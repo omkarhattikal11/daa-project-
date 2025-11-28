@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>City Design Project</title>
+
+<style>
+/* ---------- NAVIGATION BAR ---------- */
+.navbar {
+    width: 100%;
+    background: #8be0ff;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.navbar .logo {
+    font-size: 28px;
+    font-weight: 700;
+    margin-right: 40px;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* ---------- BODY BACKGROUND ---------- */
+body {
+    margin: 0;
+    background: #222;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+}
+
+/* ---------- INTRO SECTION ---------- */
+.intro-section {
+    padding: 120px 20px 80px;
+    text-align: center;
+    background-color: #333;
+}
+
+.intro-section h1 {
+    font-size: 50px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.intro-section p {
+    max-width: 900px;
+    margin: auto;
+    font-size: 24px;
+    line-height: 1.6;
+}
+
+.github-btn {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 15px 30px;
+    background-color: #00aaff;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.github-btn:hover {
+    background-color: #008ecc;
+}
+
+/* ---------- WHITE CONTENT BOX ---------- */
+.container {
+    width: 85%;
+    margin: 60px auto;
+    background: white;
+    padding: 40px;
+    color: black;
+    border-radius: 10px;
+}
+
+/* ---------- PHASE SECTION ---------- */
+.phase-section {
+    padding: 60px 20px;
+    text-align: center;
+    background: #222;
+}
+
+.phase-section h2 {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+/* ---------- BLACK CONTENT SECTIONS ---------- */
+.section {
+    background: black;
+    color: white;
+    padding: 40px;
+    border-radius: 12px;
+    margin: 50px auto;
+    width: 90%;
+}
+
+.section h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.section p {
+    font-size: 20px;
+    line-height: 32px;
+}
+
+.section p::before {
+    content: "— ";
+    color: #6ab4ff;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ---------- NAV BAR ---------- -->
+<div class="navbar">
+    <div class="logo">CITY DESIGN</div>
+
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="project.html">Project</a></li>
+        <li><a href="student1.html">student1</a></li>
+        <li><a href="student2.html">student2</a></li>
+        <li><a href="student3.html">student3</a></li>
+        <li><a href="student4.html">student4</a></li>
+        <li><a href="collabz.html">Collab</a></li>
+    </ul>
+</div>
+
+<!-- ---------- INTRO SECTION ---------- -->
+<section class="intro-section">
+    <h1>City Design</h1>
+    <p>
+        Our flagship project is a visionary sustainable city plan developed 
+        to create an eco-friendly, resource-efficient, and socially inclusive 
+        urban environment. It integrates innovative strategies to enhance 
+        energy efficiency, reduce waste, improve transportation, and promote 
+        community well-being.
+    </p>
+
+    <a class="github-btn" href="#" target="_blank">
+        Find this project on GitHub
+    </a>
+</section>
+
+<!-- ---------- PHASE SECTION ---------- -->
+<section class="phase-section">
+    <h2>PHASE 1: City Map & Topography</h2>
+</section>
+
+<!-- ---------- WHITE CONTAINER BOX (optional content) ---------- -->
+<div class="container">
+
+   <img src=" velora chart.jpeg">
+        
+</div>
+
+</body>
+</html>
