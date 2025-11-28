@@ -67,7 +67,6 @@ body {
     font-size: 24px;
     line-height: 1.6;
 }
-    
 
 .github-btn {
     display: inline-block;
@@ -93,56 +92,26 @@ body {
     padding: 40px;
     color: black;
     border-radius: 10px;
+    text-align: center;
 }
 
 /* ---------- PHASE SECTION ---------- */
 .phase-section {
     padding: 60px 20px;
-    background: white;
     text-align: center;
-    background: #222;
+    background: #111;
 }
 
-.phase-section h2 {
+.phase-section h2,
+.phase-section h1 {
     font-size: 40px;
     font-weight: bold;
+    color: #fff;
 }
 
-/* ---------- BLACK CONTENT SECTIONS ---------- */
-.section {
-    background: black;
-    color: white;
-    padding: 40px;
-    border-radius: 12px;
-    margin: 50px auto;
-    width: 90%;
-}
-
-.section h2 {
-    text-align: center;
-    font-size: 32px;
-    margin-bottom: 20px;
-    font-weight: 700;
-}
- .section h1 {
-    text-align: center;
-    font-size: 32px;
-    margin-bottom: 20px;
-    font-weight: 700;
-}   
-
-.section p {
-    font-size: 20px;
-    line-height: 32px;
-}
-
-.section p::before {
-    content: "— ";
-    color: #6ab4ff;
-    font-weight: bold;
-}
-    .contaner {
-    max-width: 600px;
+/* ---------- BUSINESS IDEA CARDS ---------- */
+.container-cards {
+    max-width: 700px;
     margin: auto;
 }
 
@@ -158,13 +127,23 @@ body {
 .card h2 {
     font-size: 22px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .card h3 {
     font-size: 18px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     opacity: 0.9;
+}
+
+.card ul {
+    margin-left: 20px;
+    line-height: 1.8;
+}
+
+.card ul li {
+    margin-bottom: 5px;
+    font-size: 16px;
 }
 </style>
 </head>
@@ -193,7 +172,7 @@ body {
     <p>
         Our flagship project is a visionary sustainable city plan developed 
         to create an eco-friendly, resource-efficient, and socially inclusive 
-        urban environment. It integrate innovative strategies to enhance 
+        urban environment. It integrates innovative strategies to enhance 
         energy efficiency, reduce waste, improve transportation, and promote 
         community well-being.
     </p>
@@ -203,48 +182,49 @@ body {
     </a>
 </section>
 
-<!-- ---------- PHASE SECTION ---------- -->
+<!-- ---------- PHASE 1 ---------- -->
 <section class="phase-section">
-    <h2 >PHASE 1: City Map & Topography</h2>
+    <h2>PHASE 1: City Map & Topography</h2>
 </section>
 
-<!-- ---------- WHITE CONTAINER BOX (optional content) ---------- -->
+<!-- ---------- IMAGE CONTAINER ---------- -->
 <div class="container">
- <img src=" Velora Chart.jpeg">
+    <img src="Velora Chart.jpeg" width="90%">
 </div>
-    
+
+<!-- ---------- PHASE 2 ---------- -->
 <section class="phase-section">
-    <h1 >PHASE 2: Buisness idea Generation</h1>
-</section>   
-<div class="contanar">
+    <h1>PHASE 2: Business Idea Generation</h1>
+</section>
+
+<!-- ---------- IDEA CARDS ---------- -->
+<div class="container-cards">
+
     <div class="card">
-         <h2>Rakshita.S.Kadam</h2>
-        <h3> Ideas </h3>
-        <ul>
-            <li> xyz </li>
-        </ul>
-
-     <div class="card">
-         <h2>Satish.S.Batakurki</h2>
-        <h3> Ideas </h3>
-        <ul>
-            <li> xyz </li>
-        </ul>
-      <div class="card">
-         <h2>Aditya.S.Hegde</h2>
-        <h3> Ideas </h3>
-        <ul>
-            <li> xyz </li>
-        </ul>
-      <div class="card">
-         <h2>Omkar.Hattikal</h2>
-        <h3> Ideas </h3>
-        <ul>
-            <li> xyz </li>
-        </ul>
-
-        
+        <h2>Rakshita S Kadam</h2>
+        <h3>Ideas</h3>
+        <ul></ul>
     </div>
-    
+
+    <div class="card">
+        <h2>Satish S Batakurki</h2>
+        <h3>Ideas</h3>
+        <ul></ul>
+    </div>
+
+    <div class="card">
+        <h2>Aditya S Hegde</h2>
+        <h3>Ideas</h3>
+        <ul></ul>
+    </div>
+
+    <div class="card">
+        <h2>Omkar Hattikal</h2>
+        <h3>Ideas</h3>
+        <ul></ul>
+    </div>
+
+</div>
+
 </body>
 </html>
