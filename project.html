@@ -84,17 +84,6 @@ body {
     background-color: #008ecc;
 }
 
-/* ---------- WHITE CONTENT BOX ---------- */
-.container {
-    width: 85%;
-    margin: 60px auto;
-    background: white;
-    padding: 40px;
-    color: black;
-    border-radius: 10px;
-    text-align: center;
-}
-
 /* ---------- PHASE SECTION ---------- */
 .phase-section {
     padding: 60px 20px;
@@ -109,17 +98,28 @@ body {
     color: #fff;
 }
 
+/* ---------- IMAGE CONTAINER ---------- */
+.container {
+    width: 85%;
+    margin: 60px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+}
+
 /* ---------- BUSINESS IDEA CARDS ---------- */
 .container-cards {
     background: white;
     max-width: 700px;
-    margin: auto;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .card {
-    
+    background: green;
     padding: 25px;
-    background :green;
     border-radius: 12px;
     margin-bottom: 25px;
     box-shadow: 0 0 10px rgba(0,0,0,0.4);
@@ -129,21 +129,21 @@ body {
     font-size: 22px;
     font-weight: bold;
     margin-bottom: 8px;
+    color: white;
 }
 
 .card h3 {
     font-size: 18px;
     margin-bottom: 12px;
     opacity: 0.9;
+    color: white;
 }
 
-.card ul {
+.card ul,
+.card ol {
     margin-left: 20px;
     line-height: 1.8;
-}
-
-.card ol li {
-    margin-bottom: 5px;
+    color: white;
     font-size: 16px;
 }
 </style>
@@ -204,36 +204,39 @@ body {
     <div class="card">
         <h2>Rakshita S Kadam</h2>
         <h3>Ideas</h3>
-        <ul></ul>
+        <ul>
+        </ul>
     </div>
 
     <div class="card">
         <h2>Satish S Batakurki</h2>
         <h3>Ideas</h3>
-        <ul></ul>
+        <ul>
+        </ul>
     </div>
 
     <div class="card">
         <h2>Aditya S Hegde</h2>
         <h3>Ideas</h3>
         <ol>
-        <li>1.</li>
-        <li>2.</li>
-        <li>3.</li>
-        <li>4.</li>
-        <li>5.</li> 
-        <li>6.</li>
-        <li>7.</li> 
-        <li>8.</li>
-        <li>9.</li>
-        <li>10.</li>    
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
         </ol>
     </div>
 
     <div class="card">
         <h2>Omkar Hattikal</h2>
         <h3>Ideas</h3>
-        <ul></ul>
+        <ul>
+        </ul>
     </div>
 
 </div>
