@@ -1,30 +1,215 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <Velora>DAA Project Portfolio - Team</Velora>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Velora — DAA Project Portfolio</title>
+
+<style>
+:root{
+  --bg: #0f1724;
+  --card: rgba(255,255,255,0.03);
+  --accent: #6ad1ff;
+  --accent2: #7be08a;
+  --muted: #9aa7b2;
+  --border: rgba(255,255,255,0.06);
+  --radius: 14px;
+  --maxw: 1100px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(900px 400px at 10% 10%, rgba(106,209,255,0.02), transparent 8%),
+    radial-gradient(700px 300px at 90% 85%, rgba(123,224,138,0.01), transparent 8%),
+    var(--bg);
+  color:#e6eef3;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding-top:86px; /* leave space for navbar */
+  line-height:1.6;
+}
+
+/* NAVBAR */
+.navbar{
+  position:fixed;
+  top:12px;
+  left:50%;
+  transform:translateX(-50%);
+  width:calc(100% - 40px);
+  max-width:var(--maxw);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid var(--border);
+  border-radius:12px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+  z-index:50;
+}
+.logo{display:flex;gap:12px;align-items:center;font-weight:800}
+.logo .dot{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#042028;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));}
+nav ul{display:flex;gap:14px;list-style:none;align-items:center}
+nav a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:8px;font-size:14px}
+nav a:hover{color:var(--accent);transform:translateY(-2px)}
+nav a.active{color:#eaf7ff;font-weight:700}
+
+/* MAIN WRAPPER */
+.wrap{max-width:var(--maxw);margin:28px auto;padding:28px}
+
+/* HERO CARD */
+.hero{
+  display:grid;
+  grid-template-columns: 1fr 360px;
+  gap:24px;
+  align-items:start;
+}
+
+/* Glass card */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:22px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(3,8,20,0.6);
+}
+
+/* Main title & intro */
+.title{font-size:34px;font-weight:900;margin-bottom:8px;color:#f7fbff}
+.lead{color:var(--muted);font-size:17px;max-width:900px}
+
+/* Team list on left (converted from original ul) */
+.team-links ul{list-style: none;padding-left:0}
+.team-links li{margin-bottom:10px}
+.team-links a{color:var(--accent);text-decoration:none;font-weight:700}
+.team-links a:hover{text-decoration:underline}
+
+/* Big about content styled */
+.about-text{
+  margin-top:18px;
+  font-size:16.5px;
+  color:#d7e7ff;
+  line-height:1.85;
+  white-space:pre-wrap;
+}
+
+/* Chart / media */
+.media{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px;justify-content:center}
+.media img{width:100%;max-width:420px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(0,0,0,0.5)}
+
+/* Right column: quick project snapshot */
+.side{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.snapshot{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  padding:14px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.02);
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* Footer-like small note */
+.note{margin-top:18px;color:var(--muted);font-size:13px}
+
+/* responsive */
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr}
+  nav ul{display:none}
+  .media img{max-width:100%}
+}
+@media (max-width:480px){
+  .title{font-size:26px}
+  .lead{font-size:15px}
+}
+</style>
 </head>
 <body>
-    <h1>DAA Project Portfolio</h1>
-    <h2>Team Members</h2>
-    <ul>
-        <li>Satish S Batakurki – <a href="Satish S Batakurki.html">Individual Page</a></li>
-        <li>Omkar Hattikal – <a href="Omkar Hattikal.html">Individual Page</a></li>
-        <li>Rakshita Kadam– <a href="Rakshita Kadam.html">Individual Page</a></li>
-        <li>Aditya Hedge– <a href="Aditya Hedge.html">Individual Page</a></li>
-    </ul>
 
-    <h2>Velora is a planned coastal smart city designed to demonstrate how algorithms can improve real-world urban systems. The city combines residential areas, commercial hubs, transport routes, public services, and recreational zones into one connected layout.
+<!-- NAVBAR (includes this page link "Velora") -->
+<header class="navbar" role="banner">
+  <div class="logo">
+    <div class="dot">CD</div>
+    <div>
+      <div style="font-weight:800">CITY DESIGN</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:2px">DAA — Velora</div>
+    </div>
+  </div>
+
+  <nav role="navigation" aria-label="Primary">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="project.html">Project</a></li>
+      <li><a class="active" href="velora.html">Velora</a></li>
+      <li><a href="rakshita.html">Rakshita</a></li>
+      <li><a href="satish.html">Satish</a></li>
+      <li><a href="aditya.html">Aditya</a></li>
+      <li><a href="omkar.html">Omkar</a></li>
+      <li><a href="collabz.html">Collabz</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="wrap" role="main">
+
+  <section class="hero">
+    <!-- left: main content -->
+    <div class="card">
+      <div class="title">DAA Project Portfolio</div>
+
+      <div class="team-links">
+        <strong style="color:#eaf7ff">Team Members</strong>
+        <ul style="margin-top:10px">
+          <li><a href="Satish S Batakurki.html">Satish S Batakurki — Individual Page</a></li>
+          <li><a href="Omkar Hattikal.html">Omkar Hattikal — Individual Page</a></li>
+          <li><a href="Rakshita Kadam.html">Rakshita Kadam — Individual Page</a></li>
+          <li><a href="Aditya Hedge.html">Aditya Hedge — Individual Page</a></li>
+        </ul>
+      </div>
+
+      <div class="about-text" style="margin-top:20px">
+Velora is a planned coastal smart city designed to demonstrate how algorithms can improve real-world urban systems. The city combines residential areas, commercial hubs, transport routes, public services, and recreational zones into one connected layout.
 Our project focuses on identifying key challenges in Velora—such as traffic flow, resource distribution, waste management, and emergency routing—and applying DAA concepts like shortest paths, greedy methods, and optimization techniques to solve them.
-Velora serves as a model for how algorithmic thinking can make a city smarter, efficient, and sustainable.</h2>
-    <p>Our city, Velora, is a well-planned coastal smart city designed with a balance of commercial, residential, and recreational zones. At the center lies Celestial Circle and City’s Times Square, surrounded by major landmarks such as the City Hall, City-Central Mall, schools, hospitals, and administrative services.
+Velora serves as a model for how algorithmic thinking can make a city smarter, efficient, and sustainable.
+      </div>
+
+      <p class="about-text" style="margin-top:18px">
+Our city, Velora, is a well-planned coastal smart city designed with a balance of commercial, residential, and recreational zones. At the center lies Celestial Circle and City’s Times Square, surrounded by major landmarks such as the City Hall, City-Central Mall, schools, hospitals, and administrative services.
 
 The western side features a vibrant beachfront area with parks, restaurants, and a convention hall that supports tourism and outdoor activities. Residential regions like the Southern Residential Area and Varghese’s Blocks are connected through smooth road networks and supported by essential services such as petrol pumps, grocery markets, and public transport.
 
 The eastern zone includes the Water & Waste Management Area, National Highway, and Railway Track, ensuring strong connectivity for transport and logistics. Recreational locations such as the Theme Park, Indoor Soccer Stadium, and community parks provide a lively environment for citizens.
 
-Overall, Velora is built to showcase efficient routing, sustainable planning, and smart city development — forming the foundation for our DAA-based business cases and algorithms..</p>
+Overall, Velora is built to showcase efficient routing, sustainable planning, and smart city development — forming the foundation for our DAA-based business cases and algorithms..
+      </p>
 
-    <h2>Chart / Workflow</h2>
-    <img src="chart.jpg" alt="Project Chart" width="400">
+      <div style="margin-top:20px">
+        <strong style="color:#eaf7ff">Chart / Workflow</strong>
+        <div class="media" aria-hidden="false">
+          <img src="chart.jpg" alt="Project Chart">
+        </div>
+      </div>
+    </div>
+
+    <!-- right: snapshot / quick links -->
+    <aside class="card side" aria-label="project snapshot">
+      <div class="snapshot"><strong>Project</strong><br>Velora — Coastal Smart City (DAA case study)</div>
+      <div class="snapshot"><strong>Focus areas</strong><br>Traffic flow • Resource distribution • Waste management • Emergency routing</div>
+      <div class="snapshot"><strong>Methods</strong><br>Shortest paths • Greedy methods • Optimization • Simulation</div>
+      <div class="note">Tip: Click the member names in the left column to open their individual pages.</div>
+    </aside>
+  </section>
+
+</main>
+
 </body>
 </html>
