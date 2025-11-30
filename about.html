@@ -1,154 +1,206 @@
-<!-- ======================================================
-    ABOUT OUR TEAM — FIXED DARK THEME
-========================================================= -->
-<section style="
-    padding: 70px 0;
-    background: rgba(255,255,255,0.02);
-    backdrop-filter: blur(8px);
-    border-top: 1px solid rgba(255,255,255,0.05);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    text-align: center;
-">
-    <h1 style="
-        font-size: 42px;
-        font-weight: 800;
-        color: #eaf4ff; /* darker + visible */
-        margin-bottom: 30px;
-        letter-spacing: 1px;
-    ">
-        About Our Team
-    </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>City Design</title>
 
-    <div style="
-        width: 80%;
-        margin: auto;
-        background: rgba(255,255,255,0.05);
-        color: #d0e2f4; /* darker text */
-        padding: 35px 45px;
-        border-radius: 14px;
-        font-size: 20px;
-        line-height: 32px;
-        text-align: center;
-        border: 1px solid rgba(255,255,255,0.10);
-        box-shadow: 0 8px 30px rgba(0,0,0,0.45);
-        backdrop-filter: blur(10px);
-    ">
-        We are a passionate team of computer science enthusiasts working together on a 
-        groundbreaking project to develop sustainable, data-driven solutions for modern urban 
-        challenges. Our goal is to integrate technology and innovation to create systems that 
-        are scalable, efficient, and user-friendly.
+<style>
+/* ---------- NAVIGATION BAR ---------- */
+.navbar {
+    width: 100%;
+    background: #8be0ff;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.navbar .logo {
+    font-size: 28px;
+    font-weight: 700;
+    margin-right: 40px;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* ---------- BODY BACKGROUND ---------- */
+body {
+    margin: 0;
+    background: #2f2f2f;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+}
+
+/* ---------- ABOUT OUR TEAM SECTION ---------- */
+.team-section {
+    background: blue;
+    padding: 60px 0;
+    margin-top: 120px;
+}
+
+.team-section h1 {
+    text-align: center;
+    font-size: 45px;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+/* Paragraph box */
+.team-box {
+    width: 80%;
+    margin: auto;
+    background: #2f2f2f;
+    padding: 35px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 20px;
+    line-height: 32px;
+    color: white;
+}
+
+/* ---------- TEAM CARDS ---------- */
+.meet-section {
+    background: #555;
+    padding: 60px 0;
+}
+
+.meet-section h1 {
+    color: white;
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 40px;
+}
+
+.team-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    width: 90%;
+    margin: auto;
+}
+
+.card {
+    width: 300px;
+    background: pink;
+    border-radius: 12px;
+    padding: 30px;
+    border: 2px solid #777;
+    text-align: center;
+    color: black;
+}
+
+.card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 0;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.card ul {
+    text-align: left;
+    line-height: 28px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ---------- NAV BAR ---------- -->
+<div class="navbar">
+    <div class="logo">CITY DESIGN</div>
+
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="project.html">Project</a></li>
+        <li><a href="rakshita.html">Rakshita</a></li>
+        <li><a href="satish.html">Satish</a></li>
+        <li><a href="aditya.html">Aditya</a></li>
+        <li><a href="omkar.html">Omkar</a></li>
+        <li><a href="collabz.html">Collabz</a></li>
+    </ul>
+</div>
+
+<!-- ---------- ABOUT SECTION ---------- -->
+<section class="team-section">
+    <h1>About Our Team</h1>
+
+    <div class="team-box">
+        We are a passionate team of computer science enthusiasts working together on a groundbreaking 
+        project to develop sustainable, data-driven solutions for modern urban challenges. 
+        Our goal is to integrate technology and innovation to create systems that are scalable, efficient, 
+        and user-friendly.
     </div>
 </section>
 
+<!-- ---------- MEET THE TEAM ---------- -->
+<section class="meet-section">
+    <h1>Meet the Team</h1>
 
+    <div class="team-cards">
 
-
-<!-- ======================================================
-    MEET THE TEAM — Modern Glass Cards Grid
-========================================================= -->
-<section style="padding: 70px 0; background: #0f1724;">
-    <h1 style="
-        text-align: center;
-        font-size: 40px;
-        color: #e8f4ff;
-        margin-bottom: 50px;
-        font-weight: 800;
-    ">
-        Meet the Team
-    </h1>
-
-    <div style="
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 30px;
-        width: 90%;
-        margin: auto;
-    ">
-
-        <!-- Member Card Template -->
-        <style>
-            .team-card {
-                width: 300px;
-                padding: 28px;
-                border-radius: 14px;
-                background: rgba(255,255,255,0.04);
-                border: 1px solid rgba(255,255,255,0.08);
-                color: #e4f2ff;
-                text-align: center;
-                backdrop-filter: blur(10px);
-                box-shadow: 0 8px 30px rgba(0,0,0,0.45);
-                transition: 0.2s ease;
-            }
-            .team-card:hover {
-                transform: translateY(-6px);
-                border-color: #6ad1ff;
-                box-shadow: 0 12px 35px rgba(90,190,255,0.22);
-            }
-            .team-card h2 {
-                margin: 0;
-                margin-bottom: 8px;
-                font-size: 24px;
-                font-weight: 700;
-            }
-            .team-card p {
-                margin: 0;
-                margin-bottom: 18px;
-                color: #a9b8c5;
-            }
-            .team-card ul {
-                list-style: none;
-                padding: 0;
-                text-align: left;
-                font-size: 17px;
-                line-height: 30px;
-                color: #d8e8f2;
-            }
-            .team-card ul li::before {
-                content: "• ";
-                color: #6ad1ff;
-                font-weight: bold;
-            }
-        </style>
-
-        <!-- Member 1 -->
-        <div class="team-card">
+        <div class="card">
             <h2>Rakshita D. Kadam</h2>
             <p>01fe24bcs</p>
-            <h3 style="margin-bottom: 10px; color: #6ad1ff;">Skills</h3>
+            <h3>Skills</h3>
             <ul>
                 <li>C, C++</li>
                 <li>Data Structures and Algorithms</li>
             </ul>
         </div>
 
-        <!-- Member 2 -->
-        <div class="team-card">
+        <div class="card">
             <h2>Satish S. Batakurki</h2>
             <p>01fe24bcs</p>
-            <h3 style="margin-bottom: 10px; color: #6ad1ff;">Skills</h3>
+            <h3>Skills</h3>
             <ul>
                 <li>C, C++</li>
                 <li>Data Structures and Algorithms</li>
             </ul>
         </div>
 
-        <!-- Member 3 -->
-        <div class="team-card">
+        <div class="card">
             <h2>Aditya S. Hegde</h2>
             <p>01fe24bcs</p>
-            <h3 style="margin-bottom: 10px; color: #6ad1ff;">Skills</h3>
+            <h3>Skills</h3>
             <ul>
                 <li>C, C++</li>
                 <li>Data Structures and Algorithms</li>
             </ul>
         </div>
 
-        <!-- Member 4 -->
-        <div class="team-card">
+        <div class="card">
             <h2>Omkar Hattikal</h2>
             <p>01fe24bcs</p>
-            <h3 style="margin-bottom: 10px; color: #6ad1ff;">Skills</h3>
+            <h3>Skills</h3>
             <ul>
                 <li>C, C++</li>
                 <li>Data Structures and Algorithms</li>
@@ -157,3 +209,6 @@
 
     </div>
 </section>
+
+</body>
+</html>
