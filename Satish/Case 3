@@ -1,0 +1,294 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+/*
+  Velora Smart Parking & Mobility Hub Simulator
+  - Hashing (unordered_map) for vehicle -> slot lookup
+  - Min-heap priority_queue to pick nearest free slot
+  - Dijkstra for routing inside parking graph (entrance -> parking node)
+  - Queue for shuttle requests / waiting list
+  - Separate min-heap for EV charging priority (lower battery => higher priority)
+*/
+
+// -------------------- Data structures --------------------
+struct Slot {
+    int id;             // unique slot id
+    int node;           // graph node where slot is located
+    double distance;    // distance from hub entrance (for nearest selection)
+    bool isEV;          // supports EV charging?
+    bool occupied;
+    Slot(int i=0,int n=0,double d=0,bool ev=false):id(i),node(n),distance(d),isEV(ev),occupied(false){}
+};
+
+struct Vehicle {
+    string plate;
+    int battery; // 0-100 (only relevant for EVs)
+    bool isEV;
+    Vehicle(string p="", bool ev=false, int b=100):plate(p),isEV(ev),battery(b){}
+};
+
+// Min-heap cmp for nearest slot (smallest distance first)
+struct SlotDistCmp {
+    bool operator()(const Slot* a, const Slot* b) const {
+        if (a->distance == b->distance) return a->id > b->id;
+        return a->distance > b->distance;
+    }
+};
+
+// Min-heap cmp for EV charging priority (lower battery -> higher priority)
+struct EVPriority {
+    bool operator()(const Vehicle* a, const Vehicle* b) const {
+        if (a->battery == b->battery) return a->plate > b->plate;
+        return a->battery > b->battery;
+    }
+};
+
+// -------------------- Global simulation containers --------------------
+vector<Slot> slots;                                 // list of all parking slots
+priority_queue<Slot*, vector<Slot*>, SlotDistCmp> freeSlotHeap; // nearest-slot selection
+unordered_map<string,int> vehicleToSlot;            // plate -> slot id
+unordered_map<int, Vehicle> slotToVehicle;          // slot id -> vehicle
+priority_queue<Vehicle*, vector<Vehicle*>, EVPriority> evChargeQueue; // waiting EVs
+queue<string> shuttleQueue;                         // shuttle/waiting queue (plates)
+
+// Graph for routing inside the hub (nodes indexed 1..N)
+int NODES = 12;
+vector<pair<int,int>> graphAdj[50]; // {neighbor, weight} (weight in meters)
+
+// -------------------- Utility functions --------------------
+
+// Add undirected edge to parking graph
+void addEdge(int u, int v, int w) {
+    graphAdj[u].push_back({v,w});
+    graphAdj[v].push_back({u,w});
+}
+
+// Dijkstra: returns pair(distance, path vector) from src to dest
+pair<int, vector<int>> dijkstraPath(int src, int dest) {
+    const int INF = 1e9;
+    vector<int> dist(NODES+1, INF), parent(NODES+1, -1);
+    dist[src] = 0;
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+    pq.push({0, src});
+    while(!pq.empty()) {
+        auto [d,u] = pq.top(); pq.pop();
+        if (d>dist[u]) continue;
+        for(auto &edge : graphAdj[u]) {
+            int v = edge.first, w = edge.second;
+            if (dist[v] > dist[u] + w) {
+                dist[v] = dist[u] + w;
+                parent[v] = u;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+    vector<int> path;
+    if (dist[dest] == INF) return {INF, path};
+    for(int cur = dest; cur != -1; cur = parent[cur]) path.push_back(cur);
+    reverse(path.begin(), path.end());
+    return {dist[dest], path};
+}
+
+// Initialize demo slots and graph
+void initializeDemo() {
+    // Graph nodes: 1 = Entrance; nodes 2..12 = lanes / slot areas
+    NODES = 12;
+    // basic connections (weights in meters)
+    addEdge(1,2,20); addEdge(1,3,30);
+    addEdge(2,4,15); addEdge(2,5,25);
+    addEdge(3,6,10); addEdge(3,7,35);
+    addEdge(4,8,12); addEdge(5,9,14);
+    addEdge(6,10,9); addEdge(7,11,11);
+    addEdge(8,12,8); addEdge(9,12,7);
+    addEdge(10,12,10); addEdge(11,12,6);
+
+    // Create slots (id, node, distance-from-entrance, isEV)
+    // distances are approximate path distances; in real system sensor would provide
+    slots.push_back(Slot(1,4, 20+15+12, false));
+    slots.push_back(Slot(2,4, 20+15+12, true));   // EV slot
+    slots.push_back(Slot(3,5, 20+25+14, false));
+    slots.push_back(Slot(4,6, 30+10+9, true));    // EV slot
+    slots.push_back(Slot(5,7, 30+35+11, false));
+    slots.push_back(Slot(6,8, 20+15+12+8, false));
+    slots.push_back(Slot(7,9, 20+25+14+7, true)); // EV slot
+    slots.push_back(Slot(8,10, 30+10+10, false));
+    slots.push_back(Slot(9,11, 30+35+11+6, false));
+    slots.push_back(Slot(10,12, 20+15+12+8, true)); // EV slot
+
+    // initially all free -> push into heap
+    for(auto &s : slots) {
+        freeSlotHeap.push(&s);
+    }
+}
+
+// Find nearest free slot (pop until free)
+Slot* getNearestFreeSlot(bool needEV=false) {
+    vector<Slot*> popped;
+    Slot* chosen = nullptr;
+    while(!freeSlotHeap.empty()) {
+        Slot* top = freeSlotHeap.top(); freeSlotHeap.pop();
+        if (!top->occupied && (!needEV || top->isEV)) {
+            chosen = top;
+            break;
+        } else {
+            popped.push_back(top);
+        }
+    }
+    // push back others
+    for(auto p : popped) freeSlotHeap.push(p);
+    return chosen;
+}
+
+// Utility to reinsert a slot into heap (after freeing)
+void reinsertSlotToHeap(int slotId) {
+    if (slotId <=0) return;
+    for(auto &s : slots) {
+        if (s.id == slotId) {
+            freeSlotHeap.push(&s);
+            return;
+        }
+    }
+}
+
+// -------------------- Simulated operations --------------------
+
+void vehicleArrives(const string &plate, bool isEV=false, int battery=100) {
+    cout << "[Arrival] Vehicle: " << plate << (isEV? " (EV) ":"") << "\n";
+    // Prefer EV slot if EV
+    Slot* slot = getNearestFreeSlot(isEV);
+    if (!slot && isEV) {
+        // fallback to any slot if no EV slot available
+        slot = getNearestFreeSlot(false);
+    }
+    if (!slot) {
+        cout << "  -> No free slots available. Added to shuttle/wait queue.\n";
+        shuttleQueue.push(plate);
+        return;
+    }
+    // assign
+    slot->occupied = true;
+    vehicleToSlot[plate] = slot->id;
+    slotToVehicle[slot->id] = Vehicle(plate, isEV, battery);
+    cout << "  -> Assigned Slot ID: " << slot->id << " (Node " << slot->node << ", Dist " << slot->distance << "m)\n";
+    // if EV and low battery, add to EV charge queue
+    if (isEV && battery < 40) {
+        Vehicle* vptr = &slotToVehicle[slot->id];
+        evChargeQueue.push(vptr);
+        cout << "  -> EV queued for charging (battery: " << battery << "%)\n";
+    }
+}
+
+void vehicleDeparts(const string &plate) {
+    cout << "[Departure] Vehicle: " << plate << "\n";
+    if (vehicleToSlot.find(plate) == vehicleToSlot.end()) {
+        cout << "  -> Vehicle not found in parking.\n";
+        return;
+    }
+    int sid = vehicleToSlot[plate];
+    vehicleToSlot.erase(plate);
+    slotToVehicle.erase(sid);
+    // mark slot free
+    for(auto &s : slots) {
+        if (s.id == sid) {
+            s.occupied = false;
+            reinsertSlotToHeap(sid);
+            cout << "  -> Freed Slot " << sid << "\n";
+            break;
+        }
+    }
+    // If shuttle queue has waiting, allocate now
+    if (!shuttleQueue.empty()) {
+        string next = shuttleQueue.front(); shuttleQueue.pop();
+        cout << "  -> Allocating freed slot to waiting vehicle: " << next << "\n";
+        vehicleArrives(next); // recursive - uses new slot allocation
+    }
+}
+
+void requestRoute(const string &plate) {
+    cout << "[Route Request] Plate: " << plate << "\n";
+    if (vehicleToSlot.find(plate) == vehicleToSlot.end()) {
+        cout << "  -> Vehicle not parked here.\n";
+        return;
+    }
+    int sid = vehicleToSlot[plate];
+    int nodeOfSlot = -1;
+    for(auto &s : slots) if (s.id == sid) nodeOfSlot = s.node;
+    if (nodeOfSlot == -1) { cout << "  -> Slot node mapping error.\n"; return; }
+    auto res = dijkstraPath(1, nodeOfSlot); // entrance = 1
+    if (res.first >= 1e9) {
+        cout << "  -> No route available.\n";
+        return;
+    }
+    cout << "  -> Distance from entrance: " << res.first << " meters\n";
+    cout << "  -> Route nodes: ";
+    for(int n : res.second) cout << n << (n==res.second.back()? "\n": " -> ");
+}
+
+void processEVChargingOne() {
+    if (evChargeQueue.empty()) {
+        cout << "[Charging] No EVs waiting.\n"; return;
+    }
+    Vehicle* v = evChargeQueue.top(); evChargeQueue.pop();
+    cout << "[Charging] Serving EV: " << v->plate << " (battery " << v->battery << "%)\n";
+    // simulate charging by incrementing battery
+    v->battery = min(100, v->battery + 60); // quick charge
+    cout << "  -> New battery: " << v->battery << "%\n";
+}
+
+// show status
+void showStatus() {
+    cout << "\n=== Parking Status ===\n";
+    for(auto &s : slots) {
+        cout << "Slot " << s.id << " | Node " << s.node
+             << " | EV:" << (s.isEV? "Y":"N")
+             << " | " << (s.occupied? "OCCUPIED":"FREE");
+        if (s.occupied) {
+            auto it = slotToVehicle.find(s.id);
+            if (it!=slotToVehicle.end()) cout << " by " << it->second.plate;
+        }
+        cout << "\n";
+    }
+    cout << "Free heap size (approx): " << freeSlotHeap.size() << "\n";
+    cout << "Vehicles parked: " << vehicleToSlot.size() << "\n";
+    cout << "EV charge queue size: " << evChargeQueue.size() << "\n";
+    cout << "Shuttle wait queue size: " << shuttleQueue.size() << "\n\n";
+}
+
+// -------------------- Main interactive simulation --------------------
+int main() {
+    initializeDemo();
+
+    cout << "=== Velora Smart Parking Hub Simulator ===\n";
+    cout << "Commands:\n";
+    cout << "1 <plate> <isEV 0/1> <battery> : Vehicle arrival\n";
+    cout << "2 <plate> : Vehicle departure\n";
+    cout << "3 <plate> : Request route to parked vehicle\n";
+    cout << "4 : Process one EV charging job\n";
+    cout << "5 : Show status\n";
+    cout << "0 : Exit\n\n";
+
+    while(true) {
+        cout << "cmd> ";
+        int cmd;
+        if (!(cin >> cmd)) break;
+        if (cmd==0) break;
+        if (cmd==1) {
+            string plate; int ev; int bat;
+            cin >> plate >> ev >> bat;
+            vehicleArrives(plate, ev==1, bat);
+        } else if (cmd==2) {
+            string plate; cin >> plate; vehicleDeparts(plate);
+        } else if (cmd==3) {
+            string plate; cin >> plate; requestRoute(plate);
+        } else if (cmd==4) {
+            processEVChargingOne();
+        } else if (cmd==5) {
+            showStatus();
+        } else {
+            cout << "Unknown command.\n";
+        }
+    }
+
+    cout << "Simulator ended.\n";
+    return 0;
+}
