@@ -1,0 +1,188 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+/*  
+   Velora Smart Surveillance & Security Control Room
+   - Queue: Incoming emergency alerts (FIFO)
+   - Min-Heap: Prioritize emergency alerts by severity
+   - Hash Map: Fast camera info lookup
+   - Graph + BFS: Find nearest patrol unit
+   - BST: Record & search incident logs
+*/
+
+// ---------------------- BST FOR INCIDENT LOGS ----------------------
+struct Node {
+    int id;
+    string detail;
+    Node *left, *right;
+
+    Node(int x, string d) : id(x), detail(d), left(NULL), right(NULL) {}
+};
+
+Node* insertIncident(Node* root, int id, string detail) {
+    if(!root) return new Node(id, detail);
+    if(id < root->id) root->left = insertIncident(root->left, id, detail);
+    else root->right = insertIncident(root->right, id, detail);
+    return root;
+}
+
+void searchIncident(Node* root, int id) {
+    if(!root) { cout << "Incident not found.\n"; return; }
+    if(id == root->id) {
+        cout << "Incident ID: " << root->id << "\nDetail: " << root->detail << "\n";
+        return;
+    }
+    else if(id < root->id) searchIncident(root->left, id);
+    else searchIncident(root->right, id);
+}
+
+// ---------------------- EMERGENCY ALERT (PRIORITY QUEUE) ----------------------
+struct Alert {
+    int level;        // 1 (mild) to 10 (critical)
+    string message;
+};
+
+struct CompareAlert {
+    bool operator()(Alert a, Alert b) {
+        return a.level < b.level; // max priority for highest severity
+    }
+};
+
+priority_queue<Alert, vector<Alert>, CompareAlert> pqAlerts;
+
+// ---------------------- QUEUE FOR NORMAL ALERT FLOW ----------------------
+queue<string> alertQueue;
+
+// ---------------------- CAMERA DATABASE (HASH MAP) ----------------------
+unordered_map<int, string> cameraDB;
+
+// ---------------------- GRAPH + BFS FOR NEAREST PATROL ----------------------
+vector<int> graphMap[20];
+bool visited[20];
+
+int findNearestUnit(int start) {
+    memset(visited, false, sizeof(visited));
+    queue<int> q;
+    q.push(start);
+    visited[start] = true;
+
+    vector<int> patrolUnits = {3, 7, 10}; // Example units in nodes
+
+    while(!q.empty()) {
+        int node = q.front(); q.pop();
+
+        for(int pu : patrolUnits)
+            if(node == pu) return node;
+
+        for(int next : graphMap[node]) {
+            if(!visited[next]) {
+                visited[next] = true;
+                q.push(next);
+            }
+        }
+    }
+    return -1;
+}
+
+// ---------------------- MAIN ----------------------
+int main() {
+
+    // Sample camera DB
+    cameraDB[101] = "Times Square - North Wing";
+    cameraDB[102] = "City Hall Entrance";
+    cameraDB[103] = "Planet Street Park";
+    cameraDB[104] = "Central Mall - Gate 3";
+
+    // Sample city graph
+    graphMap[1] = {2,4};
+    graphMap[2] = {1,3};
+    graphMap[3] = {2,6};
+    graphMap[4] = {1,5};
+    graphMap[5] = {4,7};
+    graphMap[6] = {3,10};
+    graphMap[7] = {5};
+    graphMap[10] = {6};
+
+    // BST Incident log root
+    Node* root = NULL;
+
+    int cmd;
+    while(true) {
+        cout << "\n=== Velora Central Security System ===\n";
+        cout << "1. New Alert\n";
+        cout << "2. Process Highest Priority Alert\n";
+        cout << "3. Lookup Camera\n";
+        cout << "4. Find Nearest Patrol\n";
+        cout << "5. Add Incident Log\n";
+        cout << "6. Search Incident Log\n";
+        cout << "0. Exit\n";
+        cout << "Enter: ";
+        cin >> cmd;
+
+        if(cmd == 0) break;
+
+        if(cmd == 1){
+            Alert A;
+            cout << "Enter Severity (1-10): ";
+            cin >> A.level;
+            cout << "Enter Message: ";
+            cin.ignore();
+            getline(cin, A.message);
+
+            pqAlerts.push(A);
+            alertQueue.push(A.message);
+
+            cout << "Alert Received & Added.\n";
+        }
+
+        else if(cmd == 2){
+            if(pqAlerts.empty()) cout << "No alerts.\n";
+            else {
+                Alert A = pqAlerts.top(); pqAlerts.pop();
+                cout << "Processing Critical Alert → Level " << A.level 
+                     << " | " << A.message << "\n";
+            }
+        }
+
+        else if(cmd == 3){
+            int cam;
+            cout << "Enter Camera ID: ";
+            cin >> cam;
+            if(cameraDB.count(cam))
+                cout << "Camera Location: " << cameraDB[cam] << "\n";
+            else 
+                cout << "Camera Not Found.\n";
+        }
+
+        else if(cmd == 4){
+            int loc;
+            cout << "Enter Crime Location Node: ";
+            cin >> loc;
+
+            int res = findNearestUnit(loc);
+            if(res == -1) cout << "No patrol units available.\n";
+            else cout << "Nearest Patrol Unit is at Node: " << res << "\n";
+        }
+
+        else if(cmd == 5){
+            int id; string detail;
+            cout << "Enter incident ID: "; cin >> id;
+            cout << "Enter incident detail: ";
+            cin.ignore();
+            getline(cin, detail);
+
+            root = insertIncident(root, id, detail);
+            cout << "Incident Logged.\n";
+        }
+
+        else if(cmd == 6){
+            int id;
+            cout << "Enter incident ID: ";
+            cin >> id;
+
+            searchIncident(root, id);
+        }
+    }
+
+    return 0;
+}
