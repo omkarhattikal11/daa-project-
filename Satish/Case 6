@@ -1,0 +1,194 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+/*  
+   Velora Emergency Tower Coordination System
+   Algorithms:
+   - Priority Queue (critical priority dispatch)
+   - Dijkstra (shortest rescue route)
+   - Hash Map (unit status database)
+   - Queue (incoming emergency calls)
+   - Binary Search (search emergency type)
+*/
+
+// ---------------------- Emergency Structure ----------------------
+struct Emergency {
+    int level;          // 1–10 severity
+    string type;        // fire, medical, crime
+    int locationNode;   // node where emergency occurred
+};
+
+struct CompareEmergency {
+    bool operator()(Emergency a, Emergency b){
+        return a.level < b.level; // max severity served first
+    }
+};
+
+priority_queue<Emergency, vector<Emergency>, CompareEmergency> pqEmergencies;
+queue<string> callQueue;
+
+// ---------------------- Unit Database (Hash Map) ----------------------
+unordered_map<string, int> unitLocation;   // unitName -> node
+unordered_map<string, bool> unitAvailable; // true/false
+
+// ---------------------- Graph for Dijkstra ----------------------
+vector<pair<int,int>> graphMap[50];
+int NODES = 12;
+
+void addEdge(int u,int v,int w){
+    graphMap[u].push_back({v,w});
+    graphMap[v].push_back({u,w});
+}
+
+pair<int,vector<int>> dijkstraPath(int src, int dest){
+    const int INF = 1e9;
+    vector<int> dist(NODES+1, INF), parent(NODES+1, -1);
+
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+    dist[src] = 0;
+    pq.push({0, src});
+
+    while(!pq.empty()){
+        auto [d,u] = pq.top(); pq.pop();
+
+        for(auto &edge : graphMap[u]){
+            int v=edge.first, w=edge.second;
+            if(dist[v] > dist[u] + w){
+                dist[v] = dist[u] + w;
+                parent[v] = u;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+
+    vector<int> path;
+    if(dist[dest] >= 1e9) return {INF, path};
+
+    for(int cur=dest;cur!=-1;cur=parent[cur]) path.push_back(cur);
+    reverse(path.begin(), path.end());
+    return {dist[dest], path};
+}
+
+// ---------------------- Binary Search for Emergency Types ----------------------
+bool emergencyExists(vector<string> &types, string key){
+    sort(types.begin(), types.end());
+    return binary_search(types.begin(), types.end(), key);
+}
+
+// ---------------------- Dispatch Logic ----------------------
+void dispatchUnit(Emergency e){
+    cout << "\n[Dispatch] Emergency: " << e.type 
+         << " | Severity " << e.level << "\n";
+
+    string bestUnit = "";
+    int bestDist = 1e9;
+    vector<int> bestPath;
+
+    for(auto &u : unitLocation){
+        string unit = u.first;
+        int node = u.second;
+
+        if(!unitAvailable[unit]) continue;
+
+        auto result = dijkstraPath(node, e.locationNode);
+        if(result.first < bestDist){
+            bestDist = result.first;
+            bestUnit = unit;
+            bestPath = result.second;
+        }
+    }
+
+    if(bestUnit==""){
+        cout << "No available units! Logging emergency.\n";
+        return;
+    }
+
+    cout << "Assigned Unit: " << bestUnit 
+         << " (Distance: " << bestDist << "m)\nRoute: ";
+
+    for(int n : bestPath)
+        cout << n << (n==bestPath.back()? "\n":" -> ");
+
+    unitAvailable[bestUnit] = false;
+}
+
+// ---------------------- Initialization ----------------------
+void initSystem(){
+    NODES = 12;
+
+    // City graph
+    addEdge(1,2,10); addEdge(2,3,20); addEdge(3,4,15);
+    addEdge(4,5,30); addEdge(2,6,25); addEdge(6,7,12);
+    addEdge(7,8,10); addEdge(8,9,18); addEdge(9,10,20);
+    addEdge(10,11,16); addEdge(11,12,10);
+
+    // Units in the field
+    unitLocation["FireTruck_A"] = 3;
+    unitLocation["Ambulance_B"] = 7;
+    unitLocation["PoliceCar_C"] = 10;
+
+    unitAvailable["FireTruck_A"] = true;
+    unitAvailable["Ambulance_B"] = true;
+    unitAvailable["PoliceCar_C"] = true;
+}
+
+// ---------------------- MAIN ----------------------
+int main(){
+    initSystem();
+
+    vector<string> emergencyTypes = {"fire","medical","crime","rescue"};
+
+    int cmd;
+    while(true){
+        cout << "\n=== Velora Emergency Tower System ===\n";
+        cout << "1. New Emergency Call\n";
+        cout << "2. Process Highest Priority Emergency\n";
+        cout << "3. Check Emergency Type\n";
+        cout << "4. Check Unit Status\n";
+        cout << "0. Exit\n";
+        cout << "Enter: ";
+        cin >> cmd;
+
+        if(cmd==0) break;
+
+        if(cmd==1){
+            Emergency e;
+            cout << "Severity (1–10): ";
+            cin >> e.level;
+            cout << "Type: ";
+            cin >> e.type;
+            cout << "Location Node: ";
+            cin >> e.locationNode;
+
+            pqEmergencies.push(e);
+            callQueue.push(e.type);
+
+            cout << "Emergency Logged.\n";
+        }
+
+        else if(cmd==2){
+            if(pqEmergencies.empty()) cout << "No emergencies.\n";
+            else {
+                Emergency e = pqEmergencies.top(); pqEmergencies.pop();
+                dispatchUnit(e);
+            }
+        }
+
+        else if(cmd==3){
+            string type; cin >> type;
+            if(emergencyExists(emergencyTypes, type))
+                cout << "Valid emergency type.\n";
+            else
+                cout << "Unknown emergency.\n";
+        }
+
+        else if(cmd==4){
+            for(auto &u : unitLocation){
+                cout << u.first << " at Node " << u.second
+                     << " | " << (unitAvailable[u.first]?"Available":"Busy") << "\n";
+            }
+        }
+    }
+
+    return 0;
+}
