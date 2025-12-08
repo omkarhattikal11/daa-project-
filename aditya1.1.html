@@ -6,33 +6,26 @@
 <title>Smart City – Algorithm Solutions</title>
 
 <style>
-  /* --- COMMON CSS --- */
   :root{
-    --bg-1: #0f1724;      
-    --bg-2: rgba(255,255,255,0.04);
-    --accent: #6ad1ff;
-    --accent-2: #7be08a;
-    --muted: #9aa7b2;
+    --bg-dark: #0d1117;      
+    --text-light: #e6eef3;
+    --accent-1: #00f5d4;        /* Problem + Solution */
+    --accent-2: #d97706;        /* Algorithms + Data Structures - dark amber */
+    --accent-3: #6b21a8;        /* SDGs - dark violet */
     --card-radius: 14px;
-    --glass-blur: 8px;
-    --max-width: 800px;
-    --glass-border: rgba(255,255,255,0.06);
-    --glass-highlight: rgba(255,255,255,0.02);
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    --shadow-dark: rgba(0,0,0,0.5);
+    --max-width: 900px;
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   }
 
-  * { box-sizing: border-box; margin:0; padding:0 }
+  * { box-sizing: border-box; margin:0; padding:0; }
   html,body { height:100%; }
 
   body{
-    min-height:100vh;
-    background:
-      radial-gradient(1200px 600px at 10% 10%, rgba(122,210,255,0.06), transparent 8%),
-      radial-gradient(900px 500px at 90% 85%, rgba(123,224,138,0.03), transparent 8%),
-      var(--bg-1);
-    color: #e6eef3;
+    background: var(--bg-dark);
+    color: var(--text-light);
     padding-top:78px;
-    line-height:1.45;
+    line-height:1.5;
   }
 
   /* NAVBAR */
@@ -41,43 +34,52 @@
     width:calc(100% - 40px); max-width:var(--max-width);
     display:flex; align-items:center; justify-content:space-between; gap:12px;
     padding:12px 18px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    border:1px solid var(--glass-border); border-radius:12px;
-    backdrop-filter: blur(var(--glass-blur)); box-shadow: 0 6px 30px rgba(2,6,23,0.6);
+    background: rgba(255,255,255,0.05);
+    border-radius:12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 6px 30px var(--shadow-dark);
     z-index:50;
   }
 
   .logo{ display:flex; gap:12px; align-items:center; font-weight:700; font-size:18px; }
   .logo .dot{ width:36px; height:36px; border-radius:9px;
-    background: linear-gradient(135deg,var(--accent), var(--accent-2));
+    background: linear-gradient(135deg,#00f5d4,#3b82f6);
     display:flex; align-items:center; justify-content:center;
-    color:#052025; font-weight:800; box-shadow:0 6px 18px rgba(105,189,255,0.12); }
+    color:#0d1117; font-weight:800; box-shadow:0 6px 18px rgba(0,255,212,0.3); }
 
   nav ul{ display:flex; gap:14px; list-style:none; align-items:center; }
-  nav a{ text-decoration:none; color:var(--muted); font-weight:600; padding:8px 12px; border-radius:8px; font-size:14px; transition: all .18s ease; }
-  nav a:hover{ color:var(--accent); transform:translateY(-2px); }
-  .menu-toggle{ display:none; border:none; background:transparent; color:var(--muted); font-size:20px; }
+  nav a{ text-decoration:none; color:var(--text-light); font-weight:600; padding:8px 12px; border-radius:8px; font-size:14px; transition: all .18s ease; }
+  nav a:hover{ color:#00f5d4; transform:translateY(-2px); }
 
   /* WRAPPER */
   .wrap{ max-width:var(--max-width); margin:28px auto; padding:28px; }
+  h1{ font-size:28px; margin-bottom:24px; text-align:center; color:var(--text-light); }
 
-  /* CARDS */
+  /* CARD STYLES */
   .card-container{ display:flex; flex-direction:column; gap:22px; }
-  .card{ background: linear-gradient(180deg, var(--bg-2), var(--glass-highlight));
-    border:1px solid var(--glass-border); border-radius:var(--card-radius);
-    padding:22px; backdrop-filter: blur(var(--glass-blur));
-    box-shadow: 0 8px 30px rgba(3,8,20,0.6); }
 
-  .card h2{ font-size:18px; margin-bottom:6px; }
-  .tags{ display:flex; gap:6px; margin-bottom:10px; }
-  .tags span{ background:rgba(255,255,255,0.05); padding:4px 8px; border-radius:6px; font-size:12px; color:var(--muted);}
-  .desc{ margin-bottom:10px; font-size:14px; }
-  .btn-group{ display:flex; flex-wrap:wrap; gap:8px; }
-  .btn-group a{ padding:6px 10px; border-radius:6px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#042028; font-weight:600; cursor:pointer; font-size:12px; text-decoration:none; display:inline-block; text-align:center; }
+  .card{
+    border-radius:var(--card-radius);
+    padding:24px;
+    box-shadow: 0 8px 30px var(--shadow-dark);
+    border:1px solid rgba(255,255,255,0.1);
+  }
 
-  footer{ margin-top:34px; color:var(--muted); font-size:14px; text-align:center; padding:18px 6px; }
+  .card h2{ font-size:20px; margin-bottom:12px; }
 
-  @media (max-width:980px){ nav ul{ display:none; } .menu-toggle{ display:block } }
+  .card ul{ padding-left:20px; margin-top:10px; }
+  .card ul li{ margin-bottom:8px; font-size:14px; }
+
+  .card table{ width:100%; border-collapse: collapse; margin-top:12px; color: #0d1117; }
+  .card th, .card td{ border:1px solid rgba(255,255,255,0.2); padding:10px; text-align:left; font-size:14px; }
+  .card th{ background-color: rgba(0,0,0,0.3); color: var(--text-light); }
+
+  /* DISTINCT GRADIENTS */
+  .problem-solution-card{ background: linear-gradient(135deg,#00f5d4,#3b82f6); color:#0d1117; }
+  .algo-datastruct-card{ background: linear-gradient(135deg,#b45309,#78350f); color:#f3f3f3; } /* dark amber/brown */
+  .sdg-card{ background: linear-gradient(135deg,#5b21b6,#3b0764); color:#f3f3f3; } /* dark violet */
+
+  footer{ margin-top:34px; color:var(--text-light); font-size:14px; text-align:center; padding:18px 6px; }
 </style>
 </head>
 <body>
@@ -88,139 +90,81 @@
       <div class="dot">CD</div>
       <div>
         <div style="font-weight:800">CITY DESIGN</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">DAA — Design & Analysis of Algorithms</div>
+        <div style="font-size:12px;color:var(--text-light);margin-top:2px">DAA — Design & Analysis of Algorithms</div>
       </div>
     </div>
     <nav>
-      
-        <li><a href="abcde.html">Aditya</a></li>
-        
+      <ul>
+        <li><a href="aditya.html">BACK</a></li>
+      </ul>
     </nav>
   </header>
 
   <!-- PAGE CONTENT -->
   <main class="wrap">
-    <h1 class="title">Smart City Traffic & Transport Optimization</h1>
+    <h1>Smart City Traffic & Transport Optimization</h1>
 
     <div class="card-container">
 
-      <!-- CARD 1 -->
-      <div class="card">
-        <h2>Implement solution</h2>
-        
-       
-        <section>
-        <h2>Problem Statement</h2>
+      <!-- PROBLEM + SOLUTION -->
+      <div class="card problem-solution-card">
+        <h2>1 • Problem Statement & Solution Overview</h2>
+        <h3>Problem Statement:</h3>
         <ul>
-            <li>Traffic jams during peak hours.</li>
-            <li>Buses and trains not adhering to optimal routes.</li>
-            <li>Lack of real-time updates on vehicle positions.</li>
-            <li>Poor resource allocation and route planning for public transport.</li>
+          <li>Traffic jams during peak hours.</li>
+          <li>Buses and trains not adhering to optimal routes.</li>
+          <li>Lack of real-time updates on vehicle positions.</li>
+          <li>Poor resource allocation and route planning for public transport.</li>
         </ul>
-    </section>
-        <h2>Solution Overview</h2>
+        <h3>Solution Overview:</h3>
         <ul>
-            <li>Collect real-time traffic data from sensors, GPS in buses, and user apps.</li>
-            <li>Predict traffic congestion using advanced algorithms.</li>
-            <li>Suggest optimal routes for public transport vehicles.</li>
-            <li>Optimize bus and train schedules dynamically using real-time data.</li>
-            <li>Provide alerts for accidents, roadblocks, or congestion.</li>
-            <li>Reduce travel time and minimize environmental impact.</li>
+          <li>Collect real-time traffic data from sensors, GPS in buses, and user apps.</li>
+          <li>Predict traffic congestion using advanced algorithms.</li>
+          <li>Suggest optimal routes for public transport vehicles.</li>
+          <li>Optimize bus and train schedules dynamically using real-time data.</li>
+          <li>Provide alerts for accidents, roadblocks, or congestion.</li>
+          <li>Reduce travel time and minimize environmental impact.</li>
         </ul>
-       <h2>Algorithms and Techniques</h2>
+      </div>
+
+      <!-- ALGORITHMS + DATA STRUCTURES -->
+      <div class="card algo-datastruct-card">
+        <h2>2 • Algorithms & Data Structures</h2>
         <table>
-            <tr>
-                <th>Task</th>
-                <th>Algorithm / Data Structure</th>
-            </tr>
-            <tr>
-                <td>Shortest path / Optimal route</td>
-                <td>Dijkstra, Bellman-Ford, Floyd-Warshall</td>
-            </tr>
-            <tr>
-                <td>Traffic prediction</td>
-                <td>BFS/DFS for graph traversal, Heap for priority queue</td>
-            </tr>
-            <tr>
-                <td>Real-time updates</td>
-                <td>Queues, Min-Heap, Segment Tree</td>
-            </tr>
-            <tr>
-                <td>Route optimization</td>
-                <td>Kruskal / Prim (network optimization)</td>
-            </tr>
-            <tr>
-                <td>Pattern matching in sensor streams</td>
-                <td>KMP, Boyer-Moore</td>
-            </tr>
-            <tr>
-                <td>Autocomplete / suggestion</td>
-                <td>Trie, Hash Table</td>
-            </tr>
+          <tr><th>Task</th><th>Algorithm / Data Structure</th></tr>
+          <tr><td>Shortest path / Optimal route</td><td>Dijkstra, Bellman-Ford, Floyd-Warshall</td></tr>
+          <tr><td>Traffic prediction</td><td>BFS/DFS for graph traversal, Heap for priority queue</td></tr>
+          <tr><td>Real-time updates</td><td>Queues, Min-Heap, Segment Tree</td></tr>
+          <tr><td>Route optimization</td><td>Kruskal / Prim (network optimization)</td></tr>
+          <tr><td>Pattern matching in sensor streams</td><td>KMP, Boyer-Moore</td></tr>
+          <tr><td>Autocomplete / suggestion</td><td>Trie, Hash Table</td></tr>
         </table>
-
-        <h3>Why Used:</h3>
+        <h3>Data Structures Used:</h3>
         <ul>
-            <li>Dijkstra/Floyd-Warshall: For shortest path in traffic networks.</li>
-            <li>Heap / Min-Heap: Efficiently pick next vehicle to dispatch.</li>
-            <li>Trie / Hash Table: Fast lookup for stops/routes or autocomplete search.</li>
-            <li>KMP / Boyer-Moore: Fast pattern matching in sensor streams.</li>
-            <li>Graphs: Represent city road networks.</li>
-            <li>Segment Trees: Update traffic intensity dynamically.</li>
+          <li><strong>Graph:</strong> Road network representation (nodes = junctions, edges = roads).</li>
+          <li><strong>Priority Queue (Heap):</strong> Dispatch vehicles efficiently.</li>
+          <li><strong>Queue:</strong> Simulate vehicles in line at stops.</li>
+          <li><strong>Array / List:</strong> Store schedules and historical data.</li>
+          <li><strong>Trie:</strong> Fast lookup of routes and stops.</li>
         </ul>
-   
+      </div>
 
-    <!-- DATA STRUCTURES -->
-
-        <h2>Data Structures Used</h2>
+      <!-- SDGs -->
+      <div class="card sdg-card">
+        <h2>3 • Sustainable Development Goals (SDGs)</h2>
         <ul>
-            <li><strong>Graph:</strong> Represent road network (nodes = junctions, edges = roads).</li>
-            <li><strong>Priority Queue (Heap):</strong> Dispatch vehicles efficiently.</li>
-            <li><strong>Queue:</strong> Simulate vehicles in line at stops.</li>
-            <li><strong>Array / List:</strong> Store schedules and historical data.</li>
-            <li><strong>Trie:</strong> Fast lookup of routes and stops.</li>
+          <li><strong>SDG 11:</strong> Sustainable Cities – Optimize public transport, reduce traffic and pollution.</li>
+          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – Smart infrastructure with sensors and IoT.</li>
+          <li><strong>SDG 13:</strong> Climate Action – Reduce emissions by minimizing congestion and idle time.</li>
         </ul>
-   
+      </div>
 
-    <!-- SDGs INVOLVED -->
-    
-        <h2>Sustainable Development Goals (SDGs)</h2>
-        <ul>
-            <li><strong>SDG 11:</strong> Sustainable Cities and Communities – Optimize public transport, reduce traffic and pollution.</li>
-            <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – Smart infrastructure with sensors and IoT.</li>
-            <li><strong>SDG 13:</strong> Climate Action – Reduce emissions by minimizing congestion and idle time.</li>
-        </ul>
     </div>
   </main>
 
   <footer>
     © City Design — DAA • KLE Technological University • Built by the project team
   </footer>
-
-<script>
-  // Mobile menu toggle
-  (function(){
-    const btn = document.getElementById('menuToggle');
-    const menu = document.getElementById('primaryMenu');
-    btn && btn.addEventListener('click', function(){
-      const expanded = this.getAttribute('aria-expanded') === 'true';
-      this.setAttribute('aria-expanded', String(!expanded));
-      if(!expanded){
-        menu.style.display = 'flex';
-        menu.style.flexDirection = 'column';
-        menu.style.background = 'transparent';
-        menu.style.position = 'absolute';
-        menu.style.right = '18px';
-        menu.style.top = '62px';
-        menu.style.gap = '10px';
-        menu.style.padding = '12px';
-      } else {
-        menu.style.display = '';
-        menu.removeAttribute('style');
-      }
-    });
-  })();
-</script>
 
 </body>
 </html>
