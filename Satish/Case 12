@@ -1,0 +1,231 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+/*
+   Rapid Response Network – Velora Smart City
+   Algorithms:
+   - Priority Queue: Immediate handling of severe incidents
+   - Graph + Dijkstra: Fastest responder routing
+   - Hash Map: Unit availability + types
+   - Queue: Incoming emergency stream
+   - BFS: Backup responder scan
+   - Linear Search: Responder type matching
+*/
+
+// ---------------------- Emergency Structure ----------------------
+struct Emergency {
+    int severity;      // 1–10
+    string type;       // fire, crime, medical
+    int locationNode;
+};
+
+struct CompareEmergency {
+    bool operator()(Emergency a, Emergency b){
+        return a.severity < b.severity; // highest severity first
+    }
+};
+
+priority_queue<Emergency, vector<Emergency>, CompareEmergency> pqEmergencies;
+queue<string> intakeQueue;
+
+// ---------------------- Responder Database ----------------------
+unordered_map<string, int> unitLocation;   // unit -> node
+unordered_map<string, bool> unitAvailable; // unit -> available or not
+unordered_map<string, string> unitType;    // unit -> type (police, fire, etc.)
+
+// ---------------------- Graph + Dijkstra ----------------------
+vector<pair<int,int>> graphCity[50];
+int NODES = 15;
+
+void addEdge(int u,int v,int w){
+    graphCity[u].push_back({v,w});
+    graphCity[v].push_back({u,w});
+}
+
+pair<int,vector<int>> dijkstraPath(int src,int dest){
+    const int INF = 1e9;
+    vector<int> dist(NODES+1, INF), parent(NODES+1,-1);
+
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+    dist[src] = 0;
+    pq.push({0,src});
+
+    while(!pq.empty()){
+        auto [d,u] = pq.top(); pq.pop();
+
+        for(auto &edge : graphCity[u]){
+            int v=edge.first, w=edge.second;
+
+            if(dist[v] > dist[u] + w){
+                dist[v] = dist[u] + w;
+                parent[v] = u;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+
+    vector<int> path;
+    if(dist[dest] >= 1e9) return {INF, path};
+
+    for(int cur=dest;cur!=-1;cur=parent[cur]) path.push_back(cur);
+    reverse(path.begin(), path.end());
+
+    return {dist[dest], path};
+}
+
+// ---------------------- BFS Backup Unit Scan ----------------------
+vector<int> zoneMap[50];
+bool visited[50];
+
+void bfsScan(int start){
+    memset(visited,false,sizeof(visited));
+    queue<int> q;
+    q.push(start);
+    visited[start] = true;
+
+    cout << "Backup unit scan across zones: ";
+
+    while(!q.empty()){
+        int cur=q.front(); q.pop();
+        cout << cur << " ";
+
+        for(int nxt : zoneMap[cur]){
+            if(!visited[nxt]){
+                visited[nxt] = true;
+                q.push(nxt);
+            }
+        }
+    }
+    cout << "\n";
+}
+
+// ---------------------- Dispatcher ----------------------
+void dispatchResponder(Emergency e){
+    cout << "\n[DISPATCH] " << e.type << " emergency | Severity " << e.severity << "\n";
+
+    string bestUnit = "";
+    int bestDist = 1e9;
+    vector<int> bestPath;
+
+    for(auto &u : unitLocation){
+        string unitName = u.first;
+        int node = u.second;
+
+        if(!unitAvailable[unitName]) continue;
+        if(unitType[unitName] != e.type && unitType[unitName] != "general")
+            continue;  
+
+        auto res = dijkstraPath(node, e.locationNode);
+        if(res.first < bestDist){
+            bestDist = res.first;
+            bestUnit = unitName;
+            bestPath = res.second;
+        }
+    }
+
+    if(bestUnit == ""){
+        cout << "No suitable responder available! Triggering backup scan...\n";
+        bfsScan(e.locationNode);
+        return;
+    }
+
+    cout << "Assigned Unit: " << bestUnit 
+         << " | Distance: " << bestDist << "m\nRoute: ";
+
+    for(int n : bestPath) cout << n << " ";
+    cout << "\n";
+
+    unitAvailable[bestUnit] = false;
+}
+
+// ---------------------- Initialization ----------------------
+void initSystem(){
+    // Graph connections
+    addEdge(1,2,10); addEdge(2,3,15);
+    addEdge(3,4,18); addEdge(4,5,25);
+    addEdge(2,6,20); addEdge(6,7,10);
+    addEdge(7,8,14); addEdge(8,9,22);
+    addEdge(9,10,12);
+
+    // Unit nodes
+    unitLocation["FireUnit_A"] = 3;
+    unitLocation["Ambulance_B"] = 7;
+    unitLocation["PoliceCar_C"] = 9;
+    unitLocation["RescueDrone_D"] = 5;
+
+    // Availability
+    unitAvailable["FireUnit_A"] = true;
+    unitAvailable["Ambulance_B"] = true;
+    unitAvailable["PoliceCar_C"] = true;
+    unitAvailable["RescueDrone_D"] = true;
+
+    // Unit types
+    unitType["FireUnit_A"] = "fire";
+    unitType["Ambulance_B"] = "medical";
+    unitType["PoliceCar_C"] = "crime";
+    unitType["RescueDrone_D"] = "general";
+
+    // Zone network for backup BFS scan
+    zoneMap[1]={2};
+    zoneMap[2]={1,3};
+    zoneMap[3]={2,4};
+    zoneMap[4]={3,5};
+    zoneMap[5]={4};
+}
+
+// ---------------------- MAIN ----------------------
+int main(){
+    initSystem();
+
+    int cmd;
+    while(true){
+        cout << "\n=== RAPID RESPONSE NETWORK ===\n";
+        cout << "1. Register Emergency\n";
+        cout << "2. Process Highest Priority Emergency\n";
+        cout << "3. Check Unit Availability\n";
+        cout << "4. BFS Backup Scan\n";
+        cout << "0. Exit\ncmd> ";
+        cin >> cmd;
+
+        if(cmd==0) break;
+
+        if(cmd==1){
+            Emergency e;
+            cout << "Severity(1–10): ";
+            cin >> e.severity;
+            cout << "Type (fire/medical/crime): ";
+            cin >> e.type;
+            cout << "Location Node: ";
+            cin >> e.locationNode;
+
+            pqEmergencies.push(e);
+            intakeQueue.push(e.type);
+
+            cout << "Emergency logged.\n";
+        }
+
+        else if(cmd==2){
+            if(pqEmergencies.empty()) cout << "No emergencies.\n";
+            else {
+                Emergency e = pqEmergencies.top(); pqEmergencies.pop();
+                dispatchResponder(e);
+            }
+        }
+
+        else if(cmd==3){
+            for(auto &u : unitAvailable){
+                cout << u.first << ": " 
+                     << (u.second?"Available":"Busy") << "\n";
+            }
+        }
+
+        else if(cmd==4){
+            int start; 
+            cout << "Enter zone node: ";
+            cin >> start;
+            bfsScan(start);
+        }
+    }
+
+    return 0;
+}
