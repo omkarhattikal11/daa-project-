@@ -1,0 +1,214 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+/* 
+   Velora Info–Tourism Centre System
+   Algorithms Used:
+   - Hash Map for attraction lookup
+   - Priority Queue for best attractions
+   - Graph & Dijkstra for shortest routes
+   - Queue for help-desk request handling
+   - Linear search for attraction matching
+*/
+
+// ---------------- Attraction Structure ----------------
+struct Attraction {
+    string name;
+    string category;
+    int rating;      // 1–100
+    int node;        // graph node for route calculation
+};
+
+// Max-heap for top attractions
+struct CompareRating {
+    bool operator()(Attraction a, Attraction b) {
+        return a.rating < b.rating;
+    }
+};
+
+// ---------------- Global Data Structures ----------------
+unordered_map<string, Attraction> attractionDB;   // Hashing
+priority_queue<Attraction, vector<Attraction>, CompareRating> topAttractions;
+
+vector<pair<int,int>> graphAdj[50];  // Graph for route planning
+int NODES = 10;
+
+queue<string> helpDeskQ;             // help desk queue
+
+// ---------------- Graph Utilities ----------------
+void addEdge(int u,int v,int w){
+    graphAdj[u].push_back({v,w});
+    graphAdj[v].push_back({u,w});
+}
+
+pair<int,vector<int>> dijkstraPath(int src, int dest){
+    const int INF = 1e9;
+    vector<int> dist(NODES+1, INF), parent(NODES+1,-1);
+    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+
+    dist[src]=0;
+    pq.push({0,src});
+
+    while(!pq.empty()){
+        auto [d,u]=pq.top(); pq.pop();
+        if(d>dist[u]) continue;
+
+        for(auto &edge: graphAdj[u]){
+            int v=edge.first, w=edge.second;
+            if(dist[v] > dist[u] + w){
+                dist[v] = dist[u] + w;
+                parent[v] = u;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+
+    vector<int> path;
+    if(dist[dest] == INF) return {INF,path};
+
+    for(int cur=dest; cur!=-1; cur=parent[cur]) path.push_back(cur);
+    reverse(path.begin(), path.end());
+    return {dist[dest], path};
+}
+
+// ---------------- Search Attraction ----------------
+void searchAttraction(string key){
+    cout << "\n[Search Attraction: " << key << "]\n";
+
+    // Linear search through hash map keys
+    for(auto &p : attractionDB){
+        if(p.first.find(key) != string::npos){
+            auto &A = p.second;
+            cout << "Found → " << A.name 
+                 << " | Category: " << A.category 
+                 << " | Rating: " << A.rating << "\n";
+        }
+    }
+}
+
+// ---------------- Core Functions ----------------
+void addAttraction(string name, string cat, int rating, int node){
+    Attraction A {name, cat, rating, node};
+    attractionDB[name] = A;
+    topAttractions.push(A);
+}
+
+void recommendTopAttractions(){
+    cout << "\nTop 3 Recommended Attractions:\n";
+    vector<Attraction> temp;
+
+    for(int i=0;i<3 && !topAttractions.empty();i++){
+        auto A = topAttractions.top();
+        topAttractions.pop();
+        cout << i+1 << ") " << A.name 
+             << " (Rating: " << A.rating << ")\n";
+        temp.push_back(A);
+    }
+
+    // Push back to heap
+    for(auto &t: temp) topAttractions.push(t);
+}
+
+void findRoute(string A, string B){
+    if(!attractionDB.count(A) || !attractionDB.count(B)){
+        cout << "Attraction not found.\n";
+        return;
+    }
+    int src = attractionDB[A].node;
+    int dest = attractionDB[B].node;
+
+    auto result = dijkstraPath(src, dest);
+    if(result.first >= 1e9){
+        cout << "No route available.\n";
+        return;
+    }
+
+    cout << "\nShortest Route (" << A << " → " << B << "): "
+         << result.first << " meters\nPath: ";
+    for(int n : result.second) 
+        cout << n << (n==result.second.back()? "\n":" -> ");
+}
+
+void helpDeskAdd(string name){
+    helpDeskQ.push(name);
+    cout << "Added visitor '" << name << "' to help desk queue.\n";
+}
+
+void helpDeskServe(){
+    if(helpDeskQ.empty()){
+        cout << "No visitors waiting.\n";
+        return;
+    }
+    cout << "Serving: " << helpDeskQ.front() << "\n";
+    helpDeskQ.pop();
+}
+
+// ---------------- Initialization ----------------
+void initCity(){
+    NODES = 10;
+
+    // Sample graph for tourism centres
+    addEdge(1,2,30);
+    addEdge(2,3,25);
+    addEdge(3,4,20);
+    addEdge(4,5,35);
+    addEdge(2,6,40);
+    addEdge(6,7,15);
+    addEdge(7,8,10);
+    addEdge(8,9,50);
+    addEdge(9,10,20);
+
+    // Add Demo Attractions
+    addAttraction("Velora Beach", "Nature", 95, 5);
+    addAttraction("Sky Tower", "Viewpoint", 92, 7);
+    addAttraction("History Museum", "Cultural", 85, 3);
+    addAttraction("Wildlife Dome", "Nature", 88, 9);
+    addAttraction("Food Street", "Cuisine", 90, 2);
+}
+
+// ---------------- Main ----------------
+int main(){
+    initCity();
+
+    cout << "=== Velora City Info–Tourism Centre ===\n";
+
+    int cmd;
+    while(true){
+        cout << "\nCommands:\n";
+        cout << "1: Search Attraction\n";
+        cout << "2: Top Recommendations\n";
+        cout << "3: Find Route Between Attractions\n";
+        cout << "4: Add Visitor to Help Desk\n";
+        cout << "5: Serve Help Desk Visitor\n";
+        cout << "0: Exit\n";
+
+        cout << "cmd> ";
+        cin >> cmd;
+
+        if(cmd==0) break;
+
+        if(cmd==1){
+            string key; cin >> key;
+            searchAttraction(key);
+        }
+        else if(cmd==2){
+            recommendTopAttractions();
+        }
+        else if(cmd==3){
+            string A,B; cin >> A >> B;
+            findRoute(A,B);
+        }
+        else if(cmd==4){
+            string name; cin >> name;
+            helpDeskAdd(name);
+        }
+        else if(cmd==5){
+            helpDeskServe();
+        }
+        else{
+            cout << "Invalid command.\n";
+        }
+    }
+
+    return 0;
+}
