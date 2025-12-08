@@ -1,0 +1,114 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// ----------------------------------
+// DIJKSTRA – SHORTEST PATH FOR SERVICES
+// ----------------------------------
+vector<pair<int,int>> graphCity[20];
+vector<int> distCity(20, INT_MAX);
+
+void dijkstra(int start) {
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+    distCity[start] = 0;
+    pq.push({0, start});
+
+    while(!pq.empty()) {
+        int cost = pq.top().first;
+        int node = pq.top().second;
+        pq.pop();
+
+        for(auto &it : graphCity[node]) {
+            int next = it.first;
+            int weight = it.second;
+
+            if(distCity[next] > cost + weight) {
+                distCity[next] = cost + weight;
+                pq.push({distCity[next], next});
+            }
+        }
+    }
+}
+
+// ----------------------------------
+// MAIN PROGRAM
+// ----------------------------------
+int main() {
+
+    cout << "\n============================\n";
+    cout << " Velora Smart Governance System\n";
+    cout << "============================\n\n";
+
+    // ----------------------------------
+    // 1) QUEUE FOR TOKEN SYSTEM
+    // ----------------------------------
+    queue<string> citizenQueue;
+    citizenQueue.push("Rahul");
+    citizenQueue.push("Sneha");
+    citizenQueue.push("Amit");
+
+    cout << "🧾 Token Queue (First Come First Serve):\n";
+    while(!citizenQueue.empty()) {
+        cout << "  Serving: " << citizenQueue.front() << endl;
+        citizenQueue.pop();
+    }
+
+    cout << "\n--------------------------------------\n\n";
+
+    // ----------------------------------
+    // 2) HASH TABLE FOR CITIZEN DATABASE
+    // ----------------------------------
+    unordered_map<string, string> citizens;
+    citizens["101"] = "Rahul Sharma";
+    citizens["102"] = "Sneha Kapoor";
+    citizens["103"] = "Amit Verma";
+
+    cout << "🔍 Enter Citizen ID to search: ";
+    string id;
+    cin >> id;
+
+    if(citizens.find(id) != citizens.end()) {
+        cout << "Citizen Found: " << citizens[id] << endl;
+    } else {
+        cout << "Citizen Not Registered.\n";
+    }
+
+    cout << "\n--------------------------------------\n\n";
+
+    // ----------------------------------
+    // 3) GRAPH + DIJKSTRA FOR FAST ROUTING
+    // ----------------------------------
+    // Government service centers graph (sample)
+    graphCity[1] = {{2,2}, {3,4}};
+    graphCity[2] = {{3,1}, {4,7}};
+    graphCity[3] = {{4,3}};
+    
+    dijkstra(1);
+
+    cout << " Fastest route times from Citizen Service Center:\n";
+    for(int i=1;i<=4;i++) {
+        cout << "  To center " << i << " : " << distCity[i] << " mins\n";
+    }
+
+    cout << "\n--------------------------------------\n\n";
+
+    // ----------------------------------
+    // 4) FILE HANDLING FOR COMPLAINTS
+    // ----------------------------------
+    ofstream file("complaints.txt", ios::app);
+    string complaint;
+
+    cout << " Enter a complaint to save: ";
+    cin.ignore();
+    getline(cin, complaint);
+
+    file << complaint << endl;
+    file.close();
+
+    cout << "Complaint Saved Successfully!\n";
+
+    cout << "\n============================\n";
+    cout << " END OF SMART GOVERNANCE SYSTEM\n";
+    cout << "============================\n";
+
+    return 0;
+}
