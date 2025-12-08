@@ -1,0 +1,145 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+/*
+   Smart Emergency Beacon System – Velora
+   Algorithms:
+   - BFS → Alert spreading across beacon network
+   - Priority Queue → Highest severity alert first
+   - Hash Map → Beacon status lookup
+   - Queue → Broadcast line
+   - Binary Search → Validate alert category
+*/
+
+// ------------------------ Alert Structure ------------------------
+struct Alert {
+    int severity;        // 1–10
+    string type;         // fire, medical, crime
+    int node;            // beacon node ID
+};
+struct CompareAlert {
+    bool operator()(Alert a, Alert b){
+        return a.severity < b.severity; // highest severity first
+    }
+};
+
+priority_queue<Alert, vector<Alert>, CompareAlert> pqAlerts;
+queue<string> broadcastQueue;  
+unordered_map<int, string> beaconStatus; 
+
+// ------------------------ Graph / BFS ------------------------
+vector<int> graphMap[30];
+bool visited[30];
+
+void bfsActivate(int start){
+    memset(visited, false, sizeof(visited));
+    queue<int> q;
+    q.push(start);
+    visited[start] = true;
+
+    cout << "\nActivating Emergency Beacons: ";
+
+    while(!q.empty()){
+        int node = q.front(); q.pop();
+        cout << node << " ";
+
+        for(int nxt : graphMap[node]){
+            if(!visited[nxt]){
+                visited[nxt] = true;
+                q.push(nxt);
+            }
+        }
+    }
+    cout << "\n";
+}
+
+// ------------------------ Binary Search for alert type ------------------------
+bool alertTypeExists(vector<string> &types, string key){
+    sort(types.begin(), types.end());
+    return binary_search(types.begin(), types.end(), key);
+}
+
+// ------------------------ MAIN ------------------------
+int main(){
+
+    // Sample Beacon Network
+    graphMap[1] = {2,3};
+    graphMap[2] = {1,4,5};
+    graphMap[3] = {1,6};
+    graphMap[4] = {2};
+    graphMap[5] = {2,7};
+    graphMap[6] = {3};
+    graphMap[7] = {5};
+
+    // Beacon statuses
+    beaconStatus[1] = "OK";
+    beaconStatus[2] = "OK";
+    beaconStatus[3] = "OK";
+    beaconStatus[4] = "OK";
+    beaconStatus[5] = "OK";
+    beaconStatus[6] = "OK";
+    beaconStatus[7] = "OK";
+
+    // Allowed alert types
+    vector<string> alertTypes = {"fire","crime","medical","disaster"};
+
+    int cmd;
+    while(true){
+        cout << "\n=== Smart Emergency Beacon System ===\n";
+        cout << "1. Register New Alert\n";
+        cout << "2. Activate Highest Priority Alert\n";
+        cout << "3. Check Beacon Status\n";
+        cout << "4. Validate Alert Type\n";
+        cout << "0. Exit\ncmd> ";
+        cin >> cmd;
+
+        if(cmd == 0) break;
+
+        if(cmd == 1){
+            Alert A;
+            cout << "Enter Severity (1–10): "; cin >> A.severity;
+            cout << "Enter Type: "; cin >> A.type;
+            cout << "Enter Node Location: "; cin >> A.node;
+
+            pqAlerts.push(A);
+            broadcastQueue.push(A.type);
+
+            cout << "Alert Registered.\n";
+        }
+
+        else if(cmd == 2){
+            if(pqAlerts.empty()){
+                cout << "No alerts.\n"; 
+                continue;
+            }
+            Alert A = pqAlerts.top(); pqAlerts.pop();
+
+            cout << "\nProcessing Alert → Type: " << A.type 
+                 << " | Severity: " << A.severity 
+                 << " | Node: " << A.node << "\n";
+
+            bfsActivate(A.node);
+        }
+
+        else if(cmd == 3){
+            int id;
+            cout << "Enter Beacon ID: ";
+            cin >> id;
+
+            if(beaconStatus.count(id))
+                cout << "Beacon " << id << ": " << beaconStatus[id] << "\n";
+            else
+                cout << "Beacon not found.\n";
+        }
+
+        else if(cmd == 4){
+            string t; cin >> t;
+            if(alertTypeExists(alertTypes, t))
+                cout << "Valid alert type.\n";
+            else
+                cout << "Invalid alert type.\n";
+        }
+    }
+
+    return 0;
+}
