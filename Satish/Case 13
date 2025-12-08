@@ -1,0 +1,197 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+/*
+   Smart Residential Surveillance Pod – Velora
+   Algorithms:
+   - Hash Map: Resident & visitor access DB
+   - KMP String Matching: Unknown face detection
+   - Priority Queue: Threat dispatch
+   - Graph + Dijkstra: Patrol routing
+   - Queue: Entry logs
+*/
+
+// ------------------------- KMP MATCH -------------------------
+vector<int> buildLPS(string p){
+    int n=p.size(), j=0;
+    vector<int> lps(n);
+    for(int i=1;i<n;i++){
+        while(j>0 && p[i]!=p[j]) j=lps[j-1];
+        if(p[i]==p[j]) j++;
+        lps[i]=j;
+    }
+    return lps;
+}
+bool KMPmatch(string txt,string pat){
+    auto lps=buildLPS(pat);
+    int i=0,j=0;
+    while(i<txt.size()){
+        if(txt[i]==pat[j]) i++,j++;
+        else{
+            if(j>0) j=lps[j-1];
+            else i++;
+        }
+        if(j==pat.size()) return true;
+    }
+    return false;
+}
+
+// ------------------------- RESIDENT + VISITOR DB -------------------------
+unordered_map<string,string> residentDB; // flatNo -> name
+unordered_map<string,bool> visitorApproved; // name -> allowed?
+
+queue<string> entryLog;
+
+// ------------------------- PRIORITY QUEUE FOR THREATS -------------------------
+struct Threat {
+    int level;
+    string detail;
+    int podNode;
+};
+struct CompareThreat {
+    bool operator()(Threat a, Threat b){
+        return a.level < b.level;
+    }
+};
+priority_queue<Threat, vector<Threat>, CompareThreat> threatPQ;
+
+// ------------------------- GRAPH + DIJKSTRA (PATROL ROUTING) -------------------------
+vector<pair<int,int>> graphPod[30];
+int NODES = 10;
+
+void addEdge(int u,int v,int w){
+    graphPod[u].push_back({v,w});
+    graphPod[v].push_back({u,w});
+}
+
+pair<int,vector<int>> dijkstraPath(int src,int dest){
+    const int INF = 1e9;
+    vector<int> dist(NODES+1, INF), parent(NODES+1,-1);
+
+    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+
+    dist[src]=0;
+    pq.push({0,src});
+
+    while(!pq.empty()){
+        auto [d,u] = pq.top(); pq.pop();
+        for(auto &E : graphPod[u]){
+            int v=E.first, w=E.second;
+            if(dist[v] > dist[u] + w){
+                dist[v] = dist[u] + w;
+                parent[v] = u;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+
+    vector<int> path;
+    if(dist[dest] >= 1e9) return {INF,path};
+
+    for(int c=dest;c!=-1;c=parent[c]) path.push_back(c);
+    reverse(path.begin(), path.end());
+    return {dist[dest], path};
+}
+
+// ------------------------- MAIN -------------------------
+int main(){
+
+    // sample residents
+    residentDB["A101"] = "Kiran";
+    residentDB["A102"] = "Megha";
+    residentDB["B203"] = "Rahul";
+
+    // approved visitors
+    visitorApproved["Driver_Ram"] = true;
+    visitorApproved["Maid_Sita"] = true;
+
+    // graph nodes for patrol units
+    addEdge(1,2,10); addEdge(2,3,12);
+    addEdge(3,4,20); addEdge(2,5,15);
+    addEdge(5,6,10);
+
+    int cmd;
+    while(true){
+        cout << "\n=== Smart Residential Surveillance Pod ===\n";
+        cout << "1. Log Entry (Visitor/Resident)\n";
+        cout << "2. Check Unknown Face (KMP)\n";
+        cout << "3. Raise Threat Alert\n";
+        cout << "4. Process Highest Threat\n";
+        cout << "5. Find Patrol Route (Dijkstra)\n";
+        cout << "6. Show Entry Log\n";
+        cout << "0. Exit\ncmd> ";
+        cin >> cmd;
+
+        if(cmd == 0) break;
+
+        if(cmd == 1){
+            string name; 
+            cin >> name;
+
+            entryLog.push(name);
+
+            if(visitorApproved[name] || residentDB.count(name)){
+                cout << "Access Granted to " << name << "\n";
+            } 
+            else {
+                cout << "UNKNOWN person detected!\n";
+            }
+        }
+
+        else if(cmd == 2){
+            string live, pat;
+            cout << "Live-feature: "; cin >> live;
+            cout << "Pattern: "; cin >> pat;
+
+            if(KMPmatch(live, pat))
+                cout << "Match Found (Known Face)\n";
+            else
+                cout << "Unknown Face Detected!\n";
+        }
+
+        else if(cmd == 3){
+            Threat t;
+            cout << "Threat Level (1–10): "; cin >> t.level;
+            cout << "Detail: ";
+            cin.ignore();
+            getline(cin, t.detail);
+            cout << "Pod Node: "; cin >> t.podNode;
+
+            threatPQ.push(t);
+            cout << "Threat Registered.\n";
+        }
+
+        else if(cmd == 4){
+            if(threatPQ.empty()) cout << "No threats.\n";
+            else {
+                Threat t = threatPQ.top(); threatPQ.pop();
+                cout << "Processing Threat: Level " << t.level 
+                     << " | " << t.detail << "\n";
+            }
+        }
+
+        else if(cmd == 5){
+            int src, dest;
+            cout << "Patrol Unit Node: "; cin >> src;
+            cout << "Pod Node: "; cin >> dest;
+
+            auto res = dijkstraPath(src, dest);
+            if(res.first >= 1e9) cout << "No route.\n";
+            else{
+                cout << "Distance: " << res.first << "\nPath: ";
+                for(int n : res.second) cout << n << " ";
+                cout << "\n";
+            }
+        }
+
+        else if(cmd == 6){
+            cout << "Entry Log:\n";
+            while(!entryLog.empty()){
+                cout << "- " << entryLog.front() << "\n";
+                entryLog.pop();
+            }
+        }
+    }
+
+    return 0;
+}
