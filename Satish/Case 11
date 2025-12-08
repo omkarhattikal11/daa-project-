@@ -1,0 +1,203 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+/*
+   Velora City Post Office System
+   Algorithms Used:
+   - Priority Queue (urgent parcel dispatch)
+   - Hash Map (parcel tracking database)
+   - Queue (normal mail sorting line)
+   - Graph + Dijkstra (delivery routing)
+   - Binary Search (region code validation)
+   - BST (sender record storage)
+*/
+
+// ---------------------- BST FOR SENDERS ----------------------
+struct Node {
+    int id;
+    string name;
+    Node *left, *right;
+    Node(int i, string n) : id(i), name(n), left(NULL), right(NULL) {}
+};
+
+Node* insertSender(Node* root, int id, string name){
+    if(!root) return new Node(id, name);
+    if(id < root->id) root->left = insertSender(root->left,id,name);
+    else root->right = insertSender(root->right,id,name);
+    return root;
+}
+
+void searchSender(Node* root, int id){
+    if(!root){ cout << "Sender not found.\n"; return; }
+    if(root->id == id){
+        cout << "Sender Found: " << root->name << "\n";
+        return;
+    }
+    if(id < root->id) searchSender(root->left,id);
+    else searchSender(root->right,id);
+}
+
+// ---------------------- PRIORITY QUEUE FOR URGENT PARCELS ----------------------
+struct Parcel {
+    int priority;       // 1–10 (10 = most urgent)
+    string parcelID;
+    int destNode;
+};
+struct CompareParcel {
+    bool operator()(Parcel a, Parcel b){
+        return a.priority < b.priority;
+    }
+};
+priority_queue<Parcel, vector<Parcel>, CompareParcel> urgentPQ;
+
+// ---------------------- HASH MAP FOR PARCEL TRACKING ----------------------
+unordered_map<string, string> parcelTrackDB; // parcelID -> status
+
+// ---------------------- NORMAL MAIL QUEUE ----------------------
+queue<string> normalMailQ;
+
+// ---------------------- GRAPH + DIJKSTRA ROUTES ----------------------
+vector<pair<int,int>> graphMap[50];
+int NODES = 12;
+
+void addEdge(int u,int v,int w){
+    graphMap[u].push_back({v,w});
+    graphMap[v].push_back({u,w});
+}
+
+pair<int,vector<int>> dijkstraPath(int src,int dest){
+    const int INF = 1e9;
+    vector<int> dist(NODES+1,INF), parent(NODES+1,-1);
+
+    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+    dist[src]=0;
+    pq.push({0,src});
+
+    while(!pq.empty()){
+        auto [d,u] = pq.top(); pq.pop();
+        for(auto &edge : graphMap[u]){
+            int v=edge.first, w=edge.second;
+            if(dist[v] > dist[u] + w){
+                dist[v] = dist[u] + w;
+                parent[v]=u;
+                pq.push({dist[v],v});
+            }
+        }
+    }
+
+    vector<int> path;
+    if(dist[dest] >= 1e9) return {INF,path};
+    for(int c=dest; c!=-1; c=parent[c]) path.push_back(c);
+    reverse(path.begin(),path.end());
+    return {dist[dest], path};
+}
+
+// ---------------------- Binary Search for Valid Region ----------------------
+bool isValidRegion(vector<int> &regions, int code){
+    sort(regions.begin(), regions.end());
+    return binary_search(regions.begin(), regions.end(), code);
+}
+
+// ---------------------- MAIN ----------------------
+int main(){
+
+    // Setup city graph
+    addEdge(1,2,12); addEdge(2,3,14);
+    addEdge(3,4,20); addEdge(2,5,10);
+    addEdge(5,6,11); addEdge(6,7,15);
+    addEdge(7,8,18); addEdge(3,9,25);
+
+    // Sender Records
+    Node* root = NULL;
+
+    // Valid region codes
+    vector<int> regions = {101,102,103,104,105,201,202,301};
+
+    int cmd;
+    while(true){
+        cout << "\n=== Velora City Post Office ===\n";
+        cout << "1. Add Normal Mail\n";
+        cout << "2. Add Urgent Parcel\n";
+        cout << "3. Dispatch Highest Priority Parcel\n";
+        cout << "4. Track Parcel\n";
+        cout << "5. Add Sender Record\n";
+        cout << "6. Search Sender\n";
+        cout << "7. Find Delivery Route\n";
+        cout << "8. Validate Region Code\n";
+        cout << "0. Exit\ncmd> ";
+
+        cin >> cmd;
+        if(cmd == 0) break;
+
+        if(cmd == 1){
+            string id; cin >> id;
+            normalMailQ.push(id);
+            parcelTrackDB[id] = "In Sorting";
+            cout << "Normal mail queued.\n";
+        }
+
+        else if(cmd == 2){
+            Parcel p;
+            cout << "ParcelID: "; cin >> p.parcelID;
+            cout << "Priority(1–10): "; cin >> p.priority;
+            cout << "Destination Node: "; cin >> p.destNode;
+
+            urgentPQ.push(p);
+            parcelTrackDB[p.parcelID] = "Registered - High Priority";
+            cout << "Urgent parcel added.\n";
+        }
+
+        else if(cmd == 3){
+            if(urgentPQ.empty()) cout << "No urgent parcels.\n";
+            else {
+                Parcel p = urgentPQ.top(); urgentPQ.pop();
+                cout << "Dispatching urgent parcel " << p.parcelID 
+                     << " | Priority " << p.priority << "\n";
+                parcelTrackDB[p.parcelID] = "Dispatched";
+            }
+        }
+
+        else if(cmd == 4){
+            string id; cin >> id;
+            if(parcelTrackDB.count(id))
+                cout << "Parcel Status: " << parcelTrackDB[id] << "\n";
+            else
+                cout << "Parcel not found.\n";
+        }
+
+        else if(cmd == 5){
+            int id; string name; 
+            cin >> id;
+            cin.ignore();
+            getline(cin, name);
+            root = insertSender(root,id,name);
+            cout << "Sender added.\n";
+        }
+
+        else if(cmd == 6){
+            int id; cin >> id;
+            searchSender(root,id);
+        }
+
+        else if(cmd == 7){
+            int src, dest;
+            cin >> src >> dest;
+
+            auto res = dijkstraPath(src,dest);
+            if(res.first >= 1e9) cout << "No route available.\n";
+            else{
+                cout << "Route distance: " << res.first << "\nPath: ";
+                for(int node : res.second) cout << node << " ";
+                cout << "\n";
+            }
+        }
+
+        else if(cmd == 8){
+            int code; cin >> code;
+            cout << (isValidRegion(regions, code) ? 
+                     "Valid Region.\n" : "Invalid region code.\n");
+        }
+    }
+
+    return 0;
+}
