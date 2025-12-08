@@ -1,0 +1,154 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+/*
+   AI Powered Lost Person Detection – Velora Smart City
+   Algorithms:
+   - KMP String Matching: Face-feature pattern matching
+   - Hash Map: Camera → People seen
+   - Priority Queue: Highest confidence match first
+   - BFS: Scan nearby camera zones
+   - Queue: Incoming lost-person reports
+*/
+
+// ---------------------- KMP ALGORITHM ----------------------
+vector<int> buildLPS(string p){
+    int n=p.size(), j=0;
+    vector<int> lps(n,0);
+
+    for(int i=1;i<n;i++){
+        while(j>0 && p[i]!=p[j]) j=lps[j-1];
+        if(p[i]==p[j]) j++;
+        lps[i]=j;
+    }
+    return lps;
+}
+
+bool KMPmatch(string text, string pat){
+    auto lps = buildLPS(pat);
+    int i=0,j=0;
+
+    while(i<text.size()){
+        if(text[i]==pat[j]) i++, j++;
+        else{
+            if(j>0) j=lps[j-1];
+            else i++;
+        }
+        if(j==pat.size()) return true;
+    }
+    return false;
+}
+
+// ---------------------- LOST PERSON STRUCT ----------------------
+struct Match {
+    string camera;
+    int confidence;
+};
+struct CompareMatch {
+    bool operator()(Match a, Match b){
+        return a.confidence < b.confidence; // highest confidence first
+    }
+};
+
+priority_queue<Match, vector<Match>, CompareMatch> pqMatches;
+
+// ---------------------- HASH MAP FOR CAMERA DATA ----------------------
+unordered_map<string, vector<string>> cameraFaces; 
+// cameraID -> list of feature codes
+
+// ---------------------- BFS FOR LOCATION SCAN ----------------------
+vector<int> graphMap[30];
+bool visited[30];
+
+void bfsScan(int start){
+    memset(visited, false, sizeof(visited));
+    queue<int> q;
+    q.push(start);
+    visited[start]=true;
+
+    cout << "\nScanning Nearby Camera Zones: ";
+    while(!q.empty()){
+        int cur=q.front(); q.pop();
+        cout << cur << " ";
+
+        for(int nxt : graphMap[cur]){
+            if(!visited[nxt]){
+                visited[nxt]=true;
+                q.push(nxt);
+            }
+        }
+    }
+    cout << "\n";
+}
+
+// ---------------------- MAIN ----------------------
+int main(){
+
+    // SAMPLE CAMERA NETWORK
+    graphMap[1]={2,3};
+    graphMap[2]={1,4};
+    graphMap[3]={1,5};
+    graphMap[4]={2};
+    graphMap[5]={3,6};
+    graphMap[6]={5};
+
+    // SAMPLE CAMERA FACE DATA (feature codes)
+    cameraFaces["C101"] = {"ABCD12", "ZXCV99", "LOST14"};
+    cameraFaces["C102"] = {"PQRS55", "JHGF77"};
+    cameraFaces["C103"] = {"LOST14", "A1B2C3"};
+    cameraFaces["C104"] = {"QWER88"};
+
+    int cmd;
+    while(true){
+        cout << "\n=== AI Lost Person Detection System ===\n";
+        cout << "1. Run Lost-Person Scan (KMP)\n";
+        cout << "2. Process Top Confidence Match\n";
+        cout << "3. BFS Scan Nearby Cameras\n";
+        cout << "0. Exit\ncmd> ";
+        cin >> cmd;
+
+        if(cmd==0) break;
+
+        if(cmd==1){
+            string feature;
+            cout << "Enter lost person feature-code: ";
+            cin >> feature;
+
+            cout << "\nMatching Across Cameras...\n";
+
+            for(auto &p : cameraFaces){
+                string camID = p.first;
+
+                for(auto &face : p.second){
+                    if(KMPmatch(face, feature)){
+                        // generate random confidence
+                        int conf = rand()%50 + 50; // between 50–100
+                        pqMatches.push({camID, conf});
+                        cout << "Possible match at " << camID 
+                             << " | Confidence " << conf << "%\n";
+                    }
+                }
+            }
+        }
+
+        else if(cmd==2){
+            if(pqMatches.empty()){
+                cout << "No matches yet.\n";
+                continue;
+            }
+            auto top = pqMatches.top(); pqMatches.pop();
+            cout << "\nTop Match → Camera " << top.camera 
+                 << " | Confidence: " << top.confidence << "%\n";
+        }
+
+        else if(cmd==3){
+            int start;
+            cout << "Enter camera zone node to scan around: ";
+            cin >> start;
+
+            bfsScan(start);
+        }
+    }
+
+    return 0;
+}
