@@ -1,573 +1,428 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Satish B — Velora Use Cases (DAA)</title>
-
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Algorithms Lab — Project Evaluation Sheet</title>
 <style>
-:root {
-  --bg: #0a0f1d;
-  --card: rgba(255,255,255,0.03);
-  --accent: #ffb86b;
-  --accent2: #6df7c1;
-  --muted: #a7b4c8;
-  --glass: rgba(255,255,255,0.05);
-  --border: rgba(255,255,255,0.07);
-  --radius: 14px;
-  --blur: 10px;
-  font-family: "Inter", sans-serif;
-}
+  /* Visual style tuned to match the screenshot (white page, serif font) */
+  body {
+    font-family: "Times New Roman", Times, serif;
+    background: #ffffff;
+    color: #000;
+    margin: 36px;
+  }
 
-/* Reset */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  min-height: 100vh;
-  background:
-    radial-gradient(900px 400px at 10% 10%, rgba(255,184,107,0.06), transparent),
-    radial-gradient(900px 400px at 90% 90%, rgba(109,247,193,0.04), transparent),
-    var(--bg);
-  color: #e9f8ff;
-  padding: 90px 20px;
-  line-height: 1.45;
-}
+  .center {
+    text-align: center;
+  }
 
-/* Header Bar */
-header {
-  position: fixed;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 40px);
-  max-width: 1100px;
-  padding: 12px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  backdrop-filter: blur(var(--blur));
-  z-index: 100;
-}
+  h1, h2 { margin: 0; }
+  .top {
+    margin-bottom: 18px;
+  }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
+  .fields {
+    display: flex;
+    justify-content: space-between;
+    margin: 18px 0 8px;
+  }
+  .fields div { width: 32%; }
 
-.badge {
-  width: 46px;
-  height: 46px;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #062018;
-  font-size: 20px;
-  font-weight: 900;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-}
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
 
-.brand .title {
-  font-weight: 900;
-  font-size: 17px;
-}
+  table thead th {
+    border: 1px solid #000;
+    padding: 8px 6px;
+    background: #fff;
+    font-weight: 700;
+    text-align: left;
+  }
 
-nav a {
-  color: var(--muted);
-  text-decoration: none;
-  font-weight: 700;
-  margin-left: 14px;
-}
-nav a:hover { color: var(--accent); }
+  table tbody td {
+    border: 1px solid #000;
+    padding: 8px 6px;
+    vertical-align: top;
+  }
 
-/* Main Wrapper */
-main {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 330px;
-  gap: 26px;
-}
+  /* narrower column widths */
+  .col-algo { width: 22%; }
+  .col-used { width: 8%; text-align: center; }
+  .col-how { width: 40%; }
+  .col-space { width: 13%; text-align: center; }
+  .col-time { width: 17%; text-align: center; }
 
-/* Left Card */
-.card {
-  padding: 24px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  backdrop-filter: blur(var(--blur));
-  box-shadow: 0 10px 35px rgba(2,10,20,0.7);
-}
+  .other-analysis {
+    margin-top: 18px;
+    font-size: 14px;
+  }
 
-h1 { font-size: 30px; font-weight: 900; margin-bottom: 6px; }
-.subtitle { color: var(--muted); margin-bottom: 16px; }
+  .small-muted { font-size: 13px; color: #222; margin-top: 6px; }
 
-/* Author Box */
-.author-box {
-  display: flex;
-  gap: 14px;
-  margin: 20px 0;
-  padding: 14px;
-  border-radius: var(--radius);
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.03);
-}
-
-.avatar {
-  width: 70px;
-  height: 70px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--accent2), var(--accent));
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 22px;
-  font-weight: 900;
-  color: #042018;
-}
-
-.author-info .name {
-  font-size: 17px;
-  font-weight: 900;
-  margin-bottom: 4px;
-}
-.author-info .meta {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-/* Case List */
-.case-section {
-  margin-top: 20px;
-}
-
-.case-item {
-  margin-bottom: 22px;
-  padding: 16px;
-  border-radius: var(--radius);
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.03);
-}
-
-.case-item h2 {
-  font-size: 20px;
-  margin-bottom: 8px;
-  font-weight: 900;
-  color: var(--accent);
-}
-
-.case-item p {
-  color: var(--muted);
-  margin-bottom: 10px;
-}
-
-/* Algorithms Box */
-.algos-title {
-  margin-top: 6px;
-  font-weight: 800;
-  color: #fff;
-  font-size: 16px;
-}
-
-.case-item ul {
-  margin-top: 6px;
-  margin-bottom: 14px;
-  margin-left: 18px;
-  color: var(--muted);
-}
-
-/* Buttons */
-.btn {
-  display: inline-block;
-  padding: 10px 16px;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  border-radius: 10px;
-  color: #062018;
-  text-decoration: none;
-  font-weight: 800;
-}
-
-/* Sidebar */
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.side-card {
-  padding: 16px;
-  background: rgba(255,255,255,0.03);
-  border-radius: var(--radius);
-  border: 1px solid rgba(255,255,255,0.03);
-}
-.side-card h3 {
-  margin-bottom: 8px;
-  font-weight: 900;
-  font-size: 16px;
-}
-.side-card p { color: var(--muted); }
-
-/* Footer */
-footer {
-  grid-column: 1 / -1;
-  margin-top: 30px;
-  text-align: center;
-  color: var(--muted);
-  font-size: 13px;
-}
+  /* responsive small */
+  @media (max-width:900px){
+    .fields { flex-direction: column; gap: 8px; }
+    .fields div { width: 100%; }
+    table { font-size: 13px; }
+  }
 </style>
 </head>
-
 <body>
 
-<header>
-  <div class="brand">
-    <div class="badge">SB</div>
-    <div class="title">Satish B — Velora Project</div>
+  <div class="center top">
+    <h2>Algorithms Lab</h2>
+    <h1>Project Evaluation Sheet</h1>
   </div>
 
-  <nav>
-    <a href="../index.html">Home</a>
-    <a href="../Velora.html">City</a>
-    <a href="../project.html">Project</a>
-  </nav>
-</header>
-
-<main>
-
-<!-- LEFT MAIN CARD -->
-<section class="card">
-  <h1>Business Use Cases — Velora</h1>
-  <div class="subtitle">All conceptual + algorithmic implementations under DAA</div>
-
-  <!-- Author Box -->
-  <div class="author-box">
-    <div class="avatar">SB</div>
-    <div class="author-info">
-      <div class="name">Satish B</div>
-      <div class="meta">Roll No: 229 • Dept. of CSE</div>
-    </div>
+  <div class="fields" aria-label="student-info">
+    <div><strong>Name:</strong> Satish S. Batakurki</div>
+    <div style="text-align:center"><strong>SRN:</strong> 01FE24BCS103</div>
+    <div style="text-align:right"><strong>Roll:</strong> 229</div>
   </div>
 
-  <!-- Business Case List -->
-  <div class="case-section">
+  <h3>Implementation Analysis</h3>
 
+  <table>
+    <thead>
+      <tr>
+        <th class="col-algo">Algorithm/Data Structure</th>
+        <th class="col-used">Used? (Yes/No)</th>
+        <th class="col-how">How and where?</th>
+        <th class="col-space">Space Efficiency</th>
+        <th class="col-time">Time Efficiency</th>
+      </tr>
+    </thead>
 
-    <!-- ========================= CASE 1 ========================= -->
-    <div class="case-item">
-      <h2>Digital Advertising & Events Hub</h2>
-      <p>
-        A centralized platform managing digital advertising slots, event bookings, live audience analytics,
-        and stall allocations inside Velora’s Times-Square-style plaza. The system uses ad-slot priority
-        scheduling, automated stall allocation, and drone-based display routing. The hub optimizes advertising
-        performance and event flow with real-time data.
-      </p>
+    <tbody>
+      <tr>
+        <td>Arrays</td>
+        <td class="col-used">Yes</td>
+        <td>Used as basic containers across many modules (sensor logs, small fixed tables, adjacency lists stored as vectors/arrays in routing modules such as Dijkstra in Rapid Response, Mall navigation and Parking).</td>
+        <td>O(n)</td>
+        <td>O(1) access</td>
+      </tr>
 
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Hash Table → Stall & advertiser lookup</li>
-        <li>Max-Heap → Ad-slot priority scheduling</li>
-        <li>Dijkstra → Drone/display routing paths</li>
-        <li>Queue → Live advertisement rotation cycle</li>
-      </ul>
+      <tr>
+        <td>Structures</td>
+        <td class="col-used">Yes</td>
+        <td>Custom structs (C++ structs/classes) used to model Parcels, Emergencies, Stores, Cameras, Units and Graph edges in multiple cases (Post Office, Rapid Response, Mall, Surveillance).</td>
+        <td>O(n)</td>
+        <td>O(1) per access</td>
+      </tr>
 
-      <a class="btn" 
-         href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Central(case-1).cpp" 
-         target="_blank">View Code</a>
-    </div>
+      <tr>
+        <td>List</td>
+        <td class="col-used">Yes</td>
+        <td>Linked-list style sequences / STL lists used for ordered logs and walk-throughs (entry logs, visitor log buffers in Pods & Flow Analysis).</td>
+        <td>O(n)</td>
+        <td>O(1) insert/delete (given iterator)</td>
+      </tr>
 
+      <tr>
+        <td>Stack</td>
+        <td class="col-used">No</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-    <!-- ========================= CASE 2 ========================= -->
-    <div class="case-item">
-      <h2>Smart Governance & Citizen Service Centre</h2>
-      <p>
-        A unified digital counter where citizens can apply for certificates, pay taxes, raise grievances,
-        and track service requests. The system maintains secure citizen records, manages live token queues,
-        and auto-routes requests to correct departments with estimated processing time.
-      </p>
+      <tr>
+        <td>Queue</td>
+        <td class="col-used">Yes</td>
+        <td>Used extensively for FIFO workflows: billing queues (Mall), mail sorting (Post Office), entry logs & intake queues (Pods), incoming emergency intake.</td>
+        <td>O(n)</td>
+        <td>O(1) enqueue/dequeue</td>
+      </tr>
 
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Hashing → Citizen profiles & request indexing</li>
-        <li>Queue → Token & service flow management</li>
-        <li>Heap → Priority handling (elderly, emergency)</li>
-        <li>Search Trees → Document & record lookup</li>
-      </ul>
+      <tr>
+        <td>Binary Tree</td>
+        <td class="col-used">No</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%202"
-        target="_blank">View Code</a>
-    </div>
+      <tr>
+        <td>Binary Search Tree</td>
+        <td class="col-used">Yes</td>
+        <td>BST used for inventory item indexing in Central Mall Management (simple BST to demonstrate ordered lookup of items).</td>
+        <td>O(n)</td>
+        <td>O(h) average O(log n) if balanced</td>
+      </tr>
 
+      <tr>
+        <td>AVL Tree</td>
+        <td class="col-used">No</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-    <!-- ========================= CASE 3 ========================= -->
-    <div class="case-item">
-      <h2>Smart Parking & Mobility Hub</h2>
-      <p>
-        A real-time parking and mobility node that detects free slots, assists EV charging, and routes
-        autonomous shuttles. Uses sensors to predict peak demand and provide dynamic congestion pricing.
-      </p>
+      <tr>
+        <td>2-3 Tree</td>
+        <td class="col-used">No</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Hash Table → Vehicle slot assignments</li>
-        <li>Min-Heap → Nearest-free-slot selection</li>
-        <li>BFS → Level-by-level parking zone scanning</li>
-        <li>Dijkstra → Shuttle routing across hub graph</li>
-      </ul>
+      <tr>
+        <td>Red-Black Tree</td>
+        <td class="col-used">No</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%203"
-        target="_blank">View Code</a>
-    </div>
+      <tr>
+        <td>Trie</td>
+        <td class="col-used">Yes</td>
+        <td>Planned / used conceptually in City Info–Tourism Centre for fast prefix searches of POI names and for quick facility lookup in Omkar's ideas.</td>
+        <td>O(total chars)</td>
+        <td>O(length of query)</td>
+      </tr>
 
+      <tr>
+        <td>Heap</td>
+        <td class="col-used">Yes</td>
+        <td>Max/min-heaps (priority_queue) used for top-seller analytics (Mall), ad-slot priority, urgent-parcel priorities, and scheduling responders (Rapid Response).</td>
+        <td>O(n)</td>
+        <td>O(log n) insert/pop</td>
+      </tr>
 
-    <!-- ========================= CASE 4 ========================= -->
-    <div class="case-item">
-      <h2>City Info–Tourism Centre</h2>
-      <p>
-        Digital tourism hub with attraction details, crowd heatmaps, ticketing info, and personalized trip
-        suggestions. Generates shortest visitor routes across Velora’s landmarks.
-      </p>
+      <tr>
+        <td>Lookup Table</td>
+        <td class="col-used">Yes</td>
+        <td>Implemented as hashing / unordered_map for camera registry, parcel tracking, shop DB, resident DB and unit availability across systems.</td>
+        <td>O(n)</td>
+        <td>O(1) average lookup</td>
+      </tr>
 
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Hash Table → Attraction details & lookup</li>
-        <li>Heap → Attraction ranking recommendations</li>
-        <li>Dijkstra → Tourist route planner</li>
-        <li>Trie → Fast searching of attraction names</li>
-      </ul>
+      <tr>
+        <td>Sparse Table</td>
+        <td class="col-used">No</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%204"
-        target="_blank">View Code</a>
-    </div>
+      <tr>
+        <td>Fenwick Tree</td>
+        <td class="col-used">No</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
+      <tr>
+        <td>Segment Tree</td>
+        <td class="col-used">No</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-    <!-- ========================= CASE 5 ========================= -->
-    <div class="case-item">
-      <h2>Central Security & Smart Surveillance Room</h2>
-      <p>
-        A unified command center supervising CCTV, fire sensors, motion detectors, and emergency alarms.
-        Intelligence-based anomaly detection triggers immediate alerts and dispatches nearby patrol units.
-      </p>
+      <tr>
+        <td>Skip List</td>
+        <td class="col-used">No</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Hashing → Camera/alert database</li>
-        <li>Priority Queue → Alert severity ranking</li>
-        <li>BFS → Nearby camera scanning</li>
-        <li>AVL Tree → Incident log indexing</li>
-      </ul>
+      <tr>
+        <td>Union-Find</td>
+        <td class="col-used">No</td>
+        <td>Not required for the presented use-cases (no dynamic connectivity problems implemented).</td>
+        <td></td>
+        <td></td>
+      </tr>
 
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%205"
-        target="_blank">View Code</a>
-    </div>
+      <tr>
+        <td>Hashing</td>
+        <td class="col-used">Yes</td>
+        <td>Core technique across almost every module — camera registries, parcel DB, citizen profiles, shop lookup, beacon status, unit availability.</td>
+        <td>O(n)</td>
+        <td>O(1) average</td>
+      </tr>
 
+      <tr>
+        <td>DFS</td>
+        <td class="col-used">No</td>
+        <td>Not used explicitly; BFS and Dijkstra are the primary graph traversals.</td>
+        <td></td>
+        <td></td>
+      </tr>
 
-    <!-- ========================= CASE 6 ========================= -->
-    <div class="case-item">
-      <h2>Emergency Coordination Tower</h2>
-      <p>
-        The main disaster & emergency command node managing fire, rescue, police, and medical routing.
-        Uses severity classification and nearest-responder matching for optimal safety outcomes.
-      </p>
+      <tr>
+        <td>BFS</td>
+        <td class="col-used">Yes</td>
+        <td>Used for zone scans, nearby camera scanning (Lost Person, Surveillance), beacon propagation (Emergency Beacon System), and backup responder searches.</td>
+        <td>O(V + E)</td>
+        <td>O(V + E)</td>
+      </tr>
 
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Priority Queue → Incident severity ranking</li>
-        <li>Hash Table → Responder availability</li>
-        <li>Dijkstra → Fastest responder routing</li>
-        <li>Queue → Multi-stage rescue workflow</li>
-      </ul>
+      <tr>
+        <td>Bubble Sort</td>
+        <td class="col-used">No</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%206"
-        target="_blank">View Code</a>
-    </div>
+      <tr>
+        <td>Selection Sort</td>
+        <td class="col-used">No</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
+      <tr>
+        <td>Insertion Sort</td>
+        <td class="col-used">No</td>
+        <td>Not used explicitly; priority-queues often replace ad-hoc sorts.</td>
+        <td></td>
+        <td></td>
+      </tr>
 
-    <!-- ========================= CASE 7 ========================= -->
-    <div class="case-item">
-      <h2>Visitors Flow Analysis</h2>
-      <p>
-        Tracks visitor density in Velora’s beaches, malls, parks, and plazas. Predicts congestion and 
-        recommends alternate routes using heatmap-style crowd analytics.
-      </p>
+      <tr>
+        <td>Quick Sort</td>
+        <td class="col-used">No</td>
+        <td>Not used directly (STL sort could be used if needed).</td>
+        <td></td>
+        <td></td>
+      </tr>
 
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Sliding Window → Density analysis</li>
-        <li>Hash Map → Sensor/entry logs</li>
-        <li>BFS → Crowd propagation mapping</li>
-        <li>Heap → Peak-time forecasting</li>
-      </ul>
+      <tr>
+        <td>Merge Sort</td>
+        <td class="col-used">No</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%207"
-        target="_blank">View Code</a>
-    </div>
+      <tr>
+        <td>Brute Force String Search</td>
+        <td class="col-used">No</td>
+        <td>We used KMP where efficient pattern match was needed.</td>
+        <td></td>
+        <td></td>
+      </tr>
 
+      <tr>
+        <td>Rabin Karp</td>
+        <td class="col-used">No</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-    <!-- ========================= CASE 8 ========================= -->
-    <div class="case-item">
-      <h2>Smart Emergency Beacon System</h2>
-      <p>
-        A network of intelligent beacon pillars that flash directional evacuation alerts during emergencies.
-        Propagates signals across the city grid for coordinated safety routing.
-      </p>
+      <tr>
+        <td>Boyer-Moore</td>
+        <td class="col-used">No</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>BFS → Beacon-to-beacon alert propagation</li>
-        <li>Hash Table → Beacon status lookup</li>
-        <li>Queue → Emergency broadcast handling</li>
-        <li>Graph Traversal → Safe-route generation</li>
-      </ul>
+      <tr>
+        <td>Knuth-Morris-Pratt (KMP)</td>
+        <td class="col-used">Yes</td>
+        <td>Used for pattern matching in Lost-Person Detection and Residential Pod (face-feature signature matching simulation).</td>
+        <td>O(m + n)</td>
+        <td>O(m + n)</td>
+      </tr>
 
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%208"
-        target="_blank">View Code</a>
-    </div>
+      <tr>
+        <td>Heap Sort</td>
+        <td class="col-used">No</td>
+        <td>Heaps used as priority queues instead of explicit heap-sort usage.</td>
+        <td></td>
+        <td></td>
+      </tr>
 
+      <tr>
+        <td>Kruskal</td>
+        <td class="col-used">No</td>
+        <td>Not required — no MST problems in delivered cases.</td>
+        <td></td>
+        <td></td>
+      </tr>
 
-    <!-- ========================= CASE 9 ========================= -->
-    <div class="case-item">
-      <h2>AI-Powered Lost Person Detection</h2>
-      <p>
-        Uses camera logs & pattern-matching to identify missing people. Matches facial features against 
-        recorded footage and ranks confidence scores for responders.
-      </p>
+      <tr>
+        <td>Prim</td>
+        <td class="col-used">No</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>KMP → Facial feature pattern matching</li>
-        <li>Hash Map → Camera sightings registry</li>
-        <li>Priority Queue → Match confidence ranking</li>
-        <li>BFS → Camera zone scanning</li>
-      </ul>
+      <tr>
+        <td>Dijkstra</td>
+        <td class="col-used">Yes</td>
+        <td>Core to routing: Rapid Response, Mall navigation, Parking shuttle routing, Drone/display routing — used to compute shortest responder/visitor/drone paths.</td>
+        <td>O(V + E) (with binary heap: O(E log V))</td>
+        <td>O(E log V)</td>
+      </tr>
 
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%209"
-        target="_blank">View Code</a>
-    </div>
+      <tr>
+        <td>Floyd</td>
+        <td class="col-used">No</td>
+        <td>Not used; Dijkstra sufficed for point-to-point routing.</td>
+        <td></td>
+        <td></td>
+      </tr>
 
+      <tr>
+        <td>Warshall</td>
+        <td class="col-used">No</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-    <!-- ========================= CASE 10 ========================= -->
-    <div class="case-item">
-      <h2>Central Mall Management</h2>
-      <p>
-        Handles tenant shops, footfall analytics, billing queue tracking, indoor navigation, and product lookup.
-        Enhances shopper experience using intelligent routing and demand prediction.
-      </p>
+      <tr>
+        <td>Bellman-Ford</td>
+        <td class="col-used">No</td>
+        <td>Not required (no negative-weight path problems present).</td>
+        <td></td>
+        <td></td>
+      </tr>
 
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Hash Map → Shop & inventory data</li>
-        <li>Queue → Billing & checkout flow</li>
-        <li>Heap → Best-offer recommendation</li>
-        <li>Dijkstra → Indoor navigation paths</li>
-      </ul>
+      <tr>
+        <td>Any Other (Priority Queue / STL priority_queue)</td>
+        <td class="col-used">Yes</td>
+        <td>Used widely to prioritize tasks: ad scheduling, urgent parcels, emergency severity ordering, top-store analytics, and match confidence ranking.</td>
+        <td>O(n)</td>
+        <td>O(log n) operations</td>
+      </tr>
+    </tbody>
+  </table>
 
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%2010"
-        target="_blank">View Code</a>
-    </div>
-
-
-    <!-- ========================= CASE 11 ========================= -->
-    <div class="case-item">
-      <h2>City Post Office Control System</h2>
-      <p>
-        Handles parcel sorting, urgent delivery prioritization, address lookup, and optimized routing for 
-        delivery vehicles. Tracks package statuses in real time.
-      </p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Queue → Normal parcel sorting</li>
-        <li>Priority Queue → Urgent parcel scheduling</li>
-        <li>Hash Table → Sender/receiver records</li>
-        <li>Dijkstra → Delivery path optimization</li>
-      </ul>
-
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%2011"
-        target="_blank">View Code</a>
-    </div>
-
-
-    <!-- ========================= CASE 12 ========================= -->
-    <div class="case-item">
-      <h2>Rapid Response Network</h2>
-      <p>
-        Connects police, ambulance, fire, drone, and utility repair teams for coordinated action. Assigns 
-        the best responder using specialization-based ranking and fallback routing.
-      </p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Priority Queue → Emergency ranking</li>
-        <li>Hash Map → Unit specialization lookup</li>
-        <li>Dijkstra → Fastest responder path</li>
-        <li>BFS → Backup responder scanning</li>
-      </ul>
-
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%2012"
-        target="_blank">View Code</a>
-    </div>
-
-
-    <!-- ========================= CASE 13 ========================= -->
-    <div class="case-item">
-      <h2>Smart Residential Surveillance Pods</h2>
-      <p>
-        AI-enabled pods at residential entrances tracking visitor logs, access control, anomaly detection,
-        and emergency alerts to neighborhood patrol teams.
-      </p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Hash Table → Resident/visitor records</li>
-        <li>KMP → Pattern-based anomaly detection</li>
-        <li>Queue → Entry/exit event handling</li>
-        <li>Dijkstra → Patrol dispatch routing</li>
-      </ul>
-
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%2013"
-        target="_blank">View Code</a>
-    </div>
-
+  <div class="other-analysis">
+    <strong>Other Analysis:</strong><br>
+    Number of Lines of Code Written: (at least 2000) — combined across all case files, utility modules and helper functions.<br>
+    Number of Functions: ~ 80–150 (split across 13 case modules; many small helpers and graph utilities).<br>
+    Design Techniques and Principles used:
+    <ul>
+      <li>Modular design (separate modules for routing, tracking, analytics)</li>
+      <li>Use of STL containers for fast prototyping (unordered_map, vector, queue, priority_queue)</li>
+      <li>Graph modeling for city topology and routing</li>
+      <li>Priority scheduling & queueing theory for service-centres and emergency dispatch</li>
+      <li>Hash-based indexing for constant-time lookups (camera registry, parcel DB)</li>
+      <li>Pattern matching (KMP) for efficient feature matching</li>
+      <li>Clear separation of I/O, algorithmic processing and dispatch logic for testability</li>
+    </ul>
   </div>
-</section>
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
-
-  <div class="side-card">
-    <h3>Progress</h3>
-    <p>All 13 business cases documented. Code links active & working.</p>
+  <div class="small-muted">
+    Note: The "Used?" column is marked based on the implemented C++ modules and the algorithmic strategies described in the 13 business-case codes (Digital Advertising hub, Smart Governance, Smart Parking, Tourism Centre, Security Control, Emergency Coordination, Visitors Flow Analysis, Emergency Beacons, Lost-Person Detection, Mall Management, Post Office, Rapid Response Network, Residential Pods). Unused entries left blank to reflect that they were not necessary for the presented solutions.
   </div>
 
-  <div class="side-card">
-    <h3>Current Task</h3>
-    <p>Add more optimization algorithms or animations if needed.</p>
-  </div>
-
-</aside>
-
-<footer>
-  © 2025 Velora — DAA • Designed by Satish B
-</footer>
-
-</main>
 </body>
 </html>
-
