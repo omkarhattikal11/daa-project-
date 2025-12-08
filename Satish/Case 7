@@ -1,0 +1,174 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+/*
+    Visitor Flow Analysis – Velora Smart City
+    Algorithms:
+    - Hash Map for crowd count tracking
+    - Queue for real-time visitor movement stream
+    - Sliding Window for peak-hour detection
+    - Graph + BFS for congestion scanning
+    - Min-Heap to find least crowded zone
+*/
+
+// ---------------------- Global Structures ----------------------
+
+// Location ←→ visitor count
+unordered_map<string, int> crowdCount;
+
+// Real-time movement log
+queue<pair<string,string>> movementLog; 
+// {visitorName, location}
+
+// Graph of zones (edges: zones connected physically)
+vector<int> graphMap[20];
+bool visited[20];
+
+// Min-heap for least crowded zone
+struct Zone {
+    string name;
+    int count;
+};
+struct CompareZone {
+    bool operator()(Zone a, Zone b){
+        return a.count > b.count;
+    }
+};
+priority_queue<Zone, vector<Zone>, CompareZone> minCrowdHeap;
+
+// ---------------------- BFS Congestion Scanner ----------------------
+void bfsCongestion(int start) {
+    memset(visited, false, sizeof(visited));
+
+    queue<int> q;
+    q.push(start);
+    visited[start] = true;
+
+    cout << "Scanning connected congestion areas: ";
+
+    while(!q.empty()) {
+        int curr = q.front(); q.pop();
+        cout << curr << " ";
+
+        for(int nxt : graphMap[curr]) {
+            if(!visited[nxt]) {
+                visited[nxt] = true;
+                q.push(nxt);
+            }
+        }
+    }
+    cout << "\n";
+}
+
+// ---------------------- Sliding Window Peak Hour (10 readings) ----------------------
+int peakHour(vector<int> &arr, int k){
+    int window = 0, best = 0;
+
+    // initial window
+    for(int i=0;i<k;i++) window += arr[i];
+
+    best = window;
+
+    for(int i=k; i<arr.size(); i++){
+        window += arr[i] - arr[i-k];
+        best = max(best, window);
+    }
+
+    return best;
+}
+
+// ---------------------- Add visitor movement ----------------------
+void addMovement(string name, string loc){
+    movementLog.push({name, loc});
+    crowdCount[loc]++;
+    cout << name << " entered " << loc << "\n";
+}
+
+// ---------------------- Find least crowded zone ----------------------
+void computeMinCrowdHeap(){
+    while(!minCrowdHeap.empty()) minCrowdHeap.pop();
+
+    for(auto &p : crowdCount){
+        minCrowdHeap.push({p.first, p.second});
+    }
+
+    if(!minCrowdHeap.empty()){
+        auto z = minCrowdHeap.top();
+        cout << "Least Crowded Zone: " 
+             << z.name << " (" << z.count << " visitors)\n";
+    }
+}
+
+// ---------------------- MAIN ----------------------
+int main(){
+    // initialize some demo connections
+    // Node number = physical zone id
+    graphMap[1] = {2,3};
+    graphMap[2] = {1,4};
+    graphMap[3] = {1,5};
+    graphMap[4] = {2,6};
+    graphMap[5] = {3,6};
+    graphMap[6] = {4,5};
+
+    // initial visitor counts
+    crowdCount["TimesSquare"] = 0;
+    crowdCount["Park"] = 0;
+    crowdCount["Mall"] = 0;
+    crowdCount["Beach"] = 0;
+
+    int cmd;
+    while(true){
+        cout << "\n=== Visitor Flow Analysis System ===\n";
+        cout << "1. Add Visitor Movement\n";
+        cout << "2. Show Least Crowded Zone\n";
+        cout << "3. Run Congestion Scan (BFS)\n";
+        cout << "4. Compute Peak Hour (Sliding Window)\n";
+        cout << "5. Show Current Crowd Counts\n";
+        cout << "0. Exit\ncmd> ";
+        cin >> cmd;
+
+        if(cmd == 0) break;
+
+        if(cmd == 1){
+            string name, loc;
+            cin >> name >> loc;
+            addMovement(name, loc);
+        }
+
+        else if(cmd == 2){
+            computeMinCrowdHeap();
+        }
+
+        else if(cmd == 3){
+            int start; 
+            cout << "Enter starting zone node: ";
+            cin >> start;
+            bfsCongestion(start);
+        }
+
+        else if(cmd == 4){
+            int n,k;
+            cout << "Enter number of readings: ";
+            cin >> n;
+
+            vector<int> arr(n);
+            cout << "Enter readings: ";
+            for(int i=0;i<n;i++) cin >> arr[i];
+
+            cout << "Enter window size k: ";
+            cin >> k;
+
+            cout << "Peak Hour (max visitors in any window): "
+                 << peakHour(arr,k) << "\n";
+        }
+
+        else if(cmd == 5){
+            cout << "Current Crowds:\n";
+            for(auto &p : crowdCount){
+                cout << p.first << " : " << p.second << "\n";
+            }
+        }
+    }
+
+    return 0;
+}
