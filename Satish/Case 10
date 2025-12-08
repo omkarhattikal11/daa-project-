@@ -1,0 +1,199 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+/*
+   Central Mall Management – Velora Smart City
+   Algorithms:
+   - Hash Map: Shop database
+   - Queue: Billing line simulation
+   - Priority Queue: Top-selling stores
+   - Graph + Dijkstra: Mall navigation
+   - BST: Inventory management
+   - Linear Search: Shop search
+*/
+
+// ---------------------- BST FOR INVENTORY ----------------------
+struct Node {
+    int itemID;
+    string name;
+    Node *left, *right;
+
+    Node(int id, string n): itemID(id), name(n), left(NULL), right(NULL) {}
+};
+
+Node* insertItem(Node* root, int id, string name){
+    if(!root) return new Node(id, name);
+    if(id < root->itemID) root->left = insertItem(root->left,id,name);
+    else root->right = insertItem(root->right,id,name);
+    return root;
+}
+
+void searchItem(Node* root, int id){
+    if(!root){ cout << "Item not found.\n"; return; }
+    if(root->itemID == id){
+        cout << "Item Found: " << root->name << "\n";
+        return;
+    }
+    if(id < root->itemID) searchItem(root->left,id);
+    else searchItem(root->right,id);
+}
+
+// ---------------------- PRIORITY QUEUE FOR TOP STORES ----------------------
+struct Store {
+    string name;
+    int sales;
+};
+struct CompareStore {
+    bool operator()(Store a, Store b){
+        return a.sales < b.sales; // highest sales first
+    }
+};
+priority_queue<Store, vector<Store>, CompareStore> topStores;
+
+// ---------------------- HASH MAP FOR SHOP DATABASE ----------------------
+unordered_map<string, string> shopDB; // shopName -> category
+
+// ---------------------- BILLING QUEUE ----------------------
+queue<string> billingQ;
+
+// ---------------------- GRAPH FOR MALL NAVIGATION ----------------------
+vector<pair<int,int>> graphMall[30];
+int NODES = 10;
+
+void addEdge(int u, int v, int w){
+    graphMall[u].push_back({v,w});
+    graphMall[v].push_back({u,w});
+}
+
+pair<int,vector<int>> dijkstraPath(int src, int dest){
+    const int INF = 1e9;
+    vector<int> dist(NODES+1, INF), parent(NODES+1,-1);
+    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+
+    dist[src] = 0;
+    pq.push({0,src});
+
+    while(!pq.empty()){
+        auto [d,u] = pq.top(); pq.pop();
+
+        for(auto &edge : graphMall[u]){
+            int v=edge.first, w=edge.second;
+            if(dist[v] > dist[u] + w){
+                dist[v] = dist[u] + w;
+                parent[v] = u;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+
+    vector<int> path;
+    if(dist[dest] == INF) return {INF, path};
+
+    for(int cur=dest; cur!=-1; cur=parent[cur]) path.push_back(cur);
+    reverse(path.begin(), path.end());
+    return {dist[dest], path};
+}
+
+// ---------------------- LINEAR SEARCH FOR SHOP NAMES ----------------------
+void searchShop(string key){
+    cout << "\nSearch Results:\n";
+    for(auto &p : shopDB){
+        if(p.first.find(key) != string::npos){
+            cout << "- " << p.first << " | Category: " << p.second << "\n";
+        }
+    }
+}
+
+// ---------------------- MAIN ----------------------
+int main(){
+
+    // Initialize mall graph (floors and corridors)
+    addEdge(1,2,10); addEdge(1,3,15);
+    addEdge(2,4,20); addEdge(3,5,25);
+    addEdge(4,6,18); addEdge(5,6,22);
+
+    // Initialize stores
+    shopDB["MegaMart"] = "Supermarket";
+    shopDB["TrendyWear"] = "Clothing";
+    shopDB["ElectroHub"] = "Electronics";
+    shopDB["Foodiez"] = "Food Court";
+
+    topStores.push({"MegaMart", 900});
+    topStores.push({"TrendyWear", 750});
+    topStores.push({"ElectroHub", 1200});
+    topStores.push({"Foodiez", 850});
+
+    // Inventory BST
+    Node* root = NULL;
+
+    int cmd;
+    while(true){
+        cout << "\n=== Central Mall Management System ===\n";
+        cout << "1. Add Customer to Billing Queue\n";
+        cout << "2. Process Next Billing\n";
+        cout << "3. Top Selling Stores\n";
+        cout << "4. Search Shop by Name\n";
+        cout << "5. Add Inventory Item\n";
+        cout << "6. Search Inventory Item\n";
+        cout << "7. Find Mall Route (Dijkstra)\n";
+        cout << "0. Exit\ncmd> ";
+
+        cin >> cmd;
+        if(cmd == 0) break;
+
+        if(cmd == 1){
+            string name; cin >> name;
+            billingQ.push(name);
+            cout << name << " added to billing queue.\n";
+        }
+
+        else if(cmd == 2){
+            if(billingQ.empty()) cout << "No customers.\n";
+            else{
+                cout << "Billing for: " << billingQ.front() << "\n";
+                billingQ.pop();
+            }
+        }
+
+        else if(cmd == 3){
+            auto s = topStores.top();
+            topStores.pop();
+            cout << "Top Store: " << s.name 
+                 << " | Sales: " << s.sales << "\n";
+            topStores.push(s);
+        }
+
+        else if(cmd == 4){
+            string key; cin >> key;
+            searchShop(key);
+        }
+
+        else if(cmd == 5){
+            int id; string name;
+            cin >> id;
+            cin.ignore();
+            getline(cin, name);
+            root = insertItem(root,id,name);
+            cout << "Item added.\n";
+        }
+
+        else if(cmd == 6){
+            int id; cin >> id;
+            searchItem(root,id);
+        }
+
+        else if(cmd == 7){
+            int src, dest;
+            cin >> src >> dest;
+            auto res = dijkstraPath(src,dest);
+            if(res.first >= 1e9) cout << "No route.\n";
+            else{
+                cout << "Shortest route distance: " << res.first << "\nPath: ";
+                for(int n : res.second) cout << n << " ";
+                cout << "\n";
+            }
+        }
+    }
+
+    return 0;
+}
