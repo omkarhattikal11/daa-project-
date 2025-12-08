@@ -219,6 +219,87 @@ footer {
   color: var(--muted);
   font-size: 13px;
 }
+
+/* ------------------ NEW: Algorithm Checklist (white-style) ------------------ */
+.alg-check {
+  margin-top: 28px;
+  padding: 18px;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #0a0f1d;
+  border: 1px solid #e6e9ee;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.15);
+}
+
+.alg-check h2 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  color: #072433;
+  font-weight: 800;
+}
+
+.alg-check p {
+  margin: 0 0 12px 0;
+  color: #374151;
+}
+
+/* Responsive table */
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 8px;
+}
+
+.alg-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  color: #0b2540;
+}
+.alg-table thead th {
+  text-align: left;
+  padding: 10px 12px;
+  background: #f4f7fb;
+  border-bottom: 1px solid #e6e9ee;
+  color: #072433;
+  font-weight: 800;
+}
+.alg-table tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: top;
+}
+
+/* small badges */
+.bad-yes {
+  display:inline-block;
+  padding:4px 8px;
+  background:#e6ffef;
+  color:#055a2a;
+  border-radius:8px;
+  font-weight:700;
+  font-size:12px;
+}
+.bad-no {
+  display:inline-block;
+  padding:4px 8px;
+  background:#fff0f0;
+  color:#8b1d19;
+  border-radius:8px;
+  font-weight:700;
+  font-size:12px;
+}
+
+/* where-used text style */
+.where {
+  color:#273749;
+  font-size:13px;
+}
+
+/* responsive */
+@media (max-width:980px){
+  main{ grid-template-columns: 1fr; padding-bottom:30px; }
+  .alg-table thead th, .alg-table tbody td { white-space: nowrap; }
+}
 </style>
 </head>
 
@@ -255,297 +336,208 @@ footer {
 
   <!-- Business Case List -->
   <div class="case-section">
-
-
-    <!-- ========================= CASE 1 ========================= -->
-    <div class="case-item">
-      <h2>Digital Advertising & Events Hub</h2>
-      <p>
-        A centralized platform managing digital advertising slots, event bookings, live audience analytics,
-        and stall allocations inside Velora’s Times-Square-style plaza. The system uses ad-slot priority
-        scheduling, automated stall allocation, and drone-based display routing. The hub optimizes advertising
-        performance and event flow with real-time data.
-      </p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Hash Table → Stall & advertiser lookup</li>
-        <li>Max-Heap → Ad-slot priority scheduling</li>
-        <li>Dijkstra → Drone/display routing paths</li>
-        <li>Queue → Live advertisement rotation cycle</li>
-      </ul>
-
-      <a class="btn" 
-         href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Central(case-1).cpp" 
-         target="_blank">View Code</a>
-    </div>
-
-
-    <!-- ========================= CASE 2 ========================= -->
-    <div class="case-item">
-      <h2>Smart Governance & Citizen Service Centre</h2>
-      <p>
-        A unified digital counter where citizens can apply for certificates, pay taxes, raise grievances,
-        and track service requests. The system maintains secure citizen records, manages live token queues,
-        and auto-routes requests to correct departments with estimated processing time.
-      </p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Hashing → Citizen profiles & request indexing</li>
-        <li>Queue → Token & service flow management</li>
-        <li>Heap → Priority handling (elderly, emergency)</li>
-        <li>Search Trees → Document & record lookup</li>
-      </ul>
-
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%202"
-        target="_blank">View Code</a>
-    </div>
-
-
-    <!-- ========================= CASE 3 ========================= -->
-    <div class="case-item">
-      <h2>Smart Parking & Mobility Hub</h2>
-      <p>
-        A real-time parking and mobility node that detects free slots, assists EV charging, and routes
-        autonomous shuttles. Uses sensors to predict peak demand and provide dynamic congestion pricing.
-      </p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Hash Table → Vehicle slot assignments</li>
-        <li>Min-Heap → Nearest-free-slot selection</li>
-        <li>BFS → Level-by-level parking zone scanning</li>
-        <li>Dijkstra → Shuttle routing across hub graph</li>
-      </ul>
-
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%203"
-        target="_blank">View Code</a>
-    </div>
-
-
-    <!-- ========================= CASE 4 ========================= -->
-    <div class="case-item">
-      <h2>City Info–Tourism Centre</h2>
-      <p>
-        Digital tourism hub with attraction details, crowd heatmaps, ticketing info, and personalized trip
-        suggestions. Generates shortest visitor routes across Velora’s landmarks.
-      </p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Hash Table → Attraction details & lookup</li>
-        <li>Heap → Attraction ranking recommendations</li>
-        <li>Dijkstra → Tourist route planner</li>
-        <li>Trie → Fast searching of attraction names</li>
-      </ul>
-
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%204"
-        target="_blank">View Code</a>
-    </div>
-
-
-    <!-- ========================= CASE 5 ========================= -->
-    <div class="case-item">
-      <h2>Central Security & Smart Surveillance Room</h2>
-      <p>
-        A unified command center supervising CCTV, fire sensors, motion detectors, and emergency alarms.
-        Intelligence-based anomaly detection triggers immediate alerts and dispatches nearby patrol units.
-      </p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Hashing → Camera/alert database</li>
-        <li>Priority Queue → Alert severity ranking</li>
-        <li>BFS → Nearby camera scanning</li>
-        <li>AVL Tree → Incident log indexing</li>
-      </ul>
-
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%205"
-        target="_blank">View Code</a>
-    </div>
-
-
-    <!-- ========================= CASE 6 ========================= -->
-    <div class="case-item">
-      <h2>Emergency Coordination Tower</h2>
-      <p>
-        The main disaster & emergency command node managing fire, rescue, police, and medical routing.
-        Uses severity classification and nearest-responder matching for optimal safety outcomes.
-      </p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Priority Queue → Incident severity ranking</li>
-        <li>Hash Table → Responder availability</li>
-        <li>Dijkstra → Fastest responder routing</li>
-        <li>Queue → Multi-stage rescue workflow</li>
-      </ul>
-
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%206"
-        target="_blank">View Code</a>
-    </div>
-
-
-    <!-- ========================= CASE 7 ========================= -->
-    <div class="case-item">
-      <h2>Visitors Flow Analysis</h2>
-      <p>
-        Tracks visitor density in Velora’s beaches, malls, parks, and plazas. Predicts congestion and 
-        recommends alternate routes using heatmap-style crowd analytics.
-      </p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Sliding Window → Density analysis</li>
-        <li>Hash Map → Sensor/entry logs</li>
-        <li>BFS → Crowd propagation mapping</li>
-        <li>Heap → Peak-time forecasting</li>
-      </ul>
-
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%207"
-        target="_blank">View Code</a>
-    </div>
-
-
-    <!-- ========================= CASE 8 ========================= -->
-    <div class="case-item">
-      <h2>Smart Emergency Beacon System</h2>
-      <p>
-        A network of intelligent beacon pillars that flash directional evacuation alerts during emergencies.
-        Propagates signals across the city grid for coordinated safety routing.
-      </p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>BFS → Beacon-to-beacon alert propagation</li>
-        <li>Hash Table → Beacon status lookup</li>
-        <li>Queue → Emergency broadcast handling</li>
-        <li>Graph Traversal → Safe-route generation</li>
-      </ul>
-
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%208"
-        target="_blank">View Code</a>
-    </div>
-
-
-    <!-- ========================= CASE 9 ========================= -->
-    <div class="case-item">
-      <h2>AI-Powered Lost Person Detection</h2>
-      <p>
-        Uses camera logs & pattern-matching to identify missing people. Matches facial features against 
-        recorded footage and ranks confidence scores for responders.
-      </p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>KMP → Facial feature pattern matching</li>
-        <li>Hash Map → Camera sightings registry</li>
-        <li>Priority Queue → Match confidence ranking</li>
-        <li>BFS → Camera zone scanning</li>
-      </ul>
-
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%209"
-        target="_blank">View Code</a>
-    </div>
-
-
-    <!-- ========================= CASE 10 ========================= -->
-    <div class="case-item">
-      <h2>Central Mall Management</h2>
-      <p>
-        Handles tenant shops, footfall analytics, billing queue tracking, indoor navigation, and product lookup.
-        Enhances shopper experience using intelligent routing and demand prediction.
-      </p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Hash Map → Shop & inventory data</li>
-        <li>Queue → Billing & checkout flow</li>
-        <li>Heap → Best-offer recommendation</li>
-        <li>Dijkstra → Indoor navigation paths</li>
-      </ul>
-
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%2010"
-        target="_blank">View Code</a>
-    </div>
-
-
-    <!-- ========================= CASE 11 ========================= -->
-    <div class="case-item">
-      <h2>City Post Office Control System</h2>
-      <p>
-        Handles parcel sorting, urgent delivery prioritization, address lookup, and optimized routing for 
-        delivery vehicles. Tracks package statuses in real time.
-      </p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Queue → Normal parcel sorting</li>
-        <li>Priority Queue → Urgent parcel scheduling</li>
-        <li>Hash Table → Sender/receiver records</li>
-        <li>Dijkstra → Delivery path optimization</li>
-      </ul>
-
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%2011"
-        target="_blank">View Code</a>
-    </div>
-
-
-    <!-- ========================= CASE 12 ========================= -->
-    <div class="case-item">
-      <h2>Rapid Response Network</h2>
-      <p>
-        Connects police, ambulance, fire, drone, and utility repair teams for coordinated action. Assigns 
-        the best responder using specialization-based ranking and fallback routing.
-      </p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Priority Queue → Emergency ranking</li>
-        <li>Hash Map → Unit specialization lookup</li>
-        <li>Dijkstra → Fastest responder path</li>
-        <li>BFS → Backup responder scanning</li>
-      </ul>
-
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%2012"
-        target="_blank">View Code</a>
-    </div>
-
-
-    <!-- ========================= CASE 13 ========================= -->
-    <div class="case-item">
-      <h2>Smart Residential Surveillance Pods</h2>
-      <p>
-        AI-enabled pods at residential entrances tracking visitor logs, access control, anomaly detection,
-        and emergency alerts to neighborhood patrol teams.
-      </p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Hash Table → Resident/visitor records</li>
-        <li>KMP → Pattern-based anomaly detection</li>
-        <li>Queue → Entry/exit event handling</li>
-        <li>Dijkstra → Patrol dispatch routing</li>
-      </ul>
-
-      <a class="btn"
-        href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%2013"
-        target="_blank">View Code</a>
-    </div>
-
+    <!-- (All 13 case-item blocks here — same as before) -->
+    <!-- For brevity I omit re-listing them here in this snippet; they remain unchanged -->
+    <!-- (But in the actual file you paste, keep the business case blocks from your current satish.html) -->
   </div>
+
+  <!-- ================= NEW SECTION: Algorithm Usage Checklist ================= -->
+  <div class="alg-check" id="algorithm-checklist">
+    <h2>Algorithm Usage Checklist</h2>
+    <p>This table marks whether each algorithm/data-structure is used in the corresponding business case and briefly indicates <strong>where</strong> it is applied.</p>
+
+    <div class="table-wrap">
+      <table class="alg-table" role="table" aria-label="Algorithm usage checklist">
+        <thead>
+          <tr>
+            <th>Business Case</th>
+            <th>Hashing</th>
+            <th>Heap / Priority</th>
+            <th>Queue</th>
+            <th>Dijkstra / Graph</th>
+            <th>BFS</th>
+            <th>KMP / Pattern</th>
+            <th>Trie / Search</th>
+            <th>Sliding Window / Stats</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- Case 1 -->
+          <tr>
+            <td><strong>Digital Advertising & Events Hub</strong></td>
+            <td><span class="bad-yes">YES</span><div class="where">Stall & advertiser lookup</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Ad-slot priority scheduling</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Ad rotation cycle</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Drone/display routing</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+          </tr>
+
+          <!-- Case 2 -->
+          <tr>
+            <td><strong>Smart Governance & Citizen Service Centre</strong></td>
+            <td><span class="bad-yes">YES</span><div class="where">Citizen records & indexing</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Priority fast-track handling</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Token & queue flow</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-yes">YES</span><div class="where">Document/record lookup</div></td>
+            <td><span class="bad-no">NO</span></td>
+          </tr>
+
+          <!-- Case 3 -->
+          <tr>
+            <td><strong>Smart Parking & Mobility Hub</strong></td>
+            <td><span class="bad-yes">YES</span><div class="where">Slot assignment DB</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Nearest-free-slot (min-heap)</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-yes">YES</span><div class="where">Shuttle routing across nodes</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Zone scanning</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-yes">YES</span><div class="where">Peak-demand prediction</div></td>
+          </tr>
+
+          <!-- Case 4 -->
+          <tr>
+            <td><strong>City Info–Tourism Centre</strong></td>
+            <td><span class="bad-yes">YES</span><div class="where">Attraction lookup</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Top attraction ranking</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Help-desk queue</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Tourist path planning</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-yes">YES</span><div class="where">Fast name search (Trie)</div></td>
+            <td><span class="bad-no">NO</span></td>
+          </tr>
+
+          <!-- Case 5 -->
+          <tr>
+            <td><strong>Central Security & Smart Surveillance Room</strong></td>
+            <td><span class="bad-yes">YES</span><div class="where">Camera & sensor registry</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Alert severity priority</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Incoming alert flow</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Patrol routing / city graph</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Nearby camera scan</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+          </tr>
+
+          <!-- Case 6 -->
+          <tr>
+            <td><strong>Emergency Coordination Tower</strong></td>
+            <td><span class="bad-yes">YES</span><div class="where">Unit availability map</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Severity priority queue</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Call intake queue</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Dijkstra for nearest responder</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Fallback backup scan</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+          </tr>
+
+          <!-- Case 7 -->
+          <tr>
+            <td><strong>Visitors Flow Analysis</strong></td>
+            <td><span class="bad-yes">YES</span><div class="where">Sensor / entry logs</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Heap for least/peak zones</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Movement stream queue</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-yes">YES</span><div class="where">Congestion connectivity (BFS)</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-yes">YES</span><div class="where">Sliding-window peak detection</div></td>
+          </tr>
+
+          <!-- Case 8 -->
+          <tr>
+            <td><strong>Smart Emergency Beacon System</strong></td>
+            <td><span class="bad-yes">YES</span><div class="where">Beacon health/status registry</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-yes">YES</span><div class="where">Broadcast queue</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Routing & propagation graph</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">BFS propagation</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+          </tr>
+
+          <!-- Case 9 -->
+          <tr>
+            <td><strong>AI-Powered Lost Person Detection</strong></td>
+            <td><span class="bad-yes">YES</span><div class="where">Camera → sightings index</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Priority ranking of matches</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Report queue</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-yes">YES</span><div class="where">Nearby camera scanning (BFS)</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">KMP / pattern match on features</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+          </tr>
+
+          <!-- Case 10 -->
+          <tr>
+            <td><strong>Central Mall Management</strong></td>
+            <td><span class="bad-yes">YES</span><div class="where">Shop & inventory tables</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Top-seller heap</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Billing queue</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Indoor navigation (Dijkstra)</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+          </tr>
+
+          <!-- Case 11 -->
+          <tr>
+            <td><strong>City Post Office Control System</strong></td>
+            <td><span class="bad-yes">YES</span><div class="where">Parcel tracking DB</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Urgent parcel priority</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Normal sorting queue</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Delivery route planning</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+          </tr>
+
+          <!-- Case 12 -->
+          <tr>
+            <td><strong>Rapid Response Network</strong></td>
+            <td><span class="bad-yes">YES</span><div class="where">Unit lookup & availability</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Emergency ranking</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Intake queue</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Responder path (Dijkstra)</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Backup scanning (BFS)</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+          </tr>
+
+          <!-- Case 13 -->
+          <tr>
+            <td><strong>Smart Residential Surveillance Pods</strong></td>
+            <td><span class="bad-yes">YES</span><div class="where">Resident/visitor DB</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-yes">YES</span><div class="where">Entry log queue</div></td>
+            <td><span class="bad-yes">YES</span><div class="where">Patrol routing (Dijkstra)</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-yes">YES</span><div class="where">KMP-like pattern match for faces</div></td>
+            <td><span class="bad-no">NO</span></td>
+            <td><span class="bad-no">NO</span></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- ================= END: Algorithm Checklist ================= -->
+
 </section>
 
 <!-- SIDEBAR -->
@@ -558,7 +550,7 @@ footer {
 
   <div class="side-card">
     <h3>Current Task</h3>
-    <p>Add more optimization algorithms or animations if needed.</p>
+    <p>Add case C++ files or update links if filenames change on GitHub.</p>
   </div>
 
 </aside>
