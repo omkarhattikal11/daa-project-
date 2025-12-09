@@ -1,0 +1,107 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// ----------------------------
+// Segment Tree for score range
+// ----------------------------
+vector<int> segtree;
+
+int build(vector<int>& arr, int idx, int l, int r) {
+    if (l == r) return segtree[idx] = arr[l];
+    int mid = (l + r) / 2;
+    return segtree[idx] = max(
+        build(arr, idx*2, l, mid),
+        build(arr, idx*2+1, mid+1, r)
+    );
+}
+
+int query(int idx, int l, int r, int ql, int qr) {
+    if (qr < l || r < ql) return -1e9;
+    if (ql <= l && r <= qr) return segtree[idx];
+    int mid = (l+r)/2;
+    return max(
+        query(idx*2, l, mid, ql, qr),
+        query(idx*2+1, mid+1, r, ql, qr)
+    );
+}
+
+// ----------------------------
+// Trie for subject search
+// ----------------------------
+struct TrieNode {
+    bool end;
+    TrieNode* next[26];
+    TrieNode() {
+        end = false;
+        fill(begin(next), end(next), nullptr);
+    }
+};
+
+void insertWord(TrieNode* root, string s) {
+    for (char c : s) {
+        int i = c - 'a';
+        if (!root->next[i]) root->next[i] = new TrieNode();
+        root = root->next[i];
+    }
+    root->end = true;
+}
+
+bool searchPrefix(TrieNode* root, string s) {
+    for (char c : s) {
+        int i = c - 'a';
+        if (!root->next[i]) return false;
+        root = root->next[i];
+    }
+    return true;
+}
+
+int main() {
+
+    // ---------------------------------
+    // Hash Map for student score lookup
+    // ---------------------------------
+    unordered_map<string, vector<int>> studentScores;
+    studentScores["Asha"] = {78, 88, 91};
+    studentScores["Ravi"] = {55, 60, 62};
+    studentScores["Manu"] = {92, 89, 95};
+
+    // ---------------------------------
+    // Ranking students (sorting)
+    // ---------------------------------
+    vector<pair<int,string>> ranking;
+
+    for (auto &s : studentScores) {
+        int total = s.second[0] + s.second[1] + s.second[2];
+        ranking.push_back({total, s.first});
+    }
+
+    sort(ranking.begin(), ranking.end(), greater<>());
+
+    cout << "Top Student: " << ranking[0].second 
+         << " (Total: " << ranking[0].first << ")\n";
+
+    // ---------------------------------
+    // Segment Tree Example
+    // ---------------------------------
+    vector<int> arr = {78, 88, 91}; 
+    int n = arr.size();
+    segtree.resize(n*4);
+
+    build(arr, 1, 0, n-1);
+
+    cout << "Highest Score in range [0,2]: "
+         << query(1, 0, n-1, 0, 2) << "\n";
+
+    // ---------------------------------
+    // Trie Example for subject search
+    // ---------------------------------
+    TrieNode* root = new TrieNode();
+    insertWord(root, "maths");
+    insertWord(root, "physics");
+    insertWord(root, "chemistry");
+
+    cout << "Searching prefix 'phy': ";
+    cout << (searchPrefix(root, "phy") ? "FOUND\n" : "NOT FOUND\n");
+
+    return 0;
+}
