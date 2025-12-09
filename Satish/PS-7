@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 7 - Visitors Flow Analysis</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #66b0ff;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #66b0ff;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+    .sdg-box {
+        background: #e6f0ff;
+        padding: 12px;
+        border-left: 5px solid #66b0ff;
+        border-radius: 6px;
+        margin-top: 8px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Case 7 — Visitors Flow Analysis</h1>
+
+<h2>Brief Description</h2>
+<p>
+The Visitors Flow Analysis system monitors real-time footfall and crowd movement across Velora’s 
+public zones such as amusement parks, malls, beaches, and transport hubs. 
+It predicts congestion, identifies high-density areas, and helps city authorities manage movement effectively.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Overcrowding in public spaces leading to safety risks.</li>
+    <li>Sudden visitor surges during events causing traffic jams.</li>
+    <li>Difficulty in predicting peak visiting times.</li>
+    <li>Inefficient allocation of staff and resources during crowd formation.</li>
+</ul>
+
+<h2>Solutions / Logic Used</h2>
+<ul>
+    <li><strong>Sliding Window Technique:</strong> Analyzes continuous visitor flow and detects sudden peaks.</li>
+    <li><strong>Hash Maps:</strong> Stores sensor logs and footfall data for each zone.</li>
+    <li><strong>BFS:</strong> Identifies how crowd spreads across connected areas.</li>
+    <li><strong>Priority Queue (Heap):</strong> Finds top congested zones in real-time.</li>
+    <li><strong>Queue:</strong> Manages sequential footfall entries and movement data streams.</li>
+</ul>
+
+<h2>Suitable SDGs</h2>
+
+<div class="sdg-box">
+    <strong>SDG 11 — Sustainable Cities & Communities</strong>
+    <p>Ensures safe public spaces through crowd regulation and mobility planning.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 3 — Good Health & Well-Being</strong>
+    <p>Reduces safety hazards caused by overcrowding and improves emergency accessibility.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 9 — Industry, Innovation & Infrastructure</strong>
+    <p>Promotes intelligent monitoring using algorithmic and sensor-based systems.</p>
+</div>
+
+<div class="tag">End of Case 7</div>
+
+</body>
+</html>
