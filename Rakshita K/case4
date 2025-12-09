@@ -1,0 +1,80 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// ------------------------------
+// Basic BST to store past crowds
+// ------------------------------
+struct Node {
+    int crowd;
+    Node* left;
+    Node* right;
+    Node(int c): crowd(c), left(NULL), right(NULL) {}
+};
+
+Node* insertBST(Node* root, int value) {
+    if(!root) return new Node(value);
+    if(value < root->crowd) root->left = insertBST(root->left, value);
+    else root->right = insertBST(root->right, value);
+    return root;
+}
+
+bool searchBST(Node* root, int value) {
+    if(!root) return false;
+    if(root->crowd == value) return true;
+    return value < root->crowd ?
+           searchBST(root->left, value) :
+           searchBST(root->right, value);
+}
+
+// ------------------------------
+// Simple trend prediction function
+// ------------------------------
+int predictNext(vector<int>& arr) {
+    int n = arr.size();
+    if(n < 2) return arr.back();     // no trend possible
+
+    // Simple rising/falling trend (difference average)
+    int diffSum = 0;
+    for(int i = 1; i < n; i++)
+        diffSum += arr[i] - arr[i-1];
+
+    int avgDiff = diffSum / (n - 1);
+    return arr.back() + avgDiff;     // predicted next crowd value
+}
+
+int main() {
+
+    queue<int> entryQueue;                     // Real-time entry queue
+    unordered_map<string, int> crowdData;      // Hash map for day/time
+    Node* root = NULL;                         // BST for historical storage
+
+    // Simulating customer entries
+    entryQueue.push(12);
+    entryQueue.push(25);
+    entryQueue.push(40);
+
+    // Updating live crowd data
+    crowdData["Monday-7PM"] = 45;
+    crowdData["Monday-8PM"] = 60;
+
+    // Insert historical data into BST
+    vector<int> pastCrowd = {30, 45, 50, 70, 65};
+    for(int x : pastCrowd) root = insertBST(root, x);
+
+    // Searching for a specific value in history
+    cout << "Was 70 customers ever recorded? : "
+         << (searchBST(root, 70) ? "Yes" : "No") << endl;
+
+    // Predict next hour crowd using simple trend
+    int prediction = predictNext(pastCrowd);
+    cout << "Predicted crowd next hour: " << prediction << endl;
+
+    // Processing queue
+    cout << "\nCurrent customer queue: ";
+    while(!entryQueue.empty()) {
+        cout << entryQueue.front() << " ";
+        entryQueue.pop();
+    }
+
+    return 0;
+}
