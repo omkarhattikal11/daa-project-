@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 6 - Emergency Coordination Tower</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #ff914d;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #ff914d;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+    .sdg-box {
+        background: #fff1e6;
+        padding: 12px;
+        border-left: 5px solid #ff914d;
+        border-radius: 6px;
+        margin-top: 8px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Case 6 — Emergency Coordination Tower</h1>
+
+<h2>Brief Description</h2>
+<p>
+The Emergency Coordination Tower acts as Velora’s central hub for managing disaster and emergency services 
+including fire response, medical emergencies, police assistance, and rescue teams. 
+It ensures rapid decision-making and optimal deployment of emergency units.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Difficulty in identifying which emergency unit is closest to the incident location.</li>
+    <li>Multiple emergencies occurring at the same time causing response delays.</li>
+    <li>Lack of communication between fire, police, and medical departments.</li>
+    <li>Slow dispatch due to manual decision-making.</li>
+</ul>
+
+<h2>Solutions / Logic Used</h2>
+<ul>
+    <li><strong>Priority Queue (Heap):</strong> Rank incoming emergencies based on severity.</li>
+    <li><strong>Hash Table:</strong> Track availability and status of rescue units (ambulance, police, fire).</li>
+    <li><strong>Dijkstra’s Algorithm:</strong> Determine the fastest route for the nearest emergency unit.</li>
+    <li><strong>Queue:</strong> Manage multi-step rescue workflows and dispatch sequences.</li>
+    <li><strong>BFS:</strong> Used for scanning nearby backup units or alternate routes.</li>
+</ul>
+
+<h2>Suitable SDGs</h2>
+
+<div class="sdg-box">
+    <strong>SDG 3 — Good Health & Well-Being</strong>
+    <p>Supports immediate medical care and reduces response time during health emergencies.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 11 — Sustainable Cities & Communities</strong>
+    <p>Enhances preparedness and resilience during accidents, fires, and natural disasters.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 9 — Industry, Innovation & Infrastructure</strong>
+    <p>Uses smart analytics and intelligent routing to modernize emergency infrastructure.</p>
+</div>
+
+<div class="tag">End of Case 6</div>
+
+</body>
+</html>
