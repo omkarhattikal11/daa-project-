@@ -1,0 +1,111 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// --------------------
+// Trie for keyword search
+// --------------------
+struct TrieNode {
+    bool end;
+    TrieNode* next[26];
+    TrieNode() {
+        end = false;
+        fill(begin(next), end(next), nullptr);
+    }
+};
+
+void insertWord(TrieNode* root, string s) {
+    for(char c : s){
+        int i = c - 'a';
+        if(!root->next[i]) root->next[i] = new TrieNode();
+        root = root->next[i];
+    }
+    root->end = true;
+}
+
+bool searchWord(TrieNode* root, string s) {
+    for(char c : s){
+        int i = c - 'a';
+        if(!root->next[i]) return false;
+        root = root->next[i];
+    }
+    return root->end;
+}
+
+// --------------------
+// Complaint structure
+// --------------------
+struct Complaint {
+    int id;
+    string text;
+    int priority; // lower = higher urgency
+};
+
+int main() {
+
+    // --------------------
+    // Hash Map for complaints
+    // --------------------
+    unordered_map<int, Complaint> complaints;
+    complaints[1] = {1, "broken streetlight near park", 2};
+    complaints[2] = {2, "garbage pile in south area", 1};
+    complaints[3] = {3, "water leakage in main road", 3};
+
+    // --------------------
+    // Priority Queue → Address urgent complaints first
+    // --------------------
+    auto cmp = [](Complaint a, Complaint b){ return a.priority > b.priority; };
+    priority_queue<Complaint, vector<Complaint>, decltype(cmp)> pq(cmp);
+
+    for(auto &c : complaints) pq.push(c.second);
+
+    cout << "Processing complaints by urgency:\n";
+    while(!pq.empty()){
+        Complaint c = pq.top(); pq.pop();
+        cout << "Complaint ID: " << c.id << " | Priority: " << c.priority 
+             << " | Text: " << c.text << endl;
+    }
+
+    // --------------------
+    // Trie → Keyword search example
+    // --------------------
+    TrieNode* root = new TrieNode();
+    insertWord(root, "streetlight");
+    insertWord(root, "garbage");
+    insertWord(root, "water");
+
+    cout << "\nSearching for keyword 'garbage': " 
+         << (searchWord(root, "garbage") ? "FOUND" : "NOT FOUND") << endl;
+
+    // --------------------
+    // Rabin-Karp simple pattern check
+    // --------------------
+    string text = "garbage pile in south area";
+    string pattern = "garbage";
+    int d = 256;
+    int q = 101;
+    int M = pattern.size();
+    int N = text.size();
+    int p = 0, t = 0, h = 1;
+
+    for(int i = 0; i < M-1; i++) h = (h*d) % q;
+
+    for(int i = 0; i < M; i++){
+        p = (d*p + pattern[i]) % q;
+        t = (d*t + text[i]) % q;
+    }
+
+    bool found = false;
+    for(int i = 0; i <= N-M; i++){
+        if(p == t){
+            if(text.substr(i,M) == pattern) found = true;
+        }
+        if(i < N-M){
+            t = (d*(t - text[i]*h) + text[i+M]) % q;
+            if(t < 0) t += q;
+        }
+    }
+
+    cout << "Pattern 'garbage' found: " << (found ? "YES" : "NO") << endl;
+
+    return 0;
+}
