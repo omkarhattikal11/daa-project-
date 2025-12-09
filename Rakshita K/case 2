@@ -1,0 +1,76 @@
+#include <iostream>
+#include <unordered_map>
+#include <queue>
+#include <vector>
+using namespace std;
+
+// Fenwick Tree for fast prefix sums
+class Fenwick {
+public:
+    vector<int> bit;
+    int n;
+
+    Fenwick(int n) {
+        this->n = n;
+        bit.assign(n+1, 0);
+    }
+
+    void update(int idx, int val) {
+        while (idx <= n) {
+            bit[idx] += val;
+            idx += idx & -idx;
+        }
+    }
+
+    int sum(int idx) {
+        int s = 0;
+        while (idx > 0) {
+            s += bit[idx];
+            idx -= idx & -idx;
+        }
+        return s;
+    }
+
+    int rangeSum(int l, int r) {
+        return sum(r) - sum(l-1);
+    }
+};
+
+int main() {
+    unordered_map<int, int> usageLog; // timestamp → usage
+    queue<int> recent;                // sliding window of last readings
+    Fenwick fenwick(1000);            // 1000 timestamps for example
+
+    int threshold = 50; // if usage in window > threshold → possible leak
+
+    // sample readings
+    vector<int> readings = {2, 3, 4, 20, 25, 30}; 
+    int time = 1;
+
+    for (int usage : readings) {
+        usageLog[time] = usage;
+        fenwick.update(time, usage);
+
+        recent.push(usage);
+        if (recent.size() > 5) recent.pop(); // sliding window size 5
+
+        // calculate total in sliding window
+        int windowTotal = 0;
+        queue<int> temp = recent;
+        while (!temp.empty()) {
+            windowTotal += temp.front();
+            temp.pop();
+        }
+
+        cout << "Time " << time << ": Usage = " << usage
+             << ", Window Total = " << windowTotal << endl;
+
+        if (windowTotal > threshold) {
+            cout << "⚠ Leak Detected! Abnormal water usage.\n";
+        }
+
+        time++;
+    }
+
+    return 0;
+}
