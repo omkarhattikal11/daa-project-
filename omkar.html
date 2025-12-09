@@ -2,24 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Business Use Cases — Individual Page</title>
+    <title>Business Use Cases — YOUR CITY / PARK</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <style>
         :root {
-            --bg: #020617;
-            --bg-soft: #020617;
-            --panel: #020819;
-            --panel-soft: #050b1d;
-            --accent: #38bdf8;
-            --accent-2: #a855f7;
-            --accent-soft: rgba(56, 189, 248, 0.1);
-            --accent-soft-2: rgba(168, 85, 247, 0.2);
+            --bg: #050816;
+            --bg-alt: #0b1220;
+            --panel: #020617;
+            --accent: #22c55e;
+            --accent-soft: rgba(34, 197, 94, 0.12);
             --text-main: #e5e7eb;
             --text-muted: #9ca3af;
-            --border-subtle: rgba(148, 163, 184, 0.35);
+            --border-subtle: rgba(148, 163, 184, 0.32);
             --chip-bg: rgba(15, 23, 42, 0.95);
-            --card-radius: 18px;
         }
 
         * {
@@ -30,8 +26,7 @@
 
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background:
-                radial-gradient(circle at top left, #0f172a 0, #020617 45%, #000 100%);
+            background: radial-gradient(circle at top left, #1f2937 0, #020617 45%, #000 100%);
             color: var(--text-main);
             min-height: 100vh;
         }
@@ -41,168 +36,126 @@
             text-decoration: none;
         }
 
-        /* HEADER / NAVBAR */
+        /* TOP NAVBAR */
 
-        .navbar-wrapper {
-            display: flex;
-            justify-content: center;
-            padding: 10px 12px 0;
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(31, 41, 55, 0.9);
         }
 
-        .navbar {
-            width: 100%;
-            max-width: 1300px;
-            background: linear-gradient(
-                135deg,
-                rgba(15, 23, 42, 0.95),
-                rgba(15, 23, 42, 0.98)
-            );
-            border-radius: 18px;
-            border: 1px solid rgba(30, 64, 175, 0.7);
+        .top-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 10px 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 18px;
-            box-shadow:
-                0 18px 45px rgba(15, 23, 42, 0.9),
-                0 0 0 1px rgba(15, 23, 42, 0.7) inset;
         }
 
-        .nav-left {
+        .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .nav-logo {
-            width: 32px;
-            height: 32px;
-            border-radius: 999px;
-            background: conic-gradient(
-                from 180deg,
-                #22c55e,
-                #38bdf8,
-                #a855f7,
-                #22c55e
-            );
+        .brand-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 14px;
+            background: radial-gradient(circle at 0 0, #4ade80, #22c55e 45%, #16a34a 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 15px;
+            font-size: 16px;
             color: #020617;
         }
 
-        .nav-title {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .nav-title-main {
-            font-size: 15px;
+        .brand-text-main {
             font-weight: 700;
+            font-size: 16px;
             letter-spacing: 0.06em;
         }
 
-        .nav-title-sub {
+        .brand-text-sub {
             font-size: 11px;
             color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
         }
 
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 16px;
-            font-size: 12px;
+            gap: 18px;
+            font-size: 13px;
         }
 
-        .nav-link {
-            opacity: 0.8;
+        .nav-links a {
+            opacity: 0.86;
         }
 
-        .nav-link:hover {
+        .nav-links a:hover {
             opacity: 1;
             color: var(--accent);
         }
 
-        @media (max-width: 780px) {
-            .navbar {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 10px 12px;
-            }
-
-            .nav-links {
-                flex-wrap: wrap;
-            }
+        .nav-chip {
+            padding: 4px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(55, 65, 81, 0.9);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
         }
 
         /* PAGE LAYOUT */
 
-        .page {
-            max-width: 1300px;
-            margin: 14px auto 40px;
-            padding: 0 12px 28px;
+        .page-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 22px 16px 40px;
             display: grid;
-            grid-template-columns: 300px minmax(0, 1fr);
+            grid-template-columns: 290px minmax(0, 1fr);
             gap: 22px;
         }
 
-        @media (max-width: 960px) {
-            .page {
+        @media (max-width: 900px) {
+            .page-wrapper {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* LEFT SIDEBAR */
+        /* SIDEBAR */
 
-        .profile {
-            background: radial-gradient(circle at top left, #0f172a, #020819 55%);
-            border-radius: 18px;
+        .sidebar {
+            background: linear-gradient(145deg, #020617, #020617 40%, rgba(34, 197, 94, 0.12));
+            border-radius: 24px;
+            padding: 22px 18px 20px;
             border: 1px solid var(--border-subtle);
-            padding: 18px 18px 16px;
             display: flex;
             flex-direction: column;
             gap: 18px;
+            position: sticky;
+            top: 72px;
+            height: fit-content;
         }
 
-        .profile-header-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 5px 10px;
-            border-radius: 999px;
-            background: rgba(15, 23, 42, 0.95);
-            border: 1px solid rgba(51, 65, 85, 0.9);
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            color: var(--text-muted);
-        }
-
-        .profile-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 999px;
-            background: var(--accent);
-            box-shadow: 0 0 14px rgba(56, 189, 248, 1);
-        }
-
-        .profile-top {
+        .profile-block {
             display: flex;
             align-items: center;
             gap: 14px;
         }
 
-        .profile-avatar {
+        .avatar {
             width: 56px;
             height: 56px;
             border-radius: 20px;
-            background: linear-gradient(135deg, #22c55e, #38bdf8);
+            background: radial-gradient(circle at 0 0, #4ade80, #22c55e);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -211,57 +164,51 @@
             color: #020617;
         }
 
-        .profile-name {
+        .student-name {
             font-size: 19px;
             font-weight: 700;
         }
 
-        .profile-meta {
+        .student-meta {
+            margin-top: 3px;
             font-size: 12px;
             color: var(--text-muted);
-            margin-top: 4px;
         }
 
-        .section-label {
+        .sidebar-title {
             font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.16em;
+            letter-spacing: 0.14em;
             color: var(--text-muted);
             margin-bottom: 6px;
         }
 
-        .profile-text {
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        .tag-row {
+        .focus-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
         }
 
         .tag {
-            font-size: 11px;
             padding: 4px 8px;
             border-radius: 999px;
             background: var(--chip-bg);
-            border: 1px solid rgba(55, 65, 81, 0.9);
+            border: 1px solid rgba(51, 65, 85, 0.9);
+            font-size: 11px;
             color: var(--text-muted);
         }
 
-        .profile-stats {
+        .stat-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 10px;
         }
 
         .stat-card {
+            padding: 9px 9px 8px;
             border-radius: 14px;
-            padding: 9px 10px 8px;
-            background: radial-gradient(circle at top left, #0f172a, #020617 55%);
-            border: 1px solid rgba(55, 65, 81, 0.95);
+            background: radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.18), #020617 55%);
+            border: 1px solid rgba(55, 65, 81, 0.9);
         }
 
         .stat-label {
@@ -271,148 +218,143 @@
 
         .stat-value {
             margin-top: 3px;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
         }
 
-        .link-list {
-            font-size: 13px;
+        .links-list {
             display: flex;
             flex-direction: column;
             gap: 6px;
+            font-size: 13px;
         }
 
-        .link-list a {
-            opacity: 0.9;
+        .links-list a span {
+            display: block;
+            font-size: 11px;
+            color: var(--text-muted);
         }
 
-        .link-list a:hover {
+        .links-list a:hover {
             color: var(--accent);
         }
 
         /* MAIN CONTENT */
 
-        .main {
+        .content {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 18px;
         }
 
         .page-header {
-            background: radial-gradient(circle at top left, #0f172a, #020819 55%);
-            border-radius: 18px;
-            border: 1px solid var(--border-subtle);
-            padding: 16px 18px 14px;
-        }
-
-        .page-kicker {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.18em;
-            color: var(--text-muted);
-        }
-
-        .page-title {
-            margin-top: 5px;
-            font-size: 22px;
-            font-weight: 700;
-        }
-
-        .page-subtitle {
-            margin-top: 6px;
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .cases-wrapper {
-            background: linear-gradient(145deg, #020617, #020819 60%);
-            border-radius: 18px;
-            border: 1px solid rgba(31, 41, 55, 0.9);
-            padding: 16px 16px 10px;
-        }
-
-        .cases-heading {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            color: var(--text-muted);
-            margin-bottom: 10px;
-        }
-
-        /* CASE CARD */
-
-        .case-card {
-            margin-top: 10px;
-            border-radius: var(--card-radius);
-            background: radial-gradient(circle at top left, #0f172a 0, #020617 60%);
-            border: 1px solid rgba(55, 65, 81, 0.95);
-            padding: 14px 14px 12px;
-        }
-
-        .case-header {
             display: flex;
-            align-items: baseline;
             justify-content: space-between;
+            align-items: baseline;
             gap: 8px;
         }
 
-        .case-label {
-            font-size: 12px;
+        .page-header h1 {
+            font-size: 24px;
+            letter-spacing: 0.04em;
+        }
+
+        .page-subtag {
+            font-size: 11px;
+            padding: 5px 11px;
+            border-radius: 999px;
+            border: 1px solid rgba(55, 65, 81, 0.95);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-muted);
+        }
+
+        .section-label {
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 0.16em;
-            color: var(--accent);
+            color: var(--text-muted);
+        }
+
+        /* CASE BLOCKS */
+
+        .case {
+            margin-top: 8px;
+            border-radius: 22px;
+            background: linear-gradient(150deg, #020617, #020617 55%, rgba(34, 197, 94, 0.12));
+            border: 1px solid rgba(55, 65, 81, 0.95);
+            padding: 16px 16px 14px;
+        }
+
+        .case + .case {
+            margin-top: 14px;
+        }
+
+        .case-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .case-pill {
+            padding: 3px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(55, 65, 81, 0.95);
+            background: rgba(15, 23, 42, 0.95);
         }
 
         .case-title {
-            margin-top: 4px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
+            margin-bottom: 6px;
         }
 
-        .case-area {
-            font-size: 11px;
+        .case-field {
+            margin-top: 6px;
+        }
+
+        .case-field h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
             color: var(--text-muted);
+            margin-bottom: 4px;
         }
 
-        .case-description {
-            margin-top: 8px;
+        .case-field p {
             font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        .case-description strong {
             color: var(--text-main);
+            line-height: 1.7;
         }
 
-        .case-bottom-grid {
+        .case-grid {
             margin-top: 10px;
             display: grid;
-            grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
             gap: 10px;
         }
 
-        @media (max-width: 860px) {
-            .case-bottom-grid {
+        @media (max-width: 800px) {
+            .case-grid {
                 grid-template-columns: 1fr;
             }
         }
 
         .info-card {
-            border-radius: 14px;
-            padding: 10px 11px 9px;
-            background: linear-gradient(
-                145deg,
-                rgba(15, 23, 42, 0.98),
-                #020617 60%
-            );
-            border: 1px solid rgba(55, 65, 81, 0.95);
+            border-radius: 16px;
+            padding: 10px 12px 10px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(37, 99, 235, 0.2);
         }
 
-        .info-header {
+        .info-label-row {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            margin-bottom: 4px;
             font-size: 13px;
             font-weight: 600;
         }
@@ -421,99 +363,65 @@
             width: 18px;
             height: 18px;
             border-radius: 6px;
-            background: radial-gradient(circle at 30% 0, #38bdf8, #22c55e);
+            background: var(--accent-soft);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 11px;
-            color: #020617;
         }
 
-        .info-subtitle {
-            margin-top: 4px;
-            font-size: 11px;
+        .info-main {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .info-sub {
+            margin-top: 3px;
+            font-size: 12px;
             color: var(--text-muted);
         }
 
-        .info-body {
-            margin-top: 6px;
-            font-size: 13px;
-            color: var(--text-main);
-            line-height: 1.6;
-            min-height: 40px; /* space to type */
-        }
-
-        .sdg-badges {
-            margin-top: 6px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .sdg-pill {
-            font-size: 11px;
-            padding: 4px 8px;
-            border-radius: 999px;
-            background: var(--accent-soft-2);
-            border: 1px solid rgba(168, 85, 247, 0.8);
-            color: #e9d5ff;
-        }
-
-        /* CODE BLOCK */
-
-        .code-card {
+        .code-block {
             margin-top: 10px;
             border-radius: 14px;
-            background: radial-gradient(circle at top, #020617, #020617 55%);
-            border: 1px solid rgba(55, 65, 81, 0.95);
-            padding: 8px 9px 9px;
+            background: #020617;
+            border: 1px solid rgba(31, 41, 55, 0.95);
+            padding: 10px 10px 8px;
         }
 
         .code-header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            gap: 8px;
+            align-items: center;
+            font-size: 12px;
+            margin-bottom: 6px;
         }
 
         .code-title {
-            font-size: 13px;
             font-weight: 600;
         }
 
         .copy-btn {
-            font-size: 11px;
-            padding: 5px 10px;
+            padding: 4px 9px;
             border-radius: 999px;
             border: none;
-            background: linear-gradient(135deg, #38bdf8, #22c55e);
-            color: #020617;
+            font-size: 11px;
             cursor: pointer;
-            font-weight: 600;
-        }
-
-        .copy-btn:hover {
-            filter: brightness(1.05);
+            background: linear-gradient(135deg, #22c55e, #4ade80);
+            color: #020617;
         }
 
         pre {
-            margin-top: 6px;
-            border-radius: 10px;
-            background: #020617;
-            padding: 10px 10px 9px;
+            margin: 0;
+            font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
             font-size: 12px;
-            overflow-x: auto;
-            border: 1px solid rgba(31, 41, 55, 0.9);
-        }
-
-        code {
-            font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
-                Consolas, "Liberation Mono", "Courier New", monospace;
+            white-space: pre-wrap;
+            word-break: break-word;
             color: #e5e7eb;
         }
 
         footer {
-            margin-top: 10px;
+            margin-top: 16px;
             font-size: 11px;
             color: var(--text-muted);
             text-align: right;
@@ -522,68 +430,61 @@
     </style>
 </head>
 <body>
-    <!-- HEADER / NAVBAR -->
-    <div class="navbar-wrapper">
-        <header class="navbar">
-            <div class="nav-left">
-                <div class="nav-logo">CD</div>
-                <div class="nav-title">
-                    <div class="nav-title-main">CITY DESIGN</div>
-                    <div class="nav-title-sub">DAA — Design &amp; Analysis of Algorithms</div>
+
+    <!-- TOP NAVBAR -->
+    <header class="top-nav">
+        <div class="top-nav-inner">
+            <div class="brand">
+                <div class="brand-icon">CD</div>
+                <div>
+                    <div class="brand-text-main">CITY DESIGN</div>
+                    <div class="brand-text-sub">DAA — Design &amp; Analysis of Algorithms</div>
                 </div>
             </div>
             <nav class="nav-links">
-                <a href="#" class="nav-link">Home</a>
-                <a href="#" class="nav-link">About</a>
-                <a href="#" class="nav-link">Project</a>
-                <a href="#" class="nav-link">City-Velora</a>
-                <a href="#" class="nav-link">Rakshita</a>
-                <a href="#" class="nav-link">Satish</a>
-                <a href="#" class="nav-link">Aditya</a>
-                <a href="#" class="nav-link">Omkar</a>
-                <a href="#" class="nav-link">Collabz</a>
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Project</a>
+                <a href="#">City-Velora</a>
+                <a href="#">Rakshita</a>
+                <a href="#">Satish</a>
+                <a href="#">Aditya</a>
+                <a href="#">Omkar</a>
+                <a href="#">Collabz</a>
+                <span class="nav-chip">DAA • Mini Project</span>
             </nav>
-        </header>
-    </div>
+        </div>
+    </header>
 
-    <!-- MAIN PAGE -->
-    <div class="page">
-        <!-- LEFT SIDEBAR -->
-        <aside class="profile">
-            <div class="profile-header-pill">
-                <span class="profile-dot"></span>
-                YOUR PROJECT TITLE
-            </div>
-
-            <div class="profile-top">
-                <div class="profile-avatar">YN</div>
+    <div class="page-wrapper">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="profile-block">
+                <div class="avatar">YN</div><!-- YOUR INITIALS -->
                 <div>
-                    <div class="profile-name">YOUR NAME</div>
-                    <div class="profile-meta">
-                        Roll No: YOUR ROLL • Dept. of CSE<br />
+                    <div class="student-name">YOUR NAME</div>
+                    <div class="student-meta">
+                        Roll No: YOUR ROLL • Dept. of CSE<br>
                         SEMESTER • COURSE NAME
                     </div>
                 </div>
             </div>
 
             <div>
-                <div class="section-label">Short Note</div>
-                <p class="profile-text">
-                    <!-- Add a small note about this individual page -->
-                </p>
-            </div>
-
-            <div>
-                <div class="section-label">Focus Areas</div>
-                <div class="tag-row">
-                    <span class="tag">Algorithms</span>
-                    <span class="tag">Data Structures</span>
+                <div class="sidebar-title">Focus Areas</div>
+                <div class="focus-tags">
+                    <span class="tag">Graphs</span>
+                    <span class="tag">Heaps</span>
+                    <span class="tag">Greedy</span>
+                    <span class="tag">Dynamic Programming</span>
+                    <span class="tag">Hashing</span>
+                    <span class="tag">Queues &amp; Stacks</span>
                 </div>
             </div>
 
             <div>
-                <div class="section-label">Project Snapshot</div>
-                <div class="profile-stats">
+                <div class="sidebar-title">Project Snapshot</div>
+                <div class="stat-grid">
                     <div class="stat-card">
                         <div class="stat-label">Business Cases</div>
                         <div class="stat-value">10</div>
@@ -596,571 +497,540 @@
             </div>
 
             <div>
-                <div class="section-label">Links</div>
-                <div class="link-list">
-                    <a href="#">GitHub Repository</a>
-                    <a href="#">Main Project Page</a>
+                <div class="sidebar-title">Links</div>
+                <div class="links-list">
+                    <a href="YOUR_GITHUB_LINK" target="_blank">
+                        GitHub Repository
+                        <span>YOUR-REPO-NAME</span>
+                    </a>
                 </div>
             </div>
         </aside>
 
-        <!-- RIGHT MAIN CONTENT -->
-        <main class="main">
-            <section class="page-header">
-                <div class="page-kicker">DAA • Project</div>
-                <h1 class="page-title">Business Use Cases — YOUR CITY / PARK</h1>
-                <p class="page-subtitle">
-                    <!-- Add a short one-line description for all your business cases here -->
-                </p>
+        <!-- MAIN CONTENT -->
+        <main class="content">
+            <div class="page-header">
+                <h1>Business Use Cases — YOUR CITY / PARK</h1>
+                <div class="page-subtag">DAA • MINI PROJECT</div>
+            </div>
+
+            <div class="section-label" style="margin-top:10px;">Business Cases</div>
+
+            <!-- ========== CASE 1 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 1</span>
+                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                </div>
+                <div class="case-title">TITLE OF BUSINESS CASE 1</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Write 2–3 lines giving an overview of what Case 1 is about.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Explain in detail what happens in Case 1 in your system. For example:
+                       how users interact, what is being scheduled, allocated, or optimized.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-sub">
+                            Briefly explain how or why this algorithm is used in Case 1.
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-sub">
+                            Explain how this case supports the selected Sustainable Development Goals.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+                    <pre>// Paste your C++ code for Case 1 here</pre>
+                </div>
             </section>
 
-            <section class="cases-wrapper">
-                <div class="cases-heading">Business Cases</div>
+            <!-- ========== CASE 2 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 2</span>
+                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                </div>
+                <div class="case-title">TITLE OF BUSINESS CASE 2</div>
 
-                <!-- ========= CASE TEMPLATE (copy for 1–10) ========= -->
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Write 2–3 lines giving an overview of what Case 2 is about.</p>
+                </div>
 
-                <!-- CASE 1 -->
-                <article class="case-card" id="case1">
-                    <div class="case-header">
-                        <div>
-                            <div class="case-label">Case 1</div>
-                            <div class="case-title">Title of Business Case 1</div>
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Describe the scenario and operations handled in Case 2.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
                         </div>
-                        <div class="case-area">Domain / Area</div>
-                    </div>
-                       
-                    <p class="case-description">
-                        <strong>Business Case:</strong>
-                        <!-- Add short description of what happens in Case 1 -->
-                        <br />
-                        <strong>Algorithm Focus:</strong>
-                        <!-- Add high-level algorithm idea for this case -->
-                        <br />
-                        <strong>SDGs Focus:</strong>
-                        <!-- Add SDGs related to this case -->
-                    </p>
-
-                    <div class="case-bottom-grid">
-                        <!-- Algorithm card -->
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">A</div>
-                                <div>Algorithm Used</div>
-                            </div>
-                            <div class="info-subtitle">
-                                Algorithm / Data Structure Name
-                            </div>
-                            <div class="info-body">
-                                <!-- Add 1–3 lines describing how the algorithm works in this case -->
-                            </div>
-                        </div>
-
-                        <!-- SDG card -->
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">S</div>
-                                <div>SDGs Linked</div>
-                            </div>
-                            <div class="info-subtitle">
-                                Mention SDG numbers and short titles
-                            </div>
-                            <div class="info-body">
-                                <!-- Add explanation on how this case supports the SDGs -->
-                                <div class="sdg-badges">
-                                    <span class="sdg-pill">SDG X</span>
-                                    <span class="sdg-pill">SDG Y</span>
-                                </div>
-                            </div>
+                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-sub">
+                            Short explanation of why this algorithm fits Case 2.
                         </div>
                     </div>
 
-                    <!-- Code block -->
-                    <div class="code-card">
-                        <div class="code-header">
-                            <div class="code-title">C++ Code</div>
-                            <button class="copy-btn" data-target="code-case1">Copy Code</button>
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
                         </div>
-                        <pre><code id="code-case1">// Paste your C++ code for Case 1 here
-
-</code></pre>
+                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-sub">
+                            Mention the SDGs and connection with this business case.
+                        </div>
                     </div>
-                </article>
+                </div>
 
-                <!-- CASE 2 -->
-                <article class="case-card" id="case2">
-                    <div class="case-header">
-                        <div>
-                            <div class="case-label">Case 2</div>
-                            <div class="case-title">Title of Business Case 2</div>
-                        </div>
-                        <div class="case-area">Domain / Area</div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
                     </div>
+                    <pre>// Paste your C++ code for Case 2 here</pre>
+                </div>
+            </section>
 
-                    <p class="case-description">
-                        <strong>Business Case:</strong>
-                        <!-- Description for Case 2 -->
-                        <br />
-                        <strong>Algorithm Focus:</strong>
-                        <!-- Algorithm summary -->
-                        <br />
-                        <strong>SDGs Focus:</strong>
-                        <!-- SDGs summary -->
-                    </p>
+            <!-- ========== CASE 3 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 3</span>
+                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                </div>
+                <div class="case-title">TITLE OF BUSINESS CASE 3</div>
 
-                    <div class="case-bottom-grid">
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">A</div>
-                                <div>Algorithm Used</div>
-                            </div>
-                            <div class="info-subtitle">
-                                Algorithm / Data Structure Name
-                            </div>
-                            <div class="info-body"></div>
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Write 2–3 lines giving an overview of what Case 3 is about.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Describe what this case manages or optimizes inside your city/park.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
                         </div>
-
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">S</div>
-                                <div>SDGs Linked</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body">
-                                <div class="sdg-badges">
-                                    <span class="sdg-pill">SDG X</span>
-                                </div>
-                            </div>
+                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-sub">
+                            Short explanation for algorithm usage in Case 3.
                         </div>
                     </div>
 
-                    <div class="code-card">
-                        <div class="code-header">
-                            <div class="code-title">C++ Code</div>
-                            <button class="copy-btn" data-target="code-case2">Copy Code</button>
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
                         </div>
-                        <pre><code id="code-case2">// Paste your C++ code for Case 2 here
-
-</code></pre>
-                    </div>
-                </article>
-
-                <!-- CASE 3 -->
-                <article class="case-card" id="case3">
-                    <div class="case-header">
-                        <div>
-                            <div class="case-label">Case 3</div>
-                            <div class="case-title">Title of Business Case 3</div>
-                        </div>
-                        <div class="case-area">Domain / Area</div>
-                    </div>
-
-                    <p class="case-description">
-                        <strong>Business Case:</strong><br />
-                        <strong>Algorithm Focus:</strong><br />
-                        <strong>SDGs Focus:</strong>
-                    </p>
-
-                    <div class="case-bottom-grid">
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">A</div>
-                                <div>Algorithm Used</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body"></div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">S</div>
-                                <div>SDGs Linked</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body">
-                                <div class="sdg-badges"></div>
-                            </div>
+                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-sub">
+                            SDG description for Case 3.
                         </div>
                     </div>
+                </div>
 
-                    <div class="code-card">
-                        <div class="code-header">
-                            <div class="code-title">C++ Code</div>
-                            <button class="copy-btn" data-target="code-case3">Copy Code</button>
-                        </div>
-                        <pre><code id="code-case3">// Paste your C++ code for Case 3 here
-
-</code></pre>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
                     </div>
-                </article>
+                    <pre>// Paste your C++ code for Case 3 here</pre>
+                </div>
+            </section>
 
-                <!-- CASE 4 -->
-                <article class="case-card" id="case4">
-                    <div class="case-header">
-                        <div>
-                            <div class="case-label">Case 4</div>
-                            <div class="case-title">Title of Business Case 4</div>
+            <!-- ========== CASE 4 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 4</span>
+                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                </div>
+                <div class="case-title">TITLE OF BUSINESS CASE 4</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Write 2–3 lines giving an overview of what Case 4 is about.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Describe the full workflow handled by Case 4.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
                         </div>
-                        <div class="case-area">Domain / Area</div>
-                    </div>
-
-                    <p class="case-description">
-                        <strong>Business Case:</strong><br />
-                        <strong>Algorithm Focus:</strong><br />
-                        <strong>SDGs Focus:</strong>
-                    </p>
-
-                    <div class="case-bottom-grid">
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">A</div>
-                                <div>Algorithm Used</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body"></div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">S</div>
-                                <div>SDGs Linked</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body">
-                                <div class="sdg-badges"></div>
-                            </div>
+                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-sub">
+                            Short explanation for algorithm usage in Case 4.
                         </div>
                     </div>
 
-                    <div class="code-card">
-                        <div class="code-header">
-                            <div class="code-title">C++ Code</div>
-                            <button class="copy-btn" data-target="code-case4">Copy Code</button>
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
                         </div>
-                        <pre><code id="code-case4">// Paste your C++ code for Case 4 here
-
-</code></pre>
-                    </div>
-                </article>
-
-                <!-- CASE 5 -->
-                <article class="case-card" id="case5">
-                    <div class="case-header">
-                        <div>
-                            <div class="case-label">Case 5</div>
-                            <div class="case-title">Title of Business Case 5</div>
-                        </div>
-                        <div class="case-area">Domain / Area</div>
-                    </div>
-
-                    <p class="case-description">
-                        <strong>Business Case:</strong><br />
-                        <strong>Algorithm Focus:</strong><br />
-                        <strong>SDGs Focus:</strong>
-                    </p>
-
-                    <div class="case-bottom-grid">
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">A</div>
-                                <div>Algorithm Used</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body"></div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">S</div>
-                                <div>SDGs Linked</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body">
-                                <div class="sdg-badges"></div>
-                            </div>
+                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-sub">
+                            SDG description for Case 4.
                         </div>
                     </div>
+                </div>
 
-                    <div class="code-card">
-                        <div class="code-header">
-                            <div class="code-title">C++ Code</div>
-                            <button class="copy-btn" data-target="code-case5">Copy Code</button>
-                        </div>
-                        <pre><code id="code-case5">// Paste your C++ code for Case 5 here
-
-</code></pre>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
                     </div>
-                </article>
+                    <pre>// Paste your C++ code for Case 4 here</pre>
+                </div>
+            </section>
 
-                <!-- CASE 6 -->
-                <article class="case-card" id="case6">
-                    <div class="case-header">
-                        <div>
-                            <div class="case-label">Case 6</div>
-                            <div class="case-title">Title of Business Case 6</div>
+            <!-- ========== CASE 5 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 5</span>
+                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                </div>
+                <div class="case-title">TITLE OF BUSINESS CASE 5</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Write 2–3 lines giving an overview of what Case 5 is about.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Describe how Case 5 operates inside the system.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
                         </div>
-                        <div class="case-area">Domain / Area</div>
-                    </div>
-
-                    <p class="case-description">
-                        <strong>Business Case:</strong><br />
-                        <strong>Algorithm Focus:</strong><br />
-                        <strong>SDGs Focus:</strong>
-                    </p>
-
-                    <div class="case-bottom-grid">
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">A</div>
-                                <div>Algorithm Used</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body"></div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">S</div>
-                                <div>SDGs Linked</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body">
-                                <div class="sdg-badges"></div>
-                            </div>
+                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-sub">
+                            Short explanation for algorithm usage in Case 5.
                         </div>
                     </div>
 
-                    <div class="code-card">
-                        <div class="code-header">
-                            <div class="code-title">C++ Code</div>
-                            <button class="copy-btn" data-target="code-case6">Copy Code</button>
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
                         </div>
-                        <pre><code id="code-case6">// Paste your C++ code for Case 6 here
-
-</code></pre>
-                    </div>
-                </article>
-
-                <!-- CASE 7 -->
-                <article class="case-card" id="case7">
-                    <div class="case-header">
-                        <div>
-                            <div class="case-label">Case 7</div>
-                            <div class="case-title">Title of Business Case 7</div>
-                        </div>
-                        <div class="case-area">Domain / Area</div>
-                    </div>
-
-                    <p class="case-description">
-                        <strong>Business Case:</strong><br />
-                        <strong>Algorithm Focus:</strong><br />
-                        <strong>SDGs Focus:</strong>
-                    </p>
-
-                    <div class="case-bottom-grid">
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">A</div>
-                                <div>Algorithm Used</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body"></div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">S</div>
-                                <div>SDGs Linked</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body">
-                                <div class="sdg-badges"></div>
-                            </div>
+                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-sub">
+                            SDG description for Case 5.
                         </div>
                     </div>
+                </div>
 
-                    <div class="code-card">
-                        <div class="code-header">
-                            <div class="code-title">C++ Code</div>
-                            <button class="copy-btn" data-target="code-case7">Copy Code</button>
-                        </div>
-                        <pre><code id="code-case7">// Paste your C++ code for Case 7 here
-
-</code></pre>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
                     </div>
-                </article>
+                    <pre>// Paste your C++ code for Case 5 here</pre>
+                </div>
+            </section>
 
-                <!-- CASE 8 -->
-                <article class="case-card" id="case8">
-                    <div class="case-header">
-                        <div>
-                            <div class="case-label">Case 8</div>
-                            <div class="case-title">Title of Business Case 8</div>
+            <!-- ========== CASE 6 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 6</span>
+                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                </div>
+                <div class="case-title">TITLE OF BUSINESS CASE 6</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Write 2–3 lines giving an overview of what Case 6 is about.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Describe the process and entities involved in Case 6.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
                         </div>
-                        <div class="case-area">Domain / Area</div>
-                    </div>
-
-                    <p class="case-description">
-                        <strong>Business Case:</strong><br />
-                        <strong>Algorithm Focus:</strong><br />
-                        <strong>SDGs Focus:</strong>
-                    </p>
-
-                    <div class="case-bottom-grid">
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">A</div>
-                                <div>Algorithm Used</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body"></div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">S</div>
-                                <div>SDGs Linked</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body">
-                                <div class="sdg-badges"></div>
-                            </div>
+                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-sub">
+                            Short explanation for algorithm usage in Case 6.
                         </div>
                     </div>
 
-                    <div class="code-card">
-                        <div class="code-header">
-                            <div class="code-title">C++ Code</div>
-                            <button class="copy-btn" data-target="code-case8">Copy Code</button>
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
                         </div>
-                        <pre><code id="code-case8">// Paste your C++ code for Case 8 here
-
-</code></pre>
-                    </div>
-                </article>
-
-                <!-- CASE 9 -->
-                <article class="case-card" id="case9">
-                    <div class="case-header">
-                        <div>
-                            <div class="case-label">Case 9</div>
-                            <div class="case-title">Title of Business Case 9</div>
-                        </div>
-                        <div class="case-area">Domain / Area</div>
-                    </div>
-
-                    <p class="case-description">
-                        <strong>Business Case:</strong><br />
-                        <strong>Algorithm Focus:</strong><br />
-                        <strong>SDGs Focus:</strong>
-                    </p>
-
-                    <div class="case-bottom-grid">
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">A</div>
-                                <div>Algorithm Used</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body"></div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">S</div>
-                                <div>SDGs Linked</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body">
-                                <div class="sdg-badges"></div>
-                            </div>
+                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-sub">
+                            SDG description for Case 6.
                         </div>
                     </div>
+                </div>
 
-                    <div class="code-card">
-                        <div class="code-header">
-                            <div class="code-title">C++ Code</div>
-                            <button class="copy-btn" data-target="code-case9">Copy Code</button>
-                        </div>
-                        <pre><code id="code-case9">// Paste your C++ code for Case 9 here
-
-</code></pre>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
                     </div>
-                </article>
+                    <pre>// Paste your C++ code for Case 6 here</pre>
+                </div>
+            </section>
 
-                <!-- CASE 10 -->
-                <article class="case-card" id="case10">
-                    <div class="case-header">
-                        <div>
-                            <div class="case-label">Case 10</div>
-                            <div class="case-title">Title of Business Case 10</div>
+            <!-- ========== CASE 7 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 7</span>
+                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                </div>
+                <div class="case-title">TITLE OF BUSINESS CASE 7</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Write 2–3 lines giving an overview of what Case 7 is about.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Describe how Case 7 helps the smart city / park.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
                         </div>
-                        <div class="case-area">Domain / Area</div>
-                    </div>
-
-                    <p class="case-description">
-                        <strong>Business Case:</strong><br />
-                        <strong>Algorithm Focus:</strong><br />
-                        <strong>SDGs Focus:</strong>
-                    </p>
-
-                    <div class="case-bottom-grid">
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">A</div>
-                                <div>Algorithm Used</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body"></div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-header">
-                                <div class="info-icon">S</div>
-                                <div>SDGs Linked</div>
-                            </div>
-                            <div class="info-subtitle"></div>
-                            <div class="info-body">
-                                <div class="sdg-badges"></div>
-                            </div>
+                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-sub">
+                            Short explanation for algorithm usage in Case 7.
                         </div>
                     </div>
 
-                    <div class="code-card">
-                        <div class="code-header">
-                            <div class="code-title">C++ Code</div>
-                            <button class="copy-btn" data-target="code-case10">Copy Code</button>
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
                         </div>
-                        <pre><code id="code-case10">// Paste your C++ code for Case 10 here
-
-</code></pre>
+                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-sub">
+                            SDG description for Case 7.
+                        </div>
                     </div>
-                </article>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+                    <pre>// Paste your C++ code for Case 7 here</pre>
+                </div>
+            </section>
+
+            <!-- ========== CASE 8 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 8</span>
+                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                </div>
+                <div class="case-title">TITLE OF BUSINESS CASE 8</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Write 2–3 lines giving an overview of what Case 8 is about.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Describe the flow, constraints, or optimization goal for Case 8.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-sub">
+                            Short explanation for algorithm usage in Case 8.
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-sub">
+                            SDG description for Case 8.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+                    <pre>// Paste your C++ code for Case 8 here</pre>
+                </div>
+            </section>
+
+            <!-- ========== CASE 9 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 9</span>
+                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                </div>
+                <div class="case-title">TITLE OF BUSINESS CASE 9</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Write 2–3 lines giving an overview of what Case 9 is about.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Explain how Case 9 works and what problem it solves.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-sub">
+                            Short explanation for algorithm usage in Case 9.
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-sub">
+                            SDG description for Case 9.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+                    <pre>// Paste your C++ code for Case 9 here</pre>
+                </div>
+            </section>
+
+            <!-- ========== CASE 10 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 10</span>
+                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                </div>
+                <div class="case-title">TITLE OF BUSINESS CASE 10</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Write 2–3 lines giving an overview of what Case 10 is about.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Describe the complete situation for the final case in your project.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-sub">
+                            Short explanation for algorithm usage in Case 10.
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-sub">
+                            SDG description for Case 10.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+                    <pre>// Paste your C++ code for Case 10 here</pre>
+                </div>
             </section>
 
             <footer>
-                City Design • DAA Mini Project — Individual Business Cases
+                YOUR COLLEGE NAME • DAA Mini Project • Academic Use Only
             </footer>
         </main>
     </div>
-
-    <!-- SIMPLE COPY BUTTON SCRIPT -->
-    <script>
-        document.querySelectorAll(".copy-btn").forEach(function (btn) {
-            btn.addEventListener("click", function () {
-                var id = btn.getAttribute("data-target");
-                var codeEl = document.getElementById(id);
-                if (!codeEl) return;
-
-                var text = codeEl.innerText;
-                navigator.clipboard.writeText(text).then(function () {
-                    var old = btn.innerText;
-                    btn.innerText = "Copied!";
-                    setTimeout(function () {
-                        btn.innerText = old;
-                    }, 900);
-                });
-            });
-        });
-    </script>
 </body>
 </html>
