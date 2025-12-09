@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 3 - Smart Parking & Mobility Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #ffa559;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #ffa559;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+    .sdg-box {
+        background: #fff3e6;
+        padding: 12px;
+        border-left: 5px solid #ffa559;
+        border-radius: 6px;
+        margin-top: 8px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Case 3 — Smart Parking & Mobility Hub</h1>
+
+<h2>Brief Description</h2>
+<p>
+The Smart Parking & Mobility Hub automates vehicle parking, slot detection, mobility guidance, 
+and EV charging distribution. It integrates sensors, real-time maps, and autonomous shuttle routing 
+to reduce traffic congestion and improve visitor convenience.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Visitors losing time
