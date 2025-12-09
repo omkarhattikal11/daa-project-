@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 10 - Central Mall Management</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #ffb84d;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #ffb84d;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 12px;
+    }
+    .sdg-box {
+        background: #fff4e1;
+        padding: 12px;
+        border-left: 5px solid #ffb84d;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Case 10 — Central Mall Management</h1>
+
+<h2>Brief Description</h2>
+<p>
+The Central Mall Management system automates mall operations such as shop information, 
+queue handling at billing counters, indoor navigation, inventory alerts, and crowd management. 
+It ensures smooth customer flow and efficient resource utilization within the mall premises.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Long billing queues during weekends and festive rush.</li>
+    <li>Customers struggling to find shops or specific products quickly.</li>
+    <li>Inventory shortages going undetected until too late.</li>
+    <li>Poor distribution of visitor density across mall floors.</li>
+</ul>
+
+<h2>Solutions / Logic Used</h2>
+<ul>
+    <li><strong>Hash Tables:</strong> Used for fast lookup of shops, product availability, and store details.</li>
+    <li><strong>Queue:</strong> Manages customer billing queues efficiently.</li>
+    <li><strong>Priority Queue (Heap):</strong> Identifies top-selling items and busiest shops.</li>
+    <li><strong>Dijkstra’s Algorithm:</strong> Provides shortest indoor navigation routes for customers.</li>
+</ul>
+
+<h2>Suitable SDGs</h2>
+
+<div class="sdg-box">
+    <strong>SDG 9 — Industry, Innovation & Infrastructure</strong>
+    <p>Improves commercial infrastructure using intelligent navigation and queue systems.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 11 — Sustainable Cities & Communities</strong>
+    <p>Enhances consumer experience and ensures smooth crowd distribution inside large malls.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 12 — Responsible Consumption & Production</strong>
+    <p>Supports efficient inventory management and reduces product wastage.</p>
+</div>
+
+<div class="tag">End of Case 10</div>
+
+</body>
+</html>
