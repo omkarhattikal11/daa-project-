@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 12 - Rapid Response Network</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #ff7f7f;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #ff7f7f;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 12px;
+    }
+    .sdg-box {
+        background: #ffecec;
+        padding: 12px;
+        border-left: 5px solid #ff7f7f;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Case 12 — Rapid Response Network</h1>
+
+<h2>Brief Description</h2>
+<p>
+The Rapid Response Network integrates all emergency services—including ambulance, fire units, 
+police patrols, and disaster teams—into a unified intelligent system. 
+It ensures the fastest possible response by assigning the right team and route for every emergency.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Delayed emergency response due to inefficient coordination.</li>
+    <li>Difficulty in choosing the correct team for a specific type of emergency.</li>
+    <li>Lack of backup units when the nearest teams are busy.</li>
+    <li>Unoptimized routes causing delays and resource wastage.</li>
+</ul>
+
+<h2>Solutions / Logic Used</h2>
+<ul>
+    <li><strong>Hash Tables:</strong> Maintain database of emergency units, status, and specializations.</li>
+    <li><strong>Priority Queue:</strong> Rank emergency calls based on severity and urgency.</li>
+    <li><strong>Queue:</strong> Handle incoming emergency calls and assign them sequentially.</li>
+    <li><strong>Dijkstra’s Algorithm:</strong> Find the fastest route to reach the location.</li>
+    <li><strong>BFS:</strong> Scan for nearest backup units when primary responders are unavailable.</li>
+</ul>
+
+<h2>Suitable SDGs</h2>
+
+<div class="sdg-box">
+    <strong>SDG 3 — Good Health & Well-Being</strong>
+    <p>Improves survival rates and emergency outcomes through rapid medical response.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 11 — Sustainable Cities & Communities</strong>
+    <p>Strengthens urban resilience and ensures quick disaster management.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 9 — Industry, Innovation & Infrastructure</strong>
+    <p>Implements intelligent emergency systems and modern routing technology.</p>
+</div>
+
+<div class="tag">End of Case 12</div>
+
+</body>
+</html>
