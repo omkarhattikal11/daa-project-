@@ -53,17 +53,18 @@ header {
   align-items: center;
   gap: 14px;
 }
-   /* NAVBAR */
-  .navbar{
-    position:fixed; top:8px; left:50%; transform:translateX(-50%);
-    width:calc(100% - 40px); max-width:var(--max-width);
-    display:flex; align-items:center; justify-content:space-between; gap:12px;
-    padding:12px 18px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    border:1px solid var(--glass-border); border-radius:12px;
-    backdrop-filter: blur(var(--glass-blur)); box-shadow: 0 6px 30px rgba(2,6,23,0.6);
-    z-index:50;
-  }
+
+/* NAVBAR */
+.navbar{
+  position:fixed; top:8px; left:50%; transform:translateX(-50%);
+  width:calc(100% - 40px); max-width:var(--max-width);
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:12px 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border:1px solid var(--glass-border); border-radius:12px;
+  backdrop-filter: blur(var(--glass-blur)); box-shadow: 0 6px 30px rgba(2,6,23,0.6);
+  z-index:50;
+}
 
 .badge {
   width: 46px;
@@ -267,206 +268,311 @@ footer {
     <!-- ========================= CASE 1 ========================= -->
     <div class="case-item">
       <h2>Smart Ambulance Routing System</h2>
-      <p>
-        Optimizes ambulance travel in Velora using real-time road data, distances, and connectivity.
-        Ensures fastest response to emergencies by calculating the shortest path to hospitals.
-      </p>
+      <p>In busy cities, ambulances often get delayed due to traffic, confusing routes, and slow decision-making. Even a short delay can risk a patient’s life.</p>
+
       <div class="algos-title">Algorithms Used</div>
       <ul>
-        <li>Dijkstra → Fastest route calculation</li>
-        <li>Min-Heap → Efficient node selection for Dijkstra</li>
-        <li>Hash Map → Quick hospital data lookup</li>
-        <li>Graph (Adjacency List) → City road representation</li>
+        <li>Dijkstra → Shortest Path Finder</li>
+        <li>Min-Heap → Efficient Node Pick</li>
+        <li>Hash Map → Fast Hospital Lookup</li>
+        <li>Graph (Adjacency List) → Road Representation</li>
       </ul>
-      <a class="btn" 
+
+      <div class="algos-title">System Workflow</div>
+      <ul>
+        <li>City roads are stored in graph form.</li>
+        <li>Ambulance location is taken as the starting node.</li>
+        <li>Dijkstra’s algorithm calculates distance to all hospitals.</li>
+        <li>Min-Heap speeds up the selection process.</li>
+        <li>Hash Map identifies the smallest-distance hospital.</li>
+        <li>System displays shortest path + minimum distance.</li>
+      </ul>
+
+      <div class="algos-title">Conclusion</div>
+      <p>The Smart Ambulance Routing System improves emergency response time and supports life-saving decisions. With efficient algorithms and data structures, it delivers the fastest route instantly and ensures patients reach hospitals as quickly as possible.</p>
+
+       <a class="btn" 
          href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case1"
          target="_blank">View Code</a>
     </div>
 
     <!-- ========================= CASE 2 ========================= -->
     <div class="case-item">
-      <h2>Hospital & Emergency Resource Management</h2>
-      <p>
-        Efficient allocation of hospital beds, medical staff, and emergency equipment based on real-time demand.
-        Tracks usage patterns to reduce bottlenecks and improve service efficiency.
-      </p>
+      <h2>Residential Water Leak Detection System</h2>
+      <p>Detects abnormal water consumption in residential buildings using real-time sensor readings to alert residents of leaks early, saving water and preventing damage.</p>
+
       <div class="algos-title">Algorithms Used</div>
       <ul>
-        <li>Priority Queue → Allocate beds and resources based on urgency</li>
-        <li>Hash Map → Quick staff and equipment lookup</li>
-        <li>Queue → Manage incoming patient flow</li>
-        <li>Graph Analysis → Resource distribution across hospitals</li>
+        <li>Hash Map → Fast storage of sensor readings</li>
+        <li>Fenwick Tree → Quick range-sum usage checks</li>
+        <li>Sliding Window → Spotting sudden continuous spikes</li>
+        <li>Queue → Managing recent sensor readings</li>
       </ul>
-      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case%202" 
-        target="_blank">View Code</a>
+
+      <div class="algos-title">System Workflow</div>
+      <ul>
+        <li>Sensor sends a water flow reading every minute.</li>
+        <li>Reading is stored in the Hash Map and updated in the Fenwick Tree.</li>
+        <li>Queue updates with the latest values for sliding-window analysis.</li>
+        <li>System compares real-time usage with normal patterns.</li>
+        <li>If continuous abnormal usage is detected → leak is confirmed.</li>
+        <li>User receives an alert with location/time of suspected leak.</li>
+      </ul>
+
+      <div class="algos-title">Conclusion</div>
+      <p>This smart leak detection model ensures early identification of water leakage by analyzing real-time readings and usage patterns. It reduces wastage, prevents structural damage, and provides an efficient, automated monitoring solution for residential communities.</p>
+
+      <a class="btn" href="#" target="_blank">View Code</a>
     </div>
 
     <!-- ========================= CASE 3 ========================= -->
     <div class="case-item">
-      <h2>Flood & Water Level Monitoring</h2>
-      <p>
-        Monitors real-time water levels of Velora’s rivers and drainage system. Predicts flood-prone zones 
-        and alerts city management for preemptive action.
-      </p>
+      <h2>Beach Waste Monitoring & Prediction System</h2>
+      <p>Monitors waste levels at beaches using sensors and predicts high-waste areas to guide cleaning teams efficiently.</p>
+
       <div class="algos-title">Algorithms Used</div>
       <ul>
-        <li>Sliding Window → Detect sudden changes in water levels</li>
-        <li>Queue → Real-time sensor data stream</li>
-        <li>Threshold Alerting → Trigger flood warnings</li>
-        <li>Graph → Model drainage connectivity</li>
+        <li>Queue → Handling Sensor Reports</li>
+        <li>Hash Map → Store Waste Levels Per Zone</li>
+        <li>Segment Tree → Predict High-Waste Areas</li>
+        <li>Merge Sort → Sorting Zones by Priority</li>
       </ul>
-      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case%203"
-        target="_blank">View Code</a>
+
+      <div class="algos-title">System Workflow</div>
+      <ul>
+        <li>Sensors send waste readings continuously.</li>
+        <li>Readings enter the queue.</li>
+        <li>Hash Map updates the zone’s latest waste level.</li>
+        <li>Segment Tree identifies critical stretches.</li>
+        <li>Merge Sort prepares a priority list.</li>
+        <li>Cleaning teams receive alerts with priority zones.</li>
+      </ul>
+
+      <div class="algos-title">Conclusion</div>
+      <p>This system ensures beaches stay clean using fast processing, early prediction, and smart prioritization. By combining sensor data with powerful algorithms, the beach remains hygienic, safe, and well-maintained.</p>
+
+      <a class="btn" href="#" target="_blank">View Code</a>
     </div>
 
     <!-- ========================= CASE 4 ========================= -->
     <div class="case-item">
-      <h2>Bank & Government Queue Management</h2>
-      <p>
-        Manages queues in banks and government offices with token-based systems. Prioritizes elderly 
-        and emergency cases while maintaining overall efficiency.
-      </p>
+      <h2>Restaurant Crowd & Demand Prediction</h2>
+      <p>Analyzes customer flow in restaurants to predict peak hours, ensuring better service, reduced wait times, and minimized food wastage.</p>
+
       <div class="algos-title">Algorithms Used</div>
       <ul>
-        <li>Queue → Manage token flows</li>
-        <li>Priority Queue → Handle emergency or priority customers</li>
-        <li>Hashing → Store citizen or customer data</li>
-        <li>Graph → Optimize service counters allocation</li>
+        <li>Queue → Tracking customers entering the restaurant</li>
+        <li>Hash Map → Storing & updating footfall data</li>
+        <li>Binary Search Tree → Historical trend comparison</li>
+        <li>Linear Regression with Arrays → Predicting demand</li>
       </ul>
-      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case4" 
-        target="_blank">View Code</a>
+
+      <div class="algos-title">System Workflow</div>
+      <ul>
+        <li>Customers entering the restaurant are recorded in a Queue.</li>
+        <li>Crowd data is updated in the Hash Map for the current time slot.</li>
+        <li>Historical values are stored and organized using a BST.</li>
+        <li>Arrays maintain time-series patterns for trend calculation.</li>
+        <li>System analyzes the patterns and predicts upcoming peak/off-peak periods.</li>
+        <li>Restaurant receives forecast insights for staffing and food preparation.</li>
+      </ul>
+
+      <div class="algos-title">Conclusion</div>
+      <p>This prediction system helps restaurants avoid long queues, reduce food wastage, and improve service quality. By combining real-time tracking with simple, effective algorithms, restaurants can make accurate decisions and operate more efficiently.</p>
+
+      <a class="btn" href="#" target="_blank">View Code</a>
     </div>
 
     <!-- ========================= CASE 5 ========================= -->
     <div class="case-item">
-      <h2>Smart Parking Management</h2>
-      <p>
-        Detects available parking slots and provides real-time guidance. Reduces traffic congestion and 
-        optimizes space usage using sensor data.
-      </p>
+      <h2>AI-Based Public Complaint & Feedback System</h2>
+      <p>Collects, organizes, and prioritizes citizen complaints for faster municipal response. Manual handling is slow, inconsistent, and error-prone.</p>
+
       <div class="algos-title">Algorithms Used</div>
       <ul>
-        <li>Min-Heap → Find nearest free parking slots</li>
-        <li>Hash Map → Vehicle tracking</li>
-        <li>BFS → Navigate parking zones efficiently</li>
-        <li>Queue → Manage entry-exit flow</li>
+        <li>Trie → Fast keyword search in complaints</li>
+        <li>Hash Map → Efficient storage and lookup</li>
+        <li>Priority Queue → Urgent issue prioritization</li>
+        <li>Rabin-Karp → Detect repeated patterns in feedback</li>
       </ul>
-      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case%205" 
-        target="_blank">View Code</a>
+
+      <div class="algos-title">System Workflow</div>
+      <ul>
+        <li>Citizens submit complaints via web/mobile app.</li>
+        <li>System extracts keywords using Trie and stores complaint data in Hash Map.</li>
+        <li>Priority Queue assigns urgency based on keywords and patterns.</li>
+        <li>Rabin-Karp algorithm identifies duplicate or recurring complaints.</li>
+        <li>Municipal authorities receive sorted list of prioritized complaints.</li>
+      </ul>
+
+      <div class="algos-title">Conclusion</div>
+      <p>This system accelerates complaint resolution, improves transparency, and reduces redundancy. Efficient algorithms ensure urgent issues are addressed quickly, making city administration more responsive to citizens.</p>
+
+      <a class="btn" href="#" target="_blank">View Code</a>
     </div>
 
     <!-- ========================= CASE 6 ========================= -->
     <div class="case-item">
-      <h2>Cybersecurity Threat Detection System</h2>
-      <p>
-        Monitors city networks for anomalies or intrusion patterns. Sends alerts to administrators for 
-        immediate action.
-      </p>
+      <h2>Intelligent Traffic Light Control</h2>
+      <p>Adjusts traffic light duration dynamically using real-time vehicle flow data to reduce congestion and optimize traffic movement.</p>
+
       <div class="algos-title">Algorithms Used</div>
       <ul>
-        <li>Anomaly Detection → Identify suspicious activity</li>
-        <li>Hash Table → Store known threat patterns</li>
-        <li>Queue → Event log management</li>
-        <li>Graph → Network topology analysis</li>
+        <li>Queue → Manage vehicles waiting at lights</li>
+        <li>Hash Map → Store traffic density per lane</li>
+        <li>Priority Queue → Adjust signal for busiest lanes</li>
+        <li>Sliding Window → Average vehicle counts over time</li>
       </ul>
-      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case6" 
-        target="_blank">View Code</a>
+
+      <div class="algos-title">System Workflow</div>
+      <ul>
+        <li>Sensors count vehicles in each lane.</li>
+        <li>Hash Map stores vehicle counts for each lane.</li>
+        <li>Sliding Window averages counts over last few minutes.</li>
+        <li>Priority Queue identifies lane needing longer green light.</li>
+        <li>Traffic light durations adjust dynamically in real-time.</li>
+      </ul>
+
+      <div class="algos-title">Conclusion</div>
+      <p>The Intelligent Traffic Light Control system reduces waiting time, eases congestion, and enhances traffic flow. Algorithmic optimization allows smart signal adjustments based on actual road usage.</p>
+
+      <a class="btn" href="#" target="_blank">View Code</a>
     </div>
 
     <!-- ========================= CASE 7 ========================= -->
     <div class="case-item">
-      <h2>Emergency Alert System</h2>
-      <p>
-        Sends real-time alerts to citizens during emergencies like fires, floods, or accidents. Integrates 
-        multiple communication channels.
-      </p>
+      <h2>Smart Streetlight Management</h2>
+      <p>Streetlights adjust brightness automatically based on pedestrian and vehicle presence to save energy and improve safety.</p>
+
       <div class="algos-title">Algorithms Used</div>
       <ul>
-        <li>Queue → Notification flow management</li>
-        <li>Priority Queue → Alert criticality ranking</li>
-        <li>Hash Map → Citizen contact lookup</li>
-        <li>Graph → Route optimal message delivery</li>
+        <li>Queue → Manage detection events</li>
+        <li>Hash Map → Store streetlight status</li>
+        <li>Binary Search → Identify streetlights in area efficiently</li>
+        <li>Segment Tree → Aggregate brightness levels in zones</li>
       </ul>
-      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case7" 
-        target="_blank">View Code</a>
+
+      <div class="algos-title">System Workflow</div>
+      <ul>
+        <li>Sensors detect movement and report events.</li>
+        <li>Queue stores real-time events in order of occurrence.</li>
+        <li>Hash Map keeps track of each streetlight’s status.</li>
+        <li>Segment Tree calculates average brightness for each zone.</li>
+        <li>Binary Search helps locate specific streetlights for adjustments.</li>
+        <li>Streetlights automatically dim or brighten according to real-time activity.</li>
+      </ul>
+
+      <div class="algos-title">Conclusion</div>
+      <p>Energy-efficient and adaptive, this system reduces electricity consumption while maintaining safety. Smart algorithmic control ensures timely, intelligent responses to movement on streets.</p>
+
+      <a class="btn" href="#" target="_blank">View Code</a>
     </div>
 
     <!-- ========================= CASE 8 ========================= -->
     <div class="case-item">
-      <h2>Shop & Restaurant Dynamic Pricing</h2>
-      <p>
-        Adjusts prices based on demand, inventory, and customer flow. Ensures optimized revenue and 
-        customer satisfaction.
-      </p>
+      <h2>Smart Parking Slot Finder</h2>
+      <p>Detects available parking slots in real-time and guides drivers, reducing search time and traffic congestion near parking areas.</p>
+
       <div class="algos-title">Algorithms Used</div>
       <ul>
-        <li>Sliding Window → Track customer flow over time</li>
-        <li>Heap → Determine high-demand products</li>
-        <li>Hash Map → Product stock lookup</li>
-        <li>Graph Analysis → Optimize distribution of goods</li>
+        <li>Hash Map → Store slot availability</li>
+        <li>Priority Queue → Recommend nearest slot</li>
+        <li>Graph → Represent parking zones and paths</li>
+        <li>BFS → Find shortest walking path to slot</li>
       </ul>
-      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case8" 
-        target="_blank">View Code</a>
+
+      <div class="algos-title">System Workflow</div>
+      <ul>
+        <li>Sensors detect empty or occupied parking slots.</li>
+        <li>Hash Map stores real-time availability status.</li>
+        <li>Priority Queue ranks slots by proximity to entry/exit points.</li>
+        <li>Graph models walking paths inside the parking lot.</li>
+        <li>BFS algorithm finds the shortest path from entrance to recommended slot.</li>
+        <li>System sends guidance to drivers’ app.</li>
+      </ul>
+
+      <div class="algos-title">Conclusion</div>
+      <p>The system reduces time spent looking for parking, minimizes congestion, and provides a seamless parking experience. Algorithmic efficiency ensures fast, accurate recommendations in real-time.</p>
+
+      <a class="btn" href="#" target="_blank">View Code</a>
     </div>
 
     <!-- ========================= CASE 9 ========================= -->
     <div class="case-item">
-      <h2>Climate-Resilient City Resource Management</h2>
-      <p>
-        Manages energy, water, and waste in Velora efficiently. Ensures sustainable usage and reduces 
-        environmental impact.
-      </p>
+      <h2>Disaster Alert & Response System</h2>
+      <p>Collects real-time environmental data to predict natural disasters, sends alerts, and optimizes resource deployment for emergency response.</p>
+
       <div class="algos-title">Algorithms Used</div>
       <ul>
-        <li>Hash Map → Resource usage tracking</li>
-        <li>Priority Queue → Assign resources based on demand</li>
-        <li>Graph → Optimize supply chains</li>
-        <li>Queue → Manage distribution requests</li>
+        <li>Heap → Prioritize areas based on disaster risk</li>
+        <li>Graph → Model evacuation routes</li>
+        <li>Dijkstra → Find fastest evacuation paths</li>
+        <li>Hash Map → Store real-time sensor readings</li>
       </ul>
-      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case9"
-        target="_blank">View Code</a>
+
+      <div class="algos-title">System Workflow</div>
+      <ul>
+        <li>Sensors monitor temperature, water level, and other environmental factors.</li>
+        <li>Hash Map stores sensor readings per location.</li>
+        <li>Heap prioritizes regions with highest disaster risk.</li>
+        <li>Dijkstra calculates fastest evacuation routes.</li>
+        <li>Alerts are sent to residents and emergency services with recommended actions.</li>
+      </ul>
+
+      <div class="algos-title">Conclusion</div>
+      <p>This system improves early warning and response effectiveness. Prioritization, route optimization, and real-time alerts help save lives and reduce disaster impact.</p>
+
+      <a class="btn" href="#" target="_blank">View Code</a>
     </div>
 
     <!-- ========================= CASE 10 ========================= -->
     <div class="case-item">
-      <h2>Industrial Goods Transport Optimization</h2>
-      <p>
-        Optimizes routing of industrial goods across Velora using real-time traffic data and warehouse 
-        locations. Minimizes cost and time.
-      </p>
+      <h2>Urban Air Quality Monitoring & Prediction</h2>
+      <p>Collects air pollution data from multiple sensors to monitor air quality and predict harmful zones for citizens’ health alerts.</p>
+
       <div class="algos-title">Algorithms Used</div>
       <ul>
-        <li>Dijkstra → Shortest path routing</li>
-        <li>Heap → Efficient priority handling of deliveries</li>
-        <li>Graph → City transport network mapping</li>
-        <li>Hash Map → Warehouse & vehicle tracking</li>
+        <li>Hash Map → Store sensor readings</li>
+        <li>Segment Tree → Aggregate pollution levels by zone</li>
+        <li>Linear Regression → Predict future air quality</li>
+        <li>Queue → Manage real-time alerts</li>
       </ul>
-      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case10"
-        target="_blank">View Code</a>
+
+      <div class="algos-title">System Workflow</div>
+      <ul>
+        <li>Air quality sensors report pollutant levels continuously.</li>
+        <li>Hash Map maintains latest readings per zone.</li>
+        <li>Segment Tree aggregates and identifies high-pollution areas.</li>
+        <li>Linear Regression predicts next-hour air quality levels.</li>
+        <li>Queue manages alert notifications to citizens’ devices.</li>
+      </ul>
+
+      <div class="algos-title">Conclusion</div>
+      <p>This system provides citizens with actionable air quality alerts, helps authorities plan pollution control measures, and promotes a healthier urban environment. Predictive algorithms allow proactive measures before pollution becomes hazardous.</p>
+
+      <a class="btn" href="#" target="_blank">View Code</a>
     </div>
 
   </div>
 </section>
 
-<!-- SIDEBAR -->
+<!-- RIGHT SIDEBAR -->
 <aside class="sidebar">
-
   <div class="side-card">
-    <h3>Progress</h3>
-    <p>Case 1 added with code. Remaining cases to be implemented.</p>
+    <h3>Project Info</h3>
+    <p>DAA-based smart city implementations for Velora with real-world applications.</p>
   </div>
-
   <div class="side-card">
-    <h3>Current Task</h3>
-    <p>Add algorithm implementation and code links for cases 2–10.</p>
+    <h3>Department</h3>
+    <p>CSE, Velora Institute</p>
   </div>
-
 </aside>
 
+</main>
+
 <footer>
-  © 2025 Velora — DAA • Designed by Rakshita K
+  &copy; 2025 Rakshita K — Velora Project
 </footer>
 
-</main>
 </body>
 </html>
