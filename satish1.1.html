@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 1 - Digital Advertising & Events Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #f7b045;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #f7b045;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+    .sdg-box {
+        background: #f9f2e2;
+        padding: 12px;
+        border-left: 5px solid #f7b045;
+        border-radius: 6px;
+        margin-top: 8px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Case 1 — Digital Advertising & Events Hub</h1>
+
+<h2>Brief Description</h2>
+<p>
+The Digital Advertising & Events Hub manages real-time event operations at Velora’s central plaza. 
+It handles advertisement scheduling, stall bookings, live crowd updates, 
+and automated drone-based display routes to ensure smooth functioning during large public events.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Clashing advertisement slot bookings during peak hours.</li>
+    <li>Difficulty managing stall allocation during large-scale events.</li>
+    <li>Inefficient crowd monitoring affecting event safety.</li>
+    <li>Drone display routes getting congested due to poor planning.</li>
+</ul>
+
+<h2>Solutions / Logic Used</h2>
+<ul>
+    <li><strong>Hash Table:</strong> Allows fast lookup and management of advertiser and stall details.</li>
+    <li><strong>Priority Queue (Heap):</strong> Assigns ad slots efficiently based on priority flow.</li>
+    <li><strong>Queue:</strong> Used to rotate advertisements in a scheduled cycle.</li>
+    <li><strong>Dijkstra’s Algorithm:</strong> Determines shortest and safest drone display route.</li>
+</ul>
+
+<h2>Suitable SDGs</h2>
+
+<div class="sdg-box">
+    <strong>SDG 9 — Industry, Innovation & Infrastructure</strong>
+    <p>Promotes development of smart event infrastructure, digital systems, and modernized platforms.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 11 — Sustainable Cities & Communities</strong>
+    <p>Improves urban event management, crowd safety, and organized public spaces.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 8 — Decent Work & Economic Growth</strong>
+    <p>Supports local businesses, event vendors, and digital advertising opportunities.</p>
+</div>
+
+<div class="tag">End of Case 1</div>
+
+</body>
+</html>
