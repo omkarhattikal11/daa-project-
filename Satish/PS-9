@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 9 - AI-Powered Lost Person Detection</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #7c4dff;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #7c4dff;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 12px;
+    }
+    .sdg-box {
+        background: #f1e9ff;
+        padding: 12px;
+        border-left: 5px solid #7c4dff;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Case 9 — AI-Powered Lost Person Detection</h1>
+
+<h2>Brief Description</h2>
+<p>
+The AI-Powered Lost Person Detection system uses CCTV feeds, pattern recognition, and 
+real-time camera network traversal to identify missing individuals in Velora. 
+It automates searching across zones, ranks matches, and alerts authorities instantly.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Manual CCTV scanning is extremely slow and error-prone.</li>
+    <li>Difficulty tracking movement of a missing person across multiple zones.</li>
+    <li>Low accuracy of visual identification due to noise, low light, or crowd density.</li>
+    <li>No unified system to combine sightings from all cameras.</li>
+</ul>
+
+<h2>Solutions / Logic Used</h2>
+<ul>
+    <li><strong>KMP Pattern Matching:</strong> Matches facial feature sequences with high accuracy.</li>
+    <li><strong>Hash Tables:</strong> Store sightings by camera ID, time, and confidence score.</li>
+    <li><strong>Priority Queue:</strong> Ranks potential matches by confidence level.</li>
+    <li><strong>Queue:</strong> Manages incoming sighting reports.</li>
+    <li><strong>BFS:</strong> Searches nearby camera clusters to predict movement direction.</li>
+</ul>
+
+<h2>Suitable SDGs</h2>
+
+<div class="sdg-box">
+    <strong>SDG 16 — Peace, Justice & Strong Institutions</strong>
+    <p>Strengthens public safety and ensures timely intervention in missing-person cases.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 11 — Sustainable Cities & Communities</strong>
+    <p>Enables safer urban environments through intelligent surveillance technology.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 9 — Industry, Innovation & Infrastructure</strong>
+    <p>Adopts advanced AI and pattern-matching algorithms for efficient public safety.</p>
+</div>
+
+<div class="tag">End of Case 9</div>
+
+</body>
+</html>
