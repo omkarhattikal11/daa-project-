@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 11 - City Post Office Control System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #4db6ac;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #4db6ac;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 12px;
+    }
+    .sdg-box {
+        background: #e6f7f6;
+        padding: 12px;
+        border-left: 5px solid #4db6ac;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Case 11 — City Post Office Control System</h1>
+
+<h2>Brief Description</h2>
+<p>
+The City Post Office Control System automates parcel sorting, tracking, delivery route planning, 
+and priority-based dispatching. It ensures efficient citywide logistics and reduces delivery delays 
+through smart routing and systematic handling.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Slow sorting of parcels due to manual handling.</li>
+    <li>Misrouted or lost parcels because of poor record management.</li>
+    <li>Urgent parcels not given priority during high workload periods.</li>
+    <li>Inefficient delivery routes increasing fuel usage and delays.</li>
+</ul>
+
+<h2>Solutions / Logic Used</h2>
+<ul>
+    <li><strong>Hash Tables:</strong> Store sender/receiver details and parcel tracking IDs for fast lookup.</li>
+    <li><strong>Queue:</strong> Used for regular (non-urgent) parcel sorting and processing.</li>
+    <li><strong>Priority Queue (Heap):</strong> Ensures urgent parcels are dispatched first.</li>
+    <li><strong>Dijkstra’s Algorithm:</strong> Calculates the shortest and fastest delivery routes across Velora.</li>
+</ul>
+
+<h2>Suitable SDGs</h2>
+
+<div class="sdg-box">
+    <strong>SDG 9 — Industry, Innovation & Infrastructure</strong>
+    <p>Improves logistics infrastructure using smart routing and digital parcel systems.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 11 — Sustainable Cities & Communities</strong>
+    <p>Enhances city services by ensuring timely delivery and reducing operational inefficiencies.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 12 — Responsible Consumption & Production</strong>
+    <p>Optimizes resource usage, minimizes wasted trips, and improves workflow efficiency.</p>
+</div>
+
+<div class="tag">End of Case 11</div>
+
+</body>
+</html>
