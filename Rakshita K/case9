@@ -1,0 +1,71 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <stack>
+using namespace std;
+
+// Moving Average for Time-Series Smoothing
+double movingAverage(vector<double> data) {
+    double sum = 0;
+    for(double x : data) sum += x;
+    return sum / data.size();
+}
+
+// Graph for Marine Migration Paths
+class Graph {
+public:
+    unordered_map<string, vector<string>> adj;
+
+    void addEdge(string a, string b) {
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+
+    // DFS to explore connected habitats
+    void DFS(string start) {
+        unordered_map<string, bool> visited;
+        stack<string> st;
+        st.push(start);
+
+        cout << "DFS Exploration from " << start << ": ";
+
+        while(!st.empty()) {
+            string node = st.top();
+            st.pop();
+
+            if(!visited[node]) {
+                visited[node] = true;
+                cout << node << " ";
+
+                for(auto &nbr : adj[node]) {
+                    if(!visited[nbr]) st.push(nbr);
+                }
+            }
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    // Time-Series Example
+    vector<double> tempData = {28.3, 28.7, 29.1, 28.9, 29.4};
+    cout << "Smoothed Temperature (Moving Avg): " 
+         << movingAverage(tempData) << "°C" << endl;
+
+    // Species Sightings Using Hash Map
+    unordered_map<int, string> speciesMap;
+    speciesMap[101] = "Dolphin";
+    speciesMap[205] = "Sea Turtle";
+
+    cout << "Species 205: " << speciesMap[205] << endl;
+
+    // Graph Example
+    Graph g;
+    g.addEdge("Coral Reef", "Lagoon");
+    g.addEdge("Lagoon", "Deep Sea");
+    g.addEdge("Deep Sea", "Open Ocean");
+
+    g.DFS("Coral Reef");
+
+    return 0;
+}
