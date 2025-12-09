@@ -119,12 +119,12 @@
         </ul>
         <h3>Solution Overview:</h3>
         <ul>
-          <li>Real-Time Resource Tracking</li>
-          <li>Emergency Triage.</li>
-          <li>Smart Ambulance Allocation</li>
-          <li>Optimize bus and train schedules dynamically using real-time data.</li>
-          <li>Predictive Resource Allocation</li>
-          <li>Central dashboard</li>
+          <li>Represent the parking lot as multiple floors and zones</li>
+          <li>Maintain a priority queue for VIP or handicapped vehicles.</li>
+          <li>Assign vehicles to the nearest available parking slot using distance calculations</li>
+          <li>Allow searching a vehicle by number to find its location.</li>
+          <li>Keep track of occupied and free slots</li>
+          <li>Calculate average parking time for reporting</li>
         </ul>
       </div>
 
@@ -132,35 +132,23 @@
       <div class="card algo-datastruct-card">
         <h2>2 • Algorithms & Data Structures</h2>
         <table>
-          <tr><th>Task</th><th>Algorithm / Data Structure</th><th>why used</th></tr>
-          <tr><td>Ambulance allocation</td><td>Dijkstra (shortest path)</td><td>Find nearest available ambulance</td></tr>
-          <tr><td>Patient triage priority</td><td>Max-Heap / Priority Queue</td><td>Highest priority patient treated first</td></tr>
-          <tr><td>Resource update</td><td>Hash Table</td><td>Fast lookup of beds, ICUs</td></tr>
-          <tr><td>Ambulance dispatch queue</td><td>Queue</td><td>FIFO dispatch for emergency vehicles</td></tr>
-          <tr><td>Hospital network</td><td>Graph</td><td>Represent departments, ambulances, routes</td></tr>
-          <tr><td>Blood match system</td><td>String matching (KMP / direct map)</td><td>Quick blood group matching</td></tr>
-          <tr><td>Critical patient clustering</td><td>BFS / DFS</td><td>Group emergencies by location</td></tr>
+          <tr><th>Task</th><th>Algorithm / Data Structure</th><th>purpose</th></tr>
+          <tr><td>Nearest slot assignment</td><td>Min-Heap / Priority Queue</td><td>Find nearest available ambulance</td></tr>
+          <tr><td>Slot availability tracking</td><td>2D/3D Array</td><td>Track floors, zones, and slots occupancy status</td></tr>
+          <tr><td>Priority vehicle handling</td><td>Priority Queue</td><td>Serve VIP and handicapped vehicles first</td></tr>
+          <tr><td>Search vehicle by number</td><td>Hash Table / Map</td><td>Quick lookup of vehicle location</td></tr>
+          <tr><td>Sorting available slots</td><td>Sorting Algorithm</td><td>Display slots in ascending order of distance for better allocation</td></tr>
+          <tr><td>Represent floors & zones</td><td>Graph / BFS</td><td>Simulate floor/zone traversal to find nearest free slot efficiently</td></tr>
         </table>
-        <h3>Data Structures Used:</h3>
-        <ul>
-          <li><strong>Graph:</strong> hospital network / ambulance routes</li>
-          <li><strong>Priority Queue: </strong> triage system</li>
-          <li><strong>Queue:</strong> ambulance dispatch</li>
-          <li><strong>Hash Map:</strong> resource lookup (beds, blood, ventilators)</li>
-          <li><strong>Struct:</strong>patient, ambulance, resource info</li>
-          <li><strong>Vector:</strong>dynamic lists</li>
-        </ul>
       </div>
 
       <!-- SDGs -->
       <div class="card sdg-card">
         <h2>3 • Sustainable Development Goals (SDGs)</h2>
         <ul>
-          <li><strong>SDG 3:</strong> Good Health & Well-being – Improves emergency response, reduces mortality</li>
-          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – Smart hospital automation</li>
-          <li><strong>SDG 11:</strong> Sustainable Cities & Communities – Better ambulance distribution.</li>
-          <li><strong>SDG 12:</strong> Responsible Consumption – Avoids resource wastage (beds, oxygen, blood).</li>
-          <li><strong>SDG 17:</strong> Partnerships for the Goals – Connects hospitals, ambulance services, labs</li>
+          <li><strong>SDG 13:</strong>Climate Action – Reduces fuel consumption and carbon footprint by minimizing search time for parking</li>
+          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – Integrates smart infrastructure with IoT-like simulation</li>
+          <li><strong>SDG 11:</strong> Sustainable Cities & Communities – Improves urban mobility and reduces traffic congestion.</li>
         </ul>
       </div>
 
