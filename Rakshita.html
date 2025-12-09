@@ -1,1 +1,305 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Rakshita K — Velora Use Cases (DAA)</title>
+
+<style>
+:root {
+  --bg: #0a0f1d;
+  --card: rgba(255,255,255,0.03);
+  --accent: #8B0000;       /* Maroon */
+  --accent2: #C71585;      /* Pinkish Wine Red */
+  --muted: #a7b4c8;
+  --glass: rgba(255,255,255,0.05);
+  --border: rgba(255,255,255,0.07);
+  --radius: 14px;
+  --blur: 10px;
+  font-family: "Inter", sans-serif;
+}
+
+/* Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(900px 400px at 10% 10%, rgba(139,0,0,0.06), transparent),
+    radial-gradient(900px 400px at 90% 90%, rgba(199,21,133,0.04), transparent),
+    var(--bg);
+  color: #e9f8ff;
+  padding: 90px 20px;
+  line-height: 1.45;
+}
+
+/* Header Bar */
+header {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 1100px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  backdrop-filter: blur(var(--blur));
+  z-index: 100;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.badge {
+  width: 46px;
+  height: 46px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #062018;
+  font-size: 20px;
+  font-weight: 900;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+.brand .title {
+  font-weight: 900;
+  font-size: 17px;
+}
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 700;
+  margin-left: 14px;
+}
+nav a:hover { color: var(--accent); }
+
+/* Main Wrapper */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 330px;
+  gap: 26px;
+}
+
+/* Left Card */
+.card {
+  padding: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(var(--blur));
+  box-shadow: 0 10px 35px rgba(2,10,20,0.7);
+}
+
+h1 { font-size: 30px; font-weight: 900; margin-bottom: 6px; }
+.subtitle { color: var(--muted); margin-bottom: 16px; }
+
+/* Author Box */
+.author-box {
+  display: flex;
+  gap: 14px;
+  margin: 20px 0;
+  padding: 14px;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 900;
+  color: #042018;
+}
+
+.author-info .name {
+  font-size: 17px;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+.author-info .meta {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Case List */
+.case-section {
+  margin-top: 20px;
+}
+
+.case-item {
+  margin-bottom: 22px;
+  padding: 16px;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+.case-item h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  font-weight: 900;
+  color: var(--accent);
+}
+
+.case-item p {
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+/* Algorithms Box */
+.algos-title {
+  margin-top: 6px;
+  font-weight: 800;
+  color: #fff;
+  font-size: 16px;
+}
+
+.case-item ul {
+  margin-top: 6px;
+  margin-bottom: 14px;
+  margin-left: 18px;
+  color: var(--muted);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 10px;
+  color: #062018;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+/* Sidebar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.side-card {
+  padding: 16px;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+.side-card h3 {
+  margin-bottom: 8px;
+  font-weight: 900;
+  font-size: 16px;
+}
+.side-card p { color: var(--muted); }
+
+/* Footer */
+footer {
+  grid-column: 1 / -1;
+  margin-top: 30px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">
+    <div class="badge">RK</div>
+    <div class="title">Rakshita K — Velora Project</div>
+  </div>
+
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../Velora.html">City</a>
+    <a href="../project.html">Project</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- LEFT MAIN CARD -->
+<section class="card">
+  <h1>Business Use Cases — Velora</h1>
+  <div class="subtitle">All conceptual + algorithmic implementations under DAA</div>
+
+  <!-- Author Box -->
+  <div class="author-box">
+    <div class="avatar">RK</div>
+    <div class="author-info">
+      <div class="name">Rakshita K</div>
+      <div class="meta">Roll No: 233 • Dept. of CSE</div>
+    </div>
+  </div>
+
+  <!-- Business Case List -->
+  <div class="case-section">
+
+    <!-- ========================= CASE 1 ========================= -->
+    <div class="case-item">
+      <h2>Smart Ambulance Routing System</h2>
+      <p>
+        Optimizes ambulance travel in Velora using real-time road data, distances, and connectivity.
+        Ensures fastest response to emergencies by calculating the shortest path to hospitals.
+      </p>
+
+      <div class="algos-title">Algorithms Used</div>
+      <ul>
+        <li>Dijkstra → Fastest route calculation</li>
+        <li>Min-Heap → Efficient node selection for Dijkstra</li>
+        <li>Hash Map → Quick hospital data lookup</li>
+        <li>Graph (Adjacency List) → City road representation</li>
+      </ul>
+
+      <a class="btn" 
+         href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20k/case%201.cpp" 
+         target="_blank">View Code</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+  <div class="side-card">
+    <h3>Progress</h3>
+    <p>Case 1 added. More cases will be included soon.</p>
+  </div>
+
+  <div class="side-card">
+    <h3>Current Task</h3>
+    <p>Add remaining business cases and their algorithmic implementations.</p>
+  </div>
+
+</aside>
+
+<footer>
+  © 2025 Velora — DAA • Designed by Rakshita K
+</footer>
+
+</main>
+</body>
+</html>
