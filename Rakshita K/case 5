@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// ------------------------------
+// Segment Tree for energy usage
+// ------------------------------
+class SegmentTree {
+    vector<int> tree;
+    int n;
+
+public:
+    SegmentTree(vector<int>& arr) {
+        n = arr.size();
+        tree.resize(4*n);
+        build(arr, 1, 0, n-1);
+    }
+
+    void build(vector<int>& arr, int node, int start, int end) {
+        if(start == end) {
+            tree[node] = arr[start];
+        } else {
+            int mid = (start + end) / 2;
+            build(arr, node*2, start, mid);
+            build(arr, node*2+1, mid+1, end);
+            tree[node] = tree[node*2] + tree[node*2+1];
+        }
+    }
+
+    int query(int node, int start, int end, int l, int r) {
+        if(r < start || end < l) return 0;
+        if(l <= start && end <= r) return tree[node];
+        int mid = (start + end) / 2;
+        return query(node*2, start, mid, l, r) +
+               query(node*2+1, mid+1, end, l, r);
+    }
+};
+
+int main() {
+
+    // Sample energy usage in 8-hour intervals
+    vector<int> usage = {30, 45, 25, 60, 20, 15, 35, 50};
+    SegmentTree st(usage);
+
+    // Hash map storing real-time readings from different zones
+    unordered_map<string, int> zoneEnergy;
+    zoneEnergy["ZoneA"] = 45;
+    zoneEnergy["ZoneB"] = 20;
+    zoneEnergy["ZoneC"] = 55;
+
+    // Min-heap to identify highest energy-consuming zones
+    priority_queue<int, vector<int>, greater<int>> minHeap;
+    for(auto z : zoneEnergy) minHeap.push(z.second);
+
+    cout << "Lowest high-energy value (priority to optimize first): "
+         << minHeap.top() << "\n";
+
+    // Query peak usage from hour 2 to 5 using segment tree
+    int total = st.query(1, 0, usage.size()-1, 2, 5);
+    cout << "Energy usage between hour 2 and 5: " << total << "\n";
+
+    // Queue for real-time sensor updates
+    queue<string> sensorLog;
+    sensorLog.push("ZoneA updated");
+    sensorLog.push("ZoneC updated");
+
+    cout << "\nSensor Log:\n";
+    while(!sensorLog.empty()) {
+        cout << sensorLog.front() << endl;
+        sensorLog.pop();
+    }
+
+    return 0;
+}
