@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 5 - Central Security & Smart Surveillance Control Room</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #ff6b6b;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #ff6b6b;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+    .sdg-box {
+        background: #ffe9e9;
+        padding: 12px;
+        border-left: 5px solid #ff6b6b;
+        border-radius: 6px;
+        margin-top: 8px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Case 5 — Central Security & Smart Surveillance Control Room</h1>
+
+<h2>Brief Description</h2>
+<p>
+The Central Security & Smart Surveillance Control Room manages Velora’s entire safety ecosystem, 
+including CCTV cameras, motion sensors, emergency alerts, and real-time response coordination. 
+It automates threat identification and supports quick decision-making for citywide safety.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Manual monitoring leads to missed threats and delayed alerts.</li>
+    <li>High number of false alarms slows down security operations.</li>
+    <li>Difficulty in locating the nearest available security personnel.</li>
+    <li>Poor coordination across different surveillance zones.</li>
+</ul>
+
+<h2>Solutions / Logic Used</h2>
+<ul>
+    <li><strong>Hash Tables:</strong> Maintain camera and sensor records for instant identification.</li>
+    <li><strong>Priority Queue (Heap):</strong> Sort alerts based on severity and urgency.</li>
+    <li><strong>Queue:</strong> Manage multiple incoming alerts efficiently.</li>
+    <li><strong>Dijkstra’s Algorithm:</strong> Find the closest security officer or patrol route.</li>
+    <li><strong>BFS:</strong> Scan nearby camera feeds for threat expansion.</li>
+</ul>
+
+<h2>Suitable SDGs</h2>
+
+<div class="sdg-box">
+    <strong>SDG 16 — Peace, Justice & Strong Institutions</strong>
+    <p>Supports reliable and secure public safety systems for citizens.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 11 — Sustainable Cities & Communities</strong>
+    <p>Creates safer urban zones through smart surveillance and monitoring.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 9 — Industry, Innovation & Infrastructure</strong>
+    <p>Uses modern algorithms and digital tools for city-level security innovation.</p>
+</div>
+
+<div class="tag">End of Case 5</div>
+
+</body>
+</html>
