@@ -1,1 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Smart City – Algorithm Solutions</title>
 
+<style>
+  :root{
+    --bg-dark: #0d1117;      
+    --text-light: #e6eef3;
+    --accent-1: #00f5d4;        /* Problem + Solution */
+    --accent-2: #d97706;        /* Algorithms + Data Structures - dark amber */
+    --accent-3: #6b21a8;        /* SDGs - dark violet */
+    --card-radius: 14px;
+    --shadow-dark: rgba(0,0,0,0.5);
+    --max-width: 900px;
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+
+  * { box-sizing: border-box; margin:0; padding:0; }
+  html,body { height:100%; }
+
+  body{
+    background: var(--bg-dark);
+    color: var(--text-light);
+    padding-top:78px;
+    line-height:1.5;
+  }
+
+  /* NAVBAR */
+  .navbar{
+    position:fixed; top:8px; left:50%; transform:translateX(-50%);
+    width:calc(100% - 40px); max-width:var(--max-width);
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:12px 18px;
+    background: rgba(255,255,255,0.05);
+    border-radius:12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 6px 30px var(--shadow-dark);
+    z-index:50;
+  }
+
+  .logo{ display:flex; gap:12px; align-items:center; font-weight:700; font-size:18px; }
+  .logo .dot{ width:36px; height:36px; border-radius:9px;
+    background: linear-gradient(135deg,#00f5d4,#3b82f6);
+    display:flex; align-items:center; justify-content:center;
+    color:#0d1117; font-weight:800; box-shadow:0 6px 18px rgba(0,255,212,0.3); }
+
+  nav ul{ display:flex; gap:14px; list-style:none; align-items:center; }
+  nav a{ text-decoration:none; color:var(--text-light); font-weight:600; padding:8px 12px; border-radius:8px; font-size:14px; transition: all .18s ease; }
+  nav a:hover{ color:#00f5d4; transform:translateY(-2px); }
+
+  /* WRAPPER */
+  .wrap{ max-width:var(--max-width); margin:28px auto; padding:28px; }
+  h1{ font-size:28px; margin-bottom:24px; text-align:center; color:var(--text-light); }
+
+  /* CARD STYLES */
+  .card-container{ display:flex; flex-direction:column; gap:22px; }
+
+  .card{
+    border-radius:var(--card-radius);
+    padding:24px;
+    box-shadow: 0 8px 30px var(--shadow-dark);
+    border:1px solid rgba(255,255,255,0.1);
+  }
+
+  .card h2{ font-size:20px; margin-bottom:12px; }
+
+  .card ul{ padding-left:20px; margin-top:10px; }
+  .card ul li{ margin-bottom:8px; font-size:14px; }
+
+  .card table{ width:100%; border-collapse: collapse; margin-top:12px; color: #0d1117; }
+  .card th, .card td{ border:1px solid rgba(255,255,255,0.2); padding:10px; text-align:left; font-size:14px; }
+  .card th{ background-color: rgba(0,0,0,0.3); color: var(--text-light); }
+
+  /* DISTINCT GRADIENTS */
+  .problem-solution-card{ background: linear-gradient(135deg,#00f5d4,#3b82f6); color:#0d1117; }
+  .algo-datastruct-card{ background: linear-gradient(135deg,#b45309,#78350f); color:#f3f3f3; } /* dark amber/brown */
+  .sdg-card{ background: linear-gradient(135deg,#5b21b6,#3b0764); color:#f3f3f3; } /* dark violet */
+
+  footer{ margin-top:34px; color:var(--text-light); font-size:14px; text-align:center; padding:18px 6px; }
+</style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">
+      <div class="dot">CD</div>
+      <div>
+        <div style="font-weight:800">CITY DESIGN</div>
+        <div style="font-size:12px;color:var(--text-light);margin-top:2px">DAA — Design & Analysis of Algorithms</div>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="aditya.html">BACK</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- PAGE CONTENT -->
+  <main class="wrap">
+    <h1>bank and government queue management</h1>
+
+    <div class="card-container">
+
+      <!-- PROBLEM + SOLUTION -->
+      <div class="card problem-solution-card">
+        <h2>1 • Problem Statement & Solution Overview</h2>
+        <h3>Problem Statement:</h3>
+        <ul>
+          <li>Long Wait Times: Customers often wait for extended periods due to inefficient queue management.</li>
+          <li>Priority Handling: Elderly, pregnant women, and VIP customers need priority service.</li>
+          <li>Multiple Service Counters: Customers need routing to the correct counter for their needs.</li>
+          <li>Dynamic Queue Changes: Some customers may leave or shift to another service.</li>
+          <li>Data Tracking: Difficulty in maintaining records of serviced customers and average wait time.</li>
+        </ul>
+        <h3>Solution Overview:</h3>
+        <ul>
+          <li>Supports multiple queues for different service types.</li>
+          <li>Uses priority queues to serve elderly, pregnant women, and VIPs first.</li>
+          <li>Tracks average waiting time and number of served customers.</li>
+          <li>Allows customers to change queue or leave dynamically.</li>
+        </ul>
+      </div>
+
+      <!-- ALGORITHMS + DATA STRUCTURES -->
+      <div class="card algo-datastruct-card">
+        <h2>2 • Algorithms & Data Structures</h2>
+        <table>
+          <tr><th>Problem</th><th>Algorithm / Data Structure</th><th>logic</th></tr>
+          <tr><td>Regular queue handling</td><td>Queue</td><th>FIFO algorithm for normal customer service.</th></tr>
+          <tr><td>Priority customer handling</td><td>Priority Queue / Heap</td><th>Serve customers based on priority levels.</th></tr>
+          <tr><td>Multiple service counters</td><td>Array of Queues</td><th>Each counter has its own queue; assign customers to the least busy counter</th></tr>
+          <tr><td>Customer leaving or changing queue</td><td>Linked List / Queue</td><th>Remove or move customer dynamically without disturbing other elements</th></tr>
+          <tr><td>Fast lookup of customer details</td><td>Hash Table</td><th>Store customer IDs and details for quick reference</th></tr>
+        </table>
+      </div>
+
+      <!-- SDGs -->
+      <div class="card sdg-card">
+        <h2>3 • Sustainable Development Goals (SDGs)</h2>
+        <ul>
+          <li><strong>SDG 11:</strong> Sustainable Cities – Smart governance and citizen-friendly services.</li>
+          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – Improve government services using technology.</li>
+          <li><strong>SDG 8:</strong> Decent Work and Economic Growth – Efficient systems save time for citizens and employees.</li>
+          <li><strong>SDG 10:</strong> Reduced Inequalities – Priority handling for vulnerable groups.</li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    © City Design — DAA • KLE Technological University • Built by the project team
+  </footer>
+
+</body>
+</html>
