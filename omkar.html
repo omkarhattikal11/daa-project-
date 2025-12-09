@@ -1,1 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Business Cases – DAA Project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1120;
+      --card: #020617;
+      --accent: #f97316;        /* orange */
+      --accent-soft: rgba(249, 115, 22, 0.18);
+      --accent2: #22c55e;       /* green for SDG */
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --code-bg: #020617;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, #1e293b 0, #020617 50%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      max-width: 960px;
+      margin: 24px auto 40px;
+      padding: 0 16px 32px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .page-title {
+      font-size: 28px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .page-subtitle {
+      margin-top: 6px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* CASE CARD */
+
+    .case-card {
+      background:
+        linear-gradient(145deg, rgba(148, 163, 184, 0.1), transparent 40%),
+        var(--bg-alt);
+      border-radius: 22px;
+      padding: 18px 18px 20px;
+      border: 1px solid rgba(51, 65, 85, 0.8);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.6);
+      margin-bottom: 20px;
+    }
+
+    .case-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .case-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .case-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .case-section-label {
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .case-description {
+      margin-top: 6px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-main);
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 14px;
+      padding: 10px 12px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+    }
+
+    /* Algorithm + SDG info cards */
+
+    .info-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    @media (min-width: 720px) {
+      .info-row {
+        flex-direction: row;
+      }
+    }
+
+    .info-card {
+      flex: 1;
+      border-radius: 16px;
+      padding: 10px 12px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(75, 85, 99, 0.9);
+    }
+
+    .info-card.algorithm {
+      box-shadow: 0 0 0 1px var(--accent-soft);
+    }
+
+    .info-card.sdg {
+      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.2);
+    }
+
+    .info-label {
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .info-label span.icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      background: radial-gradient(circle at 0 0, #f97316, #facc15);
+      color: #111827;
+      font-weight: 700;
+    }
+
+    .info-label span.icon.green {
+      background: radial-gradient(circle at 0 0, #22c55e, #4ade80);
+    }
+
+    .info-title {
+      font-size: 13px;
+    }
+
+    .info-main {
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .info-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      line-height: 1.6;
+    }
+
+    /* Code block */
+
+    .code-section {
+      margin-top: 14px;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .code-header-label {
+      font-weight: 600;
+    }
+
+    .code-header-lang {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+    }
+
+    .code-box {
+      margin-top: 6px;
+      position: relative;
+      background: var(--code-bg);
+      border-radius: 16px;
+      padding: 10px 12px 12px;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      overflow-x: auto;
+      font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo,
+        Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .code-box pre {
+      white-space: pre;
+      color: #e5e7eb;
+    }
+
+    .copy-btn {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      padding: 3px 10px;
+      font-size: 11px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #f97316, #fb923c);
+      color: #111827;
+      font-weight: 600;
+    }
+
+    .copy-btn:active {
+      transform: scale(0.97);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header class="page-header">
+      <h1 class="page-title">BUSINESS CASES – DAA PROJECT</h1>
+      <p class="page-subtitle">
+        <!-- You can change this line -->
+        Describe your overall project in 1–2 lines here.
+      </p>
+    </header>
+
+    <!-- ================= CASE 1 ================= -->
+    <section class="case-card">
+      <div class="case-header">
+        <h2 class="case-title">Case 1 – YOUR CASE TITLE</h2>
+        <span class="case-tag">Business Case 1</span>
+      </div>
+
+      <div class="case-section-label">Description of the Business Case</div>
+      <p class="case-description">
+        <!-- WRITE ABOUT BUSINESS CASE 1 HERE -->
+        Briefly explain what this system does, who uses it, and what problem it solves.
+      </p>
+
+      <div class="info-row">
+        <!-- Algorithm card -->
+        <div class="info-card algorithm">
+          <div class="info-label">
+            <span class="icon">A</span>
+            <span class="info-title">Algorithm Used</span>
+          </div>
+          <div class="info-main">NAME OF ALGORITHM / DATA STRUCTURE</div>
+          <div class="info-text">
+            Write how/why this algorithm is used in this business case.
+          </div>
+        </div>
+
+        <!-- SDG card -->
+        <div class="info-card sdg">
+          <div class="info-label">
+            <span class="icon green">S</span>
+            <span class="info-title">SDGs Addressed</span>
+          </div>
+          <div class="info-main">SDG NUMBERS &amp; TITLES (e.g., SDG 11 – Sustainable Cities)</div>
+          <div class="info-text">
+            Explain briefly how this case supports the selected SDGs.
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <div class="code-header">
+          <span class="code-header-label">C++ Code</span>
+          <span class="code-header-lang">Case 1 Implementation</span>
+        </div>
+        <div class="code-box">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre>// Paste your full C++ code for Case 1 here
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    // ...
+    return 0;
+}</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== DUPLICATE & EDIT FOR CASES 2–10 ============== -->
+
+    <!-- ================= CASE 2 ================= -->
+    <section class="case-card">
+      <div class="case-header">
+        <h2 class="case-title">Case 2 – YOUR CASE TITLE</h2>
+        <span class="case-tag">Business Case 2</span>
+      </div>
+
+      <div class="case-section-label">Description of the Business Case</div>
+      <p class="case-description">
+        Write the description for Case 2 here.
+      </p>
+
+      <div class="info-row">
+        <div class="info-card algorithm">
+          <div class="info-label">
+            <span class="icon">A</span>
+            <span class="info-title">Algorithm Used</span>
+          </div>
+          <div class="info-main">ALGORITHM NAME</div>
+          <div class="info-text">
+            Short explanation of why this algorithm suits Case 2.
+          </div>
+        </div>
+
+        <div class="info-card sdg">
+          <div class="info-label">
+            <span class="icon green">S</span>
+            <span class="info-title">SDGs Addressed</span>
+          </div>
+          <div class="info-main">SDG INFO FOR CASE 2</div>
+          <div class="info-text">
+            Short explanation of SDGs related to this case.
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <div class="code-header">
+          <span class="code-header-label">C++ Code</span>
+          <span class="code-header-lang">Case 2 Implementation</span>
+        </div>
+        <div class="code-box">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre>// Paste your full C++ code for Case 2 here
+</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CASE 3 ================= -->
+    <section class="case-card">
+      <div class="case-header">
+        <h2 class="case-title">Case 3 – YOUR CASE TITLE</h2>
+        <span class="case-tag">Business Case 3</span>
+      </div>
+
+      <div class="case-section-label">Description of the Business Case</div>
+      <p class="case-description">
+        Description for Case 3.
+      </p>
+
+      <div class="info-row">
+        <div class="info-card algorithm">
+          <div class="info-label">
+            <span class="icon">A</span>
+            <span class="info-title">Algorithm Used</span>
+          </div>
+          <div class="info-main">ALGORITHM NAME</div>
+          <div class="info-text">
+            How the algorithm works in this case.
+          </div>
+        </div>
+
+        <div class="info-card sdg">
+          <div class="info-label">
+            <span class="icon green">S</span>
+            <span class="info-title">SDGs Addressed</span>
+          </div>
+          <div class="info-main">SDG INFO FOR CASE 3</div>
+          <div class="info-text">
+            How this case connects to SDGs.
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <div class="code-header">
+          <span class="code-header-label">C++ Code</span>
+          <span class="code-header-lang">Case 3 Implementation</span>
+        </div>
+        <div class="code-box">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre>// Paste your full C++ code for Case 3 here
+</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CASE 4 ================= -->
+    <section class="case-card">
+      <div class="case-header">
+        <h2 class="case-title">Case 4 – YOUR CASE TITLE</h2>
+        <span class="case-tag">Business Case 4</span>
+      </div>
+
+      <div class="case-section-label">Description of the Business Case</div>
+      <p class="case-description">
+        Description for Case 4.
+      </p>
+
+      <div class="info-row">
+        <div class="info-card algorithm">
+          <div class="info-label">
+            <span class="icon">A</span>
+            <span class="info-title">Algorithm Used</span>
+          </div>
+          <div class="info-main">ALGORITHM NAME</div>
+          <div class="info-text">
+            Algorithm explanation for Case 4.
+          </div>
+        </div>
+
+        <div class="info-card sdg">
+          <div class="info-label">
+            <span class="icon green">S</span>
+            <span class="info-title">SDGs Addressed</span>
+          </div>
+          <div class="info-main">SDG INFO FOR CASE 4</div>
+          <div class="info-text">
+            SDG explanation.
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <div class="code-header">
+          <span class="code-header-label">C++ Code</span>
+          <span class="code-header-lang">Case 4 Implementation</span>
+        </div>
+        <div class="code-box">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre>// Paste your full C++ code for Case 4 here
+</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CASE 5 ================= -->
+    <section class="case-card">
+      <div class="case-header">
+        <h2 class="case-title">Case 5 – YOUR CASE TITLE</h2>
+        <span class="case-tag">Business Case 5</span>
+      </div>
+
+      <div class="case-section-label">Description of the Business Case</div>
+      <p class="case-description">
+        Description for Case 5.
+      </p>
+
+      <div class="info-row">
+        <div class="info-card algorithm">
+          <div class="info-label">
+            <span class="icon">A</span>
+            <span class="info-title">Algorithm Used</span>
+          </div>
+          <div class="info-main">ALGORITHM NAME</div>
+          <div class="info-text">
+            Algorithm explanation for Case 5.
+          </div>
+        </div>
+
+        <div class="info-card sdg">
+          <div class="info-label">
+            <span class="icon green">S</span>
+            <span class="info-title">SDGs Addressed</span>
+          </div>
+          <div class="info-main">SDG INFO FOR CASE 5</div>
+          <div class="info-text">
+            SDG explanation.
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <div class="code-header">
+          <span class="code-header-label">C++ Code</span>
+          <span class="code-header-lang">Case 5 Implementation</span>
+        </div>
+        <div class="code-box">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre>// Paste your full C++ code for Case 5 here
+</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CASE 6 ================= -->
+    <section class="case-card">
+      <div class="case-header">
+        <h2 class="case-title">Case 6 – YOUR CASE TITLE</h2>
+        <span class="case-tag">Business Case 6</span>
+      </div>
+
+      <div class="case-section-label">Description of the Business Case</div>
+      <p class="case-description">
+        Description for Case 6.
+      </p>
+
+      <div class="info-row">
+        <div class="info-card algorithm">
+          <div class="info-label">
+            <span class="icon">A</span>
+            <span class="info-title">Algorithm Used</span>
+          </div>
+          <div class="info-main">ALGORITHM NAME</div>
+          <div class="info-text">
+            Algorithm explanation for Case 6.
+          </div>
+        </div>
+
+        <div class="info-card sdg">
+          <div class="info-label">
+            <span class="icon green">S</span>
+            <span class="info-title">SDGs Addressed</span>
+          </div>
+          <div class="info-main">SDG INFO FOR CASE 6</div>
+          <div class="info-text">
+            SDG explanation.
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <div class="code-header">
+          <span class="code-header-label">C++ Code</span>
+          <span class="code-header-lang">Case 6 Implementation</span>
+        </div>
+        <div class="code-box">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre>// Paste your full C++ code for Case 6 here
+</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CASE 7 ================= -->
+    <section class="case-card">
+      <div class="case-header">
+        <h2 class="case-title">Case 7 – YOUR CASE TITLE</h2>
+        <span class="case-tag">Business Case 7</span>
+      </div>
+
+      <div class="case-section-label">Description of the Business Case</div>
+      <p class="case-description">
+        Description for Case 7.
+      </p>
+
+      <div class="info-row">
+        <div class="info-card algorithm">
+          <div class="info-label">
+            <span class="icon">A</span>
+            <span class="info-title">Algorithm Used</span>
+          </div>
+          <div class="info-main">ALGORITHM NAME</div>
+          <div class="info-text">
+            Algorithm explanation for Case 7.
+          </div>
+        </div>
+
+        <div class="info-card sdg">
+          <div class="info-label">
+            <span class="icon green">S</span>
+            <span class="info-title">SDGs Addressed</span>
+          </div>
+          <div class="info-main">SDG INFO FOR CASE 7</div>
+          <div class="info-text">
+            SDG explanation.
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <div class="code-header">
+          <span class="code-header-label">C++ Code</span>
+          <span class="code-header-lang">Case 7 Implementation</span>
+        </div>
+        <div class="code-box">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre>// Paste your full C++ code for Case 7 here
+</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CASE 8 ================= -->
+    <section class="case-card">
+      <div class="case-header">
+        <h2 class="case-title">Case 8 – YOUR CASE TITLE</h2>
+        <span class="case-tag">Business Case 8</span>
+      </div>
+
+      <div class="case-section-label">Description of the Business Case</div>
+      <p class="case-description">
+        Description for Case 8.
+      </p>
+
+      <div class="info-row">
+        <div class="info-card algorithm">
+          <div class="info-label">
+            <span class="icon">A</span>
+            <span class="info-title">Algorithm Used</span>
+          </div>
+          <div class="info-main">ALGORITHM NAME</div>
+          <div class="info-text">
+            Algorithm explanation for Case 8.
+          </div>
+        </div>
+
+        <div class="info-card sdg">
+          <div class="info-label">
+            <span class="icon green">S</span>
+            <span class="info-title">SDGs Addressed</span>
+          </div>
+          <div class="info-main">SDG INFO FOR CASE 8</div>
+          <div class="info-text">
+            SDG explanation.
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <div class="code-header">
+          <span class="code-header-label">C++ Code</span>
+          <span class="code-header-lang">Case 8 Implementation</span>
+        </div>
+        <div class="code-box">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre>// Paste your full C++ code for Case 8 here
+</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CASE 9 ================= -->
+    <section class="case-card">
+      <div class="case-header">
+        <h2 class="case-title">Case 9 – YOUR CASE TITLE</h2>
+        <span class="case-tag">Business Case 9</span>
+      </div>
+
+      <div class="case-section-label">Description of the Business Case</div>
+      <p class="case-description">
+        Description for Case 9.
+      </p>
+
+      <div class="info-row">
+        <div class="info-card algorithm">
+          <div class="info-label">
+            <span class="icon">A</span>
+            <span class="info-title">Algorithm Used</span>
+          </div>
+          <div class="info-main">ALGORITHM NAME</div>
+          <div class="info-text">
+            Algorithm explanation for Case 9.
+          </div>
+        </div>
+
+        <div class="info-card sdg">
+          <div class="info-label">
+            <span class="icon green">S</span>
+            <span class="info-title">SDGs Addressed</span>
+          </div>
+          <div class="info-main">SDG INFO FOR CASE 9</div>
+          <div class="info-text">
+            SDG explanation.
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <div class="code-header">
+          <span class="code-header-label">C++ Code</span>
+          <span class="code-header-lang">Case 9 Implementation</span>
+        </div>
+        <div class="code-box">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre>// Paste your full C++ code for Case 9 here
+</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CASE 10 ================= -->
+    <section class="case-card">
+      <div class="case-header">
+        <h2 class="case-title">Case 10 – YOUR CASE TITLE</h2>
+        <span class="case-tag">Business Case 10</span>
+      </div>
+
+      <div class="case-section-label">Description of the Business Case</div>
+      <p class="case-description">
+        Description for Case 10.
+      </p>
+
+      <div class="info-row">
+        <div class="info-card algorithm">
+          <div class="info-label">
+            <span class="icon">A</span>
+            <span class="info-title">Algorithm Used</span>
+          </div>
+          <div class="info-main">ALGORITHM NAME</div>
+          <div class="info-text">
+            Algorithm explanation for Case 10.
+          </div>
+        </div>
+
+        <div class="info-card sdg">
+          <div class="info-label">
+            <span class="icon green">S</span>
+            <span class="info-title">SDGs Addressed</span>
+          </div>
+          <div class="info-main">SDG INFO FOR CASE 10</div>
+          <div class="info-text">
+            SDG explanation.
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <div class="code-header">
+          <span class="code-header-label">C++ Code</span>
+          <span class="code-header-lang">Case 10 Implementation</span>
+        </div>
+        <div class="code-box">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre>// Paste your full C++ code for Case 10 here
+</pre>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function copyCode(btn) {
+      const pre = btn.parentElement.querySelector("pre");
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const old = btn.innerText;
+        btn.innerText = "Copied!";
+        setTimeout(() => (btn.innerText = old), 1200);
+      });
+    }
+  </script>
+</body>
+</html>
