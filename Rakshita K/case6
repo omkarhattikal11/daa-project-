@@ -1,0 +1,94 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// ---------------------------------------
+// Simple K-Means style clustering (concept)
+// ---------------------------------------
+struct Point {
+    double x, y;
+};
+
+// Function to calculate distance
+double dist(Point a, Point b) {
+    return sqrt((a.x - b.x)*(a.x - b.x) + 
+                (a.y - b.y)*(a.y - b.y));
+}
+
+// Assign points to nearest centroid
+int nearestCentroid(Point p, vector<Point>& centroids) {
+    int idx = 0;
+    double best = dist(p, centroids[0]);
+    for(int i=1; i<centroids.size(); i++) {
+        double d = dist(p, centroids[i]);
+        if(d < best) {
+            best = d;
+            idx = i;
+        }
+    }
+    return idx;
+}
+
+int main() {
+
+    // ------------------------
+    // INCIDENT DATA (Hash Map)
+    // ------------------------
+    unordered_map<int, Point> incidents;
+    incidents[1] = {2.0, 3.0};
+    incidents[2] = {2.5, 3.5};
+    incidents[3] = {10.0, 11.0};
+    incidents[4] = {10.5, 10.5};
+
+    // ------------------------
+    // K-MEANS (2 clusters)
+    // ------------------------
+    vector<Point> centroids = {{2,3}, {10,10}};  
+    vector<vector<Point>> clusters(2);
+
+    for(auto &i : incidents) {
+        int c = nearestCentroid(i.second, centroids);
+        clusters[c].push_back(i.second);
+    }
+
+    cout << "Cluster 1 Size: " << clusters[0].size() << "\n";
+    cout << "Cluster 2 Size: " << clusters[1].size() << "\n";
+
+    // ------------------------
+    // GRAPH of dangerous zones
+    // ------------------------
+    vector<int> graph[5];
+    graph[1].push_back(2);  
+    graph[2].push_back(3);  
+    graph[3].push_back(4);
+
+    // BFS to find connected unsafe zones
+    vector<bool> visited(5, false);
+    queue<int> q;
+    q.push(1);
+    visited[1] = true;
+
+    cout << "\nConnected Unsafe Zones:\n";
+    while(!q.empty()) {
+        int node = q.front(); q.pop();
+        cout << node << " ";
+
+        for(int next : graph[node]) {
+            if(!visited[next]) {
+                visited[next] = true;
+                q.push(next);
+            }
+        }
+    }
+
+    // ------------------------
+    // MAX HEAP → Rank hotspots
+    // ------------------------
+    priority_queue<pair<int,string>> maxHeap;
+    maxHeap.push({20, "Zone A"});
+    maxHeap.push({45, "Zone B"});
+    maxHeap.push({15, "Zone C"});
+
+    cout << "\n\nMost Dangerous Zone: " << maxHeap.top().second;
+
+    return 0;
+}
