@@ -1,1 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 4 - City Info–Tourism Centre</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #5dc1b9;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #5dc1b9;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+    .sdg-box {
+        background: #e8faf8;
+        padding: 12px;
+        border-left: 5px solid #5dc1b9;
+        border-radius: 6px;
+        margin-top: 8px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Case 4 — City Info–Tourism Centre</h1>
+
+<h2>Brief Description</h2>
+<p>
+The City Info–Tourism Centre acts as a smart tourist assistance hub, offering digital maps, 
+personalized travel recommendations, real-time attraction details, and optimized city routes. 
+It enhances the visitor experience by providing accurate and instant information.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Tourists getting lost or confused in an unfamiliar city layout.</li>
+    <li>Overcrowding at popular attractions due to poor guidance.</li>
+    <li>Slow access to attraction information and ticketing details.</li>
+    <li>Inability to plan optimized travel routes across the city.</li>
+</ul>
+
+<h2>Solutions / Logic Used</h2>
+<ul>
+    <li><strong>Hash Tables:</strong> For storing attraction data, timings, ratings, and nearby facilities.</li>
+    <li><strong>Priority Queue (Heap):</strong> To rank attractions based on popularity, distance, and time.</li>
+    <li><strong>Queue:</strong> Used for tourist help-desk management.</li>
+    <li><strong>Dijkstra’s Algorithm:</strong> Generates shortest or personalized attraction routes.</li>
+    <li><strong>Trie:</strong> Provides fast name-based search for attractions, hotels, restaurants, and guides.</li>
+</ul>
+
+<h2>Suitable SDGs</h2>
+
+<div class="sdg-box">
+    <strong>SDG 8 — Decent Work & Economic Growth</strong>
+    <p>Promotes tourism development and supports local businesses.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 11 — Sustainable Cities & Communities</strong>
+    <p>Creates accessible, informational, and well-guided city experiences for tourists.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 9 — Industry, Innovation & Infrastructure</strong>
+    <p>Encourages smart tourism infrastructure using digital technologies.</p>
+</div>
+
+<div class="tag">End of Case 4</div>
+
+</body>
+</html>
