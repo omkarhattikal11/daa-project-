@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 2 - Smart Governance & Citizen Service Centre</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #6ac7ff;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #6ac7ff;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+    .sdg-box {
+        background: #e7f5ff;
+        padding: 12px;
+        border-left: 5px solid #6ac7ff;
+        border-radius: 6px;
+        margin-top: 8px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Case 2 — Smart Governance & Citizen Service Centre</h1>
+
+<h2>Brief Description</h2>
+<p>
+The Smart Governance & Citizen Service Centre acts as a unified digital hub for citizens 
+to access services such as certificate requests, grievance filing, bill payments, document management, 
+and verification. It ensures transparency, reduces waiting time, and improves government efficiency.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Long queues in physical government offices causing delays.</li>
+    <li>Mismanagement or loss of important citizen documents.</li>
+    <li>Difficulty in routing grievances to the correct department.</li>
+    <li>No priority handling for senior citizens, emergencies, or disability cases.</li>
+</ul>
+
+<h2>Solutions / Logic Used</h2>
+<ul>
+    <li><strong>Hash Tables:</strong> For instant citizen record lookup and document indexing.</li>
+    <li><strong>Queue:</strong> Managing citizen service requests and token-based flow.</li>
+    <li><strong>Priority Queue (Heap):</strong> Handling high-priority cases such as medical or senior-citizen requests first.</li>
+    <li><strong>Trie / Search Optimization:</strong> Fast search of documents, names, and service types.</li>
+</ul>
+
+<h2>Suitable SDGs</h2>
+
+<div class="sdg-box">
+    <strong>SDG 16 — Peace, Justice & Strong Institutions</strong>
+    <p>Ensures transparent, accountable, and efficient public service delivery.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 9 — Industry, Innovation & Infrastructure</strong>
+    <p>Promotes digital transformation and smart governance technologies.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 10 — Reduced Inequalities</strong>
+    <p>Provides equal access to citizen services with priority for vulnerable groups.</p>
+</div>
+
+<div class="tag">End of Case 2</div>
+
+</body>
+</html>
