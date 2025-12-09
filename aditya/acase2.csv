@@ -1,29 +1,44 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define INF 1000000000
+#define INF 1e9
 
+// --------------------- Structures ---------------------
 struct Edge {
-    int to;
-    int weight;
+    int to, weight;  // Graph edge: destination node, weight (time/distance)
 };
 
-vector<int> dijkstra_with_parent(int src, const vector<vector<Edge>> &graph, vector<int> &parent) {
+struct Vehicle {
+    string id;
+    string route;
+    int currentLocation; // node index
+    int nextStop;        // node index
+    int ETA;             // in minutes
+    int occupancy;       // %
+};
+
+// --------------------- Graph Algorithms ---------------------
+
+// Dijkstra: Shortest Path (Time Complexity: O(E log V))
+vector<int> dijkstra(int src, vector<vector<Edge>> &graph) {
     int n = graph.size();
     vector<int> dist(n, INF);
-    parent.assign(n, -1);
     dist[src] = 0;
-    // min-heap of (distance, node)
+
     priority_queue<pair<int,int>, vector<pair<int,int>>, greater<>> pq;
     pq.push({0, src});
-    while (!pq.empty()) {
-        auto [d, u] = pq.top(); pq.pop();
-        if (d > dist[u]) continue;
-        for (auto &e : graph[u]) {
-            int v = e.to, w = e.weight;
-            if (dist[u] + w < dist[v]) {
+
+    while(!pq.empty()) {
+        int d = pq.top().first;
+        int u = pq.top().second;
+        pq.pop();
+
+        if(d > dist[u]) continue;
+
+        for(auto &edge : graph[u]) {
+            int v = edge.to, w = edge.weight;
+            if(dist[u] + w < dist[v]) {
                 dist[v] = dist[u] + w;
-                parent[v] = u;
                 pq.push({dist[v], v});
             }
         }
@@ -31,142 +46,186 @@ vector<int> dijkstra_with_parent(int src, const vector<vector<Edge>> &graph, vec
     return dist;
 }
 
-vector<int> bfs_order(int start, const vector<vector<Edge>> &graph) {
+// Bellman-Ford: Shortest Path with negative edges (O(VE))
+vector<int> bellmanFord(int src, vector<vector<Edge>> &graph) {
     int n = graph.size();
-    vector<int> visited(n, 0);
-    vector<int> order;
-    queue<int> q;
-    visited[start] = 1;
-    q.push(start);
-    while (!q.empty()) {
-        int u = q.front(); q.pop();
-        order.push_back(u);
-        for (auto &e : graph[u]) {
-            int v = e.to;
-            if (!visited[v]) {
-                visited[v] = 1;
-                q.push(v);
+    vector<int> dist(n, INF);
+    dist[src] = 0;
+
+    for(int i=0;i<n-1;i++){
+        for(int u=0;u<n;u++){
+            for(auto &edge : graph[u]){
+                int v=edge.to,w=edge.weight;
+                if(dist[u]!=INF && dist[u]+w < dist[v])
+                    dist[v] = dist[u]+w;
             }
         }
     }
-    return order;
+
+    // Negative cycle detection
+    for(int u=0;u<n;u++){
+        for(auto &edge: graph[u]){
+            int v=edge.to,w=edge.weight;
+            if(dist[u]!=INF && dist[u]+w<dist[v])
+                cout<<"Warning: Negative cycle detected!\n";
+        }
+    }
+
+    return dist;
 }
 
-string build_path_str(int dest, const vector<int> &parent) {
-    if (parent.empty()) return "";
-    if (dest < 0) return "";
-    vector<int> rev;
-    int cur = dest;
-    rev.push_back(cur);
-    while (parent[cur] != -1) {
-        cur = parent[cur];
-        rev.push_back(cur);
+// Floyd-Warshall: All-pairs shortest path (O(V^3))
+vector<vector<int>> floydWarshall(vector<vector<int>> &graphMatrix) {
+    int n = graphMatrix.size();
+    vector<vector<int>> dist = graphMatrix;
+    for(int k=0;k<n;k++){
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(dist[i][k]!=INF && dist[k][j]!=INF)
+                    dist[i][j] = min(dist[i][j], dist[i][k]+dist[k][j]);
+            }
+        }
     }
-    reverse(rev.begin(), rev.end());
-    // join with " -> "
-    string s;
-    for (size_t i = 0; i < rev.size(); ++i) {
-        s += to_string(rev[i]);
-        if (i + 1 < rev.size()) s += " -> ";
-    }
-    return s;
+    return dist;
 }
 
+// Kruskal MST: Optimize route network (O(E log E))
+struct UF {
+    vector<int> parent, rank;
+    UF(int n){ parent.resize(n); rank.resize(n,0); iota(parent.begin(),parent.end(),0);}
+    int find(int x){ return parent[x]==x ? x : parent[x]=find(parent[x]); }
+    void unite(int x,int y){
+        x=find(x); y=find(y);
+        if(x==y) return;
+        if(rank[x]<rank[y]) parent[x]=y;
+        else { parent[y]=x; if(rank[x]==rank[y]) rank[x]++; }
+    }
+};
+
+int kruskalMST(vector<tuple<int,int,int>> &edges, int n){
+    sort(edges.begin(),edges.end());
+    UF uf(n);
+    int cost=0;
+    for(auto &[w,u,v]: edges){
+        if(uf.find(u)!=uf.find(v)){
+            uf.unite(u,v);
+            cost+=w;
+        }
+    }
+    return cost;
+}
+
+// --------------------- Trie for Route Lookup ---------------------
+struct TrieNode{
+    unordered_map<char,TrieNode*> children;
+    bool isEnd=false;
+};
+
+class Trie{
+    TrieNode *root;
+public:
+    Trie(){ root=new TrieNode(); }
+    void insert(string s){
+        TrieNode *node=root;
+        for(char c:s){
+            if(!node->children[c]) node->children[c]=new TrieNode();
+            node=node->children[c];
+        }
+        node->isEnd=true;
+    }
+
+    bool search(string s){
+        TrieNode *node=root;
+        for(char c:s){
+            if(!node->children[c]) return false;
+            node=node->children[c];
+        }
+        return node->isEnd;
+    }
+
+    void autocomplete(string prefix){
+        TrieNode *node=root;
+        for(char c:prefix){
+            if(!node->children[c]) return;
+            node=node->children[c];
+        }
+        vector<string> results;
+        function<void(TrieNode*, string)> dfs=[&](TrieNode* n, string s){
+            if(n->isEnd) results.push_back(prefix+s);
+            for(auto &[ch,child]: n->children) dfs(child, s+ch);
+        };
+        dfs(node,"");
+        for(auto &r: results) cout<<r<<" ";
+        cout<<endl;
+    }
+};
+
+// --------------------- Main Program ---------------------
 int main() {
-    // --- sample graph (same as previous) ---
-    int n = 6; // nodes 0..5
+    int n=6; // Number of junctions/nodes
     vector<vector<Edge>> graph(n);
-    vector<tuple<int,int,int>> edge_list; // for CSV
 
-    auto add_edge = [&](int u, int v, int w){
-        graph[u].push_back({v,w});
-        // for undirected representation in CSV you might want both directions
-        edge_list.push_back({u,v,w});
-    };
+    // Sample road network
+    graph[0].push_back({1,7});
+    graph[0].push_back({2,9});
+    graph[1].push_back({3,15});
+    graph[2].push_back({3,11});
+    graph[2].push_back({5,2});
+    graph[3].push_back({4,6});
+    graph[5].push_back({4,9});
 
-    add_edge(0,1,7);
-    add_edge(0,2,9);
-    add_edge(1,3,15);
-    add_edge(2,3,11);
-    add_edge(2,5,2);
-    add_edge(3,4,6);
-    add_edge(5,4,9);
+    // ----------------- Shortest Path Algorithms -----------------
+    cout<<"--- Dijkstra ---\n";
+    vector<int> dist = dijkstra(0, graph);
+    for(int i=0;i<n;i++) cout<<"Node "<<i<<": "<<dist[i]<<"\n";
 
-    // --- sample vehicles ---
-    struct Vehicle { string id; string route; int cur; int next; int eta; int occ; };
+    cout<<"\n--- Bellman-Ford ---\n";
+    dist = bellmanFord(0, graph);
+    for(int i=0;i<n;i++) cout<<"Node "<<i<<": "<<dist[i]<<"\n";
+
+    cout<<"\n--- Floyd-Warshall ---\n";
+    vector<vector<int>> matrix(n, vector<int>(n,INF));
+    for(int i=0;i<n;i++) matrix[i][i]=0;
+    for(int u=0;u<n;u++){
+        for(auto &e:graph[u]) matrix[u][e.to]=e.weight;
+    }
+    auto fw = floydWarshall(matrix);
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++)
+            cout<<fw[i][j]<<" ";
+        cout<<"\n";
+    }
+
+    // ----------------- Route Optimization (Kruskal MST) -----------------
+    cout<<"\n--- Kruskal MST Cost ---\n";
+    vector<tuple<int,int,int>> edges={{7,0,1},{9,0,2},{15,1,3},{11,2,3},{2,2,5},{6,3,4},{9,5,4}};
+    int mstCost = kruskalMST(edges,n);
+    cout<<"MST Total Cost: "<<mstCost<<"\n";
+
+    // ----------------- Route Lookup & Autocomplete -----------------
+    cout<<"\n--- Trie Autocomplete ---\n";
+    Trie t;
+    t.insert("A->B->C");
+    t.insert("A->B->D");
+    t.insert("A->C->D");
+    cout<<"Autocomplete for A->B->: ";
+    t.autocomplete("A->B->");
+
+    // ----------------- Sample Vehicle Info -----------------
     vector<Vehicle> vehicles = {
         {"Bus101","A->B->C",0,1,3,75},
         {"Bus102","B->C->D",1,2,5,50},
         {"Train1","X->Y->Z",2,3,7,90}
     };
 
-    // --- Dijkstra from source 0, with parents ---
-    vector<int> parent;
-    vector<int> dist = dijkstra_with_parent(0, graph, parent);
-
-    // We'll reconstruct paths to all nodes and write selected outputs.
-    // Also compute BFS order from node 0
-    vector<int> bfs = bfs_order(0, graph);
-
-    // --- open CSV file ---
-    ofstream fout("smart_city_master.csv");
-    if (!fout.is_open()) {
-        cerr << "Failed to open smart_city_master.csv for writing\n";
-        return 1;
+    cout<<"\n--- Vehicle Info ---\n";
+    for(auto &v: vehicles){
+        cout<<"ID: "<<v.id<<", Route: "<<v.route
+            <<", Current Node: "<<v.currentLocation
+            <<", Next Node: "<<v.nextStop
+            <<", ETA: "<<v.ETA<<" min"
+            <<", Occupancy: "<<v.occupancy<<"%\n";
     }
 
-    // Write header for master CSV (simple section marker layout)
-    fout << "Section,Field1,Field2,Field3,Field4,Field5,Field6\n";
-
-    // VEHICLE_DATA
-    fout << "VEHICLE_DATA,,,,,,\n";
-    fout << "Vehicle ID,Route,Current Location,Next Stop,ETA (min),Occupancy (%)\n";
-    for (auto &v : vehicles) {
-        fout << v.id << "," << v.route << "," << v.cur << "," << v.next << "," << v.eta << "," << v.occ << "\n";
-    }
-    fout << ",,,,,,\n";
-
-    // GRAPH_EDGES
-    fout << "GRAPH_EDGES (Road/Route Network),,,,,\n";
-    fout << "From Node,To Node,Weight (Time/Distance),,,,\n";
-    for (auto &t : edge_list) {
-        int u,v,w; tie(u,v,w) = t;
-        fout << u << "," << v << "," << w << ",,,,\n";
-    }
-    fout << ",,,,,,\n";
-
-    // DIJKSTRA_SHORTEST_PATH_RESULTS
-    fout << "DIJKSTRA_SHORTEST_PATH_RESULTS,,,,,,\n";
-    fout << "Source,Destination,Shortest Distance,Path,,,\n";
-    int source = 0;
-    for (int dest = 0; dest < n; ++dest) {
-        if (dist[dest] >= INF) continue;
-        string pathStr = build_path_str(dest, parent);
-        // if pathStr is empty but dest==source, path is just source
-        if (pathStr.empty()) pathStr = to_string(dest);
-        fout << source << "," << dest << "," << dist[dest] << ",\"" << pathStr << "\",,,\n";
-    }
-    fout << ",,,,,,\n";
-
-    // BFS_ROUTE_COVERAGE
-    fout << "BFS_ROUTE_COVERAGE,,,,,,\n";
-    fout << "Start Node,Reachable Order,,,,,\n";
-    fout << source << ",\"";
-    for (size_t i = 0; i < bfs.size(); ++i) {
-        fout << bfs[i];
-        if (i + 1 < bfs.size()) fout << ",";
-    }
-    fout << "\",,,,\n";
-    fout << ",,,,,,\n";
-
-    // SDG_MAPPING
-    fout << "SDG_MAPPING,,,,,,\n";
-    fout << "SDG Number,SDG Title,Contribution,,,\n";
-    fout << "SDG 9,Industry Innovation & Infrastructure,Smart mobility infrastructure,,,\n";
-    fout << "SDG 11,Sustainable Cities and Communities,Optimized traffic & reduced congestion,,,\n";
-    fout << "SDG 13,Climate Action,Lower emissions due to efficient routing,,,\n";
-
-    fout.close();
-    cout << "smart_city_master.csv generated successfully.\n";
     return 0;
 }
