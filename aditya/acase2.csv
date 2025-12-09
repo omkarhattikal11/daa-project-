@@ -1,0 +1,172 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define INF 1000000000
+
+struct Edge {
+    int to;
+    int weight;
+};
+
+vector<int> dijkstra_with_parent(int src, const vector<vector<Edge>> &graph, vector<int> &parent) {
+    int n = graph.size();
+    vector<int> dist(n, INF);
+    parent.assign(n, -1);
+    dist[src] = 0;
+    // min-heap of (distance, node)
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<>> pq;
+    pq.push({0, src});
+    while (!pq.empty()) {
+        auto [d, u] = pq.top(); pq.pop();
+        if (d > dist[u]) continue;
+        for (auto &e : graph[u]) {
+            int v = e.to, w = e.weight;
+            if (dist[u] + w < dist[v]) {
+                dist[v] = dist[u] + w;
+                parent[v] = u;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+    return dist;
+}
+
+vector<int> bfs_order(int start, const vector<vector<Edge>> &graph) {
+    int n = graph.size();
+    vector<int> visited(n, 0);
+    vector<int> order;
+    queue<int> q;
+    visited[start] = 1;
+    q.push(start);
+    while (!q.empty()) {
+        int u = q.front(); q.pop();
+        order.push_back(u);
+        for (auto &e : graph[u]) {
+            int v = e.to;
+            if (!visited[v]) {
+                visited[v] = 1;
+                q.push(v);
+            }
+        }
+    }
+    return order;
+}
+
+string build_path_str(int dest, const vector<int> &parent) {
+    if (parent.empty()) return "";
+    if (dest < 0) return "";
+    vector<int> rev;
+    int cur = dest;
+    rev.push_back(cur);
+    while (parent[cur] != -1) {
+        cur = parent[cur];
+        rev.push_back(cur);
+    }
+    reverse(rev.begin(), rev.end());
+    // join with " -> "
+    string s;
+    for (size_t i = 0; i < rev.size(); ++i) {
+        s += to_string(rev[i]);
+        if (i + 1 < rev.size()) s += " -> ";
+    }
+    return s;
+}
+
+int main() {
+    // --- sample graph (same as previous) ---
+    int n = 6; // nodes 0..5
+    vector<vector<Edge>> graph(n);
+    vector<tuple<int,int,int>> edge_list; // for CSV
+
+    auto add_edge = [&](int u, int v, int w){
+        graph[u].push_back({v,w});
+        // for undirected representation in CSV you might want both directions
+        edge_list.push_back({u,v,w});
+    };
+
+    add_edge(0,1,7);
+    add_edge(0,2,9);
+    add_edge(1,3,15);
+    add_edge(2,3,11);
+    add_edge(2,5,2);
+    add_edge(3,4,6);
+    add_edge(5,4,9);
+
+    // --- sample vehicles ---
+    struct Vehicle { string id; string route; int cur; int next; int eta; int occ; };
+    vector<Vehicle> vehicles = {
+        {"Bus101","A->B->C",0,1,3,75},
+        {"Bus102","B->C->D",1,2,5,50},
+        {"Train1","X->Y->Z",2,3,7,90}
+    };
+
+    // --- Dijkstra from source 0, with parents ---
+    vector<int> parent;
+    vector<int> dist = dijkstra_with_parent(0, graph, parent);
+
+    // We'll reconstruct paths to all nodes and write selected outputs.
+    // Also compute BFS order from node 0
+    vector<int> bfs = bfs_order(0, graph);
+
+    // --- open CSV file ---
+    ofstream fout("smart_city_master.csv");
+    if (!fout.is_open()) {
+        cerr << "Failed to open smart_city_master.csv for writing\n";
+        return 1;
+    }
+
+    // Write header for master CSV (simple section marker layout)
+    fout << "Section,Field1,Field2,Field3,Field4,Field5,Field6\n";
+
+    // VEHICLE_DATA
+    fout << "VEHICLE_DATA,,,,,,\n";
+    fout << "Vehicle ID,Route,Current Location,Next Stop,ETA (min),Occupancy (%)\n";
+    for (auto &v : vehicles) {
+        fout << v.id << "," << v.route << "," << v.cur << "," << v.next << "," << v.eta << "," << v.occ << "\n";
+    }
+    fout << ",,,,,,\n";
+
+    // GRAPH_EDGES
+    fout << "GRAPH_EDGES (Road/Route Network),,,,,\n";
+    fout << "From Node,To Node,Weight (Time/Distance),,,,\n";
+    for (auto &t : edge_list) {
+        int u,v,w; tie(u,v,w) = t;
+        fout << u << "," << v << "," << w << ",,,,\n";
+    }
+    fout << ",,,,,,\n";
+
+    // DIJKSTRA_SHORTEST_PATH_RESULTS
+    fout << "DIJKSTRA_SHORTEST_PATH_RESULTS,,,,,,\n";
+    fout << "Source,Destination,Shortest Distance,Path,,,\n";
+    int source = 0;
+    for (int dest = 0; dest < n; ++dest) {
+        if (dist[dest] >= INF) continue;
+        string pathStr = build_path_str(dest, parent);
+        // if pathStr is empty but dest==source, path is just source
+        if (pathStr.empty()) pathStr = to_string(dest);
+        fout << source << "," << dest << "," << dist[dest] << ",\"" << pathStr << "\",,,\n";
+    }
+    fout << ",,,,,,\n";
+
+    // BFS_ROUTE_COVERAGE
+    fout << "BFS_ROUTE_COVERAGE,,,,,,\n";
+    fout << "Start Node,Reachable Order,,,,,\n";
+    fout << source << ",\"";
+    for (size_t i = 0; i < bfs.size(); ++i) {
+        fout << bfs[i];
+        if (i + 1 < bfs.size()) fout << ",";
+    }
+    fout << "\",,,,\n";
+    fout << ",,,,,,\n";
+
+    // SDG_MAPPING
+    fout << "SDG_MAPPING,,,,,,\n";
+    fout << "SDG Number,SDG Title,Contribution,,,\n";
+    fout << "SDG 9,Industry Innovation & Infrastructure,Smart mobility infrastructure,,,\n";
+    fout << "SDG 11,Sustainable Cities and Communities,Optimized traffic & reduced congestion,,,\n";
+    fout << "SDG 13,Climate Action,Lower emissions due to efficient routing,,,\n";
+
+    fout.close();
+    cout << "smart_city_master.csv generated successfully.\n";
+    return 0;
+}
