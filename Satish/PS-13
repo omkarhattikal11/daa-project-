@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 13 - Smart Residential Surveillance Pods</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #5578ff;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #5578ff;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 12px;
+    }
+    .sdg-box {
+        background: #eaefff;
+        padding: 12px;
+        border-left: 5px solid #5578ff;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Case 13 — Smart Residential Surveillance Pods</h1>
+
+<h2>Brief Description</h2>
+<p>
+The Smart Residential Surveillance Pods are AI-enhanced security units placed at entrances of 
+residential societies. They monitor visitor movement, detect unusual activity, authenticate residents, 
+and alert security personnel instantly using automated analysis and smart algorithms.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Unauthorized individuals entering residential zones without being detected.</li>
+    <li>Manual visitor verification causing delays and inaccuracy.</li>
+    <li>No system to detect suspicious or abnormal behavior patterns.</li>
+    <li>Slow communication between surveillance pods and security patrolling teams.</li>
+</ul>
+
+<h2>Solutions / Logic Used</h2>
+<ul>
+    <li><strong>Hash Tables:</strong> Store resident details, visitor logs, and authentication data.</li>
+    <li><strong>KMP Pattern Matching:</strong> Detects suspicious face patterns or repeated attempts.</li>
+    <li><strong>Queue:</strong> Handles entry/exit logs and real-time visitor stream data.</li>
+    <li><strong>Dijkstra’s Algorithm:</strong> Helps route patrol units for faster security response.</li>
+    <li><strong>BFS (Optional):</strong> Scan neighboring pods for possible intrusion patterns.</li>
+</ul>
+
+<h2>Suitable SDGs</h2>
+
+<div class="sdg-box">
+    <strong>SDG 16 — Peace, Justice & Strong Institutions</strong>
+    <p>Supports safer communities by preventing unauthorized access and improving surveillance.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 11 — Sustainable Cities & Communities</strong>
+    <p>Builds secure living environments and strengthens community protection.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 9 — Industry, Innovation & Infrastructure</strong>
+    <p>Promotes use of AI-driven security infrastructure for smart residential zones.</p>
+</div>
+
+<div class="tag">End of Case 13</div>
+
+</body>
+</html>
