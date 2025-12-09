@@ -1,0 +1,87 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define INF 1e9
+
+// Graph represented as adjacency list
+vector<pair<int,int>> graphMap[100];  
+
+// ------------------------
+// Dijkstra for weighted evacuation
+// ------------------------
+vector<int> dijkstra(int src, int n) {
+    vector<int> dist(n, INF);
+    dist[src] = 0;
+
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+    pq.push({0, src});
+
+    while (!pq.empty()) {
+        auto [d, node] = pq.top();
+        pq.pop();
+
+        for (auto edge : graphMap[node]) {
+            int next = edge.first;
+            int wt = edge.second;
+
+            if (dist[next] > d + wt) {
+                dist[next] = d + wt;
+                pq.push({dist[next], next});
+            }
+        }
+    }
+    return dist;
+}
+
+// ------------------------
+// BFS for equal-weight quick evacuation
+// ------------------------
+vector<int> bfs(int src, int n) {
+    vector<int> dist(n, INF);
+    dist[src] = 0;
+
+    queue<int> q;
+    q.push(src);
+
+    while (!q.empty()) {
+        int node = q.front(); q.pop();
+
+        for (auto edge : graphMap[node]) {
+            int next = edge.first;
+            if (dist[next] == INF) {
+                dist[next] = dist[node] + 1;
+                q.push(next);
+            }
+        }
+    }
+    return dist;
+}
+
+int main() {
+    int n = 7; // sample building with 7 areas
+
+    // Sample edges (node1 -> node2 : weight)
+    graphMap[0].push_back({1, 1});
+    graphMap[0].push_back({2, 2});
+    graphMap[1].push_back({3, 2});
+    graphMap[2].push_back({3, 1});
+    graphMap[3].push_back({4, 1});
+    graphMap[4].push_back({5, 3});
+    graphMap[4].push_back({6, 1}); // exits at nodes 5 & 6
+
+    int start = 0; // person location
+
+    // Dijkstra route
+    auto dijk = dijkstra(start, n);
+
+    cout << "Safest exit using weighted route:\n";
+    cout << "Exit at Node 6 Distance = " << dijk[6] << "\n";
+
+    // BFS route (simple shortest steps)
+    auto bfsDist = bfs(start, n);
+
+    cout << "Fastest steps exit (BFS):\n";
+    cout << "Exit at Node 4 Steps = " << bfsDist[4] << "\n";
+
+    return 0;
+}
