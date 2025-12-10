@@ -559,33 +559,71 @@
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>// Dijkstra for route optimization
-#include <bits/stdc++.h>
+                    <pre>#include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-    vector<vector<pair<int,int>>> g(5);
-    auto add=[&](int u,int v,int w){ g[u].push_back({v,w}); g[v].push_back({u,w}); };
+struct Edge {
+    int to;
+    int w; // travel time or cost
+};
 
-    add(0,1,4); add(0,2,2); add(1,2,1); add(1,3,7); add(2,4,3); add(3,4,2);
+vector<vector<Edge>> graph;
 
-    vector<int> dist(5,1e9); dist[0]=0;
-    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<>> pq;
-    pq.push({0,0});
+vector<int> dijkstra(int n, int src) {
+    const int INF = 1e9;
+    vector<int> dist(n, INF);
+    dist[src] = 0;
 
-    while(!pq.empty()){
-        auto [d,u]=pq.top(); pq.pop();
-        if(d!=dist[u]) continue;
-        for(auto &e: g[u]){
-            int v=e.first, w=e.second;
-            if(d+w < dist[v]){
-                dist[v]=d+w;
-                pq.push({dist[v],v});
+    using P = pair<int,int>; // (dist, node)
+    priority_queue<P, vector<P>, greater<P>> pq;
+    pq.push({0, src});
+
+    while (!pq.empty()) {
+        auto [d, u] = pq.top();
+        pq.pop();
+        if (d != dist[u]) continue;
+
+        for (auto &e : graph[u]) {
+            int v = e.to;
+            int nd = d + e.w;
+            if (nd < dist[v]) {
+                dist[v] = nd;
+                pq.push({nd, v});
             }
         }
     }
+    return dist;
+}
 
-    for(int i=0;i<5;i++) cout<<"Distance to "<<i<<" = "<<dist[i]<<"\n";
+int main() {
+    int n = 6; // number of locations (0..5)
+    graph.assign(n, {});
+
+    auto addRoad = [&](int u, int v, int w) {
+        graph[u].push_back({v, w});
+        graph[v].push_back({u, w}); // undirected road
+    };
+
+    // sample roads with travel time
+    addRoad(0, 1, 4);
+    addRoad(0, 2, 2);
+    addRoad(1, 2, 1);
+    addRoad(1, 3, 5);
+    addRoad(2, 3, 8);
+    addRoad(2, 4, 10);
+    addRoad(3, 5, 2);
+    addRoad(4, 5, 3);
+
+    int source = 0; // factory
+    vector<int> dist = dijkstra(n, source);
+
+    cout << "Minimum travel time from source " << source << ":\n";
+    for (int i = 0; i < n; ++i) {
+        cout << "Location " << i << " : ";
+        if (dist[i] == 1e9) cout << "unreachable\n";
+        else cout << dist[i] << " units\n";
+    }
+    return 0;
 }</pre>
                 </div>
             </section>
@@ -640,25 +678,38 @@ int main() {
                     <pre>#include <bits/stdc++.h>
 using namespace std;
 
-struct Req { string id; int deadline, priority; };
-struct Cmp {
-    bool operator()(Req a, Req b){
-        if(a.deadline == b.deadline) return a.priority < b.priority;
-        return a.deadline > b.deadline;
+struct Request {
+    string id;
+    int deadline; // smaller = earlier
+    int priority; // higher = more important
+};
+
+struct Compare {
+    bool operator()(const Request &a, const Request &b) const {
+        if (a.deadline == b.deadline)
+            return a.priority < b.priority; // higher priority first
+        return a.deadline > b.deadline;     // earlier deadline first
     }
 };
 
-int main(){
-    priority_queue<Req,vector<Req>,Cmp> pq;
-    pq.push({"Waste1",10,2});
-    pq.push({"Water1",8,1});
-    pq.push({"Waste2",9,3});
+int main() {
+    priority_queue<Request, vector<Request>, Compare> pq;
 
-    while(!pq.empty()){
-        auto r=pq.top(); pq.pop();
-        cout<<r.id<<" deadline "<<r.deadline<<" priority "<<r.priority<<"\n";
+    // id, deadline (hour), priority
+    pq.push({"Waste-Truck-A", 10, 2});
+    pq.push({"Water-Tanker-1", 9, 1});
+    pq.push({"Waste-Truck-B", 11, 3});
+    pq.push({"Water-Tanker-2", 10, 5});
+
+    cout << "Service order (earliest & highest priority first):\n";
+    while (!pq.empty()) {
+        Request r = pq.top(); pq.pop();
+        cout << "Request: " << r.id 
+             << ", Deadline: " << r.deadline
+             << ", Priority: " << r.priority << "\n";
     }
-            }</pre>
+    return 0;
+}</pre>
                 </div>
             </section>
 
@@ -712,23 +763,63 @@ int main(){
                     <pre>#include <bits/stdc++.h>
 using namespace std;
 
-vector<vector<int>> g;
+vector<vector<int>> graph;
 
-vector<int> bfs(int src){
-    vector<int> vis(g.size(),0);
-    queue<int> q; q.push(src); vis[src]=1;
-    while(!q.empty()){
-        int u=q.front(); q.pop();
-        for(int v:g[u]) if(!vis[v]) vis[v]=1, q.push(v);
+vector<int> bfs(int n, int src) {
+    vector<int> visited(n, 0);
+    queue<int> q;
+    q.push(src);
+    visited[src] = 1;
+
+    while (!q.empty()) {
+        int u = q.front(); q.pop();
+        for (int v : graph[u]) {
+            if (!visited[v]) {
+                visited[v] = 1;
+                q.push(v);
+            }
+        }
     }
-    return vis;
+    return visited;
 }
 
-int main(){
-    g={{1},{0,2},{1,3},{2}};
-    auto vis=bfs(0);
-    for(int i=0;i<vis.size();i++)
-        cout<<"Node "<<i<<(vis[i]?" reachable\n":" unreachable\n");
+int main() {
+    int n = 7;
+    graph.assign(n, {});
+
+    auto addPipe = [&](int u, int v) {
+        graph[u].push_back(v);
+        graph[v].push_back(u);
+    };
+
+    addPipe(0,1);
+    addPipe(1,2);
+    addPipe(2,3);
+    addPipe(1,4);
+    addPipe(4,5);
+    addPipe(5,6);
+
+    int faultyU = 1, faultyV = 4; // faulty pipe between 1 and 4
+
+    // remove faulty edge logically by building a new graph
+    vector<vector<int>> newGraph(n);
+    for (int u = 0; u < n; ++u) {
+        for (int v : graph[u]) {
+            if ((u == faultyU && v == faultyV) ||
+                (u == faultyV && v == faultyU)) continue;
+            newGraph[u].push_back(v);
+        }
+    }
+    graph = newGraph;
+
+    vector<int> reachable = bfs(n, 0); // source station 0
+
+    cout << "Nodes reachable from source after fault:\n";
+    for (int i = 0; i < n; ++i) {
+        if (reachable[i]) cout << "Node " << i << " OK\n";
+        else cout << "Node " << i << " affected by fault\n";
+    }
+    return 0;
 }</pre>
                 </div>
             </section>
