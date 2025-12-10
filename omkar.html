@@ -848,9 +848,9 @@ int main() {
                             <div class="info-icon">⚙️</div>
                             <span>Algorithm Used</span>
                         </div>
-                        <div class="info-main">Dijkstra’s Algorithm</div>
+                        <div class="info-main">Max-Heap / Priority Queue (Heapification)</div>
                         <div class="info-sub">
-                            Best for finding least-time paths when weights vary with traffic.
+                            Each junction’s congestion level is stored in a max-heap. The algorithm repeatedly picks the highest-congestion intersections to adjust signal timings first, which matches the need to always handle the “worst traffic” area in real time.
                         </div>
                     </div>
 
@@ -871,33 +871,51 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>#include <bits/stdc++.h>
+                    <pre> // CASE 4: Highway Traffic Flow Optimization (NH-66)
+// Algorithm: Max-Heap Priority Queue (Handle highest congestion first)
+
+#include <bits/stdc++.h>
 using namespace std;
 
-struct E { int v, t; };
-vector<vector<E>> g;
+struct Junction {
+    string name;
+    int congestion;  // number of vehicles / congestion score
+};
 
-int main(){
-    g.resize(4);
-    auto add=[&](int u,int v,int t){ g[u].push_back({v,t}); g[v].push_back({u,t}); };
-
-    add(0,1,5); add(1,2,3); add(0,2,10); add(2,3,2);
-
-    vector<int> dist(4,1e9); dist[0]=0;
-    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<>> pq;
-    pq.push({0,0});
-
-    while(!pq.empty()){
-        auto [d,u]=pq.top(); pq.pop();
-        if(d!=dist[u]) continue;
-        for(auto &e:g[u]){
-            if(d+e.t < dist[e.v]){
-                dist[e.v]=d+e.t;
-                pq.push({dist[e.v],e.v});
-            }
-        }
+// Max-heap comparator (higher congestion = higher priority)
+struct Compare {
+    bool operator()(const Junction &a, const Junction &b) {
+        return a.congestion < b.congestion;  
     }
-    cout<<"Min time to reach 3 = "<<dist[3];
+};
+
+int main() {
+    priority_queue<Junction, vector<Junction>, Compare> pq;
+
+    int n;
+    cout << "Enter number of highway junctions: ";
+    cin >> n;
+
+    cout << "Enter junction name and congestion level:\n";
+    for (int i = 0; i < n; i++) {
+        Junction j;
+        cin >> j.name >> j.congestion;
+        pq.push(j);
+    }
+
+    cout << "\n--- Traffic Management Order (Highest Congestion First) ---\n";
+
+    while (!pq.empty()) {
+        Junction top = pq.top();
+        pq.pop();
+
+        cout << "Junction: " << top.name 
+             << " | Congestion Level: " << top.congestion
+             << " → Adjust signal timing / open extra lane.\n";
+    }
+
+    cout << "\nTraffic optimization cycle completed.\n";
+    return 0;
 }</pre>
                 </div>
             </section>
