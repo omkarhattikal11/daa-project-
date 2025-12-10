@@ -958,7 +958,49 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>// Paste your C++ code for Case 6 here</pre>
+                    <pre>//// Case 6 - Smart Stall Lookup using Hashing (unordered_map)
+#include <bits/stdc++.h>
+using namespace std;
+
+struct StallInfo {
+    string name;
+    string category;
+    string location;
+};
+
+int main() {
+    unordered_map<int, StallInfo> stalls; // key = stall ID
+    int n;
+    cout << "Enter number of stalls: ";
+    cin >> n;
+
+    cout << "Enter stallID, name, category, location:\n";
+    for (int i = 0; i < n; ++i) {
+        int id;
+        StallInfo s;
+        cin >> id >> s.name >> s.category >> s.location;
+        stalls[id] = s;
+    }
+
+    cout << "\nEnter stall ID to search: ";
+    int query;
+    cin >> query;
+
+    auto it = stalls.find(query);
+    if (it != stalls.end()) {
+        cout << "Stall found:\n";
+        cout << "ID: " << query << "\n";
+        cout << "Name: " << it->second.name << "\n";
+        cout << "Category: " << it->second.category << "\n";
+        cout << "Location: " << it->second.location << "\n";
+    } else {
+        cout << "Stall with ID " << query << " not found.\n";
+    }
+
+    return 0;
+}
+
+</pre>
                 </div>
             </section>
 
@@ -966,18 +1008,18 @@ int main() {
             <section class="case">
                 <div class="case-header-row">
                     <span>CASE 7</span>
-                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                    <span class="case-pill">Information Retrieval & Search</span>
                 </div>
-                <div class="case-title">TITLE OF BUSINESS CASE 7</div>
+                <div class="case-title">Fast Facility Lookup using a Trie</div>
 
                 <div class="case-field">
                     <h3>About the Case</h3>
-                    <p>Write 2–3 lines giving an overview of what Case 7 is about.</p>
+                    <p>Provides instant search for factories, warehouses and service centers by name or code. As the user types, suggestions appear in real time.</p>
                 </div>
 
                 <div class="case-field">
                     <h3>Description of the Business Case</h3>
-                    <p>Describe how Case 7 helps the smart city / park.</p>
+                    <p>Each facility has a unique name and ID stored in the system. When an operator types the first few characters, the system must quickly list all matching facilities without scanning the entire dataset, even when thousands of entries exist.</p>
                 </div>
 
                 <div class="case-grid">
@@ -986,9 +1028,9 @@ int main() {
                             <div class="info-icon">⚙️</div>
                             <span>Algorithm Used</span>
                         </div>
-                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-main">Trie (Prefix Tree) Data Structure</div>
                         <div class="info-sub">
-                            Short explanation for algorithm usage in Case 7.
+                            Strings are stored character by character in a tree where each path represents a prefix. Looking up all names with a given prefix becomes O(length of prefix), which is ideal for fast auto-complete and search.
                         </div>
                     </div>
 
@@ -997,9 +1039,9 @@ int main() {
                             <div class="info-icon">🌍</div>
                             <span>SDGs Linked</span>
                         </div>
-                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-main">SDG 9 – Industry, Innovation and Infrastructure, SDG 8 – Decent Work and Economic Growth</div>
                         <div class="info-sub">
-                            SDG description for Case 7.
+Speeds up access to industrial information and services. Efficient lookups support smoother industrial operations.
                         </div>
                     </div>
                 </div>
@@ -1009,7 +1051,130 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>// Paste your C++ code for Case 7 here</pre>
+                    <pre>#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <string>
+using namespace std;
+
+// ---------------- Trie Node ----------------
+struct TrieNode {
+    unordered_map<char, TrieNode*> next;
+    vector<int> ids;   // Stores indices of facilities with this prefix
+};
+
+// ---------------- Facility Struct ----------------
+struct Facility {
+    string name;
+    string id;
+};
+
+// ---------------- Trie Class ----------------
+class Trie {
+public:
+    Trie() { root = new TrieNode(); }
+
+    void insert(const string &name, int idx) {
+        TrieNode* node = root;
+        for (char c : toLower(name)) {
+            if (!node->next.count(c))
+                node->next[c] = new TrieNode();
+            node = node->next[c];
+            node->ids.push_back(idx);
+        }
+    }
+
+    vector<int> searchPrefix(const string &prefix) {
+        TrieNode* node = root;
+        for (char c : toLower(prefix)) {
+            if (!node->next.count(c)) return {};
+            node = node->next[c];
+        }
+        return node->ids;
+    }
+
+private:
+    TrieNode* root;
+
+    string toLower(string s) {
+        for (char &c : s) c = tolower(c);
+        return s;
+    }
+};
+
+// ---------------- MAIN PROGRAM ----------------
+int main() {
+    Trie trie;
+    vector<Facility> facilities;
+
+    // Preloaded sample data
+    vector<pair<string,string>> demo = {
+        {"Alpha Factory", "F001"},
+        {"Alpha Warehouse", "W010"},
+        {"Beta Service Center", "S020"},
+        {"Central Logistics Hub", "H100"},
+        {"City West Depot", "D200"}
+    };
+
+    // Insert demo data into Trie
+    for (auto &p : demo) {
+        facilities.push_back({p.first, p.second});
+        trie.insert(p.first, facilities.size() - 1);
+    }
+
+    cout << "\n--- Fast Facility Lookup Using Trie ---\n";
+
+    while (true) {
+        cout << "\n1. Add Facility\n";
+        cout << "2. Search by Prefix\n";
+        cout << "3. Exit\n";
+        cout << "Choice: ";
+
+        int ch;
+        cin >> ch;
+        cin.ignore();
+
+        if (ch == 1) {
+            Facility f;
+            cout << "Facility Name: ";
+            getline(cin, f.name);
+            cout << "Facility ID: ";
+            getline(cin, f.id);
+
+            facilities.push_back(f);
+            trie.insert(f.name, facilities.size() - 1);
+
+            cout << "Added successfully!\n";
+        }
+        else if (ch == 2) {
+            string pref;
+            cout << "Enter prefix: ";
+            getline(cin, pref);
+
+            vector<int> result = trie.searchPrefix(pref);
+
+            if (result.empty()) {
+                cout << "No facility found.\n";
+            } else {
+                cout << "\nMatching Facilities:\n";
+                for (int idx : result) {
+                    cout << " - " << facilities[idx].name
+                         << " (ID: " << facilities[idx].id << ")\n";
+                }
+            }
+        }
+        else if (ch == 3) {
+            cout << "Goodbye!\n";
+            break;
+        }
+        else {
+            cout << "Invalid option.\n";
+        }
+    }
+
+    return 0;
+}
+</pre>
                 </div>
             </section>
 
