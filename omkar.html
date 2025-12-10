@@ -517,7 +517,7 @@
             <section class="case">
                 <div class="case-header-row">
                     <span>CASE 1</span>
-                    <span class="case-pill">  </span>
+                    <span class="case-pill"> Logistics & Supply Chain </span>
                 </div>
                 <div class="case-title">Industrial Transport Route Optimization</div>
 
@@ -632,7 +632,7 @@ int main() {
             <section class="case">
                 <div class="case-header-row">
                     <span>CASE 2</span>
-                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                    <span class="case-pill">Urban Utilities & Environment</span>
                 </div>
                 <div class="case-title">Waste & Water Management Scheduling</div>
 
@@ -717,7 +717,7 @@ int main() {
             <section class="case">
                 <div class="case-header-row">
                     <span>CASE 3</span>
-                    <span class="case-pill">  </span>
+                    <span class="case-pill"> Utility Monitoring & Maintenance </span>
                 </div>
                 <div class="case-title">Pipeline Network Fault Detection</div>
 
@@ -828,7 +828,7 @@ int main() {
             <section class="case">
                 <div class="case-header-row">
                     <span>CASE 4</span>
-                    <span class="case-pill">  </span>
+                    <span class="case-pill"> Intelligent Transportation Systems </span>
                 </div>
                 <div class="case-title">Highway Traffic Flow Optimization (NH-66)</div>
 
@@ -1269,18 +1269,18 @@ int main() {
             <section class="case">
                 <div class="case-header-row">
                     <span>CASE 8</span>
-                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                    <span class="case-pill">System Monitoring & Debugging</span>
                 </div>
-                <div class="case-title">TITLE OF BUSINESS CASE 8</div>
+                <div class="case-title">Log Pattern Detection with Brute-Force String Match</div>
 
                 <div class="case-field">
                     <h3>About the Case</h3>
-                    <p>Write 2–3 lines giving an overview of what Case 8 is about.</p>
+                    <p>Searches small to medium-sized log files for specific error keywords or patterns. Used by operators during quick manual checks.</p>
                 </div>
 
                 <div class="case-field">
                     <h3>Description of the Business Case</h3>
-                    <p>Describe the flow, constraints, or optimization goal for Case 8.</p>
+                    <p>When a fault is reported, engineers provide an error pattern (e.g., "CRITICAL_TIMEOUT"). The system scans recent log files to highlight every occurrence of this pattern so they can see when and where it happened, but log sizes are moderate so extreme optimisation is not mandatory.</p>
                 </div>
 
                 <div class="case-grid">
@@ -1289,9 +1289,9 @@ int main() {
                             <div class="info-icon">⚙️</div>
                             <span>Algorithm Used</span>
                         </div>
-                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-main">Brute-Force Pattern Matching</div>
                         <div class="info-sub">
-                            Short explanation for algorithm usage in Case 8.
+                          Compares the pattern with every possible position in the log string. The algorithm is simple to implement, easy to debug, and performs well enough for moderate-sized logs, making it suitable when development time is more critical than ultra-high speed.
                         </div>
                     </div>
 
@@ -1300,9 +1300,9 @@ int main() {
                             <div class="info-icon">🌍</div>
                             <span>SDGs Linked</span>
                         </div>
-                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-main">SDG 9 – Industry, Innovation and Infrastructure, SDG 12 – Responsible Consumption and Production</div>
                         <div class="info-sub">
-                            SDG description for Case 8.
+                            Helps maintain reliable industrial IT systems.Reduces downtime and waste by fast fault diagnosis.
                         </div>
                     </div>
                 </div>
@@ -1312,7 +1312,53 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>// Paste your C++ code for Case 8 here</pre>
+                    <pre>// CASE 9: Log Pattern Detection using Brute-Force Matching
+#include <bits/stdc++.h>
+using namespace std;
+
+// Brute-force pattern matching function
+vector<int> findPattern(const string &logData, const string &pattern) {
+    vector<int> positions;
+    int n = logData.size();
+    int m = pattern.size();
+
+    for (int i = 0; i <= n - m; i++) {
+        int j = 0;
+        // check pattern match starting at index i
+        while (j < m && logData[i + j] == pattern[j]) {
+            j++;
+        }
+        if (j == m) {
+            positions.push_back(i); // pattern found at index i
+        }
+    }
+    return positions;
+}
+
+int main() {
+    string logData, pattern;
+
+    cout << "Enter log text (single line or long text):\n";
+    getline(cin, logData);
+
+    cout << "Enter error pattern to search for: ";
+    getline(cin, pattern);
+
+    vector<int> result = findPattern(logData, pattern);
+
+    if (result.empty()) {
+        cout << "\nPattern NOT FOUND in log.\n";
+    } else {
+        cout << "\nPattern found at positions: ";
+        for (int idx : result) {
+            cout << idx << " ";
+        }
+        cout << "\nTotal occurrences: " << result.size() << "\n";
+    }
+
+    return 0;
+}
+</pre>
                 </div>
             </section>
 
@@ -1320,18 +1366,18 @@ int main() {
             <section class="case">
                 <div class="case-header-row">
                     <span>CASE 9</span>
-                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                    <span class="case-pill">Large-Scale System Analytics</span>
                 </div>
-                <div class="case-title">TITLE OF BUSINESS CASE 9</div>
+                <div class="case-title">Industrial Log Error Detection</div>
 
                 <div class="case-field">
                     <h3>About the Case</h3>
-                    <p>Write 2–3 lines giving an overview of what Case 9 is about.</p>
+                    <p>Automatically scans huge log streams from multiple industrial machines to detect recurring error signatures. Needs to be faster and more scalable than simple brute-force search.</p>
                 </div>
 
                 <div class="case-field">
                     <h3>Description of the Business Case</h3>
-                    <p>Explain how Case 9 works and what problem it solves.</p>
+                    <p>Production plants generate millions of log lines per day. The system maintains a set of known error patterns and must continuously check incoming logs to detect them quickly. Since logs are long, naive scanning for each pattern would be too slow.</p>
                 </div>
 
                 <div class="case-grid">
@@ -1340,9 +1386,9 @@ int main() {
                             <div class="info-icon">⚙️</div>
                             <span>Algorithm Used</span>
                         </div>
-                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-main">Knuth–Morris–Pratt (KMP) Pattern Matching</div>
                         <div class="info-sub">
-                            Short explanation for algorithm usage in Case 9.
+                            KMP preprocesses the pattern to build a longest-prefix-suffix (LPS) table, allowing the search to avoid re-checking characters when a mismatch occurs. This gives linear-time matching in the size of the log, which is ideal for high-volume error detection.
                         </div>
                     </div>
 
@@ -1351,9 +1397,9 @@ int main() {
                             <div class="info-icon">🌍</div>
                             <span>SDGs Linked</span>
                         </div>
-                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-main">SDG 9 – Industry, Innovation and Infrastructure, SDG 12 – Responsible Consumption and Production</div>
                         <div class="info-sub">
-                            SDG description for Case 9.
+                            Supports stable and resilient industrial automation.Early detection of faults prevents waste, defects and rework.
                         </div>
                     </div>
                 </div>
@@ -1363,7 +1409,80 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>// Paste your C++ code for Case 9 here</pre>
+                    <pre>// CASE 10: Industrial Log Error Detection using KMP Algorithm
+#include <bits/stdc++.h>
+using namespace std;
+
+// Build LPS array (Longest Prefix which is also Suffix)
+vector<int> buildLPS(const string &pat) {
+    int m = pat.size();
+    vector<int> lps(m, 0);
+    int len = 0; // length of previous longest prefix suffix
+
+    for (int i = 1; i < m; ) {
+        if (pat[i] == pat[len]) {
+            len++;
+            lps[i] = len;
+            i++;
+        } else {
+            if (len != 0) {
+                len = lps[len - 1];
+            } else {
+                lps[i] = 0;
+                i++;
+            }
+        }
+    }
+    return lps;
+}
+
+// KMP search function
+vector<int> KMPSearch(const string &text, const string &pat) {
+    vector<int> lps = buildLPS(pat);
+    vector<int> positions;
+
+    int n = text.size();
+    int m = pat.size();
+    int i = 0, j = 0; // text index, pattern index
+
+    while (i < n) {
+        if (text[i] == pat[j]) {
+            i++;
+            j++;
+        }
+        if (j == m) {
+            positions.push_back(i - j); // pattern found at index (i-j)
+            j = lps[j - 1];
+        } else if (i < n && text[i] != pat[j]) {
+            if (j != 0) j = lps[j - 1];
+            else i++;
+        }
+    }
+
+    return positions;
+}
+
+int main() {
+    string logData, pattern;
+
+    cout << "Enter log data (single line or multiple words):\n";
+    getline(cin, logData);
+
+    cout << "Enter error pattern to detect: ";
+    getline(cin, pattern);
+
+    vector<int> result = KMPSearch(logData, pattern);
+
+    if (result.empty()) {
+        cout << "\nPattern NOT FOUND in log.\n";
+    } else {
+        cout << "\nPattern found at positions: ";
+        for (int idx : result) cout << idx << " ";
+        cout << "\nTotal occurrences: " << result.size() << "\n";
+    }
+
+    return 0;
+}</pre>
                 </div>
             </section>
 
@@ -1371,18 +1490,18 @@ int main() {
             <section class="case">
                 <div class="case-header-row">
                     <span>CASE 10</span>
-                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                    <span class="case-pill"> </span>
                 </div>
-                <div class="case-title">TITLE OF BUSINESS CASE 10</div>
+                <div class="case-title">Vendor Directory Search</div>
 
                 <div class="case-field">
                     <h3>About the Case</h3>
-                    <p>Write 2–3 lines giving an overview of what Case 10 is about.</p>
+                    <p>Velora maintains a directory of vendors/stalls sorted by ID.</p>
                 </div>
 
                 <div class="case-field">
                     <h3>Description of the Business Case</h3>
-                    <p>Describe the complete situation for the final case in your project.</p>
+                    <p>It needs fast insert & search, but also keeps the tree height balanced even when many vendors are added.</p>
                 </div>
 
                 <div class="case-grid">
@@ -1391,9 +1510,9 @@ int main() {
                             <div class="info-icon">⚙️</div>
                             <span>Algorithm Used</span>
                         </div>
-                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-main">AVL TREE</div>
                         <div class="info-sub">
-                            Short explanation for algorithm usage in Case 10.
+                            AVL tree is a self-balancing BST with O(log n) search, insert, and delete. It avoids skewed trees that make search slow.
                         </div>
                     </div>
 
@@ -1402,9 +1521,9 @@ int main() {
                             <div class="info-icon">🌍</div>
                             <span>SDGs Linked</span>
                         </div>
-                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-main">SDG 8 – Decent Work and Economic Growth</div>
                         <div class="info-sub">
-                            SDG description for Case 10.
+                         Quick vendor identification reduces delays in operations, supporting productive workflows and contributing to stronger economic performance.
                         </div>
                     </div>
                 </div>
@@ -1414,12 +1533,274 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>// Paste your C++ code for Case 10 here</pre>
+                    <pre>// Case 9 - Vendor Directory using AVL Tree
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int key;            // e.g., vendor ID
+    string name;
+    Node *left, *right;
+    int height;
+    Node(int k, string n) : key(k), name(n), left(nullptr), right(nullptr), height(1) {}
+};
+
+int getHeight(Node* n) {
+    return n ? n->height : 0;
+}
+
+int getBalance(Node* n) {
+    return n ? getHeight(n->left) - getHeight(n->right) : 0;
+}
+
+Node* rightRotate(Node* y) {
+    Node* x = y->left;
+    Node* T2 = x->right;
+
+    x->right = y;
+    y->left = T2;
+
+    y->height = max(getHeight(y->left), getHeight(y->right)) + 1;
+    x->height = max(getHeight(x->left), getHeight(x->right)) + 1;
+
+    return x;
+}
+
+Node* leftRotate(Node* x) {
+    Node* y = x->right;
+    Node* T2 = y->left;
+
+    y->left = x;
+    x->right = T2;
+
+    x->height = max(getHeight(x->left), getHeight(x->right)) + 1;
+    y->height = max(getHeight(y->left), getHeight(y->right)) + 1;
+
+    return y;
+}
+
+Node* insertNode(Node* node, int key, const string &name) {
+    if (!node) return new Node(key, name);
+
+    if (key < node->key)
+        node->left = insertNode(node->left, key, name);
+    else if (key > node->key)
+        node->right = insertNode(node->right, key, name);
+    else
+        return node; // duplicate IDs not inserted
+
+    node->height = 1 + max(getHeight(node->left), getHeight(node->right));
+    int balance = getBalance(node);
+
+    // Left Left
+    if (balance > 1 && key < node->left->key)
+        return rightRotate(node);
+    // Right Right
+    if (balance < -1 && key > node->right->key)
+        return leftRotate(node);
+    // Left Right
+    if (balance > 1 && key > node->left->key) {
+        node->left = leftRotate(node->left);
+        return rightRotate(node);
+    }
+    // Right Left
+    if (balance < -1 && key < node->right->key) {
+        node->right = rightRotate(node->right);
+        return leftRotate(node);
+    }
+
+    return node;
+}
+
+Node* search(Node* root, int key) {
+    if (!root || root->key == key) return root;
+    if (key < root->key) return search(root->left, key);
+    return search(root->right, key);
+}
+
+void inorder(Node* root) {
+    if (!root) return;
+    inorder(root->left);
+    cout << root->key << " - " << root->name << "\n";
+    inorder(root->right);
+}
+
+int main() {
+    Node* root = nullptr;
+    int n;
+    cout << "Enter number of vendors: ";
+    cin >> n;
+
+    cout << "Enter vendorID and name:\n";
+    for (int i = 0; i < n; ++i) {
+        int id;
+        string name;
+        cin >> id >> name;
+        root = insertNode(root, id, name);
+    }
+
+    cout << "\nVendors in sorted order (AVL inorder traversal):\n";
+    inorder(root);
+
+    cout << "\nEnter vendorID to search: ";
+    int q;
+    cin >> q;
+    Node* res = search(root, q);
+    if (res) cout << "Vendor found: " << res->key << " - " << res->name << "\n";
+    else cout << "Vendor not found.\n";
+
+    return 0;
+}
+</pre>
+                </div>
+            </section>
+          <!-- ========== CASE 11 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 11</span>
+                    <span class="case-pill"> </span>
+                </div>
+                <div class="case-title">Crowd Density Monitor (Segment Tree)</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Velora divides a walking street into sections. Each section has a current crowd count.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>We need fast updates when more people enter/leave and fast range queries, like “how many people between section 3 and 8?</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">Segment tree</div>
+                        <div class="info-sub">
+                          A segment tree supports range sum queries and point updates in O(log n), ideal for live crowd monitoring dashboards.
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main">SDG 11 – Sustainable Cities and Communities</div>
+                        <div class="info-sub">
+                        Real-time crowd monitoring helps prevent overcrowding in public spaces, improving safety and supporting smarter urban management.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+                    <pre> // Case 10 - Crowd Density Monitor using Segment Tree (range sum)
+#include <bits/stdc++.h>
+using namespace std;
+
+struct SegmentTree {
+    int n;
+    vector<int> tree;
+
+    SegmentTree(int size) {
+        n = size;
+        tree.assign(4 * n, 0);
+    }
+
+    void build(vector<int> &arr, int idx, int l, int r) {
+        if (l == r) {
+            tree[idx] = arr[l];
+            return;
+        }
+        int mid = (l + r) / 2;
+        build(arr, 2 * idx, l, mid);
+        build(arr, 2 * idx + 1, mid + 1, r);
+        tree[idx] = tree[2 * idx] + tree[2 * idx + 1];
+    }
+
+    void build(vector<int> &arr) {
+        build(arr, 1, 0, n - 1);
+    }
+
+    void update(int idx, int l, int r, int pos, int val) {
+        if (l == r) {
+            tree[idx] = val;
+            return;
+        }
+        int mid = (l + r) / 2;
+        if (pos <= mid) update(2 * idx, l, mid, pos, val);
+        else update(2 * idx + 1, mid + 1, r, pos, val);
+        tree[idx] = tree[2 * idx] + tree[2 * idx + 1];
+    }
+
+    void update(int pos, int val) {
+        update(1, 0, n - 1, pos, val);
+    }
+
+    int query(int idx, int l, int r, int ql, int qr) {
+        if (qr < l || ql > r) return 0;         // no overlap
+        if (ql <= l && r <= qr) return tree[idx]; // complete overlap
+        int mid = (l + r) / 2;
+        return query(2 * idx, l, mid, ql, qr) +
+               query(2 * idx + 1, mid + 1, r, ql, qr);
+    }
+
+    int query(int l, int r) {
+        return query(1, 0, n - 1, l, r);
+    }
+};
+
+int main() {
+    int n;
+    cout << "Enter number of sections in street: ";
+    cin >> n;
+
+    vector<int> crowd(n);
+    cout << "Enter initial crowd count for each section:\n";
+    for (int i = 0; i < n; ++i) cin >> crowd[i];
+
+    SegmentTree st(n);
+    st.build(crowd);
+
+    while (true) {
+        cout << "\n1. Update crowd at a section\n";
+        cout << "2. Query total crowd in a range\n";
+        cout << "3. Exit\n";
+        cout << "Choose option: ";
+        int choice;
+        cin >> choice;
+
+        if (choice == 1) {
+            int pos, val;
+            cout << "Enter section index (0-based) and new crowd count: ";
+            cin >> pos >> val;
+            st.update(pos, val);
+        } else if (choice == 2) {
+            int l, r;
+            cout << "Enter range [l r]: ";
+            cin >> l >> r;
+            cout << "Total crowd from section " << l << " to " << r
+                 << " = " << st.query(l, r) << "\n";
+        } else {
+            break;
+        }
+    }
+
+    return 0;
+} </pre>
                 </div>
             </section>
 
+
             <footer>
-                YOUR COLLEGE NAME • DAA Mini Project • Academic Use Only
+                KLE TECHNOLOGICAL UNIVERSITY • DAA Project 
             </footer>
         </main>
     </div>
