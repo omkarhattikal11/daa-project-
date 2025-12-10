@@ -524,6 +524,7 @@
                 <div class="case-field">
                     <h3>About the Case</h3>
                     <p>Optimizes transport routes between factories and warehouses to reduce travel time and fuel cost.</p>
+                </div>
 
                 <div class="case-field">
                     <h3>Description of the Business Case</h3>
@@ -559,7 +560,7 @@
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>#include <bits/stdc++.h>
+<pre>#include &lt;bits/stdc++.h&gt;
 using namespace std;
 
 struct Edge {
@@ -567,15 +568,15 @@ struct Edge {
     int w; // travel time or cost
 };
 
-vector<vector<Edge>> graph;
+vector&lt;vector&lt;Edge&gt;&gt; graph;
 
-vector<int> dijkstra(int n, int src) {
+vector&lt;int&gt; dijkstra(int n, int src) {
     const int INF = 1e9;
-    vector<int> dist(n, INF);
+    vector&lt;int&gt; dist(n, INF);
     dist[src] = 0;
 
-    using P = pair<int,int>; // (dist, node)
-    priority_queue<P, vector<P>, greater<P>> pq;
+    using P = pair&lt;int,int&gt;; // (dist, node)
+    priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; pq;
     pq.push({0, src});
 
     while (!pq.empty()) {
@@ -586,7 +587,7 @@ vector<int> dijkstra(int n, int src) {
         for (auto &e : graph[u]) {
             int v = e.to;
             int nd = d + e.w;
-            if (nd < dist[v]) {
+            if (nd &lt; dist[v]) {
                 dist[v] = nd;
                 pq.push({nd, v});
             }
@@ -615,13 +616,13 @@ int main() {
     addRoad(4, 5, 3);
 
     int source = 0; // factory
-    vector<int> dist = dijkstra(n, source);
+    vector&lt;int&gt; dist = dijkstra(n, source);
 
-    cout << "Minimum travel time from source " << source << ":\n";
-    for (int i = 0; i < n; ++i) {
-        cout << "Location " << i << " : ";
-        if (dist[i] == 1e9) cout << "unreachable\n";
-        else cout << dist[i] << " units\n";
+    cout &lt;&lt; "Minimum travel time from source " &lt;&lt; source &lt;&lt; ":\n";
+    for (int i = 0; i &lt; n; ++i) {
+        cout &lt;&lt; "Location " &lt;&lt; i &lt;&lt; " : ";
+        if (dist[i] == 1e9) cout &lt;&lt; "unreachable\n";
+        else cout &lt;&lt; dist[i] &lt;&lt; " units\n";
     }
     return 0;
 }</pre>
@@ -663,7 +664,7 @@ int main() {
                             <div class="info-icon">🌍</div>
                             <span>SDGs Linked</span>
                         </div>
-                        <div class="info-main"SDG 6 — Clean Water & Sanitation</div>
+                        <div class="info-main">SDG 6 — Clean Water & Sanitation</div>
                         <div class="info-sub">
                            Ensures timely waste disposal and water supply.
                         </div>
@@ -675,7 +676,7 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>#include <bits/stdc++.h>
+<pre>#include &lt;bits/stdc++.h&gt;
 using namespace std;
 
 struct Request {
@@ -685,15 +686,15 @@ struct Request {
 };
 
 struct Compare {
-    bool operator()(const Request &a, const Request &b) const {
+    bool operator()(const Request &amp;a, const Request &amp;b) const {
         if (a.deadline == b.deadline)
-            return a.priority < b.priority; // higher priority first
-        return a.deadline > b.deadline;     // earlier deadline first
+            return a.priority &lt; b.priority; // higher priority first
+        return a.deadline &gt; b.deadline;     // earlier deadline first
     }
 };
 
 int main() {
-    priority_queue<Request, vector<Request>, Compare> pq;
+    priority_queue&lt;Request, vector&lt;Request&gt;, Compare&gt; pq;
 
     // id, deadline (hour), priority
     pq.push({"Waste-Truck-A", 10, 2});
@@ -701,12 +702,12 @@ int main() {
     pq.push({"Waste-Truck-B", 11, 3});
     pq.push({"Water-Tanker-2", 10, 5});
 
-    cout << "Service order (earliest & highest priority first):\n";
+    cout &lt;&lt; "Service order (earliest &amp; highest priority first):\n";
     while (!pq.empty()) {
         Request r = pq.top(); pq.pop();
-        cout << "Request: " << r.id 
-             << ", Deadline: " << r.deadline
-             << ", Priority: " << r.priority << "\n";
+        cout &lt;&lt; "Request: " &lt;&lt; r.id 
+             &lt;&lt; ", Deadline: " &lt;&lt; r.deadline
+             &lt;&lt; ", Priority: " &lt;&lt; r.priority &lt;&lt; "\n";
     }
     return 0;
 }</pre>
@@ -760,14 +761,14 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>#include <bits/stdc++.h>
+<pre>#include &lt;bits/stdc++.h&gt;
 using namespace std;
 
-vector<vector<int>> graph;
+vector&lt;vector&lt;int&gt;&gt; graph;
 
-vector<int> bfs(int n, int src) {
-    vector<int> visited(n, 0);
-    queue<int> q;
+vector&lt;int&gt; bfs(int n, int src) {
+    vector&lt;int&gt; visited(n, 0);
+    queue&lt;int&gt; q;
     q.push(src);
     visited[src] = 1;
 
@@ -802,22 +803,22 @@ int main() {
     int faultyU = 1, faultyV = 4; // faulty pipe between 1 and 4
 
     // remove faulty edge logically by building a new graph
-    vector<vector<int>> newGraph(n);
-    for (int u = 0; u < n; ++u) {
+    vector&lt;vector&lt;int&gt;&gt; newGraph(n);
+    for (int u = 0; u &lt; n; ++u) {
         for (int v : graph[u]) {
-            if ((u == faultyU && v == faultyV) ||
-                (u == faultyV && v == faultyU)) continue;
+            if ((u == faultyU &amp;&amp; v == faultyV) ||
+                (u == faultyV &amp;&amp; v == faultyU)) continue;
             newGraph[u].push_back(v);
         }
     }
     graph = newGraph;
 
-    vector<int> reachable = bfs(n, 0); // source station 0
+    vector&lt;int&gt; reachable = bfs(n, 0); // source station 0
 
-    cout << "Nodes reachable from source after fault:\n";
-    for (int i = 0; i < n; ++i) {
-        if (reachable[i]) cout << "Node " << i << " OK\n";
-        else cout << "Node " << i << " affected by fault\n";
+    cout &lt;&lt; "Nodes reachable from source after fault:\n";
+    for (int i = 0; i &lt; n; ++i) {
+        if (reachable[i]) cout &lt;&lt; "Node " &lt;&lt; i &lt;&lt; " OK\n";
+        else cout &lt;&lt; "Node " &lt;&lt; i &lt;&lt; " affected by fault\n";
     }
     return 0;
 }</pre>
@@ -871,10 +872,10 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre> // CASE 4: Highway Traffic Flow Optimization (NH-66)
+<pre>// CASE 4: Highway Traffic Flow Optimization (NH-66)
 // Algorithm: Max-Heap Priority Queue (Handle highest congestion first)
 
-#include <bits/stdc++.h>
+#include &lt;bits/stdc++.h&gt;
 using namespace std;
 
 struct Junction {
@@ -884,37 +885,37 @@ struct Junction {
 
 // Max-heap comparator (higher congestion = higher priority)
 struct Compare {
-    bool operator()(const Junction &a, const Junction &b) {
-        return a.congestion < b.congestion;  
+    bool operator()(const Junction &amp;a, const Junction &amp;b) {
+        return a.congestion &lt; b.congestion;  
     }
 };
 
 int main() {
-    priority_queue<Junction, vector<Junction>, Compare> pq;
+    priority_queue&lt;Junction, vector&lt;Junction&gt;, Compare&gt; pq;
 
     int n;
-    cout << "Enter number of highway junctions: ";
-    cin >> n;
+    cout &lt;&lt; "Enter number of highway junctions: ";
+    cin &gt;&gt; n;
 
-    cout << "Enter junction name and congestion level:\n";
-    for (int i = 0; i < n; i++) {
+    cout &lt;&lt; "Enter junction name and congestion level:\n";
+    for (int i = 0; i &lt; n; i++) {
         Junction j;
-        cin >> j.name >> j.congestion;
+        cin &gt;&gt; j.name &gt;&gt; j.congestion;
         pq.push(j);
     }
 
-    cout << "\n--- Traffic Management Order (Highest Congestion First) ---\n";
+    cout &lt;&lt; "\n--- Traffic Management Order (Highest Congestion First) ---\n";
 
     while (!pq.empty()) {
         Junction top = pq.top();
         pq.pop();
 
-        cout << "Junction: " << top.name 
-             << " | Congestion Level: " << top.congestion
-             << " → Adjust signal timing / open extra lane.\n";
+        cout &lt;&lt; "Junction: " &lt;&lt; top.name 
+             &lt;&lt; " | Congestion Level: " &lt;&lt; top.congestion
+             &lt;&lt; " \u2192 Adjust signal timing / open extra lane.\n";
     }
 
-    cout << "\nTraffic optimization cycle completed.\n";
+    cout &lt;&lt; "\nTraffic optimization cycle completed.\n";
     return 0;
 }</pre>
                 </div>
@@ -930,12 +931,12 @@ int main() {
 
                 <div class="case-field">
                     <h3>About the Case</h3>
-                    <p>Manages gates at multiple railway crossings where trains and road vehicles intersect. Goal is to minimise gate-closed time while maintaining full safety..</p>
+                    <p>Manages gates at multiple railway crossings where trains and road vehicles intersect. Goal is to minimise gate-closed time while maintaining full safety.</p>
                 </div>
 
                 <div class="case-field">
                     <h3>Description of the Business Case</h3>
-                    <p>The system predicts when trains will reach the crossing and closes or opens the gate at the right moments, keeping it safe without unnecessary delays</p>
+                    <p>The system predicts when trains will reach the crossing and closes or opens the gate at the right moments, keeping it safe without unnecessary delays.</p>
                 </div>
 
                 <div class="case-grid">
@@ -947,7 +948,6 @@ int main() {
                         <div class="info-main">Event Scheduling with Priority Queue (Min-Heap by Arrival Time)</div>
                         <div class="info-sub">
                            A min-heap stores train events by arrival time, letting the system handle the earliest event first for safe, collision-free scheduling.
-
                         </div>
                     </div>
 
@@ -956,9 +956,9 @@ int main() {
                             <div class="info-icon">🌍</div>
                             <span>SDGs Linked</span>
                         </div>
-                        <div class="info-main">SDG 3 – Good Health and Well-Being  SDG 9 – Industry, Innovation and Infrastructure</div>
+                        <div class="info-main">SDG 3 – Good Health and Well-Being; SDG 9 – Industry, Innovation and Infrastructure</div>
                         <div class="info-sub">
-                           Prevents accidents at railway crossings.Enhances safety of transport infrastructure.
+                           Prevents accidents at railway crossings. Enhances safety of transport infrastructure.
                         </div>
                     </div>
                 </div>
@@ -968,9 +968,9 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>// Case 5 - Railway Crossing Coordination using Min-Heap Event Scheduling
+<pre>// Case 5 - Railway Crossing Coordination using Min-Heap Event Scheduling
 
-#include <bits/stdc++.h>
+#include &lt;bits/stdc++.h&gt;
 using namespace std;
 
 struct Train {
@@ -979,39 +979,38 @@ struct Train {
 };
 
 // Min-heap based on arrival times
-struct Compare {
-    bool operator()(Train const& a, Train const& b) {
-        return a.arrivalTime > b.arrivalTime; // earlier train = higher priority
+struct CompareTrain {
+    bool operator()(Train const&amp; a, Train const&amp; b) {
+        return a.arrivalTime &gt; b.arrivalTime; // earlier train = higher priority
     }
 };
 
 int main() {
-    priority_queue<Train, vector<Train>, Compare> pq;
+    priority_queue&lt;Train, vector&lt;Train&gt;, CompareTrain&gt; pq;
 
     int n;
-    cout << "Enter number of trains: ";
-    cin >> n;
+    cout &lt;&lt; "Enter number of trains: ";
+    cin &gt;&gt; n;
 
-    cout << "Enter train name and arrival time:\n";
-    for (int i = 0; i < n; i++) {
+    cout &lt;&lt; "Enter train name and arrival time:\n";
+    for (int i = 0; i &lt; n; i++) {
         Train t;
-        cin >> t.trainName >> t.arrivalTime;
+        cin &gt;&gt; t.trainName &gt;&gt; t.arrivalTime;
         pq.push(t);
     }
 
-    cout << "\n--- Railway Crossing Gate Schedule ---\n";
+    cout &lt;&lt; "\n--- Railway Crossing Gate Schedule ---\n";
     while (!pq.empty()) {
         Train t = pq.top();
         pq.pop();
-        cout << "Train " << t.trainName 
-             << " arriving at time " << t.arrivalTime
-             << " → Gate CLOSED\n";
+        cout &lt;&lt; "Train " &lt;&lt; t.trainName 
+             &lt;&lt; " arriving at time " &lt;&lt; t.arrivalTime
+             &lt;&lt; " \u2192 Gate CLOSED\n";
     }
 
-    cout << "\nAll trains processed safely.\n";
+    cout &lt;&lt; "\nAll trains processed safely.\n";
     return 0;
-}
-</pre>
+}</pre>
                 </div>
             </section>
 
@@ -1019,13 +1018,13 @@ int main() {
             <section class="case">
                 <div class="case-header-row">
                     <span>CASE 6</span>
-                    <span class="case-pill">  </span>
+                    <span class="case-pill"> Smart Storage & Security </span>
                 </div>
                 <div class="case-title">Smart Locker & Lost-and-Found System</div>
 
                 <div class="case-field">
                     <h3>About the Case</h3>
-                    <p>Visitors in Velora often deposit items (bags, helmets, books, gadgets) in smart lockers or submit lost items at counters. The system needs to quickly store, search, and return items to the correct owner using a unique token or ID.</p>
+                    <p>Visitors deposit items (bags, helmets, books, gadgets) in smart lockers or submit lost items at counters. The system must quickly store, search, and return items using a unique token or ID.</p>
                 </div>
 
                 <div class="case-field">
@@ -1039,10 +1038,9 @@ int main() {
                             <div class="info-icon">⚙️</div>
                             <span>Algorithm Used</span>
                         </div>
-                        <div class="info-main">Hash Table (Hashing with Separate Chaining or Linear Probing)</div>
+                        <div class="info-main">Hash Table (Hashing with unordered_map)</div>
                         <div class="info-sub">
                            Hashing gives near-instant (avg O(1)) insert and search by token ID, making item lookup extremely fast.
-
                         </div>
                     </div>
 
@@ -1051,9 +1049,9 @@ int main() {
                             <div class="info-icon">🌍</div>
                             <span>SDGs Linked</span>
                         </div>
-                        <div class="info-main">SDG 9 – Industry, Innovation & Infrastructure  SDG 11 – Sustainable Cities & Communities:</div>
+                        <div class="info-main">SDG 9 – Industry, Innovation &amp; Infrastructure; SDG 11 – Sustainable Cities &amp; Communities</div>
                         <div class="info-sub">
-                            smart locker / digital tracking system.improves visitor convenience and safety in a smart city park.
+                            Smart locker / digital tracking system improves visitor convenience and safety in a smart city park.
                         </div>
                     </div>
                 </div>
@@ -1063,8 +1061,8 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>//// Case 6 - Smart Stall Lookup using Hashing (unordered_map)
-#include <bits/stdc++.h>
+<pre>// Case 6 - Smart Stall/Locker Lookup using Hashing (unordered_map)
+#include &lt;bits/stdc++.h&gt;
 using namespace std;
 
 struct StallInfo {
@@ -1074,38 +1072,36 @@ struct StallInfo {
 };
 
 int main() {
-    unordered_map<int, StallInfo> stalls; // key = stall ID
+    unordered_map&lt;int, StallInfo&gt; stalls; // key = stall ID
     int n;
-    cout << "Enter number of stalls: ";
-    cin >> n;
+    cout &lt;&lt; "Enter number of stalls: ";
+    cin &gt;&gt; n;
 
-    cout << "Enter stallID, name, category, location:\n";
-    for (int i = 0; i < n; ++i) {
+    cout &lt;&lt; "Enter stallID, name, category, location:\n";
+    for (int i = 0; i &lt; n; ++i) {
         int id;
         StallInfo s;
-        cin >> id >> s.name >> s.category >> s.location;
+        cin &gt;&gt; id &gt;&gt; s.name &gt;&gt; s.category &gt;&gt; s.location;
         stalls[id] = s;
     }
 
-    cout << "\nEnter stall ID to search: ";
+    cout &lt;&lt; "\nEnter stall ID to search: ";
     int query;
-    cin >> query;
+    cin &gt;&gt; query;
 
     auto it = stalls.find(query);
     if (it != stalls.end()) {
-        cout << "Stall found:\n";
-        cout << "ID: " << query << "\n";
-        cout << "Name: " << it->second.name << "\n";
-        cout << "Category: " << it->second.category << "\n";
-        cout << "Location: " << it->second.location << "\n";
+        cout &lt;&lt; "Stall found:\n";
+        cout &lt;&lt; "ID: " &lt;&lt; query &lt;&lt; "\n";
+        cout &lt;&lt; "Name: " &lt;&lt; it-&gt;second.name &lt;&lt; "\n";
+        cout &lt;&lt; "Category: " &lt;&lt; it-&gt;second.category &lt;&lt; "\n";
+        cout &lt;&lt; "Location: " &lt;&lt; it-&gt;second.location &lt;&lt; "\n";
     } else {
-        cout << "Stall with ID " << query << " not found.\n";
+        cout &lt;&lt; "Stall with ID " &lt;&lt; query &lt;&lt; " not found.\n";
     }
 
     return 0;
-}
-
-</pre>
+}</pre>
                 </div>
             </section>
 
@@ -1144,7 +1140,7 @@ int main() {
                             <div class="info-icon">🌍</div>
                             <span>SDGs Linked</span>
                         </div>
-                        <div class="info-main">SDG 9 – Industry, Innovation and Infrastructure, SDG 8 – Decent Work and Economic Growth</div>
+                        <div class="info-main">SDG 9 – Industry, Innovation and Infrastructure; SDG 8 – Decent Work and Economic Growth</div>
                         <div class="info-sub">
 Speeds up access to industrial information and services. Efficient lookups support smoother industrial operations.
                         </div>
@@ -1156,16 +1152,16 @@ Speeds up access to industrial information and services. Efficient lookups suppo
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>#include <iostream>
-#include <vector>
-#include <unordered_map>
-#include <string>
+<pre>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;unordered_map&gt;
+#include &lt;string&gt;
 using namespace std;
 
 // ---------------- Trie Node ----------------
 struct TrieNode {
-    unordered_map<char, TrieNode*> next;
-    vector<int> ids;   // Stores indices of facilities with this prefix
+    unordered_map&lt;char, TrieNode*&gt; next;
+    vector&lt;int&gt; ids;   // Stores indices of facilities with this prefix
 };
 
 // ---------------- Facility Struct ----------------
@@ -1179,30 +1175,30 @@ class Trie {
 public:
     Trie() { root = new TrieNode(); }
 
-    void insert(const string &name, int idx) {
+    void insert(const string &amp;name, int idx) {
         TrieNode* node = root;
         for (char c : toLower(name)) {
-            if (!node->next.count(c))
-                node->next[c] = new TrieNode();
-            node = node->next[c];
-            node->ids.push_back(idx);
+            if (!node-&gt;next.count(c))
+                node-&gt;next[c] = new TrieNode();
+            node = node-&gt;next[c];
+            node-&gt;ids.push_back(idx);
         }
     }
 
-    vector<int> searchPrefix(const string &prefix) {
+    vector&lt;int&gt; searchPrefix(const string &amp;prefix) {
         TrieNode* node = root;
         for (char c : toLower(prefix)) {
-            if (!node->next.count(c)) return {};
-            node = node->next[c];
+            if (!node-&gt;next.count(c)) return {};
+            node = node-&gt;next[c];
         }
-        return node->ids;
+        return node-&gt;ids;
     }
 
 private:
     TrieNode* root;
 
     string toLower(string s) {
-        for (char &c : s) c = tolower(c);
+        for (char &amp;c : s) c = tolower(c);
         return s;
     }
 };
@@ -1210,10 +1206,10 @@ private:
 // ---------------- MAIN PROGRAM ----------------
 int main() {
     Trie trie;
-    vector<Facility> facilities;
+    vector&lt;Facility&gt; facilities;
 
     // Preloaded sample data
-    vector<pair<string,string>> demo = {
+    vector&lt;pair&lt;string,string&gt;&gt; demo = {
         {"Alpha Factory", "F001"},
         {"Alpha Warehouse", "W010"},
         {"Beta Service Center", "S020"},
@@ -1222,64 +1218,63 @@ int main() {
     };
 
     // Insert demo data into Trie
-    for (auto &p : demo) {
+    for (auto &amp;p : demo) {
         facilities.push_back({p.first, p.second});
         trie.insert(p.first, facilities.size() - 1);
     }
 
-    cout << "\n--- Fast Facility Lookup Using Trie ---\n";
+    cout &lt;&lt; "\n--- Fast Facility Lookup Using Trie ---\n";
 
     while (true) {
-        cout << "\n1. Add Facility\n";
-        cout << "2. Search by Prefix\n";
-        cout << "3. Exit\n";
-        cout << "Choice: ";
+        cout &lt;&lt; "\n1. Add Facility\n";
+        cout &lt;&lt; "2. Search by Prefix\n";
+        cout &lt;&lt; "3. Exit\n";
+        cout &lt;&lt; "Choice: ";
 
         int ch;
-        cin >> ch;
+        cin &gt;&gt; ch;
         cin.ignore();
 
         if (ch == 1) {
             Facility f;
-            cout << "Facility Name: ";
+            cout &lt;&lt; "Facility Name: ";
             getline(cin, f.name);
-            cout << "Facility ID: ";
+            cout &lt;&lt; "Facility ID: ";
             getline(cin, f.id);
 
             facilities.push_back(f);
             trie.insert(f.name, facilities.size() - 1);
 
-            cout << "Added successfully!\n";
+            cout &lt;&lt; "Added successfully!\n";
         }
         else if (ch == 2) {
             string pref;
-            cout << "Enter prefix: ";
+            cout &lt;&lt; "Enter prefix: ";
             getline(cin, pref);
 
-            vector<int> result = trie.searchPrefix(pref);
+            vector&lt;int&gt; result = trie.searchPrefix(pref);
 
             if (result.empty()) {
-                cout << "No facility found.\n";
+                cout &lt;&lt; "No facility found.\n";
             } else {
-                cout << "\nMatching Facilities:\n";
+                cout &lt;&lt; "\nMatching Facilities:\n";
                 for (int idx : result) {
-                    cout << " - " << facilities[idx].name
-                         << " (ID: " << facilities[idx].id << ")\n";
+                    cout &lt;&lt; " - " &lt;&lt; facilities[idx].name
+                         &lt;&lt; " (ID: " &lt;&lt; facilities[idx].id &lt;&lt; ")\n";
                 }
             }
         }
         else if (ch == 3) {
-            cout << "Goodbye!\n";
+            cout &lt;&lt; "Goodbye!\n";
             break;
         }
         else {
-            cout << "Invalid option.\n";
+            cout &lt;&lt; "Invalid option.\n";
         }
     }
 
     return 0;
-}
-</pre>
+}</pre>
                 </div>
             </section>
 
@@ -1318,9 +1313,9 @@ int main() {
                             <div class="info-icon">🌍</div>
                             <span>SDGs Linked</span>
                         </div>
-                        <div class="info-main">SDG 9 – Industry, Innovation and Infrastructure, SDG 12 – Responsible Consumption and Production</div>
+                        <div class="info-main">SDG 9 – Industry, Innovation and Infrastructure; SDG 12 – Responsible Consumption and Production</div>
                         <div class="info-sub">
-                            Helps maintain reliable industrial IT systems.Reduces downtime and waste by fast fault diagnosis.
+                            Helps maintain reliable industrial IT systems. Reduces downtime and waste by fast fault diagnosis.
                         </div>
                     </div>
                 </div>
@@ -1330,20 +1325,20 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>// CASE 9: Log Pattern Detection using Brute-Force Matching
-#include <bits/stdc++.h>
+<pre>// CASE 8: Log Pattern Detection using Brute-Force Matching
+#include &lt;bits/stdc++.h&gt;
 using namespace std;
 
 // Brute-force pattern matching function
-vector<int> findPattern(const string &logData, const string &pattern) {
-    vector<int> positions;
+vector&lt;int&gt; findPattern(const string &amp;logData, const string &amp;pattern) {
+    vector&lt;int&gt; positions;
     int n = logData.size();
     int m = pattern.size();
 
-    for (int i = 0; i <= n - m; i++) {
+    for (int i = 0; i &lt;= n - m; i++) {
         int j = 0;
         // check pattern match starting at index i
-        while (j < m && logData[i + j] == pattern[j]) {
+        while (j &lt; m &amp;&amp; logData[i + j] == pattern[j]) {
             j++;
         }
         if (j == m) {
@@ -1356,27 +1351,26 @@ vector<int> findPattern(const string &logData, const string &pattern) {
 int main() {
     string logData, pattern;
 
-    cout << "Enter log text (single line or long text):\n";
+    cout &lt;&lt; "Enter log text (single line or long text):\n";
     getline(cin, logData);
 
-    cout << "Enter error pattern to search for: ";
+    cout &lt;&lt; "Enter error pattern to search for: ";
     getline(cin, pattern);
 
-    vector<int> result = findPattern(logData, pattern);
+    vector&lt;int&gt; result = findPattern(logData, pattern);
 
     if (result.empty()) {
-        cout << "\nPattern NOT FOUND in log.\n";
+        cout &lt;&lt; "\nPattern NOT FOUND in log.\n";
     } else {
-        cout << "\nPattern found at positions: ";
+        cout &lt;&lt; "\nPattern found at positions: ";
         for (int idx : result) {
-            cout << idx << " ";
+            cout &lt;&lt; idx &lt;&lt; " ";
         }
-        cout << "\nTotal occurrences: " << result.size() << "\n";
+        cout &lt;&lt; "\nTotal occurrences: " &lt;&lt; result.size() &lt;&lt; "\n";
     }
 
     return 0;
-}
-</pre>
+}</pre>
                 </div>
             </section>
 
@@ -1415,9 +1409,9 @@ int main() {
                             <div class="info-icon">🌍</div>
                             <span>SDGs Linked</span>
                         </div>
-                        <div class="info-main">SDG 9 – Industry, Innovation and Infrastructure, SDG 12 – Responsible Consumption and Production</div>
+                        <div class="info-main">SDG 9 – Industry, Innovation and Infrastructure; SDG 12 – Responsible Consumption and Production</div>
                         <div class="info-sub">
-                            Supports stable and resilient industrial automation.Early detection of faults prevents waste, defects and rework.
+                            Supports stable and resilient industrial automation. Early detection of faults prevents waste, defects and rework.
                         </div>
                     </div>
                 </div>
@@ -1427,17 +1421,17 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>// CASE 10: Industrial Log Error Detection using KMP Algorithm
-#include <bits/stdc++.h>
+<pre>// CASE 9: Industrial Log Error Detection using KMP Algorithm
+#include &lt;bits/stdc++.h&gt;
 using namespace std;
 
 // Build LPS array (Longest Prefix which is also Suffix)
-vector<int> buildLPS(const string &pat) {
+vector&lt;int&gt; buildLPS(const string &amp;pat) {
     int m = pat.size();
-    vector<int> lps(m, 0);
+    vector&lt;int&gt; lps(m, 0);
     int len = 0; // length of previous longest prefix suffix
 
-    for (int i = 1; i < m; ) {
+    for (int i = 1; i &lt; m; ) {
         if (pat[i] == pat[len]) {
             len++;
             lps[i] = len;
@@ -1455,15 +1449,15 @@ vector<int> buildLPS(const string &pat) {
 }
 
 // KMP search function
-vector<int> KMPSearch(const string &text, const string &pat) {
-    vector<int> lps = buildLPS(pat);
-    vector<int> positions;
+vector&lt;int&gt; KMPSearch(const string &amp;text, const string &amp;pat) {
+    vector&lt;int&gt; lps = buildLPS(pat);
+    vector&lt;int&gt; positions;
 
     int n = text.size();
     int m = pat.size();
     int i = 0, j = 0; // text index, pattern index
 
-    while (i < n) {
+    while (i &lt; n) {
         if (text[i] == pat[j]) {
             i++;
             j++;
@@ -1471,7 +1465,7 @@ vector<int> KMPSearch(const string &text, const string &pat) {
         if (j == m) {
             positions.push_back(i - j); // pattern found at index (i-j)
             j = lps[j - 1];
-        } else if (i < n && text[i] != pat[j]) {
+        } else if (i &lt; n &amp;&amp; text[i] != pat[j]) {
             if (j != 0) j = lps[j - 1];
             else i++;
         }
@@ -1483,20 +1477,20 @@ vector<int> KMPSearch(const string &text, const string &pat) {
 int main() {
     string logData, pattern;
 
-    cout << "Enter log data (single line or multiple words):\n";
+    cout &lt;&lt; "Enter log data (single line or multiple words):\n";
     getline(cin, logData);
 
-    cout << "Enter error pattern to detect: ";
+    cout &lt;&lt; "Enter error pattern to detect: ";
     getline(cin, pattern);
 
-    vector<int> result = KMPSearch(logData, pattern);
+    vector&lt;int&gt; result = KMPSearch(logData, pattern);
 
     if (result.empty()) {
-        cout << "\nPattern NOT FOUND in log.\n";
+        cout &lt;&lt; "\nPattern NOT FOUND in log.\n";
     } else {
-        cout << "\nPattern found at positions: ";
-        for (int idx : result) cout << idx << " ";
-        cout << "\nTotal occurrences: " << result.size() << "\n";
+        cout &lt;&lt; "\nPattern found at positions: ";
+        for (int idx : result) cout &lt;&lt; idx &lt;&lt; " ";
+        cout &lt;&lt; "\nTotal occurrences: " &lt;&lt; result.size() &lt;&lt; "\n";
     }
 
     return 0;
@@ -1508,7 +1502,7 @@ int main() {
             <section class="case">
                 <div class="case-header-row">
                     <span>CASE 10</span>
-                    <span class="case-pill"> </span>
+                    <span class="case-pill"> Vendor Management </span>
                 </div>
                 <div class="case-title">Vendor Directory Search</div>
 
@@ -1519,7 +1513,7 @@ int main() {
 
                 <div class="case-field">
                     <h3>Description of the Business Case</h3>
-                    <p>It needs fast insert & search, but also keeps the tree height balanced even when many vendors are added.</p>
+                    <p>It needs fast insert &amp; search, but also keeps the tree height balanced even when many vendors are added.</p>
                 </div>
 
                 <div class="case-grid">
@@ -1528,7 +1522,7 @@ int main() {
                             <div class="info-icon">⚙️</div>
                             <span>Algorithm Used</span>
                         </div>
-                        <div class="info-main">AVL TREE</div>
+                        <div class="info-main">AVL Tree</div>
                         <div class="info-sub">
                             AVL tree is a self-balancing BST with O(log n) search, insert, and delete. It avoids skewed trees that make search slow.
                         </div>
@@ -1551,8 +1545,8 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>// Case 9 - Vendor Directory using AVL Tree
-#include <bits/stdc++.h>
+<pre>// Case 10 - Vendor Directory using AVL Tree
+#include &lt;bits/stdc++.h&gt;
 using namespace std;
 
 struct Node {
@@ -1564,66 +1558,66 @@ struct Node {
 };
 
 int getHeight(Node* n) {
-    return n ? n->height : 0;
+    return n ? n-&gt;height : 0;
 }
 
 int getBalance(Node* n) {
-    return n ? getHeight(n->left) - getHeight(n->right) : 0;
+    return n ? getHeight(n-&gt;left) - getHeight(n-&gt;right) : 0;
 }
 
 Node* rightRotate(Node* y) {
-    Node* x = y->left;
-    Node* T2 = x->right;
+    Node* x = y-&gt;left;
+    Node* T2 = x-&gt;right;
 
-    x->right = y;
-    y->left = T2;
+    x-&gt;right = y;
+    y-&gt;left = T2;
 
-    y->height = max(getHeight(y->left), getHeight(y->right)) + 1;
-    x->height = max(getHeight(x->left), getHeight(x->right)) + 1;
+    y-&gt;height = max(getHeight(y-&gt;left), getHeight(y-&gt;right)) + 1;
+    x-&gt;height = max(getHeight(x-&gt;left), getHeight(x-&gt;right)) + 1;
 
     return x;
 }
 
 Node* leftRotate(Node* x) {
-    Node* y = x->right;
-    Node* T2 = y->left;
+    Node* y = x-&gt;right;
+    Node* T2 = y-&gt;left;
 
-    y->left = x;
-    x->right = T2;
+    y-&gt;left = x;
+    x-&gt;right = T2;
 
-    x->height = max(getHeight(x->left), getHeight(x->right)) + 1;
-    y->height = max(getHeight(y->left), getHeight(y->right)) + 1;
+    x-&gt;height = max(getHeight(x-&gt;left), getHeight(x-&gt;right)) + 1;
+    y-&gt;height = max(getHeight(y-&gt;left), getHeight(y-&gt;right)) + 1;
 
     return y;
 }
 
-Node* insertNode(Node* node, int key, const string &name) {
+Node* insertNode(Node* node, int key, const string &amp;name) {
     if (!node) return new Node(key, name);
 
-    if (key < node->key)
-        node->left = insertNode(node->left, key, name);
-    else if (key > node->key)
-        node->right = insertNode(node->right, key, name);
+    if (key &lt; node-&gt;key)
+        node-&gt;left = insertNode(node-&gt;left, key, name);
+    else if (key &gt; node-&gt;key)
+        node-&gt;right = insertNode(node-&gt;right, key, name);
     else
         return node; // duplicate IDs not inserted
 
-    node->height = 1 + max(getHeight(node->left), getHeight(node->right));
+    node-&gt;height = 1 + max(getHeight(node-&gt;left), getHeight(node-&gt;right));
     int balance = getBalance(node);
 
     // Left Left
-    if (balance > 1 && key < node->left->key)
+    if (balance &gt; 1 &amp;&amp; key &lt; node-&gt;left-&gt;key)
         return rightRotate(node);
     // Right Right
-    if (balance < -1 && key > node->right->key)
+    if (balance &lt; -1 &amp;&amp; key &gt; node-&gt;right-&gt;key)
         return leftRotate(node);
     // Left Right
-    if (balance > 1 && key > node->left->key) {
-        node->left = leftRotate(node->left);
+    if (balance &gt; 1 &amp;&amp; key &gt; node-&gt;left-&gt;key) {
+        node-&gt;left = leftRotate(node-&gt;left);
         return rightRotate(node);
     }
     // Right Left
-    if (balance < -1 && key < node->right->key) {
-        node->right = rightRotate(node->right);
+    if (balance &lt; -1 &amp;&amp; key &lt; node-&gt;right-&gt;key) {
+        node-&gt;right = rightRotate(node-&gt;right);
         return leftRotate(node);
     }
 
@@ -1631,52 +1625,52 @@ Node* insertNode(Node* node, int key, const string &name) {
 }
 
 Node* search(Node* root, int key) {
-    if (!root || root->key == key) return root;
-    if (key < root->key) return search(root->left, key);
-    return search(root->right, key);
+    if (!root || root-&gt;key == key) return root;
+    if (key &lt; root-&gt;key) return search(root-&gt;left, key);
+    return search(root-&gt;right, key);
 }
 
 void inorder(Node* root) {
     if (!root) return;
-    inorder(root->left);
-    cout << root->key << " - " << root->name << "\n";
-    inorder(root->right);
+    inorder(root-&gt;left);
+    cout &lt;&lt; root-&gt;key &lt;&lt; " - " &lt;&lt; root-&gt;name &lt;&lt; "\n";
+    inorder(root-&gt;right);
 }
 
 int main() {
     Node* root = nullptr;
     int n;
-    cout << "Enter number of vendors: ";
-    cin >> n;
+    cout &lt;&lt; "Enter number of vendors: ";
+    cin &gt;&gt; n;
 
-    cout << "Enter vendorID and name:\n";
-    for (int i = 0; i < n; ++i) {
+    cout &lt;&lt; "Enter vendorID and name:\n";
+    for (int i = 0; i &lt; n; ++i) {
         int id;
         string name;
-        cin >> id >> name;
+        cin &gt;&gt; id &gt;&gt; name;
         root = insertNode(root, id, name);
     }
 
-    cout << "\nVendors in sorted order (AVL inorder traversal):\n";
+    cout &lt;&lt; "\nVendors in sorted order (AVL inorder traversal):\n";
     inorder(root);
 
-    cout << "\nEnter vendorID to search: ";
+    cout &lt;&lt; "\nEnter vendorID to search: ";
     int q;
-    cin >> q;
+    cin &gt;&gt; q;
     Node* res = search(root, q);
-    if (res) cout << "Vendor found: " << res->key << " - " << res->name << "\n";
-    else cout << "Vendor not found.\n";
+    if (res) cout &lt;&lt; "Vendor found: " &lt;&lt; res-&gt;key &lt;&lt; " - " &lt;&lt; res-&gt;name &lt;&lt; "\n";
+    else cout &lt;&lt; "Vendor not found.\n";
 
     return 0;
-}
-</pre>
+}</pre>
                 </div>
             </section>
-          <!-- ========== CASE 11 ========== -->
+
+            <!-- ========== CASE 11 (Segment Tree) ========== -->
             <section class="case">
                 <div class="case-header-row">
                     <span>CASE 11</span>
-                    <span class="case-pill"> </span>
+                    <span class="case-pill"> Crowd Management </span>
                 </div>
                 <div class="case-title">Crowd Density Monitor (Segment Tree)</div>
 
@@ -1687,7 +1681,7 @@ int main() {
 
                 <div class="case-field">
                     <h3>Description of the Business Case</h3>
-                    <p>We need fast updates when more people enter/leave and fast range queries, like “how many people between section 3 and 8?</p>
+                    <p>We need fast updates when more people enter/leave and fast range queries, like “how many people between section 3 and 8?”.</p>
                 </div>
 
                 <div class="case-grid">
@@ -1696,7 +1690,7 @@ int main() {
                             <div class="info-icon">⚙️</div>
                             <span>Algorithm Used</span>
                         </div>
-                        <div class="info-main">Segment tree</div>
+                        <div class="info-main">Segment Tree</div>
                         <div class="info-sub">
                           A segment tree supports range sum queries and point updates in O(log n), ideal for live crowd monitoring dashboards.
                         </div>
@@ -1719,20 +1713,20 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre> // Case 10 - Crowd Density Monitor using Segment Tree (range sum)
-#include <bits/stdc++.h>
+<pre>// Case 11 - Crowd Density Monitor using Segment Tree (range sum)
+#include &lt;bits/stdc++.h&gt;
 using namespace std;
 
 struct SegmentTree {
     int n;
-    vector<int> tree;
+    vector&lt;int&gt; tree;
 
     SegmentTree(int size) {
         n = size;
         tree.assign(4 * n, 0);
     }
 
-    void build(vector<int> &arr, int idx, int l, int r) {
+    void build(vector&lt;int&gt; &amp;arr, int idx, int l, int r) {
         if (l == r) {
             tree[idx] = arr[l];
             return;
@@ -1743,7 +1737,7 @@ struct SegmentTree {
         tree[idx] = tree[2 * idx] + tree[2 * idx + 1];
     }
 
-    void build(vector<int> &arr) {
+    void build(vector&lt;int&gt; &amp;arr) {
         build(arr, 1, 0, n - 1);
     }
 
@@ -1753,7 +1747,7 @@ struct SegmentTree {
             return;
         }
         int mid = (l + r) / 2;
-        if (pos <= mid) update(2 * idx, l, mid, pos, val);
+        if (pos &lt;= mid) update(2 * idx, l, mid, pos, val);
         else update(2 * idx + 1, mid + 1, r, pos, val);
         tree[idx] = tree[2 * idx] + tree[2 * idx + 1];
     }
@@ -1763,8 +1757,8 @@ struct SegmentTree {
     }
 
     int query(int idx, int l, int r, int ql, int qr) {
-        if (qr < l || ql > r) return 0;         // no overlap
-        if (ql <= l && r <= qr) return tree[idx]; // complete overlap
+        if (qr &lt; l || ql &gt; r) return 0;         // no overlap
+        if (ql &lt;= l &amp;&amp; r &lt;= qr) return tree[idx]; // complete overlap
         int mid = (l + r) / 2;
         return query(2 * idx, l, mid, ql, qr) +
                query(2 * idx + 1, mid + 1, r, ql, qr);
@@ -1777,50 +1771,96 @@ struct SegmentTree {
 
 int main() {
     int n;
-    cout << "Enter number of sections in street: ";
-    cin >> n;
+    cout &lt;&lt; "Enter number of sections in street: ";
+    cin &gt;&gt; n;
 
-    vector<int> crowd(n);
-    cout << "Enter initial crowd count for each section:\n";
-    for (int i = 0; i < n; ++i) cin >> crowd[i];
+    vector&lt;int&gt; crowd(n);
+    cout &lt;&lt; "Enter initial crowd count for each section:\n";
+    for (int i = 0; i &lt; n; ++i) cin &gt;&gt; crowd[i];
 
     SegmentTree st(n);
     st.build(crowd);
 
     while (true) {
-        cout << "\n1. Update crowd at a section\n";
-        cout << "2. Query total crowd in a range\n";
-        cout << "3. Exit\n";
-        cout << "Choose option: ";
+        cout &lt;&lt; "\n1. Update crowd at a section\n";
+        cout &lt;&lt; "2. Query total crowd in a range\n";
+        cout &lt;&lt; "3. Exit\n";
+        cout &lt;&lt; "Choose option: ";
         int choice;
-        cin >> choice;
+        cin &gt;&gt; choice;
 
         if (choice == 1) {
             int pos, val;
-            cout << "Enter section index (0-based) and new crowd count: ";
-            cin >> pos >> val;
+            cout &lt;&lt; "Enter section index (0-based) and new crowd count: ";
+            cin &gt;&gt; pos &gt;&gt; val;
             st.update(pos, val);
         } else if (choice == 2) {
             int l, r;
-            cout << "Enter range [l r]: ";
-            cin >> l >> r;
-            cout << "Total crowd from section " << l << " to " << r
-                 << " = " << st.query(l, r) << "\n";
+            cout &lt;&lt; "Enter range [l r]: ";
+            cin &gt;&gt; l &gt;&gt; r;
+            cout &lt;&lt; "Total crowd from section " &lt;&lt; l &lt;&lt; " to " &lt;&lt; r
+                 &lt;&lt; " = " &lt;&lt; st.query(l, r) &lt;&lt; "\n";
         } else {
             break;
         }
     }
 
     return 0;
-} </pre>
+}</pre>
                 </div>
             </section>
-
 
             <footer>
                 KLE TECHNOLOGICAL UNIVERSITY • DAA Project 
             </footer>
         </main>
     </div>
+
+    <!-- COPY CODE SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const buttons = document.querySelectorAll('.copy-btn');
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const codeBlock = btn.closest('.code-block');
+                    if (!codeBlock) return;
+                    const pre = codeBlock.querySelector('pre');
+                    if (!pre) return;
+
+                    const text = pre.innerText;
+
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(() => {
+                            const oldText = btn.textContent;
+                            btn.textContent = 'Copied!';
+                            setTimeout(() => {
+                                btn.textContent = oldText;
+                            }, 1200);
+                        }).catch(() => {
+                            alert('Copy failed. Please copy manually.');
+                        });
+                    } else {
+                        // Fallback for very old browsers
+                        const textarea = document.createElement('textarea');
+                        textarea.value = text;
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        try {
+                            document.execCommand('copy');
+                            const oldText = btn.textContent;
+                            btn.textContent = 'Copied!';
+                            setTimeout(() => {
+                                btn.textContent = oldText;
+                            }, 1200);
+                        } catch (e) {
+                            alert('Copy failed. Please copy manually.');
+                        }
+                        document.body.removeChild(textarea);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
