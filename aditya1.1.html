@@ -7,9 +7,10 @@
 
 <style>
   :root{
-    --bg-dark:#0d1117;
-    --text-light:#e6eef3;
-    --accent-1:#00f5d4;
+    --bg-1:#f0f4ff;        /* Main page background */
+    --section-bg:#ffffff;  /* Section boxes */
+    --text-dark:#1a1a1a;
+    --accent-1:#0077ff;
     --accent-2:#d97706;
     --accent-3:#6b21a8;
     --max-width:900px;
@@ -18,8 +19,8 @@
 
   *{ margin:0; padding:0; box-sizing:border-box; }
   body{
-    background:var(--bg-dark);
-    color:var(--text-light);
+    background:var(--bg-1);
+    color:var(--text-dark);
     padding-top:78px;
     line-height:1.6;
   }
@@ -29,9 +30,10 @@
     position:fixed; top:8px; left:50%; transform:translateX(-50%);
     width:calc(100% - 40px); max-width:var(--max-width);
     display:flex; justify-content:space-between; align-items:center;
-    background:rgba(255,255,255,0.05);
+    background:#ffffffbb;
     padding:12px 18px; border-radius:12px;
     backdrop-filter:blur(10px);
+    border:1px solid #d0d8ff;
   }
 
   .logo{ display:flex; gap:12px; align-items:center; }
@@ -39,12 +41,11 @@
     width:36px; height:36px; border-radius:9px;
     background:linear-gradient(135deg,#00f5d4,#3b82f6);
     display:flex; align-items:center; justify-content:center;
-    font-weight:800; color:#0d1117;
+    font-weight:800; color:#ffffff;
   }
 
-  nav a{ text-decoration:none; color:var(--text-light); font-weight:600; }
+  nav a{ text-decoration:none; color:var(--text-dark); font-weight:600; }
 
-  /* MAIN CONTENT */
   .wrap{
     max-width:var(--max-width);
     margin:28px auto;
@@ -53,11 +54,15 @@
 
   h1{ text-align:center; margin-bottom:32px; }
 
-  /* SECTION STYLE (FULL-WIDTH WITH SEPARATOR) */
+  /* SECTION STYLE */
   .section{
-    padding:28px 0;
-    border-bottom:1px solid rgba(255,255,255,0.15);
+    background:var(--section-bg);
+    padding:28px 22px;
+    margin-bottom:22px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
   }
+
   .section h2{
     margin-bottom:12px;
     font-size:24px;
@@ -73,25 +78,24 @@
   .section ul{ padding-left:22px; margin-top:10px; }
   .section ul li{ margin-bottom:8px; }
 
-  /* TABLE */
   table{
     width:100%;
     margin-top:14px;
     border-collapse:collapse;
   }
   th,td{
-    border:1px solid rgba(255,255,255,0.3);
+    border:1px solid #d0d0d0;
     padding:10px;
   }
   th{
-    background:rgba(255,255,255,0.1);
+    background:#e8eefd;
   }
 
   footer{
     text-align:center;
     padding:24px;
     margin-top:24px;
-    color:var(--text-light);
+    color:var(--text-dark);
   }
 </style>
 </head>
@@ -106,9 +110,7 @@
       <div style="font-size:12px;">DAA — Design & Analysis of Algorithms</div>
     </div>
   </div>
-  <nav>
-   <!--- <a href="aditya.html">BACK</a>-->
-  </nav>
+  <nav></nav>
 </header>
 
 <main class="wrap">
@@ -175,6 +177,8 @@
       <tr><td>Heuristic Function</td><td>A* estimation</td></tr>
     </table>
 
+    <h2>Algorithm used (with efficiency)</h2>
+
     <h3>Dijkstra – Scenario 1</h3>
     <p><strong>Time:</strong> O((V+E) log V) &nbsp; | &nbsp; <strong>Space:</strong> O(V+E)</p>
 
@@ -188,9 +192,19 @@
     <p><strong>Time:</strong> Best O(E), Worst O(E log V) &nbsp; | &nbsp; <strong>Space:</strong> O(V)</p>
   </div>
 
+  
   <!-- SECTION 4 -->
   <div class="section">
-    <h2>4. Transfer of Knowledge</h2>
+    <h2>4. Sustainable Development Goals (SDGs)</h2>
+    <ul>
+      <li><strong>SDG 11:</strong> Sustainable Cities & Communities</li>
+      <li><strong>SDG 9:</strong> Industry & Innovation</li>
+      <li><strong>SDG 13:</strong> Climate Action (reduced fuel waste)</li>
+    </ul>
+  </div>
+<!-- SECTION 5 -->
+  <div class="section">
+    <h2>5. Transfer of Knowledge</h2>
     <ul>
       <li>Logistics route optimization</li>
       <li>Railway scheduling & planning</li>
@@ -198,17 +212,6 @@
       <li>Air traffic route planning</li>
     </ul>
   </div>
-
-  <!-- SECTION 5 -->
-  <div class="section">
-    <h2>5. Sustainable Development Goals (SDGs)</h2>
-    <ul>
-      <li><strong>SDG 11:</strong> Sustainable Cities & Communities</li>
-      <li><strong>SDG 9:</strong> Industry & Innovation</li>
-      <li><strong>SDG 13:</strong> Climate Action (reduced fuel waste)</li>
-    </ul>
-  </div>
-
 </main>
 
 <footer>
