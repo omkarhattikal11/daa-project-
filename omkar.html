@@ -1809,6 +1809,292 @@ int main() {
 }</pre>
                 </div>
             </section>
+            <!-- ========== CASE 12 (Segment Tree) ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 12</span>
+                    <span class="case-pill"> Research library & digital knowledge center</span>
+                </div>
+                <div class="case-title">Velora Knowledge Hub Search</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Velora’s Knowledge Hub is a central library where students and visitors search for books, research papers, and digital content. The system must quickly locate resources even when thousands of entries are stored.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Every resource (book, paper, video) is stored with a unique ID, title, and short abstract. Users can search by title or by keyword. The system first locates the right resource by title, then highlights where the keyword appears inside the abstract/description.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">AVL Tree + Boyer–Moore</div>
+                        <div class="info-sub">
+                         AVL keeps the search tree balanced, so searching, inserting, or deleting any resource takes O(log n) time even when the library grows large.Boyer–Moore is efficient for pattern matching in text, as it skips multiple characters at once, making keyword search inside long descriptions fast.
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main">SDG 4 – Quality Education</div>
+                        <div class="info-sub">
+                       Faster access to knowledge and research material supports better learning and education.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+<pre> #include <bits/stdc++.h>
+using namespace std;
+
+struct AVLNode {
+    string key;          // e.g. book or resource title
+    int height;
+    AVLNode *left;
+    AVLNode *right;
+
+    AVLNode(const string &k)
+        : key(k), height(1), left(nullptr), right(nullptr) {}
+};
+
+int getHeight(AVLNode *node) {
+    return node ? node->height : 0;
+}
+
+int getBalance(AVLNode *node) {
+    if (!node) return 0;
+    return getHeight(node->left) - getHeight(node->right);
+}
+
+AVLNode* rotateRight(AVLNode *y) {
+    AVLNode *x = y->left;
+    AVLNode *T2 = x->right;
+
+    // Perform rotation
+    x->right = y;
+    y->left = T2;
+
+    // Update heights
+    y->height = max(getHeight(y->left), getHeight(y->right)) + 1;
+    x->height = max(getHeight(x->left), getHeight(x->right)) + 1;
+
+    return x; // new root
+}
+
+AVLNode* rotateLeft(AVLNode *x) {
+    AVLNode *y = x->right;
+    AVLNode *T2 = y->left;
+
+    // Perform rotation
+    y->left = x;
+    x->right = T2;
+
+    // Update heights
+    x->height = max(getHeight(x->left), getHeight(x->right)) + 1;
+    y->height = max(getHeight(y->left), getHeight(y->right)) + 1;
+
+    return y; // new root
+}
+
+AVLNode* insertNode(AVLNode *node, const string &key) {
+    // 1. Normal BST insertion
+    if (!node) return new AVLNode(key);
+
+    if (key < node->key)
+        node->left = insertNode(node->left, key);
+    else if (key > node->key)
+        node->right = insertNode(node->right, key);
+    else
+        return node; // duplicate titles ignored or handle separately
+
+    // 2. Update height
+    node->height = 1 + max(getHeight(node->left), getHeight(node->right));
+
+    // 3. Get balance factor
+    int balance = getBalance(node);
+
+    // 4. Balance the tree
+
+    // Left Left Case
+    if (balance > 1 && key < node->left->key)
+        return rotateRight(node);
+
+    // Right Right Case
+    if (balance < -1 && key > node->right->key)
+        return rotateLeft(node);
+
+    // Left Right Case
+    if (balance > 1 && key > node->left->key) {
+        node->left = rotateLeft(node->left);
+        return rotateRight(node);
+    }
+
+    // Right Left Case
+    if (balance < -1 && key < node->right->key) {
+        node->right = rotateRight(node->right);
+        return rotateLeft(node);
+    }
+
+    // already balanced
+    return node;
+}
+
+// Simple search for exact title
+bool searchTitle(AVLNode *root, const string &key) {
+    if (!root) return false;
+    if (key == root->key) return true;
+    if (key < root->key) return searchTitle(root->left, key);
+    return searchTitle(root->right, key);
+}
+
+// Example usage
+int main() {
+    AVLNode *root = nullptr;
+
+    // Insert some resource titles
+    root = insertNode(root, "Smart Parking in Velora");
+    root = insertNode(root, "Green Energy Management");
+    root = insertNode(root, "Waste Collection Optimization");
+    root = insertNode(root, "Transit Scheduling in Velora");
+
+    string query;
+    cout << "Enter title to search: ";
+    getline(cin, query);
+
+    if (searchTitle(root, query))
+        cout << "Resource found in Knowledge Hub.\n";
+    else
+        cout << "Resource not found.\n";
+
+    return 0;
+}
+ </pre>
+                </div>
+            </section>
+            <!-- ========== CASE 13 (Segment Tree) ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 13</span>
+                    <span class="case-pill"> Public transport inside Velora</span>
+                </div>
+                <div class="case-title">Velora Shuttle Fare & Route Planner</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Velora runs internal shuttle buses between different zones (hostels, labs, exhibitions, parking areas). The system must suggest cheap and safe routes for passengers and also handle special discounts or penalties on certain routes.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Each stop in Velora is a node, and every road between stops has a cost (time, fare, or fuel usage). Sometimes some routes have discounts (negative cost edges, like “early morning discount”) or additional penalties (like “temporary congestion charge”). The planner needs to compute the best route from a given source stop to all other stops considering these adjustments.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">Bellman–Ford + Segment Tree + Floyd–Warshall </div>
+                        <div class="info-sub">
+                       Bellman–Ford : Used for single-source shortest path where edges can have negative weights.Segment Tree : Used to manage and update fare or crowd levels over time ranges efficiently. Floyd–Warshall : Used if Velora wants an all-pairs distance matrix between all stops, so at any time you can look up the best route between any two zones directly. 
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main">SDG 11 – Sustainable Cities and Communities</div>
+                        <div class="info-sub">
+                      Better public transit planning reduces congestion and supports eco-friendly mobility.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+<pre> #include <bits/stdc++.h>
+using namespace std;
+
+struct Edge {
+    int u, v;
+    int w; // cost: time / fare (can be negative for discount)
+};
+
+int main() {
+    int n, m, src;
+    cout << "Enter number of stops (vertices): ";
+    cin >> n;
+    cout << "Enter number of roads (edges): ";
+    cin >> m;
+
+    vector<Edge> edges(m);
+
+    cout << "Enter edges as: from to cost\n";
+    for (int i = 0; i < m; ++i) {
+        cin >> edges[i].u >> edges[i].v >> edges[i].w;
+    }
+
+    cout << "Enter source stop: ";
+    cin >> src;
+
+    const int INF = 1e9;
+    vector<int> dist(n + 1, INF);
+    dist[src] = 0;
+
+    // Relax edges (n - 1) times
+    for (int i = 1; i <= n - 1; ++i) {
+        bool changed = false;
+        for (const auto &e : edges) {
+            if (dist[e.u] != INF && dist[e.u] + e.w < dist[e.v]) {
+                dist[e.v] = dist[e.u] + e.w;
+                changed = true;
+            }
+        }
+        if (!changed) break; // no change => already optimal
+    }
+
+    // Check for negative-weight cycle
+    bool hasNegativeCycle = false;
+    for (const auto &e : edges) {
+        if (dist[e.u] != INF && dist[e.u] + e.w < dist[e.v]) {
+            hasNegativeCycle = true;
+            break;
+        }
+    }
+
+    if (hasNegativeCycle) {
+        cout << "Warning: Negative cycle detected in Velora shuttle network!\n";
+    } else {
+        cout << "Shortest cost from stop " << src << " to others:\n";
+        for (int i = 1; i <= n; ++i) {
+            cout << "Stop " << i << ": ";
+            if (dist[i] == INF) cout << "unreachable\n";
+            else cout << dist[i] << "\n";
+        }
+    }
+
+    return 0;
+} </pre>
+                </div>
+            </section>
 
             <footer>
                 KLE TECHNOLOGICAL UNIVERSITY • DAA Project 
