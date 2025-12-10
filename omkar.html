@@ -740,18 +740,18 @@ int main(){
             <section class="case">
                 <div class="case-header-row">
                     <span>CASE 4</span>
-                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                    <span class="case-pill">  </span>
                 </div>
-                <div class="case-title">TITLE OF BUSINESS CASE 4</div>
+                <div class="case-title">Highway Traffic Flow Optimization (NH-66)</div>
 
                 <div class="case-field">
                     <h3>About the Case</h3>
-                    <p>Write 2–3 lines giving an overview of what Case 4 is about.</p>
+                    <p>Estimates fastest travel time between highway junctions considering congestion.</p>
                 </div>
 
                 <div class="case-field">
                     <h3>Description of the Business Case</h3>
-                    <p>Describe the full workflow handled by Case 4.</p>
+                    <p>Each segment has a base time + congestion value. The system computes the minimum-time path for vehicles.</p>
                 </div>
 
                 <div class="case-grid">
@@ -760,9 +760,9 @@ int main(){
                             <div class="info-icon">⚙️</div>
                             <span>Algorithm Used</span>
                         </div>
-                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-main">Dijkstra’s Algorithm</div>
                         <div class="info-sub">
-                            Short explanation for algorithm usage in Case 4.
+                            Best for finding least-time paths when weights vary with traffic.
                         </div>
                     </div>
 
@@ -771,9 +771,9 @@ int main(){
                             <div class="info-icon">🌍</div>
                             <span>SDGs Linked</span>
                         </div>
-                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-main">SDG 11 — Sustainable Cities</div>
                         <div class="info-sub">
-                            SDG description for Case 4.
+                           Reduces congestion and improves transport efficiency.
                         </div>
                     </div>
                 </div>
@@ -783,7 +783,35 @@ int main(){
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>// Paste your C++ code for Case 4 here</pre>
+                    <pre>#include <bits/stdc++.h>
+using namespace std;
+
+struct E { int v, t; };
+vector<vector<E>> g;
+
+int main(){
+    g.resize(4);
+    auto add=[&](int u,int v,int t){ g[u].push_back({v,t}); g[v].push_back({u,t}); };
+
+    add(0,1,5); add(1,2,3); add(0,2,10); add(2,3,2);
+
+    vector<int> dist(4,1e9); dist[0]=0;
+    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<>> pq;
+    pq.push({0,0});
+
+    while(!pq.empty()){
+        auto [d,u]=pq.top(); pq.pop();
+        if(d!=dist[u]) continue;
+        for(auto &e:g[u]){
+            if(d+e.t < dist[e.v]){
+                dist[e.v]=d+e.t;
+                pq.push({dist[e.v],e.v});
+            }
+        }
+    }
+    cout<<"Min time to reach 3 = "<<dist[3];
+}
+</pre>
                 </div>
             </section>
 
@@ -791,18 +819,18 @@ int main(){
             <section class="case">
                 <div class="case-header-row">
                     <span>CASE 5</span>
-                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                    <span class="case-pill">Rail–Road Safety Management</span>
                 </div>
-                <div class="case-title">TITLE OF BUSINESS CASE 5</div>
+                <div class="case-title">Railway Crossing Coordination</div>
 
                 <div class="case-field">
                     <h3>About the Case</h3>
-                    <p>Write 2–3 lines giving an overview of what Case 5 is about.</p>
+                    <p>Manages gates at multiple railway crossings where trains and road vehicles intersect. Goal is to minimise gate-closed time while maintaining full safety..</p>
                 </div>
 
                 <div class="case-field">
                     <h3>Description of the Business Case</h3>
-                    <p>Describe how Case 5 operates inside the system.</p>
+                    <p>The system predicts when trains will reach the crossing and closes or opens the gate at the right moments, keeping it safe without unnecessary delays</p>
                 </div>
 
                 <div class="case-grid">
@@ -811,9 +839,10 @@ int main(){
                             <div class="info-icon">⚙️</div>
                             <span>Algorithm Used</span>
                         </div>
-                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-main">Event Scheduling with Priority Queue (Min-Heap by Arrival Time)</div>
                         <div class="info-sub">
-                            Short explanation for algorithm usage in Case 5.
+                           A min-heap stores train events by arrival time, letting the system handle the earliest event first for safe, collision-free scheduling.
+
                         </div>
                     </div>
 
@@ -822,9 +851,9 @@ int main(){
                             <div class="info-icon">🌍</div>
                             <span>SDGs Linked</span>
                         </div>
-                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-main">SDG 3 – Good Health and Well-Being  SDG 9 – Industry, Innovation and Infrastructure</div>
                         <div class="info-sub">
-                            SDG description for Case 5.
+                           Prevents accidents at railway crossings.Enhances safety of transport infrastructure.
                         </div>
                     </div>
                 </div>
@@ -834,7 +863,50 @@ int main(){
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>// Paste your C++ code for Case 5 here</pre>
+                    <pre>// Case 5 - Railway Crossing Coordination using Min-Heap Event Scheduling
+
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Train {
+    int arrivalTime;
+    string trainName;
+};
+
+// Min-heap based on arrival times
+struct Compare {
+    bool operator()(Train const& a, Train const& b) {
+        return a.arrivalTime > b.arrivalTime; // earlier train = higher priority
+    }
+};
+
+int main() {
+    priority_queue<Train, vector<Train>, Compare> pq;
+
+    int n;
+    cout << "Enter number of trains: ";
+    cin >> n;
+
+    cout << "Enter train name and arrival time:\n";
+    for (int i = 0; i < n; i++) {
+        Train t;
+        cin >> t.trainName >> t.arrivalTime;
+        pq.push(t);
+    }
+
+    cout << "\n--- Railway Crossing Gate Schedule ---\n";
+    while (!pq.empty()) {
+        Train t = pq.top();
+        pq.pop();
+        cout << "Train " << t.trainName 
+             << " arriving at time " << t.arrivalTime
+             << " → Gate CLOSED\n";
+    }
+
+    cout << "\nAll trains processed safely.\n";
+    return 0;
+}
+</pre>
                 </div>
             </section>
 
