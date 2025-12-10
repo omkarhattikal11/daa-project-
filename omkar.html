@@ -597,16 +597,16 @@ int main() {
                     <span>CASE 2</span>
                     <span class="case-pill">ENTER AREA / DOMAIN</span>
                 </div>
-                <div class="case-title">TITLE OF BUSINESS CASE 2</div>
+                <div class="case-title">Waste & Water Management Scheduling</div>
 
                 <div class="case-field">
                     <h3>About the Case</h3>
-                    <p>Write 2–3 lines giving an overview of what Case 2 is about.</p>
+                    <p>Schedules waste collection and water tanker dispatch based on urgency and deadlines.</p>
                 </div>
 
                 <div class="case-field">
                     <h3>Description of the Business Case</h3>
-                    <p>Describe the scenario and operations handled in Case 2.</p>
+                    <p>Requests arrive with different priorities and deadlines. The system always processes the highest-priority, earliest-deadline task first.</p>
                 </div>
 
                 <div class="case-grid">
@@ -615,9 +615,9 @@ int main() {
                             <div class="info-icon">⚙️</div>
                             <span>Algorithm Used</span>
                         </div>
-                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-main">Priority Queue (Min-Heap)</div>
                         <div class="info-sub">
-                            Short explanation of why this algorithm fits Case 2.
+                         It automatically keeps the most urgent request at the top for fast scheduling.
                         </div>
                     </div>
 
@@ -626,9 +626,9 @@ int main() {
                             <div class="info-icon">🌍</div>
                             <span>SDGs Linked</span>
                         </div>
-                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-main"SDG 6 — Clean Water & Sanitation</div>
                         <div class="info-sub">
-                            Mention the SDGs and connection with this business case.
+                           Ensures timely waste disposal and water supply.
                         </div>
                     </div>
                 </div>
@@ -638,7 +638,29 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>// Paste your C++ code for Case 2 here</pre>
+                    <pre>#include <bits/stdc++.h>
+using namespace std;
+
+struct Req { string id; int deadline, priority; };
+struct Cmp {
+    bool operator()(Req a, Req b){
+        if(a.deadline == b.deadline) return a.priority < b.priority;
+        return a.deadline > b.deadline;
+    }
+};
+
+int main(){
+    priority_queue<Req,vector<Req>,Cmp> pq;
+    pq.push({"Waste1",10,2});
+    pq.push({"Water1",8,1});
+    pq.push({"Waste2",9,3});
+
+    while(!pq.empty()){
+        auto r=pq.top(); pq.pop();
+        cout<<r.id<<" deadline "<<r.deadline<<" priority "<<r.priority<<"\n";
+    }
+}
+</pre>
                 </div>
             </section>
 
@@ -646,18 +668,18 @@ int main() {
             <section class="case">
                 <div class="case-header-row">
                     <span>CASE 3</span>
-                    <span class="case-pill">ENTER AREA / DOMAIN</span>
+                    <span class="case-pill">  </span>
                 </div>
-                <div class="case-title">TITLE OF BUSINESS CASE 3</div>
+                <div class="case-title">Pipeline Network Fault Detection</div>
 
                 <div class="case-field">
                     <h3>About the Case</h3>
-                    <p>Write 2–3 lines giving an overview of what Case 3 is about.</p>
+                    <p>Detects which pipeline sections stop receiving flow when a pipe fails.</p>
                 </div>
 
                 <div class="case-field">
                     <h3>Description of the Business Case</h3>
-                    <p>Describe what this case manages or optimizes inside your city/park.</p>
+                    <p>The pipeline is a graph. When a connection breaks, BFS identifies which nodes are still reachable.</p>
                 </div>
 
                 <div class="case-grid">
@@ -666,9 +688,9 @@ int main() {
                             <div class="info-icon">⚙️</div>
                             <span>Algorithm Used</span>
                         </div>
-                        <div class="info-main">ALGORITHM / DATA STRUCTURE NAME</div>
+                        <div class="info-main">BFS (Breadth-First Search)</div>
                         <div class="info-sub">
-                            Short explanation for algorithm usage in Case 3.
+                           It quickly checks connectivity from the source to detect fault-affected areas.
                         </div>
                     </div>
 
@@ -677,9 +699,9 @@ int main() {
                             <div class="info-icon">🌍</div>
                             <span>SDGs Linked</span>
                         </div>
-                        <div class="info-main">SDG NUMBER — SDG TITLE</div>
+                        <div class="info-main">SDG 9 — Infrastructure</div>
                         <div class="info-sub">
-                            SDG description for Case 3.
+                           Ensures reliable and safe pipeline systems.
                         </div>
                     </div>
                 </div>
@@ -689,7 +711,28 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-                    <pre>// Paste your C++ code for Case 3 here</pre>
+                    <pre>#include <bits/stdc++.h>
+using namespace std;
+
+vector<vector<int>> g;
+
+vector<int> bfs(int src){
+    vector<int> vis(g.size(),0);
+    queue<int> q; q.push(src); vis[src]=1;
+    while(!q.empty()){
+        int u=q.front(); q.pop();
+        for(int v:g[u]) if(!vis[v]) vis[v]=1, q.push(v);
+    }
+    return vis;
+}
+
+int main(){
+    g={{1},{0,2},{1,3},{2}};
+    auto vis=bfs(0);
+    for(int i=0;i<vis.size();i++)
+        cout<<"Node "<<i<<(vis[i]?" reachable\n":" unreachable\n");
+}
+</pre>
                 </div>
             </section>
 
