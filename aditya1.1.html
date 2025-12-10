@@ -7,164 +7,213 @@
 
 <style>
   :root{
-    --bg-dark: #0d1117;      
-    --text-light: #e6eef3;
-    --accent-1: #00f5d4;        /* Problem + Solution */
-    --accent-2: #d97706;        /* Algorithms + Data Structures - dark amber */
-    --accent-3: #6b21a8;        /* SDGs - dark violet */
-    --card-radius: 14px;
-    --shadow-dark: rgba(0,0,0,0.5);
-    --max-width: 900px;
-    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    --bg-dark:#0d1117;
+    --text-light:#e6eef3;
+    --accent-1:#00f5d4;
+    --accent-2:#d97706;
+    --accent-3:#6b21a8;
+    --max-width:900px;
+    font-family:'Inter',sans-serif;
   }
 
-  * { box-sizing: border-box; margin:0; padding:0; }
-  html,body { height:100%; }
-
+  *{ margin:0; padding:0; box-sizing:border-box; }
   body{
-    background: var(--bg-dark);
-    color: var(--text-light);
+    background:var(--bg-dark);
+    color:var(--text-light);
     padding-top:78px;
-    line-height:1.5;
+    line-height:1.6;
   }
 
   /* NAVBAR */
   .navbar{
     position:fixed; top:8px; left:50%; transform:translateX(-50%);
     width:calc(100% - 40px); max-width:var(--max-width);
-    display:flex; align-items:center; justify-content:space-between; gap:12px;
-    padding:12px 18px;
-    background: rgba(255,255,255,0.05);
-    border-radius:12px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 6px 30px var(--shadow-dark);
-    z-index:50;
+    display:flex; justify-content:space-between; align-items:center;
+    background:rgba(255,255,255,0.05);
+    padding:12px 18px; border-radius:12px;
+    backdrop-filter:blur(10px);
   }
 
-  .logo{ display:flex; gap:12px; align-items:center; font-weight:700; font-size:18px; }
-  .logo .dot{ width:36px; height:36px; border-radius:9px;
-    background: linear-gradient(135deg,#00f5d4,#3b82f6);
+  .logo{ display:flex; gap:12px; align-items:center; }
+  .logo .dot{
+    width:36px; height:36px; border-radius:9px;
+    background:linear-gradient(135deg,#00f5d4,#3b82f6);
     display:flex; align-items:center; justify-content:center;
-    color:#0d1117; font-weight:800; box-shadow:0 6px 18px rgba(0,255,212,0.3); }
-
-  nav ul{ display:flex; gap:14px; list-style:none; align-items:center; }
-  nav a{ text-decoration:none; color:var(--text-light); font-weight:600; padding:8px 12px; border-radius:8px; font-size:14px; transition: all .18s ease; }
-  nav a:hover{ color:#00f5d4; transform:translateY(-2px); }
-
-  /* WRAPPER */
-  .wrap{ max-width:var(--max-width); margin:28px auto; padding:28px; }
-  h1{ font-size:28px; margin-bottom:24px; text-align:center; color:var(--text-light); }
-
-  /* CARD STYLES */
-  .card-container{ display:flex; flex-direction:column; gap:22px; }
-
-  .card{
-    border-radius:var(--card-radius);
-    padding:24px;
-    box-shadow: 0 8px 30px var(--shadow-dark);
-    border:1px solid rgba(255,255,255,0.1);
+    font-weight:800; color:#0d1117;
   }
 
-  .card h2{ font-size:20px; margin-bottom:12px; }
+  nav a{ text-decoration:none; color:var(--text-light); font-weight:600; }
 
-  .card ul{ padding-left:20px; margin-top:10px; }
-  .card ul li{ margin-bottom:8px; font-size:14px; }
+  /* MAIN CONTENT */
+  .wrap{
+    max-width:var(--max-width);
+    margin:28px auto;
+    padding:0 22px;
+  }
 
-  .card table{ width:100%; border-collapse: collapse; margin-top:12px; color: #0d1117; }
-  .card th, .card td{ border:1px solid rgba(255,255,255,0.2); padding:10px; text-align:left; font-size:14px; }
-  .card th{ background-color: rgba(0,0,0,0.3); color: var(--text-light); }
+  h1{ text-align:center; margin-bottom:32px; }
 
-  /* DISTINCT GRADIENTS */
-  .problem-solution-card{ background: linear-gradient(135deg,#00f5d4,#3b82f6); color:#0d1117; }
-  .algo-datastruct-card{ background: linear-gradient(135deg,#b45309,#78350f); color:#f3f3f3; } /* dark amber/brown */
-  .sdg-card{ background: linear-gradient(135deg,#5b21b6,#3b0764); color:#f3f3f3; } /* dark violet */
+  /* SECTION STYLE (FULL-WIDTH WITH SEPARATOR) */
+  .section{
+    padding:28px 0;
+    border-bottom:1px solid rgba(255,255,255,0.15);
+  }
+  .section h2{
+    margin-bottom:12px;
+    font-size:24px;
+    color:var(--accent-1);
+  }
 
-  footer{ margin-top:34px; color:var(--text-light); font-size:14px; text-align:center; padding:18px 6px; }
+  .section h3{
+    margin-top:14px;
+    font-size:18px;
+    color:var(--accent-2);
+  }
+
+  .section ul{ padding-left:22px; margin-top:10px; }
+  .section ul li{ margin-bottom:8px; }
+
+  /* TABLE */
+  table{
+    width:100%;
+    margin-top:14px;
+    border-collapse:collapse;
+  }
+  th,td{
+    border:1px solid rgba(255,255,255,0.3);
+    padding:10px;
+  }
+  th{
+    background:rgba(255,255,255,0.1);
+  }
+
+  footer{
+    text-align:center;
+    padding:24px;
+    margin-top:24px;
+    color:var(--text-light);
+  }
 </style>
 </head>
+
 <body>
 
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="logo">
-      <div class="dot">CD</div>
-      <div>
-        <div style="font-weight:800">CITY DESIGN</div>
-        <div style="font-size:12px;color:var(--text-light);margin-top:2px">DAA — Design & Analysis of Algorithms</div>
-      </div>
+<header class="navbar">
+  <div class="logo">
+    <div class="dot">CD</div>
+    <div>
+      <div style="font-weight:800">CITY DESIGN</div>
+      <div style="font-size:12px;">DAA — Design & Analysis of Algorithms</div>
     </div>
-    <nav>
-      <ul>
-        <li><a href="aditya.html">BACK</a></li>
-      </ul>
-    </nav>
-  </header>
+  </div>
+  <nav>
+   <!--- <a href="aditya.html">BACK</a>-->
+  </nav>
+</header>
 
-  <!-- PAGE CONTENT -->
-  <main class="wrap">
-    <h1>Smart City Traffic & Transport Optimization</h1>
+<main class="wrap">
 
-    <div class="card-container">
+  <h1>Smart City Traffic & Transport Optimization</h1>
 
-      <!-- PROBLEM + SOLUTION -->
-      <div class="card problem-solution-card">
-        <h2>1 • Problem Statement & Solution Overview</h2>
-        <h3>Problem Statement:</h3>
-        <ul>
-          <li>Traffic jams during peak hours.</li>
-          <li>Buses and trains not adhering to optimal routes.</li>
-          <li>Lack of real-time updates on vehicle positions.</li>
-          <li>Poor resource allocation and route planning for public transport.</li>
-        </ul>
-        <h3>Solution Overview:</h3>
-        <ul>
-          <li>Collect real-time traffic data from sensors, GPS in buses, and user apps.</li>
-          <li>Predict traffic congestion using advanced algorithms.</li>
-          <li>Suggest optimal routes for public transport vehicles.</li>
-          <li>Optimize bus and train schedules dynamically using real-time data.</li>
-          <li>Provide alerts for accidents, roadblocks, or congestion.</li>
-          <li>Reduce travel time and minimize environmental impact.</li>
-        </ul>
-      </div>
+  <!-- SECTION 1 -->
+  <div class="section">
+    <h2>1. Problem Description</h2>
+    <p>
+      Modern cities suffer severe traffic congestion, inefficient public transport routing, and delays in emergency response,
+      leading to higher pollution, long travel times, and reduced quality of life.
+    </p>
 
-      <!-- ALGORITHMS + DATA STRUCTURES -->
-      <div class="card algo-datastruct-card">
-        <h2>2 • Algorithms & Data Structures</h2>
-        <table>
-          <tr><th>Task</th><th>Algorithm / Data Structure</th></tr>
-          <tr><td>Shortest path / Optimal route</td><td>Dijkstra, Bellman-Ford, Floyd-Warshall</td></tr>
-          <tr><td>Traffic prediction</td><td>BFS/DFS for graph traversal, Heap for priority queue</td></tr>
-          <tr><td>Real-time updates</td><td>Queues, Min-Heap, Segment Tree</td></tr>
-          <tr><td>Route optimization</td><td>Kruskal / Prim (network optimization)</td></tr>
-          <tr><td>Pattern matching in sensor streams</td><td>KMP, Boyer-Moore</td></tr>
-          <tr><td>Autocomplete / suggestion</td><td>Trie, Hash Table</td></tr>
-        </table>
-        <h3>Data Structures Used:</h3>
-        <ul>
-          <li><strong>Graph:</strong> Road network representation (nodes = junctions, edges = roads).</li>
-          <li><strong>Priority Queue (Heap):</strong> Dispatch vehicles efficiently.</li>
-          <li><strong>Queue:</strong> Simulate vehicles in line at stops.</li>
-          <li><strong>Array / List:</strong> Store schedules and historical data.</li>
-          <li><strong>Trie:</strong> Fast lookup of routes and stops.</li>
-        </ul>
-      </div>
+    <h3>Solution Overview</h3>
+    <ul>
+      <li>Reduces peak-hour traffic load</li>
+      <li>Optimizes bus routes for maximum passenger coverage</li>
+      <li>Provides fastest emergency routes using A*</li>
+      <li>Supports SDG 11 – Sustainable Cities</li>
+    </ul>
+  </div>
 
-      <!-- SDGs -->
-      <div class="card sdg-card">
-        <h2>3 • Sustainable Development Goals (SDGs)</h2>
-        <ul>
-          <li><strong>SDG 11:</strong> Sustainable Cities – Optimize public transport, reduce traffic and pollution.</li>
-          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – Smart infrastructure with sensors and IoT.</li>
-          <li><strong>SDG 13:</strong> Climate Action – Reduce emissions by minimizing congestion and idle time.</li>
-        </ul>
-      </div>
+  <!-- SECTION 2 -->
+  <div class="section">
+    <h2>2. Design Plan</h2>
+    <p>The city is represented as a weighted graph:</p>
+    <ul>
+      <li>Nodes → Junctions / bus stops</li>
+      <li>Edges → Roads with weights (distance + congestion)</li>
+    </ul>
 
-    </div>
-  </main>
+    <h3>Scenarios</h3>
 
-  <footer>
-    © City Design — DAA • KLE Technological University • Built by the project team
-  </footer>
+    <h4>Scenario 1: Peak Hour Traffic Optimization (Dijkstra)</h4>
+    <ul>
+      <li>Uses weighted shortest path</li>
+      <li>Weights = distance + congestion factor</li>
+    </ul>
+
+    <h4>Scenario 2: Public Bus Route Optimization (Greedy + DP-TSP)</h4>
+    <ul>
+      <li>Buses must visit core stops efficiently</li>
+      <li>Greedy finds start → DP TSP gives optimal cycle</li>
+    </ul>
+
+    <h4>Scenario 3: Emergency Vehicle Routing (A*)</h4>
+    <ul>
+      <li>Uses heuristic: straight-line distance</li>
+      <li>Avoids jams and blocked roads</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <h2>3. Data Structures & Algorithms Used</h2>
+
+    <table>
+      <tr><th>Data Structure</th><th>Purpose</th></tr>
+      <tr><td>Graph – Adjacency List</td><td>Represents city road map</td></tr>
+      <tr><td>Min-Heap / Priority Queue</td><td>Dijkstra + A*</td></tr>
+      <tr><td>Arrays / Vectors</td><td>Distance, visited status</td></tr>
+      <tr><td>Bitmask DP Table</td><td>TSP optimization</td></tr>
+      <tr><td>Heuristic Function</td><td>A* estimation</td></tr>
+    </table>
+
+    <h3>Dijkstra – Scenario 1</h3>
+    <p><strong>Time:</strong> O((V+E) log V) &nbsp; | &nbsp; <strong>Space:</strong> O(V+E)</p>
+
+    <h3>Greedy + DP-TSP – Scenario 2</h3>
+    <p>
+      Greedy: O(n²) time, O(n) space<br>
+      DP-TSP: O(n²·2ⁿ) time, O(n·2ⁿ) space
+    </p>
+
+    <h3>A* – Scenario 3</h3>
+    <p><strong>Time:</strong> Best O(E), Worst O(E log V) &nbsp; | &nbsp; <strong>Space:</strong> O(V)</p>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <h2>4. Transfer of Knowledge</h2>
+    <ul>
+      <li>Logistics route optimization</li>
+      <li>Railway scheduling & planning</li>
+      <li>Navigation apps (Google Maps)</li>
+      <li>Air traffic route planning</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="section">
+    <h2>5. Sustainable Development Goals (SDGs)</h2>
+    <ul>
+      <li><strong>SDG 11:</strong> Sustainable Cities & Communities</li>
+      <li><strong>SDG 9:</strong> Industry & Innovation</li>
+      <li><strong>SDG 13:</strong> Climate Action (reduced fuel waste)</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  © City Design — DAA • KLE Technological University • Built by the project team
+</footer>
 
 </body>
 </html>
