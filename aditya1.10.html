@@ -102,7 +102,7 @@
 
   <!-- PAGE CONTENT -->
   <main class="wrap">
-    <h1>Smart City Traffic & Transport Optimization</h1>
+    <h1>industrial goods transport optimization</h1>
 
     <div class="card-container">
 
@@ -111,19 +111,21 @@
         <h2>1 • Problem Statement & Solution Overview</h2>
         <h3>Problem Statement:</h3>
         <ul>
-          <li>Traffic jams during peak hours.</li>
-          <li>Buses and trains not adhering to optimal routes.</li>
-          <li>Lack of real-time updates on vehicle positions.</li>
-          <li>Poor resource allocation and route planning for public transport.</li>
+          <li>High transport cost & fuel use from suboptimal routes and empty return trips.</li>
+          <li>Vehicle capacity mismatch causing split shipments or last-minute rerouting.</li>
+          <li>Urgent/priority shipments that must be delivered sooner than low-priority loads.</li>
+          <li>Multi-stop routing complexity (Vehicle Routing Problem - NP-hard).</li>
+          <li>Dynamic constraints: time windows, vehicle availability, road disruptions.</li>
+          <li>Sustainability targets — need to reduce CO₂ emissions.</li>
         </ul>
         <h3>Solution Overview:</h3>
         <ul>
-          <li>Collect real-time traffic data from sensors, GPS in buses, and user apps.</li>
-          <li>Predict traffic congestion using advanced algorithms.</li>
-          <li>Suggest optimal routes for public transport vehicles.</li>
-          <li>Optimize bus and train schedules dynamically using real-time data.</li>
-          <li>Provide alerts for accidents, roadblocks, or congestion.</li>
-          <li>Reduce travel time and minimize environmental impact.</li>
+          <li>Model the city/industrial area as a weighted graph (nodes = depots/customers/intersections).</li>
+          <li>Compute shortest-path distances between nodes using Dijkstra once (or on demand).</li>
+          <li>Use a priority queue to schedule urgent shipments first.</li>
+          <li>Locally improve each vehicle route using 2-opt swaps to reduce distance.</li>
+          <li>Compute metrics: total distance, total cost, estimated fuel & CO₂, number of vehicles used, service of priorities..</li>
+          <li>Provide simple what-if: add vehicle, re-run assignment.</li>
         </ul>
       </div>
 
@@ -131,31 +133,25 @@
       <div class="card algo-datastruct-card">
         <h2>2 • Algorithms & Data Structures</h2>
         <table>
-          <tr><th>Task</th><th>Algorithm / Data Structure</th></tr>
-          <tr><td>Shortest path / Optimal route</td><td>Dijkstra, Bellman-Ford, Floyd-Warshall</td></tr>
-          <tr><td>Traffic prediction</td><td>BFS/DFS for graph traversal, Heap for priority queue</td></tr>
-          <tr><td>Real-time updates</td><td>Queues, Min-Heap, Segment Tree</td></tr>
-          <tr><td>Route optimization</td><td>Kruskal / Prim (network optimization)</td></tr>
-          <tr><td>Pattern matching in sensor streams</td><td>KMP, Boyer-Moore</td></tr>
-          <tr><td>Autocomplete / suggestion</td><td>Trie, Hash Table</td></tr>
+          <tr><th>Algorithm / Data Structure</th><th>purpose</th></tr>
+          <tr><td>Graph (adjacency list)</td><td>for road network</td></tr>
+          <tr><td>Dijkstra’s algorithm</td><td>for shortest paths between nodes</td></tr>
+          <tr><td>Priority Queue (max-heap)</td><td>to process urgent shipments first</td></tr>
+          <tr><td>Greedy nearest-neighbor routing</td><td>to build initial vehicle routes (fast heuristic for VRP)</td></tr>
+          <tr><td>2-Opt local search</td><td>to improve each route</td></tr>
+          <tr><td>Sorting & greedy bin-packing</td><td>by capacity to assign shipments to vehicles</td></tr>
+          <tr><td>Hash maps (unordered_map)</td><td>for quick lookups</td></tr>
         </table>
-        <h3>Data Structures Used:</h3>
-        <ul>
-          <li><strong>Graph:</strong> Road network representation (nodes = junctions, edges = roads).</li>
-          <li><strong>Priority Queue (Heap):</strong> Dispatch vehicles efficiently.</li>
-          <li><strong>Queue:</strong> Simulate vehicles in line at stops.</li>
-          <li><strong>Array / List:</strong> Store schedules and historical data.</li>
-          <li><strong>Trie:</strong> Fast lookup of routes and stops.</li>
-        </ul>
       </div>
 
       <!-- SDGs -->
       <div class="card sdg-card">
         <h2>3 • Sustainable Development Goals (SDGs)</h2>
         <ul>
-          <li><strong>SDG 11:</strong> Sustainable Cities – Optimize public transport, reduce traffic and pollution.</li>
-          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – Smart infrastructure with sensors and IoT.</li>
-          <li><strong>SDG 13:</strong> Climate Action – Reduce emissions by minimizing congestion and idle time.</li>
+          <li><strong>SDG 11:</strong> Sustainable Cities – reduce congestion and emissions.</li>
+          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure –smarter logistics and resilient supply chains.</li>
+          <li><strong>SDG 13:</strong> Climate Action – lower greenhouse gases through optimized routing.</li>
+           <li><strong>SDG 12:</strong> Responsible Consumption & Production– efficient transport reduces resource waste.</li>
         </ul>
       </div>
 
