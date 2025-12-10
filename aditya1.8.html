@@ -102,7 +102,7 @@
 
   <!-- PAGE CONTENT -->
   <main class="wrap">
-    <h1>Smart City Traffic & Transport Optimization</h1>
+    <h1>Shop & Restaurant Dynamic Pricing System</h1>
 
     <div class="card-container">
 
@@ -111,19 +111,19 @@
         <h2>1 • Problem Statement & Solution Overview</h2>
         <h3>Problem Statement:</h3>
         <ul>
-          <li>Traffic jams during peak hours.</li>
-          <li>Buses and trains not adhering to optimal routes.</li>
-          <li>Lack of real-time updates on vehicle positions.</li>
-          <li>Poor resource allocation and route planning for public transport.</li>
+          <li>Demand Fluctuation.</li>
+          <li>High Wastage in Restaurants.</li>
+          <li>Unpredictable Customer Traffic.</li>
+          <li>Inventory Mismanagement.</li>
+          <li>Competition Pressure.</li>
         </ul>
         <h3>Solution Overview:</h3>
         <ul>
-          <li>Collect real-time traffic data from sensors, GPS in buses, and user apps.</li>
-          <li>Predict traffic congestion using advanced algorithms.</li>
-          <li>Suggest optimal routes for public transport vehicles.</li>
-          <li>Optimize bus and train schedules dynamically using real-time data.</li>
-          <li>Provide alerts for accidents, roadblocks, or congestion.</li>
-          <li>Reduce travel time and minimize environmental impact.</li>
+          <li>Monitors demand and stock.</li>
+          <li>Adjusts prices dynamically using a formula.</li>
+          <li>Prioritizes items for discounts using a heap.</li>
+          <li>Routes supplier orders using Dijkstra.</li>
+          <li>Keeps ordered data in balanced trees for quick range queries and updates.</li>
         </ul>
       </div>
 
@@ -131,31 +131,25 @@
       <div class="card algo-datastruct-card">
         <h2>2 • Algorithms & Data Structures</h2>
         <table>
-          <tr><th>Task</th><th>Algorithm / Data Structure</th></tr>
-          <tr><td>Shortest path / Optimal route</td><td>Dijkstra, Bellman-Ford, Floyd-Warshall</td></tr>
-          <tr><td>Traffic prediction</td><td>BFS/DFS for graph traversal, Heap for priority queue</td></tr>
-          <tr><td>Real-time updates</td><td>Queues, Min-Heap, Segment Tree</td></tr>
-          <tr><td>Route optimization</td><td>Kruskal / Prim (network optimization)</td></tr>
-          <tr><td>Pattern matching in sensor streams</td><td>KMP, Boyer-Moore</td></tr>
-          <tr><td>Autocomplete / suggestion</td><td>Trie, Hash Table</td></tr>
+          <tr><th>Algorithm / Data Structure</th><th>purpose</th></tr>
+          <tr><td>AVL Tree</td><td>for ordered item storage (by price or id).</td></tr>
+          <tr><td>BST</td><td>for simple ordered storage/example.</td></tr>
+          <tr><td>Stack & Queue</td><td>for order processing pipeline</td></tr>
+          <tr><td>Heaps (min/max)</td><td>for top-demand and urgent-discount items</td></tr>
+          <tr><td>Hashing (unordered_map)</td><td>for fast id → item lookup</td></tr>
+          <tr><td>Quick/Merge/Heap Sort</td><td>for reports and analytics.</td></tr>
+          <tr><td>Binary Search</td><td>on sorted price lists.</td></tr>
+          <tr><td>Graph + Dijkstra</td><td>for finding nearest supplier / fastest replenishment route</td></tr>
         </table>
-        <h3>Data Structures Used:</h3>
-        <ul>
-          <li><strong>Graph:</strong> Road network representation (nodes = junctions, edges = roads).</li>
-          <li><strong>Priority Queue (Heap):</strong> Dispatch vehicles efficiently.</li>
-          <li><strong>Queue:</strong> Simulate vehicles in line at stops.</li>
-          <li><strong>Array / List:</strong> Store schedules and historical data.</li>
-          <li><strong>Trie:</strong> Fast lookup of routes and stops.</li>
-        </ul>
       </div>
 
       <!-- SDGs -->
       <div class="card sdg-card">
         <h2>3 • Sustainable Development Goals (SDGs)</h2>
         <ul>
-          <li><strong>SDG 11:</strong> Sustainable Cities – Optimize public transport, reduce traffic and pollution.</li>
-          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – Smart infrastructure with sensors and IoT.</li>
-          <li><strong>SDG 13:</strong> Climate Action – Reduce emissions by minimizing congestion and idle time.</li>
+          <li><strong>SDG 12:</strong> Responsible Consumption & Production – reduces waste by smart discounts near expiry.</li>
+          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – uses infrastructure & algorithms to modernize retail.</li>
+          <li><strong>SDG 8:</strong> Decent Work & Economic Growth – helps businesses optimize revenue.</li>
         </ul>
       </div>
 
