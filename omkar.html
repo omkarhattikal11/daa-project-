@@ -2361,7 +2361,469 @@ int main() {
 }</pre>
                 </div>
             </section>
+ <!-- ========== CASE 16 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 16</span>
+                    <span class="case-pill"> </span>
+                </div>
+                <div class="case-title">Campus Shuttle Stop Load Balancing</div>
 
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>In a large campus like Velora Tech Park, every shuttle stop receives passengers at different rates each hour. The system must sort stops by crowd size so extra shuttles can be dispatched to the busiest ones.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Passenger counts are collected from sensors every 5 minutes and stored in a simple lookup table keyed by stop ID. The system then sorts the stops by load so the transport operator can prioritize which stops need immediate shuttle reinforcement.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">Heap Sort, Lookup Table </div>
+                        <div class="info-sub">
+                            Heap Sort — For Sorting Stops by Crowd Size
+                          Lookup Table — For Fast Stop Information Access
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main"> SDG 11 — Sustainable Cities and Communities
+
+SDG 9 — Industry, Innovation and Infrastructure
+
+SDG 13 — Climate Action </div>
+                        <div class="info-sub">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+<pre> </pre>
+                </div>
+            </section>
+
+ <!-- ========== CASE 17 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 17</span>
+                    <span class="case-pill"> </span>
+                </div>
+                <div class="case-title">Emergency Evacuation Path Finder</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>boarding queue for shuttles.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Mostly near-sorted because passengers generally queue in arrival order but occasionally VIPs or reorders appear. The system must quickly reorder a small portion (fast incremental updates) and occasionally fully re-sort the list.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">DFS + Backtracking + Dynamic Programming</div>
+                        <div class="info-sub">
+                         DFS explores the building layout thoroughly.
+
+Backtracking helps avoid dead-ends and unsafe areas.
+
+Dynamic Programming picks the safest and quickest final path among many.
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main">SDG 11 — Sustainable Cities and Communities
+
+SDG 3 — Good Health and Well-being
+
+SDG 9 — Industry, Innovation and Infrastructure
+
+SDG 13 — Climate Action</div>
+                        <div class="info-sub">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+<pre> </pre>
+                </div>
+            </section>
+ <!-- ========== CASE 18 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 18</span>
+                    <span class="case-pill"> </span>
+                </div>
+                <div class="case-title">Industrial Parts Catalogue Indexing</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Factories maintain a catalog of thousands of parts used in machinery. The system must store parts by ID, name, and category while guaranteeing balanced search performance.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Items are frequently inserted and searched by maintenance staff. A balanced tree ensures consistent O(log n) response time even with large catalogs.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">Red-Black Tree + 2-3 Tree + Divide & Conquer</div>
+                        <div class="info-sub">
+                         Red-Black Trees provide fast insertions in real time. 
+2-3 Trees support guaranteed height balancing, ideal for large catalogs.
+Divide & Conquer ensures efficient batch processing.
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main">SDG 9 — Industry, Innovation and Infrastructure
+
+SDG 8 — Decent Work and Economic Growth
+
+SDG 12 — Responsible Consumption and Production</div>
+                        <div class="info-sub">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+<pre> </pre>
+                </div>
+            </section>
+ <!-- ========== CASE 19 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 19</span>
+                    <span class="case-pill"> </span>
+                </div>
+                <div class="case-title">Emergency Response Network</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Design the minimal-cost network of emergency service roads or dedicated lanes that connects all hospitals, fire stations and major junctions.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Given candidate road segments with construction/maintenance cost or travel-time weight, compute a subset connecting all critical facilities while minimizing total cost. This reduces redundancy and ensures emergency vehicles have a connected, low-cost backbone.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">Kruskal’s algorithm (MST)</div>
+                        <div class="info-sub">
+picks smallest edges and merges components via union-find (DSU). Ideal when you have weighted edges and need a minimal-total-cost spanning network.
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main">SDG 3 (Good Health & Well-Being), SDG 9 (Industry, Innovation & Infrastructure)</div>
+                        <div class="info-sub">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+<pre> </pre>
+                </div>
+            </section>
+ <!-- ========== CASE 20 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 20</span>
+                    <span class="case-pill"> </span>
+                </div>
+                <div class="case-title">Dynamic Crowd Counters</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Live tracking of visitor counts per stall/gallery/zone with frequent point updates and prefix / cumulative queries.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Operators need to update counts as people enter/exit a small area and frequently ask queries like “how many visitors in first N stalls?” or “total visitors up to zone X”. Fenwick tree gives fast point updates and prefix sums.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">Fenwick Tree / Binary Indexed Tree</div>
+                        <div class="info-sub">
+                     O(log n) updates and prefix queries with compact code and low memory.
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main">SDG 11 (Sustainable Cities & Communities), SDG 3 (Safety in public spaces)</div>
+                        <div class="info-sub">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+<pre> </pre>
+                </div>
+            </section>
+ <!-- ========== CASE 21 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 21</span>
+                    <span class="case-pill"> </span>
+                </div>
+                <div class="case-title">Sensor Analytics: Static Range Queries</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Historical analytics on environment sensors (temperature, noise) where data is written once and then many range-min/max queries are run.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Sensors produce large logs; analysts frequently ask “what was the maximum pollution reading between time A and B?” Data is mostly static (append-only or batched). Sparse Table supports fast (O(1)) RMQ after O(n log n) preprocess.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">Sparse Table</div>
+                        <div class="info-sub">
+                          Preprocess for idempotent functions (min/max/gcd) to answer range queries in O(1)
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main">SDG 11 (Sustainable Cities), SDG 3 (Good Health)</div>
+                        <div class="info-sub">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+<pre> </pre>
+                </div>
+            </section>
+ <!-- ========== CASE 22 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 22</span>
+                    <span class="case-pill"> </span>
+                </div>
+                <div class="case-title">Vendor Directory with Concurrency</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>An in-memory ordered vendor directory that supports concurrent insert/search/delete with probabilistic balancing.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>For a high-traffic vendor directory where many small updates and reads occur, skip list provides expected O(log n) operations and is easier to make lock-free than balanced trees in concurrent environments.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">Skip list</div>
+                        <div class="info-sub">
+                         Skip List (probabilistic ordered structure) — provides ordered map semantics with simpler concurrency support compared to complex balancing.
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main">SDG 8 (Decent Work & Economic Growth), SDG 9 (Innovation & Infrastructure)</div>
+                        <div class="info-sub">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+<pre> </pre>
+                </div>
+            </section>
+ <!-- ========== CASE 23 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 23</span>
+                    <span class="case-pill"> </span>
+                </div>
+                <div class="case-title">Zone Merge & Permit Management</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Manage dynamic merging of adjacent festival stalls or temporary zones (e.g., combining two low-traffic stalls into one larger stall) and quickly determine which stall group a vendor belongs to.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>When stalls merge for events, or emergency closures partition the area, quickly answer queries like “are stall A and stall B currently in the same zone?” DSU supports union and find checks in near-constant amortized time.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">Union-Find (Disjoint Set Union)</div>
+                        <div class="info-sub">
+                         Zone merges/partitions model is a natural DSU problem — very fast, minimal overhead, and maps directly to real operations (merge zone, check zone membership).
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main">SDG 11 (Sustainable Cities), SDG 3 (Public safety coordination)</div>
+                        <div class="info-sub">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+<pre> </pre>
+                </div>
+            </section>
+ <!-- ========== CASE 24 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 24</span>
+                    <span class="case-pill"> </span>
+                </div>
+                <div class="case-title">Resilient Routing under Failures</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>Create a robust backup routing network for utility lines (power or communication) that remains low-cost if individual links fail.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Find a base minimal network (MST) and compute a near-minimal second-best spanning structure (or augment MST with some low-cost extra edges) to allow rerouting after single-edge failures. Prim’s algorithm finds the MST; then analyze replacement edges.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">Prim’s algorithm (MST)</div>
+                        <div class="info-sub">
+                        builds MST from a node, good for dense graphs and easy to extend to compute replacement edges or k-edge-resilient backbones.
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main">SDG 7 (Affordable & Clean Energy) if applied to power lines, SDG 9 (Infrastructure)</div>
+                        <div class="info-sub">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+<pre> </pre>
+                </div>
+            </section>
             <footer>
                 KLE TECHNOLOGICAL UNIVERSITY • DAA Project 
             </footer>
