@@ -1,11 +1,15 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <climits>
+#include <cmath>
 using namespace std;
 
 // ------------------- GRAPH DEFINITION -------------------
 class Graph {
 public:
     int V;
-    vector<vector<pair<int,int>>> adj;
+    vector<vector<pair<int,int> > > adj;
 
     Graph(int V) {
         this->V = V;
@@ -13,8 +17,8 @@ public:
     }
 
     void addEdge(int u, int v, int w) {
-        adj[u].push_back({v,w});
-        adj[v].push_back({u,w});
+        adj[u].push_back(make_pair(v,w));
+        adj[v].push_back(make_pair(u,w));
     }
 };
 
@@ -23,38 +27,37 @@ vector<int> dijkstra(Graph &g, int src) {
     vector<int> dist(g.V, INT_MAX);
     dist[src] = 0;
 
-    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
-    pq.push({0, src});
+    priority_queue< pair<int,int>, vector<pair<int,int> >, greater<pair<int,int> > > pq;
+    pq.push(make_pair(0, src));
 
     while(!pq.empty()) {
         int u = pq.top().second;
         pq.pop();
 
-        for(auto edge : g.adj[u]) {
-            int v = edge.first;
-            int w = edge.second;
+        for(size_t i=0;i<g.adj[u].size();i++) {
+            int v = g.adj[u][i].first;
+            int w = g.adj[u][i].second;
 
             if(dist[u] + w < dist[v]) {
                 dist[v] = dist[u] + w;
-                pq.push({dist[v], v});
+                pq.push(make_pair(dist[v], v));
             }
         }
     }
-
     return dist;
 }
 
 // ------------------- A* (Scenario 3) -------------------
 int heuristic(int a, int b) {
-    return abs(a - b);  // simple heuristic
+    return abs(a - b);
 }
 
 int Astar(Graph &g, int start, int goal) {
     vector<int> g_cost(g.V, INT_MAX);
     g_cost[start] = 0;
 
-    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> open;
-    open.push({0, start});
+    priority_queue< pair<int,int>, vector<pair<int,int> >, greater<pair<int,int> > > open;
+    open.push(make_pair(0, start));
 
     while(!open.empty()) {
         int u = open.top().second;
@@ -62,15 +65,15 @@ int Astar(Graph &g, int start, int goal) {
 
         if(u == goal) return g_cost[u];
 
-        for(auto edge : g.adj[u]) {
-            int v = edge.first;
-            int w = edge.second;
+        for(size_t i=0;i<g.adj[u].size();i++) {
+            int v = g.adj[u][i].first;
+            int w = g.adj[u][i].second;
 
             int tentative = g_cost[u] + w;
             if(tentative < g_cost[v]) {
                 g_cost[v] = tentative;
                 int f = tentative + heuristic(v, goal);
-                open.push({f, v});
+                open.push(make_pair(f, v));
             }
         }
     }
@@ -78,16 +81,19 @@ int Astar(Graph &g, int start, int goal) {
 }
 
 // ------------------- GREEDY + TSP (Scenario 2) -------------------
-int nearestStop(vector<vector<int>>& dist, int current, vector<bool>& visited) {
+int nearestStop(vector<vector<int> >& dist, int current, vector<bool>& visited) {
     int best = -1;
-    for(int i = 0; i < dist.size(); i++) {
-        if(!visited[i] && (best == -1 || dist[current][i] < dist[current][best]))
+
+    for(size_t i = 0; i < dist.size(); i++) {
+        if(!visited[i] &&
+           (best == -1 || dist[current][i] < dist[current][best])) {
             best = i;
+        }
     }
     return best;
 }
 
-vector<int> greedyRoute(vector<vector<int>>& dist) {
+vector<int> greedyRoute(vector<vector<int> >& dist) {
     int n = dist.size();
     vector<bool> visited(n, false);
     vector<int> path;
@@ -102,7 +108,6 @@ vector<int> greedyRoute(vector<vector<int>>& dist) {
         path.push_back(next);
         current = next;
     }
-
     return path;
 }
 
@@ -110,7 +115,6 @@ vector<int> greedyRoute(vector<vector<int>>& dist) {
 int main() {
     Graph g(6);
 
-    // Example traffic weights
     g.addEdge(0,1,4);
     g.addEdge(1,2,3);
     g.addEdge(2,3,6);
@@ -120,14 +124,15 @@ int main() {
 
     cout << "\n--- Scenario 1: Peak Hour Optimization (Dijkstra) ---\n";
     vector<int> d = dijkstra(g, 0);
-    for(int i=0;i<d.size();i++)
+    for(size_t i=0;i<d.size();i++)
         cout << "Distance to " << i << " = " << d[i] << endl;
 
     cout << "\n--- Scenario 3: Emergency Route (A*) ---\n";
     cout << "Fastest path cost from 0 to 5 = " << Astar(g,0,5) << endl;
 
     cout << "\n--- Scenario 2: Bus Route Optimization (Greedy) ---\n";
-    vector<vector<int>> dist = {
+
+    int arr[5][5] = {
         {0,4,6,7,8},
         {4,0,2,5,7},
         {6,2,0,3,4},
@@ -135,9 +140,17 @@ int main() {
         {8,7,4,2,0}
     };
 
+    vector<vector<int> > dist(5, vector<int>(5));
+    for(int i=0;i<5;i++)
+        for(int j=0;j<5;j++)
+            dist[i][j] = arr[i][j];
+
     vector<int> route = greedyRoute(dist);
+
     cout << "Optimized Bus Route: ";
-    for(int x: route) cout << x << " ";
+    for(size_t i = 0; i < route.size(); i++)
+        cout << route[i] << " ";
+
     cout << endl;
 
     return 0;
