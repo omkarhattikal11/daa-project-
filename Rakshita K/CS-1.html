@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>case1 - Smart Ambulance Routing System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #f7b045;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #f7b045;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+    .sdg-box {
+        background: #f9f2e2;
+        padding: 12px;
+        border-left: 5px solid #f7b045;
+        border-radius: 6px;
+        margin-top: 8px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>case1 — Smart Ambulance Routing System</h1>
+
+<h2>Brief Description</h2>
+<p>
+In busy cities, ambulances often get delayed due to traffic, confusing routes, and slow decision-making. 
+Even a short delay can risk a patient’s life.
+<br><br>
+The Smart Ambulance Routing System automatically finds the quickest path to the nearest hospital using real-time road data. 
+It ensures faster emergency response and helps save lives.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Ambulances rely on manual navigation or normal GPS, which may not give optimized routes.</li>
+    <li>Heavy traffic and complex city roads cause delays during emergencies.</li>
+    <li>Difficulty in identifying the nearest suitable hospital instantly.</li>
+    <li>Slow decision-making due to lack of automated route computation.</li>
+</ul>
+
+<h2>Solution / Logic Used</h2>
+<ul>
+    <li><strong>Graph:</strong> Stores all interconnected city roads efficiently.</li>
+    <li><strong>Dijkstra’s Algorithm:</strong> Computes shortest travel time to every hospital.</li>
+    <li><strong>Min-Heap / Priority Queue:</strong> Helps select the nearest node quickly.</li>
+    <li><strong>Hash Map:</strong> Stores hospital details for instant lookup.</li>
+</ul>
+
+<h2>Algorithms and Data Structures Used</h2>
+
+<ul>
+    <li>
+        <strong>Dijkstra’s Algorithm — Shortest Path Finder</strong><br>
+        Calculates the minimum travel distance from the ambulance to every hospital.<br>
+        Ensures the system always provides the fastest possible route.
+    </li>
+    <li>
+        <strong>Min-Heap / Priority Queue — Efficient Node Pick</strong><br>
+        Helps Dijkstra select the nearest unvisited node quickly.<br>
+        Reduces overall time complexity.
+    </li>
+    <li>
+        <strong>Hash Map — Fast Hospital Lookup</strong><br>
+        Stores hospital names, codes, and locations.<br>
+        Enables quick retrieval of the nearest hospital.
+    </li>
+    <li>
+        <strong>Graph (Adjacency List) — Road Representation</strong><br>
+        Uses nodes for intersections and weighted edges for roads.<br>
+        Saves memory and allows faster traversal.
+    </li>
+</ul>
+
+<h2>System Workflow</h2>
+<ul>
+    <li>City roads are stored in graph form.</li>
+    <li>Ambulance location is taken as the starting node.</li>
+    <li>Dijkstra’s algorithm calculates distance to all hospitals.</li>
+    <li>Min-Heap speeds up shortest node selection.</li>
+    <li>Hash Map identifies the nearest hospital.</li>
+    <li>System displays shortest route and total travel distance.</li>
+</ul>
+
+<h2>Conclusion</h2>
+<p>
+The Smart Ambulance Routing System improves emergency response time and supports life-saving decisions. 
+Using efficient algorithms and data structures, it instantly identifies the best route, ensuring ambulances reach hospitals faster and safely.
+</p>
+
+<h2>Suitable SDGs</h2>
+
+<div class="sdg-box">
+    <strong>SDG 3 — Good Health & Well-Being</strong>
+    <p>Ensures timely medical assistance, improves emergency response, and saves lives.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 9 — Industry, Innovation & Infrastructure</strong>
+    <p>Promotes smart city infrastructure and adoption of intelligent routing systems.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 11 — Sustainable Cities & Communities</strong>
+    <p>Improves emergency mobility, reduces traffic delays, and enhances city safety systems.</p>
+</div>
+
+<div class="tag">End of case1</div>
+
+</body>
+</html>
