@@ -68,7 +68,7 @@
     padding:22px; backdrop-filter: blur(var(--glass-blur));
     box-shadow: 0 8px 30px rgba(3,8,20,0.6); }
 
-  .card h2{ font-size:18px; margin-bottom:6px; }
+  .card h2{ font-size:18px; margin-bottom:6px; text-transform: capitalize; }
   .tags{ display:flex; gap:6px; margin-bottom:10px; }
   .tags span{ background:rgba(255,255,255,0.05); padding:4px 8px; border-radius:6px; font-size:12px; color:var(--muted);}
   .desc{ margin-bottom:10px; font-size:14px; }
@@ -77,7 +77,29 @@
 
   footer{ margin-top:34px; color:var(--muted); font-size:14px; text-align:center; padding:18px 6px; }
 
-  @media (max-width:980px){ nav ul{ display:none; } .menu-toggle{ display:block } }
+  /* TABLE */
+  table{
+    width:100%;
+    margin-top:25px;
+    border-collapse:collapse;
+    background:rgba(255,255,255,0.05);
+    border-radius:10px;
+    overflow:hidden;
+    font-size:14px;
+  }
+  table th, table td{
+    padding:10px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  table th{
+    background:rgba(255,255,255,0.1);
+    font-weight:700;
+  }
+
+  @media (max-width:980px){
+    nav ul{ display:none; }
+    .menu-toggle{ display:block }
+  }
 </style>
 </head>
 <body>
@@ -121,152 +143,194 @@
           <span>Algorithms</span>
           <span>Graph</span>
         </div>
-        <p class="desc">Build a  Smart Traffic & Public Transport Optimization System that uses graph algorithms to reduce congestion, improve bus efficiency, and provide faster travel routes for citizens.</p>
-        <p>SDGs involved:-SDG 11,SDG 9 an SDG 13</p>
+        <p class="desc">Build a Smart Traffic & Public Transport Optimization System using graph algorithms to reduce congestion and improve travel efficiency.</p>
+        <p>SDGs involved: SDG 11, SDG 9, SDG 13</p>
         <div class="btn-group">
-          <a href="aditya1.1.html">view more</a>
+          <a href="aditya1.1.html">View More</a>
           <a href="https://github.com/omkarhattikal11/daa-project-/blob/main/aditya/acase1.cpp">Code</a>
         </div>
       </div>
 
-        <!-- CARD 2 -->
+      <!-- CARD 2 -->
       <div class="card">
-        <h2>2 • hospital & emergency resource management</h2>
+        <h2>2 • Hospital & Emergency Resource Management</h2>
         <div class="tags">
           <span>SDGs</span>
           <span>Algorithms</span>
           <span>Graph</span>
         </div>
-        <p class="desc">The system uses real-time hospital data, sensor inputs, GPS-equipped ambulances, and predictive algorithms to ensure that the nearest available resources are dispatched quickly.</p>
+        <p class="desc">Uses real-time hospital data, sensors, ambulance GPS and prediction algorithms for emergency optimization.</p>
         <div class="btn-group">
-          <a href="aditya1.2.html">view more</a>
+          <a href="aditya1.2.html">View More</a>
           <a href="https://github.com/omkarhattikal11/daa-project-/blob/main/aditya/acase2.cpp">Code</a>     
         </div>
       </div>
 
-        <!-- CARD 3-->
+      <!-- CARD 3 -->
       <div class="card">
-        <h2>3• flood and water level monitering system</h2>
+        <h2>3 • Flood and Water Level Monitoring System</h2>
         <div class="tags">
           <span>SDGs</span>
           <span>Algorithm</span>
           <span>Graph</span>
         </div>
-        <p class="desc">This system uses water-level sensors, rainfall sensors, and IoT networks to monitor water height continuously.
-    If water exceeds the danger level, an automated early-warning alert is sent to the public and disaster teams.</p>
+        <p class="desc">Real-time water level sensors + rainfall prediction + early warning alerts for disaster teams.</p>
         <div class="btn-group">
-          <a href="aditya1.3.html">view more</a>
+          <a href="aditya1.3.html">View More</a>
           <a href="https://github.com/omkarhattikal11/daa-project-/blob/main/aditya/acase3.cpp">Code</a>       
         </div>
       </div>
 
-        <!-- CARD 4 -->
+      <!-- CARD 4 -->
       <div class="card">
-        <h2>4 • bank and government queue management</h2>
+        <h2>4 • Bank & Government Queue Management</h2>
         <div class="tags">
           <span>SDGs</span>
           <span>Algorithms</span>
-          <span>Graph</span>
+          <span>Queue</span>
         </div>
-        <p class="desc">The system efficiently manages bank and government queues by handling multiple counters, priority customers, and dynamic assignment to reduce waiting time. It tracks service and waiting times, ensuring faster, fair, and organized customer service..</p>
+        <p class="desc">Manages customer queues, priority handling, and reduces waiting time with optimized service allocation.</p>
         <div class="btn-group">
-          <a href="aditya1.4.html">view more</a>
+          <a href="aditya1.4.html">View More</a>
           <a href="https://github.com/omkarhattikal11/daa-project-/blob/main/aditya/acase4.cpp">Code</a> 
         </div>
       </div>
 
-        <!-- CARD 5 -->
+      <!-- CARD 5 -->
       <div class="card">
-        <h2>5 • smart parking management</h2>
+        <h2>5 • Smart Parking Management</h2>
         <div class="tags">
           <span>SDGs</span>
           <span>Algorithms</span>
           <span>Graph</span>
         </div>
-        <p class="desc">Develop a smart parking management system that optimizes space utilization, assigns the nearest available slot to a car, supports priority customers, and tracks occupancy dynamically.</p>
+        <p class="desc">Nearest slot allocation, priority parking, occupancy tracking using algorithmic optimization.</p>
         <div class="btn-group">
-          <a href="aditya1.5.html">view more</a>
+          <a href="aditya1.5.html">View More</a>
           <a href="https://github.com/omkarhattikal11/daa-project-/blob/main/aditya/acase5.cpp">Code</a> 
         </div>
       </div>
 
-        <!-- CARD 6 -->
+      <!-- CARD 6 -->
       <div class="card">
-        <h2>6 • cybersecurity threat detection systemm</h2>
+        <h2>6 • Cybersecurity Threat Detection System</h2>
         <div class="tags">
           <span>SDGs</span>
           <span>Algorithms</span>
           <span>Graph</span>
         </div>
-        <p class="desc">A cybersecurity threat-detection system that identifies malicious signatures using fast pattern matching, analyzes attack paths using graph algorithms, and ranks threats by severity.</p>
+        <p class="desc">Threat detection using fast pattern matching, attack-path graph analysis and threat ranking.</p>
         <div class="btn-group">
-          <a href="aditya1.6.html">view more</a>
-          <a href="https://github.com/omkarhattikal11/daa-project-/blob/main/aditya/acase6.cpp">code</a>
+          <a href="aditya1.6.html">View More</a>
+          <a href="https://github.com/omkarhattikal11/daa-project-/blob/main/aditya/acase6.cpp">Code</a>
         </div>
       </div>
 
-        <!-- CARD 7 -->
+      <!-- CARD 7 -->
       <div class="card">
-        <h2>7 • >emergency alert system</h2>
+        <h2>7 • Emergency Alert System</h2>
         <div class="tags">
           <span>SDGs</span>
           <span>Algorithms</span>
-          <span>Graph</span>
+          <span>Heap</span>
         </div>
-        <p class="desc">An emergency alert system that detects critical incidents (fire, earthquake, medical emergency), prioritizes alerts using a max-heap, maps safe evacuation routes using BFS/Dijkstra, and broadcasts notifications quickly using queues and lookup tables.</p>
+        <p class="desc">Detects emergency incidents, prioritizes alerts with heap, uses BFS/Dijkstra for safe evacuation.</p>
         <div class="btn-group">
-          <a href="aditya1.7.html">view more</a>
-          <a href="https://github.com/omkarhattikal11/daa-project-/blob/main/aditya/acase7.cpp">code</a>
+          <a href="aditya1.7.html">View More</a>
+          <a href="https://github.com/omkarhattikal11/daa-project-/blob/main/aditya/acase7.cpp">Code</a>
         </div>
-      </div>
-        <!-- CARD 8 -->
-      <div class="card">
-        <h2>8 •shop and resturant dynamic pricing</h2>
-        <div class="tags">
-          <span>SDGs</span>
-          <span>Algorithms</span>
-          <span>Graph</span>
-        </div>
-        <p class="desc">Shops and restaurants face fluctuating demand, perishable inventory, unpredictable traffic, and competition. Manual pricing and naive stock decisions cause revenue loss, wasted food, and poor customer experience.</p>
-        <div class="btn-group">
-          <a href="aditya1.8.html">view more</a>
-          <a href="https://github.com/omkarhattikal11/daa-project-/blob/main/aditya/acase8.cpp">code</a>
-        </div>
-      </div>
-        <!-- CARD 9 -->
-      <div class="card">
-        <h2>9 • climate-resilient city resource management</h2>
-        <div class="tags">
-          <span>SDGs</span>
-          <span>Algorithms</span>
-          <span>Graph</span>
-        </div>
-        <p class="desc">A climate-resilient city resource management system monitors water, energy, waste, and emergencies using smart sensors and algorithms to optimize resource usage.
-It ensures sustainability, faster disaster response, and efficient urban planning under climate change conditions..</p>
-        <div class="btn-group">
-          <a href="aditya1.9.html">view more</a>
-          <a href="https://github.com/omkarhattikal11/daa-project-/blob/main/aditya/acase9.cpp">code</a>
-        </div>
-      </div>
-        <!-- CARD 10 -->
-      <div class="card">
-        <h2>10 • industrial goods transport optimization</h2>
-        <div class="tags">
-          <span>SDGs</span>
-          <span>Algorithms</span>
-          <span>Graph</span>
-        </div>
-        <p class="desc">Optimize industrial goods transport by assigning shipments to vehicles and computing efficient delivery routes that minimize distance, cost and emissions while respecting capacity and time constraints.
-     The system uses graph shortest-paths (Dijkstra), greedy vehicle routing (nearest-neighbor + 2-opt local improvement), and priority queues to handle urgent cargo first.</p>
-        <div class="btn-group">
-          <a href="aditya1.10.html">view more</a>
-          <a href="https://github.com/omkarhattikal11/daa-project-/blob/main/aditya/acase10.cpp">code</a>
-        </div>
-      </div>
-       
       </div>
 
-    
+      <!-- CARD 8 -->
+      <div class="card">
+        <h2>8 • Shop & Restaurant Dynamic Pricing</h2>
+        <div class="tags">
+          <span>SDGs</span>
+          <span>Algorithms</span>
+          <span>Prediction</span>
+        </div>
+        <p class="desc">Handles fluctuating demand, food perishability using prediction and optimization algorithms.</p>
+        <div class="btn-group">
+          <a href="aditya1.8.html">View More</a>
+          <a href="https://github.com/omkarhattikal11/daa-project-/blob/main/aditya/acase8.cpp">Code</a>
+        </div>
+      </div>
+
+      <!-- CARD 9 -->
+      <div class="card">
+        <h2>9 • Climate-Resilient City Resource Management</h2>
+        <div class="tags">
+          <span>SDGs</span>
+          <span>Algorithms</span>
+          <span>Graph</span>
+        </div>
+        <p class="desc">Monitors water, energy, waste, disaster response using sensors + optimization algorithms.</p>
+        <div class="btn-group">
+          <a href="aditya1.9.html">View More</a>
+          <a href="https://github.com/omkarhattikal11/daa-project-/blob/main/aditya/acase9.cpp">Code</a>
+        </div>
+      </div>
+
+      <!-- CARD 10 -->
+      <div class="card">
+        <h2>10 • Industrial Goods Transport Optimization</h2>
+        <div class="tags">
+          <span>SDGs</span>
+          <span>Algorithms</span>
+          <span>Graph</span>
+        </div>
+        <p class="desc">Optimizes goods transport routes using Dijkstra, Nearest Neighbor, 2-opt, and priority queues.</p>
+        <div class="btn-group">
+          <a href="aditya1.10.html">View More</a>
+          <a href="https://github.com/omkarhattikal11/daa-project-/blob/main/aditya/acase10.cpp">Code</a>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- IMPLEMENTATION TABLE -->
+    <h2 style="margin-top:30px;">Implementation Analysis</h2>
+
+    <table>
+<thead>
+<tr>
+    <th>Algorithm/Data Structure</th>
+    <th>Used?</th>
+    <th>Where Used?</th>
+    <th>Space</th>
+    <th>Time</th>
+</tr>
+</thead>
+
+<tbody>
+<tr><td>Arrays</td><td>Yes</td><td>Traffic densities, bus schedules</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Structures</td><td>Yes</td><td>Road attributes</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>List</td><td>Yes</td><td>Alerts, logs</td><td>O(n)</td><td>O(n)</td></tr>
+<tr><td>Queue</td><td>Yes</td><td>Bus arrivals, alerts</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Binary Search Tree</td><td>Yes</td><td>Sort congestion</td><td>O(n)</td><td>O(log n)</td></tr>
+<tr><td>Trie</td><td>Yes</td><td>Road name auto-complete</td><td>O(chars)</td><td>O(len)</td></tr>
+<tr><td>Heap</td><td>Yes</td><td>Dijkstra</td><td>O(n)</td><td>O(log n)</td></tr>
+<tr><td>Lookup Table</td><td>Yes</td><td>ID → data</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Segment Tree</td><td>Yes</td><td>RMQ for traffic</td><td>O(n)</td><td>O(log n)</td></tr>
+<tr><td>Union-Find</td><td>Yes</td><td>Road connectivity</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>Hashing</td><td>Yes</td><td>Fast bus route lookup</td><td>O(n)</td><td>O(1)</td></tr>
+<tr><td>DFS</td><td>Yes</td><td>Connectivity</td><td>O(n+m)</td><td>O(n+m)</td></tr>
+<tr><td>BFS</td><td>Yes</td><td>Unweighted shortest path</td><td>O(n+m)</td><td>O(n+m)</td></tr>
+<tr><td>Quick Sort</td><td>Yes</td><td>Traffic list</td><td>O(n)</td><td>O(n log n)</td></tr>
+<tr><td>Merge Sort</td><td>Yes</td><td>Prediction data</td><td>O(n)</td><td>O(n log n)</td></tr>
+<tr><td>Rabin–Karp</td><td>Yes</td><td>Search logs</td><td>O(n+m)</td><td>O(n+m)</td></tr>
+<tr><td>KMP</td><td>Yes</td><td>Violation pattern search</td><td>O(n+m)</td><td>O(n+m)</td></tr>
+<tr><td>Heap Sort</td><td>Yes</td><td>Historical traffic</td><td>O(1)</td><td>O(n log n)</td></tr>
+<tr><td>Kruskal</td><td>Yes</td><td>Maintenance network</td><td>—</td><td>O(E log E)</td></tr>
+<tr><td>Prim</td><td>Yes</td><td>Sensor cable network</td><td>—</td><td>O(E log V)</td></tr>
+<tr><td>Dijkstra</td><td>Yes</td><td>Shortest path</td><td>—</td><td>O(E log V)</td></tr>
+<tr><td>Bellman–Ford</td><td>Yes</td><td>Negative congestion</td><td>—</td><td>O(VE)</td></tr>
+<tr><td>A*</td><td>Yes</td><td>Emergency routing</td><td>—</td><td>O(E)</td></tr>
+</tbody>
+
+</table>
+
   </main>
 
   <footer>
@@ -278,21 +342,19 @@ It ensures sustainability, faster disaster response, and efficient urban plannin
   (function(){
     const btn = document.getElementById('menuToggle');
     const menu = document.getElementById('primaryMenu');
-    btn && btn.addEventListener('click', function(){
-      const expanded = this.getAttribute('aria-expanded') === 'true';
-      this.setAttribute('aria-expanded', String(!expanded));
-      if(!expanded){
-        menu.style.display = 'flex';
-        menu.style.flexDirection = 'column';
-        menu.style.background = 'transparent';
-        menu.style.position = 'absolute';
-        menu.style.right = '18px';
-        menu.style.top = '62px';
-        menu.style.gap = '10px';
-        menu.style.padding = '12px';
+
+    btn.addEventListener('click', function(){
+      const open = this.getAttribute('aria-expanded') === "true";
+      this.setAttribute('aria-expanded', !open);
+
+      if(!open){
+        menu.style.display = "flex";
+        menu.style.flexDirection = "column";
+        menu.style.background = "rgba(0,0,0,0.3)";
+        menu.style.padding = "15px";
+        menu.style.borderRadius = "10px";
       } else {
-        menu.style.display = '';
-        menu.removeAttribute('style');
+        menu.style.display = "none";
       }
     });
   })();
