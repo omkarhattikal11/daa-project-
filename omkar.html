@@ -2095,22 +2095,22 @@ int main() {
 } </pre>
                 </div>
             </section>
-  <!-- ========== CASE 1 ========== -->
+  <!-- ========== CASE 14 ========== -->
             <section class="case">
                 <div class="case-header-row">
-                    <span>CASE 1</span>
+                    <span>CASE 14</span>
                     <span class="case-pill"> Logistics & Supply Chain </span>
                 </div>
-                <div class="case-title">Industrial Transport Route Optimization</div>
+                <div class="case-title">Emergency Vehicle Dispatch Sorting</div>
 
                 <div class="case-field">
                     <h3>About the Case</h3>
-                    <p>Optimizes transport routes between factories and warehouses to reduce travel time and fuel cost.</p>
+                    <p>Velora’s emergency control room receives multiple distress calls with different severity scores. They must be arranged in correct order so ambulances or fire units are dispatched efficiently.</p>
                 </div>
 
                 <div class="case-field">
                     <h3>Description of the Business Case</h3>
-                    <p>Roads between locations have different travel times. The system finds the quickest route for each delivery by modeling the network as a weighted graph.</p>
+                    <p>Each call has a severity value (1–10). To plan dispatch order, the system sorts all active calls from highest severity to lowest before allocating rescue units.</p>
                 </div>
 
                 <div class="case-grid">
@@ -2119,9 +2119,9 @@ int main() {
                             <div class="info-icon">⚙️</div>
                             <span>Algorithm Used</span>
                         </div>
-                        <div class="info-main">Dijkstra’s Algorithm</div>
+                        <div class="info-main">Merge Sort</div>
                         <div class="info-sub">
-                            It efficiently finds the shortest travel-time path in a weighted road network.
+                           Merge Sort gives O(n log n) performance and remains fast even for large lists of emergency calls. It is stable and predictable, ensuring emergencies are ranked accurately.
                         </div>
                     </div>
 
@@ -2130,9 +2130,8 @@ int main() {
                             <div class="info-icon">🌍</div>
                             <span>SDGs Linked</span>
                         </div>
-                        <div class="info-main">SDG 9 — Industry, Innovation & Infrastructure</div>
+                        <div class="info-main">SDG 3 – Good Health and Well-Being, SDG 11 – Sustainable Cities</div>
                         <div class="info-sub">
-                           Supports efficient logistics and reduces fuel waste.
                         </div>
                     </div>
                 </div>
@@ -2142,7 +2141,223 @@ int main() {
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-<pre>  </pre>
+<pre> // CASE 12: Emergency Vehicle Dispatch Sorting using Merge Sort
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Call {
+    string id;
+    int severity;
+};
+
+void mergeArr(vector<Call> &arr, int l, int m, int r) {
+    vector<Call> left(arr.begin() + l, arr.begin() + m + 1);
+    vector<Call> right(arr.begin() + m + 1, arr.begin() + r + 1);
+
+    int i = 0, j = 0, k = l;
+
+    while (i < left.size() && j < right.size()) {
+        // Sort by severity (high → low)
+        if (left[i].severity >= right[j].severity)
+            arr[k++] = left[i++];
+        else
+            arr[k++] = right[j++];
+    }
+    while (i < left.size()) arr[k++] = left[i++];
+    while (j < right.size()) arr[k++] = right[j++];
+}
+
+void mergeSort(vector<Call> &arr, int l, int r) {
+    if (l >= r) return;
+    int m = (l + r) / 2;
+    mergeSort(arr, l, m);
+    mergeSort(arr, m + 1, r);
+    mergeArr(arr, l, m, r);
+}
+
+int main() {
+    int n;
+    cout << "Enter number of emergency calls: ";
+    cin >> n;
+
+    vector<Call> calls(n);
+    cout << "Enter CallID and Severity:\n";
+    for (int i = 0; i < n; i++)
+        cin >> calls[i].id >> calls[i].severity;
+
+    mergeSort(calls, 0, n - 1);
+
+    cout << "\nDispatch Order (Highest Severity First):\n";
+    for (auto &c : calls)
+        cout << c.id << " - Severity " << c.severity << "\n";
+
+    return 0;
+}</pre>
+                </div>
+            </section>
+ <!-- ========== CASE 15 ========== -->
+            <section class="case">
+                <div class="case-header-row">
+                    <span>CASE 15</span>
+                    <span class="case-pill"> </span>
+                </div>
+                <div class="case-title">Shuttle Boarding Reorder</div>
+
+                <div class="case-field">
+                    <h3>About the Case</h3>
+                    <p>boarding queue for shuttles.</p>
+                </div>
+
+                <div class="case-field">
+                    <h3>Description of the Business Case</h3>
+                    <p>Mostly near-sorted because passengers generally queue in arrival order but occasionally VIPs or reorders appear. The system must quickly reorder a small portion (fast incremental updates) and occasionally fully re-sort the list.</p>
+                </div>
+
+                <div class="case-grid">
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">⚙️</div>
+                            <span>Algorithm Used</span>
+                        </div>
+                        <div class="info-main">Quick + Selection + Bubble</div>
+                        <div class="info-sub">
+                          Quick Sort → for fast large-size ordering (peak hours)
+
+Selection Sort → when exact position-based comparison is needed
+
+Bubble Sort → for minor adjustments (few misplaced passengers)
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label-row">
+                            <div class="info-icon">🌍</div>
+                            <span>SDGs Linked</span>
+                        </div>
+                        <div class="info-main">SDG 11 – Sustainable Cities & Communities, SDG 11 – Sustainable Cities & Communities, SDG 8 – Decent Work & Economic Growth</div>
+                        <div class="info-sub">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">C++ Code</span>
+                        <button class="copy-btn">Copy Code</button>
+                    </div>
+<pre> // Case B: Shuttle Boarding Reorder (QuickSort primary; Selection for top-k promotions; Bubble for tiny local fixes)
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Passenger {
+    string id;
+    int vipScore;   // higher = more priority to board
+    long long arrival; // arrival timestamp
+};
+
+// comparator: VIP first (desc), then earlier arrival
+bool cmpPassenger(const Passenger &a, const Passenger &b) {
+    if (a.vipScore != b.vipScore) return a.vipScore > b.vipScore;
+    return a.arrival < b.arrival;
+}
+
+// --- QuickSort (in-place) ---
+int partitionQuick(vector<Passenger> &arr, int l, int r) {
+    Passenger pivot = arr[r];
+    int i = l - 1;
+    for (int j = l; j < r; ++j) {
+        if (cmpPassenger(arr[j], pivot)) {
+            ++i; swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + 1], arr[r]);
+    return i + 1;
+}
+
+void quickSort(vector<Passenger> &arr, int l, int r) {
+    if (l >= r) return;
+    int pi = partitionQuick(arr, l, r);
+    quickSort(arr, l, pi - 1);
+    quickSort(arr, pi + 1, r);
+}
+
+// --- Selection to promote top-k VIP into front (stable extraction using simple scan) ---
+void promoteTopK(vector<Passenger> &arr, int k) {
+    if (k <= 0) return;
+    int n = arr.size();
+    k = min(k, n);
+    // selection-like: for i in [0..k-1], find best in [i..n-1] and bring to i
+    for (int i = 0; i < k; ++i) {
+        int best = i;
+        for (int j = i + 1; j < n; ++j) {
+            if (cmpPassenger(arr[j], arr[best])) best = j;
+        }
+        // rotate to keep relative order for others (stable-ish)
+        Passenger temp = arr[best];
+        for (int t = best; t > i; --t) arr[t] = arr[t - 1];
+        arr[i] = temp;
+    }
+}
+
+// --- Tiny bubble pass to fix local small disorder (for near-sorted updates) ---
+void tinyBubbleFix(vector<Passenger> &arr, int maxPasses = 2) {
+    int n = arr.size();
+    for (int pass = 0; pass < maxPasses; ++pass) {
+        bool swapped = false;
+        for (int i = 0; i + 1 < n; ++i) {
+            if (!cmpPassenger(arr[i], arr[i + 1])) {
+                swap(arr[i], arr[i + 1]);
+                swapped = true;
+            }
+        }
+        if (!swapped) break;
+    }
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n;
+    cout << "Enter number of passengers in queue: ";
+    if (!(cin >> n) || n <= 0) return 0;
+
+    vector<Passenger> q;
+    q.reserve(n);
+    for (int i = 0; i < n; ++i) {
+        Passenger p;
+        cin >> p.id >> p.vipScore >> p.arrival; // e.g.: P123 5 1672531200
+        q.push_back(p);
+    }
+
+    cout << "\nOptions:\n1) Tiny local fix (bubble)\n2) Promote top-k VIPs\n3) Full reorder (QuickSort)\n4) Print queue\n5) Exit\n";
+
+    while (true) {
+        cout << "\nChoice: ";
+        int ch; cin >> ch;
+        if (ch == 1) {
+            tinyBubbleFix(q, 2);
+            cout << "Applied tiny bubble fix.\n";
+        } else if (ch == 2) {
+            int k; cout << "Enter k (number to promote): "; cin >> k;
+            promoteTopK(q, k);
+            cout << "Promoted top-" << k << " VIPs to front.\n";
+        } else if (ch == 3) {
+            quickSort(q, 0, (int)q.size() - 1);
+            cout << "Full reorder done with QuickSort.\n";
+        } else if (ch == 4) {
+            cout << "\nCurrent queue order:\n";
+            for (int i = 0; i < (int)q.size(); ++i) {
+                cout << i + 1 << ". " << q[i].id
+                     << " (vip=" << q[i].vipScore
+                     << ", arrival=" << q[i].arrival << ")\n";
+            }
+        } else if (ch == 5) break;
+        else cout << "Invalid.\n";
+    }
+
+    return 0;
+}</pre>
                 </div>
             </section>
 
