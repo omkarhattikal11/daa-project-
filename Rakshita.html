@@ -7,15 +7,15 @@
 
 <style>
 :root {
-  --bg: #000000;              /* Black background */
-  --card: rgba(255,255,255,0.03);
-  --accent: #FFB6C1;          /* Baby Pink */
-  --accent2: #FF69B4;         /* Slightly deeper pink */
-  --muted: #a7b4c8;
-  --glass: rgba(255,255,255,0.05);
-  --border: rgba(255,255,255,0.07);
+  --bg: #0f172a;              
+  --card: rgba(255,255,255,0.05);
+  --accent: #38bdf8;          
+  --accent2: #818cf8;         
+  --muted: #cbd5e1;           
+  --glass: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.08);
   --radius: 14px;
-  --blur: 10px;
+  --blur: 12px;
   font-family: "Inter", sans-serif;
 }
 
@@ -24,12 +24,12 @@
 body {
   min-height: 100vh;
   background: var(--bg);
-  color: #e9f8ff;
+  color: var(--muted);
   padding: 90px 20px;
   line-height: 1.45;
 }
 
-/* Header Bar */
+/* Header */
 header {
   position: fixed;
   top: 10px;
@@ -54,18 +54,6 @@ header {
   gap: 14px;
 }
 
-/* NAVBAR */
-.navbar{
-  position:fixed; top:8px; left:50%; transform:translateX(-50%);
-  width:calc(100% - 40px); max-width:var(--max-width);
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-  padding:12px 18px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-  border:1px solid var(--glass-border); border-radius:12px;
-  backdrop-filter: blur(var(--glass-blur)); box-shadow: 0 6px 30px rgba(2,6,23,0.6);
-  z-index:50;
-}
-
 .badge {
   width: 46px;
   height: 46px;
@@ -74,7 +62,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #062018;
+  color: #0f172a;
   font-size: 20px;
   font-weight: 900;
   box-shadow: 0 6px 18px rgba(0,0,0,0.4);
@@ -90,10 +78,11 @@ nav a {
   text-decoration: none;
   font-weight: 700;
   margin-left: 14px;
+  transition: 0.3s;
 }
-nav a:hover { color: var(--accent); }
+nav a:hover { color: var(--accent2); }
 
-/* Main Wrapper */
+/* Main Layout */
 main {
   max-width: 1100px;
   margin: 0 auto;
@@ -102,7 +91,7 @@ main {
   gap: 26px;
 }
 
-/* Left Card */
+/* Cards */
 .card {
   padding: 24px;
   background: var(--card);
@@ -112,10 +101,9 @@ main {
   box-shadow: 0 10px 35px rgba(2,10,20,0.7);
 }
 
-h1 { font-size: 30px; font-weight: 900; margin-bottom: 6px; }
+h1 { font-size: 30px; font-weight: 900; margin-bottom: 6px; color: var(--accent); }
 .subtitle { color: var(--muted); margin-bottom: 16px; }
 
-/* Author Box */
 .author-box {
   display: flex;
   gap: 14px;
@@ -136,7 +124,7 @@ h1 { font-size: 30px; font-weight: 900; margin-bottom: 6px; }
   align-items: center;
   font-size: 22px;
   font-weight: 900;
-  color: #042018;
+  color: #0f172a;
 }
 
 .author-info .name {
@@ -144,68 +132,38 @@ h1 { font-size: 30px; font-weight: 900; margin-bottom: 6px; }
   font-weight: 900;
   margin-bottom: 4px;
 }
-.author-info .meta {
-  color: var(--muted);
-  font-size: 13px;
-}
+.author-info .meta { color: var(--muted); font-size: 13px; }
 
-/* Case List */
-.case-section {
-  margin-top: 20px;
-}
+.case-section { margin-top: 20px; }
 
 .case-item {
   margin-bottom: 22px;
   padding: 16px;
   border-radius: var(--radius);
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.03);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: 0.3s;
 }
+.case-item:hover { background: rgba(56,189,248,0.1); }
 
-.case-item h2 {
-  font-size: 20px;
-  margin-bottom: 8px;
-  font-weight: 900;
-  color: var(--accent);
-}
+.case-item h2 { font-size: 20px; margin-bottom: 8px; font-weight: 900; color: var(--accent2); }
+.case-item p { color: var(--muted); margin-bottom: 10px; }
 
-.case-item p {
-  color: var(--muted);
-  margin-bottom: 10px;
-}
+.algos-title { margin-top: 6px; font-weight: 800; color: #e0f2fe; font-size: 16px; }
 
-/* Algorithms Box */
-.algos-title {
-  margin-top: 6px;
-  font-weight: 800;
-  color: #fff;
-  font-size: 16px;
-}
-
-.case-item ul {
-  margin-top: 6px;
-  margin-bottom: 14px;
-  margin-left: 18px;
-  color: var(--muted);
-}
-
-/* Buttons */
 .btn {
   display: inline-block;
   padding: 10px 16px;
   background: linear-gradient(90deg, var(--accent), var(--accent2));
   border-radius: 10px;
-  color: #062018;
+  color: #0f172a;
   text-decoration: none;
   font-weight: 800;
+  transition: 0.3s;
 }
+.btn:hover { opacity: 0.85; }
 
-/* Sidebar */
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+.sidebar { display: flex; flex-direction: column; gap: 16px; }
 
 .side-card {
   padding: 16px;
@@ -217,10 +175,10 @@ h1 { font-size: 30px; font-weight: 900; margin-bottom: 6px; }
   margin-bottom: 8px;
   font-weight: 900;
   font-size: 16px;
+  color: var(--accent);
 }
 .side-card p { color: var(--muted); }
 
-/* Footer */
 footer {
   grid-column: 1 / -1;
   margin-top: 30px;
@@ -238,7 +196,6 @@ footer {
     <div class="badge">RK</div>
     <div class="title">Rakshita K — Velora Project</div>
   </div>
-
   <nav>
     <a href="../index.html">Home</a>
     <a href="../Velora.html">City</a>
@@ -247,13 +204,10 @@ footer {
 </header>
 
 <main>
-
-<!-- LEFT MAIN CARD -->
 <section class="card">
   <h1>Business Use Cases — Velora</h1>
   <div class="subtitle">All conceptual + algorithmic implementations under DAA</div>
 
-  <!-- Author Box -->
   <div class="author-box">
     <div class="avatar">RK</div>
     <div class="author-info">
@@ -262,373 +216,102 @@ footer {
     </div>
   </div>
 
-  <!-- Business Case List -->
   <div class="case-section">
 
-    <!-- ========================= CASE 1 ========================= -->
+    <!-- CASES 1 to 10 -->
     <div class="case-item">
       <h2>Smart Ambulance Routing System</h2>
       <p>In busy cities, ambulances often get delayed due to traffic, confusing routes, and slow decision-making. Even a short delay can risk a patient’s life.</p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Dijkstra → Shortest Path Finder</li>
-        <li>Min-Heap → Efficient Node Pick</li>
-        <li>Hash Map → Fast Hospital Lookup</li>
-        <li>Graph (Adjacency List) → Road Representation</li>
-      </ul>
-
-      <div class="algos-title">System Workflow</div>
-      <ul>
-        <li>City roads are stored in graph form.</li>
-        <li>Ambulance location is taken as the starting node.</li>
-        <li>Dijkstra’s algorithm calculates distance to all hospitals.</li>
-        <li>Min-Heap speeds up the selection process.</li>
-        <li>Hash Map identifies the smallest-distance hospital.</li>
-        <li>System displays shortest path + minimum distance.</li>
-      </ul>
-
-      <div class="algos-title">Conclusion</div>
-      <p>The Smart Ambulance Routing System improves emergency response time and supports life-saving decisions. With efficient algorithms and data structures, it delivers the fastest route instantly and ensures patients reach hospitals as quickly as possible.</p>
-
-       <a class="btn" 
-         href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case1"
-         target="_blank">View Code</a>
+      <div class="algos-title">SDG</div>
+      <div class="algos-title">Algorithms</div>
+      <div class="algos-title">Prediction</div>
+      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case1" target="_blank">View Code</a>
     </div>
 
-    <!-- ========================= CASE 2 ========================= -->
     <div class="case-item">
       <h2>Residential Water Leak Detection System</h2>
       <p>Detects abnormal water consumption in residential buildings using real-time sensor readings to alert residents of leaks early, saving water and preventing damage.</p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Hash Map → Fast storage of sensor readings</li>
-        <li>Fenwick Tree → Quick range-sum usage checks</li>
-        <li>Sliding Window → Spotting sudden continuous spikes</li>
-        <li>Queue → Managing recent sensor readings</li>
-      </ul>
-
-      <div class="algos-title">System Workflow</div>
-      <ul>
-        <li>Sensor sends a water flow reading every minute.</li>
-        <li>Reading is stored in the Hash Map and updated in the Fenwick Tree.</li>
-        <li>Queue updates with the latest values for sliding-window analysis.</li>
-        <li>System compares real-time usage with normal patterns.</li>
-        <li>If continuous abnormal usage is detected → leak is confirmed.</li>
-        <li>User receives an alert with location/time of suspected leak.</li>
-      </ul>
-
-      <div class="algos-title">Conclusion</div>
-      <p>This smart leak detection model ensures early identification of water leakage by analyzing real-time readings and usage patterns. It reduces wastage, prevents structural damage, and provides an efficient, automated monitoring solution for residential communities.</p>
-
-      <a class="btn" 
-         href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case%202"
-         target="_blank">View Code</a>
+      <div class="algos-title">SDG</div>
+      <div class="algos-title">Algorithms</div>
+      <div class="algos-title">Prediction</div>
+      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case%202" target="_blank">View Code</a>
     </div>
-    <!-- ========================= CASE 3 ========================= -->
+
     <div class="case-item">
       <h2>Beach Waste Monitoring & Prediction System</h2>
       <p>Monitors waste levels at beaches using sensors and predicts high-waste areas to guide cleaning teams efficiently.</p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Queue → Handling Sensor Reports</li>
-        <li>Hash Map → Store Waste Levels Per Zone</li>
-        <li>Segment Tree → Predict High-Waste Areas</li>
-        <li>Merge Sort → Sorting Zones by Priority</li>
-      </ul>
-
-      <div class="algos-title">System Workflow</div>
-      <ul>
-        <li>Sensors send waste readings continuously.</li>
-        <li>Readings enter the queue.</li>
-        <li>Hash Map updates the zone’s latest waste level.</li>
-        <li>Segment Tree identifies critical stretches.</li>
-        <li>Merge Sort prepares a priority list.</li>
-        <li>Cleaning teams receive alerts with priority zones.</li>
-      </ul>
-
-      <div class="algos-title">Conclusion</div>
-      <p>This system ensures beaches stay clean using fast processing, early prediction, and smart prioritization. By combining sensor data with powerful algorithms, the beach remains hygienic, safe, and well-maintained.</p>
-
-      <a class="btn" 
-         href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case%203"
-         target="_blank">View Code</a>
+      <div class="algos-title">SDG</div>
+      <div class="algos-title">Algorithms</div>
+      <div class="algos-title">Prediction</div>
+      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case%203" target="_blank">View Code</a>
     </div>
 
-    <!-- ========================= CASE 4 ========================= -->
     <div class="case-item">
       <h2>Restaurant Crowd & Demand Prediction</h2>
       <p>Analyzes customer flow in restaurants to predict peak hours, ensuring better service, reduced wait times, and minimized food wastage.</p>
-
-      <div class="algos-title">Algorithms Used</div>
-      <ul>
-        <li>Queue → Tracking customers entering the restaurant</li>
-        <li>Hash Map → Storing & updating footfall data</li>
-        <li>Binary Search Tree → Historical trend comparison</li>
-        <li>Linear Regression with Arrays → Predicting demand</li>
-      </ul>
-
-      <div class="algos-title">System Workflow</div>
-      <ul>
-        <li>Customers entering the restaurant are recorded in a Queue.</li>
-        <li>Crowd data is updated in the Hash Map for the current time slot.</li>
-        <li>Historical values are stored and organized using a BST.</li>
-        <li>Arrays maintain time-series patterns for trend calculation.</li>
-        <li>System analyzes the patterns and predicts upcoming peak/off-peak periods.</li>
-        <li>Restaurant receives forecast insights for staffing and food preparation.</li>
-      </ul>
-
-      <div class="algos-title">Conclusion</div>
-      <p>This prediction system helps restaurants avoid long queues, reduce food wastage, and improve service quality. By combining real-time tracking with simple, effective algorithms, restaurants can make accurate decisions and operate more efficiently.</p>
-
-     <a class="btn" 
-         href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case4"
-         target="_blank">View Code</a>
+      <div class="algos-title">SDG</div>
+      <div class="algos-title">Algorithms</div>
+      <div class="algos-title">Prediction</div>
+      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case4" target="_blank">View Code</a>
     </div>
 
+    <div class="case-item">
+      <h2>Beachside Energy Usage Optimizer</h2>
+      <p>Beachside areas consume a large amount of electricity for streetlights, public lighting, shops, and utility services. However, a significant portion of this energy is wasted because lights remain ON during low-crowd hours or systems do not adjust power output based on actual demand.</p>
+      <div class="algos-title">SDG</div>
+      <div class="algos-title">Algorithms</div>
+      <div class="algos-title">Prediction</div>
+      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case5" target="_blank">View Code</a>
+    </div>
 
-   <!-- ========================= CASE 5 ========================= -->
-<div class="case-item">
-  <h2>Beachside Energy Usage Optimizer</h2>
-  <p>Beachside areas consume a large amount of electricity for streetlights, public lighting, shops, and utility services. However, a significant portion of this energy is wasted because lights remain ON during low-crowd hours or systems do not adjust power output based on actual demand.</p>
-  <p>A Beachside Energy Usage Optimizer analyzes real-time sensor data, identifies usage patterns, and predicts low-demand periods to reduce power wastage. This ensures efficient energy consumption, lower electricity bills, and improved sustainability.</p>
+    <div class="case-item">
+      <h2>Public Safety Hotspot Mapping System</h2>
+      <p>Crowded public areas such as beaches, markets, and transport hubs often develop hidden danger zones due to overcrowding, repeated incidents, or suspicious activities. A Public Safety Hotspot Mapping System analyzes incident records to identify high-risk areas and alert authorities.</p>
+      <div class="algos-title">SDG</div>
+      <div class="algos-title">Algorithms</div>
+      <div class="algos-title">Prediction</div>
+      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case6" target="_blank">View Code</a>
+    </div>
 
-  <div class="algos-title">Problem Statement</div>
-  <p>Fixed-timer lighting systems do not adapt to actual beach activity. This results in:</p>
-  <ul>
-    <li>High electricity wastage during late-night or low-crowd hours</li>
-    <li>Inefficient power distribution across different beach zones</li>
-    <li>Difficulty in analyzing and adjusting large-scale energy usage manually</li>
-  </ul>
-  <p>A smarter solution must:</p>
-  <ul>
-    <li>Monitor real-time energy usage</li>
-    <li>Detect high- and low-demand zones quickly</li>
-    <li>Predict upcoming low-usage periods</li>
-    <li>Automatically adjust lighting and utilities based on need</li>
-  </ul>
+    <div class="case-item">
+      <h2>Student Performance Pattern Finder</h2>
+      <p>Schools often struggle to identify which students need help early because performance data is scattered across tests, subjects, and activities. A Student Performance Pattern Finder studies marks, score trends, and learning patterns to detect weak areas and highlight subjects needing improvement.</p>
+      <div class="algos-title">SDG</div>
+      <div class="algos-title">Algorithms</div>
+      <div class="algos-title">Prediction</div>
+      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case7" target="_blank">View Code</a>
+    </div>
 
-  <div class="algos-title">Algorithms Used</div>
-  <ul>
-    <li>Segment Tree → Fast energy usage range queries</li>
-    <li>Min-Heap → Prioritizing high-energy zones</li>
-    <li>Hash Map → Storing latest sensor readings</li>
-    <li>Queue → Managing real-time sensor updates</li>
-  </ul>
+    <div class="case-item">
+      <h2>Emergency Evacuation Path Planner</h2>
+      <p>During emergencies such as fires, building accidents, or campus threats, people often panic and choose unsafe or crowded routes. An Emergency Evacuation Path Planner identifies the safest and fastest exit paths inside buildings, malls, schools, and public spaces.</p>
+      <div class="algos-title">SDG</div>
+      <div class="algos-title">Algorithms</div>
+      <div class="algos-title">Prediction</div>
+      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case8" target="_blank">View Code</a>
+    </div>
 
-  <div class="algos-title">System Workflow</div>
-  <ul>
-    <li>Sensors installed across beach zones send energy usage readings continuously</li>
-    <li>Queue logs these incoming readings for orderly processing</li>
-    <li>Hash Map updates the latest energy usage for each zone</li>
-    <li>Segment Tree analyzes energy consumption across time intervals</li>
-    <li>Min-Heap identifies zones consuming the most energy</li>
-    <li>System predicts low-demand periods and adjusts lighting or utilities automatically</li>
-    <li>Overall energy usage is optimized, reducing wastage and cost</li>
-  </ul>
+    <div class="case-item">
+      <h2>Marine Research & Conservation Analytics</h2>
+      <p>Coastal agencies in Velora rely on continuous ocean measurements—such as temperature, salinity, tide movements, and marine species behavior—to understand environmental changes.</p>
+      <div class="algos-title">SDG</div>
+      <div class="algos-title">Algorithms</div>
+      <div class="algos-title">Prediction</div>
+      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case9" target="_blank">View Code</a>
+    </div>
 
-  <div class="algos-title">Conclusion</div>
-  <p>The Beachside Energy Usage Optimizer provides a smart, efficient way to manage power consumption in coastal areas. With fast data structures and predictive logic, it reduces unnecessary energy usage, lowers operational costs, and supports eco-friendly beach management.</p>
-
-  <a class="btn" 
-     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case5"
-     target="_blank">View Code</a>
-</div>
-
-    <!-- ========================= CASE 6 ========================= -->
-<div class="case-item">
-  <h2>Public Safety Hotspot Mapping System</h2>
-  <p>Crowded public areas such as beaches, markets, and transport hubs often develop hidden danger zones due to overcrowding, repeated incidents, or suspicious activities. A Public Safety Hotspot Mapping System analyzes incident records to identify high-risk areas and alert authorities.</p>
-  <p>By detecting patterns early, the system helps deploy security resources more effectively, ensuring safer public environments.</p>
-
-  <div class="algos-title">Problem Statement</div>
-  <p>Public safety teams currently rely on manual observations and delayed reports. This makes it difficult to recognize:</p>
-  <ul>
-    <li>Repetitive danger zones</li>
-    <li>Incident clusters spread across nearby areas</li>
-    <li>High-risk regions requiring immediate attention</li>
-  </ul>
-  <p>A system is needed that can automatically:</p>
-  <ul>
-    <li>Process large amounts of incident data</li>
-    <li>Detect clusters of unsafe areas</li>
-    <li>Rank hotspots by severity</li>
-    <li>Provide actionable insights in real time</li>
-  </ul>
-
-  <div class="algos-title">Algorithms Used</div>
-  <ul>
-    <li>K-Means Clustering → Identify danger clusters</li>
-    <li>Graph + BFS → Detect connected risky zones</li>
-    <li>Hash Map → Fast storage of incident records</li>
-    <li>Max-Heap → Rank highest-risk hotspots</li>
-  </ul>
-
-  <div class="algos-title">System Workflow</div>
-  <ul>
-    <li>Incidents (location, time, type) are recorded and stored using a Hash Map</li>
-    <li>K-Means clustering groups these incidents into meaningful danger zones</li>
-    <li>A graph is created linking nearby unsafe points</li>
-    <li>BFS identifies connected regions that form larger hotspots</li>
-    <li>Max-Heap ranks the hotspots by severity or frequency</li>
-    <li>Authorities receive a real-time map of risk zones</li>
-    <li>Safety teams can deploy staff or take preventive action immediately</li>
-  </ul>
-
-  <div class="algos-title">Conclusion</div>
-  <p>The Public Safety Hotspot Mapping System offers a data-driven way to ensure public safety. By combining clustering, graph traversal, and priority ranking, it highlights high-risk areas quickly and accurately, helping authorities respond more efficiently and protect citizens.</p>
-
-  <a class="btn" 
-     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case6"
-     target="_blank">View Code</a>
-</div>
-
-
-   <!-- ========================= CASE 7 ========================= -->
-<div class="case-item">
-  <h2>Student Performance Pattern Finder</h2>
-  <p>Schools often struggle to identify which students need help early because performance data is scattered across tests, subjects, and activities. A Student Performance Pattern Finder studies marks, score trends, and learning patterns to detect weak areas and highlight subjects needing improvement. This enables teachers to intervene early and support students more effectively.</p>
-
-  <div class="algos-title">Problem Statement</div>
-  <p>Manually analyzing performance across multiple subjects and tests is slow and often inaccurate. Schools need an automated system that can process large student datasets, find score patterns, and quickly identify subjects where students struggle.</p>
-
-  <div class="algos-title">Algorithms Used</div>
-  <ul>
-    <li>Segment Tree → Fast range score analysis</li>
-    <li>Hash Map → Store student records</li>
-    <li>Bubble Sort / QuickSort → Ranking students</li>
-    <li>Trie → Fast subject or topic search</li>
-  </ul>
-
-  <div class="algos-title">System Workflow</div>
-  <ul>
-    <li>Student records and subject marks are stored using Hash Maps</li>
-    <li>Segment Tree processes score ranges for trend analysis</li>
-    <li>Sorting algorithm ranks students by total performance</li>
-    <li>Trie helps search subject or topic-specific performance</li>
-    <li>System highlights weak subjects and suggests improvement areas</li>
-    <li>Teachers receive a clear, data-driven performance dashboard</li>
-  </ul>
-
-  <div class="algos-title">Conclusion</div>
-  <p>The Student Performance Pattern Finder gives schools a smart, automated way to understand student learning trends. By combining fast searching, efficient range queries, sorting, and structured topic lookup, the system helps teachers make better decisions and support students before problems grow.</p>
-
-  <a class="btn" 
-     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case7"
-     target="_blank">View Code</a>
-</div>
-
-
-    <!-- ========================= CASE 8 ========================= -->
-<div class="case-item">
-  <h2>Emergency Evacuation Path Planner</h2>
-  <p>During emergencies such as fires, building accidents, or campus threats, people often panic and choose unsafe or crowded routes. An Emergency Evacuation Path Planner identifies the safest and fastest exit paths inside buildings, malls, schools, and public spaces. By analyzing routes dynamically, it helps guide people to safety without confusion or delay.</p>
-
-  <div class="algos-title">Problem Statement</div>
-  <p>Traditional evacuation maps are static and fail to consider blocked corridors, hazards, or crowd movement. A dynamic system is needed that can analyze all possible exits in real time, detect obstacles, and immediately compute the safest escape route.</p>
-
-  <div class="algos-title">Algorithms Used</div>
-  <ul>
-    <li>BFS (Breadth-First Search) → Fastest path in equal-weight areas</li>
-    <li>Dijkstra’s Algorithm → Weighted escape route selection</li>
-    <li>Graph (Adjacency List) → Representing building layout</li>
-    <li>Queue → Node processing for BFS</li>
-  </ul>
-
-  <div class="algos-title">System Workflow</div>
-  <ul>
-    <li>Building layout is stored as a graph</li>
-    <li>Obstacles or blocked paths are updated in real time</li>
-    <li>BFS is used for equal-cost environments to find nearest exits</li>
-    <li>Dijkstra is used when weighted risks or delays must be considered</li>
-    <li>System highlights the safest and fastest evacuation path</li>
-    <li>Users receive step-by-step guidance to the nearest safe exit</li>
-  </ul>
-
-  <div class="algos-title">Conclusion</div>
-  <p>The Emergency Evacuation Path Planner provides a reliable and intelligent safety solution by analyzing building layouts, hazards, and movement patterns instantly. By combining BFS, Dijkstra, and graph-based modeling, it ensures that people reach safety using the fastest and safest route possible during emergencies.</p>
-
-  <a class="btn" 
-     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case8"
-     target="_blank">View Code</a>
-</div>
-
-
-    <!-- ========================= CASE 9 ========================= -->
-<div class="case-item">
-  <h2>Marine Research & Conservation Analytics</h2>
-  <p>Coastal agencies in Velora rely on continuous ocean measurements—such as temperature, salinity, tide movements, and marine species behavior—to understand environmental changes. A Marine Research & Conservation Analytics system processes this large, noisy, and time-dependent data to identify ecological patterns and support long-term conservation planning.</p>
-
-  <div class="algos-title">Problem Statement</div>
-  <p>Marine researchers face challenges like unpredictable ocean conditions, incomplete logs, and irregular species sightings. A robust analytical system is required to detect long-term trends, identify anomalies in marine environments, and generate insights that help protect sensitive ecosystems and marine life.</p>
-
-  <div class="algos-title">Algorithms Used</div>
-  <ul>
-    <li>Moving Average (Time-Series Analysis) → Trend smoothing</li>
-    <li>Hash Map → Fast species data lookup</li>
-    <li>Graph (Migration Path Mapping) → Marine movement modeling</li>
-    <li>DFS (Depth-First Search) → Habitat zone exploration</li>
-  </ul>
-
-  <div class="algos-title">System Workflow</div>
-  <ul>
-    <li>Ocean sensors collect continuous data</li>
-    <li>Moving Average smooths noisy time-series signals</li>
-    <li>Hash Map stores species logs with timestamps and locations</li>
-    <li>Migration routes are modeled using graph structures</li>
-    <li>DFS explores connectivity and identifies isolated marine zones</li>
-    <li>Final insights help researchers plan conservation strategies</li>
-  </ul>
-
-  <div class="algos-title">Conclusion</div>
-  <p>The Marine Research & Conservation Analytics system transforms raw ocean data into meaningful environmental insights. By combining time-series smoothing, fast data storage, graph mapping, and zone exploration, it helps protect marine ecosystems and supports scientific decision-making.</p>
-
-  <a class="btn" 
-     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case9"
-     target="_blank">View Code</a>
-</div>
-
-    <!-- ========================= CASE 10 ========================= -->
-    <!-- ========================= CASE 10 ========================= -->
-<div class="case-item">
-  <h2>AI-Based Public Complaint & Feedback System</h2>
-  <p>Collects, organizes, and prioritizes citizen complaints for faster municipal response. The system automatically categorizes issues, identifies recurring problems, and highlights critical concerns, enabling authorities to act efficiently and improve public satisfaction.</p>
-
-  <div class="algos-title">Problem Statement</div>
-  <p>Manual handling is slow, inconsistent, and error-prone.</p>
-
-  <div class="algos-title">Algorithms Used</div>
-  <ul>
-    <li>Trie → Fast keyword search in complaints</li>
-    <li>Hash Map → Efficient storage and lookup</li>
-    <li>Priority Queue → Urgent issue prioritization</li>
-    <li>Rabin-Karp → Detect repeated patterns in feedback</li>
-  </ul>
-
-  <div class="algos-title">System Workflow</div>
-  <ul>
-    <li>Citizens submit complaints.</li>
-    <li>Extract keywords with Trie and store data in Hash Map.</li>
-    <li>Rank urgent issues via Priority Queue.</li>
-    <li>Detect repeated complaints using Rabin-Karp.</li>
-    <li>Forward to departments and update citizens.</li>
-  </ul>
-
-  <div class="algos-title">Conclusion</div>
-  <p>Streamlines complaint management, ensures urgent issues are prioritized, and enhances municipal responsiveness.</p>
-
-  <a class="btn" 
-     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case10"
-     target="_blank">View Code</a>
-</div>
-
+    <div class="case-item">
+      <h2>AI-Based Public Complaint & Feedback System</h2>
+      <p>Collects, organizes, and prioritizes citizen complaints for faster municipal response. The system automatically categorizes issues, identifies recurring problems, and highlights critical concerns.</p>
+      <div class="algos-title">SDG</div>
+      <div class="algos-title">Algorithms</div>
+      <div class="algos-title">Prediction</div>
+      <a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Rakshita%20K/case10" target="_blank">View Code</a>
+    </div>
 
   </div>
 </section>
 
-<!-- RIGHT SIDEBAR -->
 <aside class="sidebar">
   <div class="side-card">
     <h3>Project Info</h3>
