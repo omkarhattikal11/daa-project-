@@ -292,45 +292,41 @@
     <!-- IMPLEMENTATION TABLE -->
     <h2 style="margin-top:30px;">Implementation Analysis</h2>
 
-    <table>
-<thead>
-<tr>
-    <th>Algorithm/Data Structure</th>
-    <th>Used?</th>
-    <th>Where Used?</th>
-    <th>Space</th>
-    <th>Time</th>
-</tr>
-</thead>
+  <h2>Algorithms & Data Structures Usage Table</h2>
 
-<tbody>
-<tr><td>Arrays</td><td>Yes</td><td>Traffic densities, bus schedules</td><td>O(n)</td><td>O(1)</td></tr>
-<tr><td>Structures</td><td>Yes</td><td>Road attributes</td><td>O(n)</td><td>O(1)</td></tr>
-<tr><td>List</td><td>Yes</td><td>Alerts, logs</td><td>O(n)</td><td>O(n)</td></tr>
-<tr><td>Queue</td><td>Yes</td><td>Bus arrivals, alerts</td><td>O(n)</td><td>O(1)</td></tr>
-<tr><td>Binary Search Tree</td><td>Yes</td><td>Sort congestion</td><td>O(n)</td><td>O(log n)</td></tr>
-<tr><td>Trie</td><td>Yes</td><td>Road name auto-complete</td><td>O(chars)</td><td>O(len)</td></tr>
-<tr><td>Heap</td><td>Yes</td><td>Dijkstra</td><td>O(n)</td><td>O(log n)</td></tr>
-<tr><td>Lookup Table</td><td>Yes</td><td>ID → data</td><td>O(n)</td><td>O(1)</td></tr>
-<tr><td>Segment Tree</td><td>Yes</td><td>RMQ for traffic</td><td>O(n)</td><td>O(log n)</td></tr>
-<tr><td>Union-Find</td><td>Yes</td><td>Road connectivity</td><td>O(n)</td><td>O(1)</td></tr>
-<tr><td>Hashing</td><td>Yes</td><td>Fast bus route lookup</td><td>O(n)</td><td>O(1)</td></tr>
-<tr><td>DFS</td><td>Yes</td><td>Connectivity</td><td>O(n+m)</td><td>O(n+m)</td></tr>
-<tr><td>BFS</td><td>Yes</td><td>Unweighted shortest path</td><td>O(n+m)</td><td>O(n+m)</td></tr>
-<tr><td>Quick Sort</td><td>Yes</td><td>Traffic list</td><td>O(n)</td><td>O(n log n)</td></tr>
-<tr><td>Merge Sort</td><td>Yes</td><td>Prediction data</td><td>O(n)</td><td>O(n log n)</td></tr>
-<tr><td>Rabin–Karp</td><td>Yes</td><td>Search logs</td><td>O(n+m)</td><td>O(n+m)</td></tr>
-<tr><td>KMP</td><td>Yes</td><td>Violation pattern search</td><td>O(n+m)</td><td>O(n+m)</td></tr>
-<tr><td>Heap Sort</td><td>Yes</td><td>Historical traffic</td><td>O(1)</td><td>O(n log n)</td></tr>
-<tr><td>Kruskal</td><td>Yes</td><td>Maintenance network</td><td>—</td><td>O(E log E)</td></tr>
-<tr><td>Prim</td><td>Yes</td><td>Sensor cable network</td><td>—</td><td>O(E log V)</td></tr>
-<tr><td>Dijkstra</td><td>Yes</td><td>Shortest path</td><td>—</td><td>O(E log V)</td></tr>
-<tr><td>Bellman–Ford</td><td>Yes</td><td>Negative congestion</td><td>—</td><td>O(VE)</td></tr>
-<tr><td>A*</td><td>Yes</td><td>Emergency routing</td><td>—</td><td>O(E)</td></tr>
-</tbody>
+<table>
+    <tr>
+        <th>Algorithm/Data Structure</th>
+        <th>Used?</th>
+        <th>How and where?</th>
+        <th>Space Efficiency</th>
+        <th>Time Efficiency</th>
+    </tr>
 
+    <tr><td>Arrays</td><td>Yes</td><td>Store traffic densities, bus schedules</td><td>O(n)</td><td>O(1)</td></tr>
+    <tr><td>Structures</td><td>Yes</td><td>Group road info</td><td>O(n)</td><td>O(1)</td></tr>
+    <tr><td>List (Linked List)</td><td>Yes</td><td>Dynamic list of incidents</td><td>O(n)</td><td>O(n)</td></tr>
+    <tr><td>Queue</td><td>Yes</td><td>Manage bus arrivals & signals</td><td>O(n)</td><td>O(1)</td></tr>
+    <tr><td>BST</td><td>Yes</td><td>Store roads by congestion</td><td>O(n)</td><td>O(log n)</td></tr>
+    <tr><td>Trie</td><td>Yes</td><td>Road name autocomplete</td><td>O(chars)</td><td>O(length)</td></tr>
+    <tr><td>Heap</td><td>Yes</td><td>Dijkstra shortest path</td><td>O(n)</td><td>O(log n)</td></tr>
+    <tr><td>Lookup Table</td><td>Yes</td><td>Map roadID to data</td><td>O(n)</td><td>O(1)</td></tr>
+    <tr><td>Segment Tree</td><td>Yes</td><td>Range traffic queries</td><td>O(n)</td><td>O(log n)</td></tr>
+    <tr><td>Union-Find</td><td>Yes</td><td>Connectivity during accidents</td><td>O(n)</td><td>O(1)</td></tr>
+    <tr><td>Hashing</td><td>Yes</td><td>Fast lookup for routes</td><td>O(n)</td><td>O(1)</td></tr>
+    <tr><td>DFS</td><td>Yes</td><td>Check connectivity</td><td>O(n+m)</td><td>O(n+m)</td></tr>
+    <tr><td>BFS</td><td>Yes</td><td>Unweighted shortest path</td><td>O(n+m)</td><td>O(n+m)</td></tr>
+    <tr><td>Quick Sort</td><td>Yes</td><td>Sort congestion</td><td>O(n)</td><td>O(n log n)</td></tr>
+    <tr><td>Merge Sort</td><td>Yes</td><td>Sort bus timings</td><td>O(n)</td><td>O(n log n)</td></tr>
+    <tr><td>Rabin-Karp</td><td>Yes</td><td>Search logs</td><td>O(n+m)</td><td>O(n+m)</td></tr>
+    <tr><td>KMP</td><td>Yes</td><td>Violation log search</td><td>O(n+m)</td><td>O(n+m)</td></tr>
+    <tr><td>Heap Sort</td><td>Yes</td><td>Historical traffic data</td><td>O(1)</td><td>O(n log n)</td></tr>
+    <tr><td>Kruskal</td><td>Yes</td><td>Road maintenance network</td><td>O(E)</td><td>O(E log E)</td></tr>
+    <tr><td>Prim</td><td>Yes</td><td>Sensor cable optimization</td><td>O(E)</td><td>O(E log V)</td></tr>
+    <tr><td>Dijkstra</td><td>Yes</td><td>Shortest path</td><td>O(E)</td><td>O(E log V)</td></tr>
+    <tr><td>Bellman-Ford</td><td>Yes</td><td>Detect anomalies</td><td>O(VE)</td><td>Slow</td></tr>
+    <tr><td>A*</td><td>Yes</td><td>Emergency routing</td><td>O(E)</td><td>Fast</td></tr>
 </table>
-
   </main>
 
   <footer>
