@@ -7,14 +7,14 @@
 
 <style>
   :root{
-    --bg-dark: #0d1117;      
+    --bg-dark: #0d1117;
     --text-light: #e6eef3;
     --accent-1: #00f5d4;        /* Problem + Solution */
     --accent-2: #d97706;        /* Algorithms + Data Structures - dark amber */
     --accent-3: #6b21a8;        /* SDGs - dark violet */
     --card-radius: 14px;
     --shadow-dark: rgba(0,0,0,0.5);
-    --max-width: 900px;
+    --max-width: 980px;
     font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   }
 
@@ -24,17 +24,17 @@
   body{
     background: var(--bg-dark);
     color: var(--text-light);
-    padding-top:78px;
+    padding-top:90px;
     line-height:1.5;
   }
 
   /* NAVBAR */
   .navbar{
-    position:fixed; top:8px; left:50%; transform:translateX(-50%);
+    position:fixed; top:12px; left:50%; transform:translateX(-50%);
     width:calc(100% - 40px); max-width:var(--max-width);
     display:flex; align-items:center; justify-content:space-between; gap:12px;
-    padding:12px 18px;
-    background: rgba(255,255,255,0.05);
+    padding:14px 18px;
+    background: rgba(255,255,255,0.04);
     border-radius:12px;
     backdrop-filter: blur(10px);
     box-shadow: 0 6px 30px var(--shadow-dark);
@@ -42,10 +42,10 @@
   }
 
   .logo{ display:flex; gap:12px; align-items:center; font-weight:700; font-size:18px; }
-  .logo .dot{ width:36px; height:36px; border-radius:9px;
+  .logo .dot{ width:42px; height:42px; border-radius:9px;
     background: linear-gradient(135deg,#00f5d4,#3b82f6);
     display:flex; align-items:center; justify-content:center;
-    color:#0d1117; font-weight:800; box-shadow:0 6px 18px rgba(0,255,212,0.3); }
+    color:#0d1117; font-weight:800; box-shadow:0 6px 18px rgba(0,255,212,0.18); }
 
   nav ul{ display:flex; gap:14px; list-style:none; align-items:center; }
   nav a{ text-decoration:none; color:var(--text-light); font-weight:600; padding:8px 12px; border-radius:8px; font-size:14px; transition: all .18s ease; }
@@ -60,9 +60,10 @@
 
   .card{
     border-radius:var(--card-radius);
-    padding:24px;
+    padding:22px;
     box-shadow: 0 8px 30px var(--shadow-dark);
-    border:1px solid rgba(255,255,255,0.1);
+    border:1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.02);
   }
 
   .card h2{ font-size:20px; margin-bottom:12px; }
@@ -70,16 +71,28 @@
   .card ul{ padding-left:20px; margin-top:10px; }
   .card ul li{ margin-bottom:8px; font-size:14px; }
 
-  .card table{ width:100%; border-collapse: collapse; margin-top:12px; color: #0d1117; }
-  .card th, .card td{ border:1px solid rgba(255,255,255,0.2); padding:10px; text-align:left; font-size:14px; }
-  .card th{ background-color: rgba(0,0,0,0.3); color: var(--text-light); }
+  .card table{ width:100%; border-collapse: collapse; margin-top:12px; }
+  .card th, .card td{ border:1px solid rgba(255,255,255,0.08); padding:10px; text-align:left; font-size:14px; }
+  .card th{ background-color: rgba(255,255,255,0.04); color: var(--text-light); }
 
   /* DISTINCT GRADIENTS */
-  .problem-solution-card{ background: linear-gradient(135deg,#00f5d4,#3b82f6); color:#0d1117; }
-  .algo-datastruct-card{ background: linear-gradient(135deg,#b45309,#78350f); color:#f3f3f3; } /* dark amber/brown */
-  .sdg-card{ background: linear-gradient(135deg,#5b21b6,#3b0764); color:#f3f3f3; } /* dark violet */
+  .problem-solution-card{ background: linear-gradient(135deg,#00f5d4 0%, #3b82f6 100%); color:#08101a; }
+  .algo-datastruct-card{ background: linear-gradient(135deg,#b45309 0%, #78350f 100%); color:#fff; }
+  .sdg-card{ background: linear-gradient(135deg,#5b21b6 0%, #3b0764 100%); color:#fff; }
+
+  /* smaller gradient variant for secondary cards */
+  .panel{ background: rgba(255,255,255,0.02); }
+  .panel h3{ margin-top:8px; margin-bottom:6px; }
+  .muted{ opacity:0.9; font-size:14px; }
 
   footer{ margin-top:34px; color:var(--text-light); font-size:14px; text-align:center; padding:18px 6px; }
+
+  /* RESPONSIVE */
+  @media (min-width:760px){
+    .card-container{ flex-direction:row; flex-wrap:wrap; }
+    .card{ flex:1 1 calc(50% - 22px); min-width:320px; }
+    .wide{ flex:1 1 100%; }
+  }
 </style>
 </head>
 <body>
@@ -102,91 +115,132 @@
 
   <!-- PAGE CONTENT -->
   <main class="wrap">
-    <h1>Smart City Traffic & Transport Optimization</h1>
+    <h1>Smart City — Hospital & Emergency Resource Management</h1>
 
     <div class="card-container">
 
       <!-- PROBLEM + SOLUTION -->
-      <div class="card problem-solution-card">
-        <h2>1 • Problem Statement & Solution Overview</h2>
-        <h3>Problem Statement:</h3>
+      <section class="card problem-solution-card wide" aria-labelledby="ps-heading">
+        <h2 id="ps-heading">1 • Problem Statement & Solution Overview</h2>
+        <h3 class="muted">Problem Statement:</h3>
         <ul>
-          <h4>Emergency Resource Issues</h4>
-          <li>Ambulances not allocated properly.</li>
-          <li>ICU beds get filled; no real-time availability updates..</li>
+          <li>Ambulances not allocated optimally leading to delays.</li>
+          <li>ICU beds get filled; no real-time availability updates.</li>
           <li>Delay in assigning doctors and nurses.</li>
           <li>Blood banks unable to track urgent blood requirements.</li>
           <li>Equipment shortage (ventilators, oxygen cylinders).</li>
           <li>Emergency triage not prioritised properly.</li>
         </ul>
-        <h3>Solution Overview:</h3>
+
+        <h3 class="muted">Solution Overview:</h3>
         <ul>
-          <li>Ambulance Routing & Traffic Navigation</li>
-          <li>Patient Triage & Prioritization.</li>
-          <li>Bed / ICU / Ventilator Allocation</li>
-          <li>Medicine Stock & Distribution.</li>
-          <li>Emergency Prediction</li>
+          <li>Ambulance Routing & Traffic Navigation (Dijkstra + dynamic updates)</li>
+          <li>Patient Triage & Prioritization (Max-Heap / Priority Queue)</li>
+          <li>Bed / ICU / Ventilator Allocation (AVL / BST)</li>
+          <li>Medicine Stock & Distribution (Hash table + Min-Heap)</li>
+          <li>Emergency Prediction (Dynamic Programming / Greedy)</li>
         </ul>
-      </div>
+      </section>
 
       <!-- ALGORITHMS + DATA STRUCTURES -->
-      <div class="card algo-datastruct-card">
-        <h2>2 • Algorithms & Data Structures</h2>
-        <table>
-          <tr><th>Task</th><th>Algorithm / Data Structure</th><th>why used</th></tr>
-          <tr><td>Ambulance fastest route</td><td>Dijkstra’s Algorithm</td><td>Shortest path</td></tr>
-          <tr><td>Patient triage priorityCity area reachability</td><td>BFS/DFS</td><td>Region search & exploration</td></tr>
-          <tr><td>Bed search</td><td>Binary Search (sorted beds/BST)</td><td>-</td></tr>
-          <tr><td>Patient sorting by severity</td><td>Merge Sort / Quick Sort</td><td>-</td></tr>
-          
-        </table>
-        <h3>Optimization Techniques</h3>
-        <table>
-          <tr><th>Technique</th><th>Application</th></tr>
-          <tr><th>Divide & Conquer</th><th>Sorting patient records</th></tr>
-          <tr><th>Dynamic Programming</th><th>Emergency prediction</th></tr>
-          <tr><th>Greedy Algorithm</th><th>Allocate nearest ambulance</th></tr>
-        </table>
-        </ul>
-        <h3>Data Structures Used:</h3>
+      <section class="card algo-datastruct-card" aria-labelledby="alg-heading">
+        <h2 id="alg-heading">2 • Algorithms & Data Structures</h2>
+        <div class="panel">
+          <table>
+            <thead>
+              <tr><th>Task</th><th>Algorithm / Data Structure</th><th>Why Used</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Ambulance fastest route</td><td>Dijkstra’s Algorithm</td><td>Shortest path with positive weights</td></tr>
+              <tr><td>City area reachability</td><td>BFS / DFS</td><td>Region search & exploration</td></tr>
+              <tr><td>Bed search</td><td>BST / AVL Tree</td><td>Fast insert/search/delete (O(log n))</td></tr>
+              <tr><td>Patient sorting by severity</td><td>Merge Sort / Quick Sort</td><td>Stable & efficient sorting</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Optimization Techniques</h3>
+          <table>
+            <thead>
+              <tr><th>Technique</th><th>Application</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Divide & Conquer</td><td>Sorting & parallel processing</td></tr>
+              <tr><td>Dynamic Programming</td><td>Emergency prediction & demand estimation</td></tr>
+              <tr><td>Greedy Algorithm</td><td>Assign nearest ambulance / quick allocation</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Data Structures Used:</h3>
+          <ul>
+            <li><strong>Max-Heap / Priority Queue</strong> — Patient triage</li>
+            <li><strong>BST / AVL Tree</strong> — Bed mapping & allocation</li>
+            <li><strong>Hash Table + Min-Heap</strong> — Medicine stock & expiry management</li>
+            <li><strong>Graph (Adjacency List)</strong> — Traffic map / road network</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- SYSTEM ARCHITECTURE -->
+      <section class="card panel" aria-labelledby="arch-heading">
+        <h2 id="arch-heading">3 • System Architecture</h2>
         <ul>
-          <li><strong>Max-Heap / Priority Queue</strong>Patient triage</li>
-          <li><strong>BST / AVL Tree </strong>Bed mapping</li>
-          <li><strong>Hash Table + Min-Heap (expiry)</strong>Medicine stock</li>
-          <li><strong>Graph (Adjacency List)</strong>Traffic map</li>
+          <li><strong>Ambulance Routing Module</strong>
+            <p class="muted">Graph of city roads. Use Dijkstra to compute shortest path (with dynamic edge weights for traffic).</p>
+          </li>
+          <li><strong>Patient Priority Module</strong>
+            <p class="muted">Max-Heap based triage queue to pick highest severity first.</p>
+          </li>
+          <li><strong>Resource Allocation Module</strong>
+            <p class="muted">AVL Tree for beds / ICUs; Hash table for medicines with fast lookup.</p>
+          </li>
+          <li><strong>Waste Management</strong>
+            <p class="muted">Min-Heap ordered by expiry date to reduce medicine waste.</p>
+          </li>
+          <li><strong>Emergency Prediction Module</strong>
+            <p class="muted">DP & Greedy models to forecast demand and pre-allocate resources.</p>
+          </li>
         </ul>
-      </div>
-       <div class="card algo-datastruct-card4">
-         <h2>System Architecture</h2>
-         <ul>
-           <li>Ambulance Routing Module
-           </li><p>Graph of city roads.
-             Use Dijkstra to compute shortest path.</p>
-           <li>Patient Priority Module</li>
-           <p>Max-Heap based triage queue.</p>
-           <li>Resource Allocation Module
-           </li>
-           <p>AVL Tree for beds.
-             Hash table for medicines.</p>
-           <li>Waste Management (Expired Medicines)</li>
-           <p>Min-Heap by expiry date.</p>
-           <li>Emergency Prediction Module</li>
-           <p>Dynamic programming trend analysis.</p>
-         </ul>
-       </div>
-      <!-- SDGs -->
-      <div class="card sdg-card">
-        <h2>3 • Sustainable Development Goals (SDGs)</h2>
+      </section>
+
+      <!-- TIME & SPACE -->
+      <section class="card algo-datastruct-card wide" aria-labelledby="complex-heading">
+        <h2 id="complex-heading">4 • Time & Space Complexity Analysis</h2>
         <ul>
-          <li><strong>SDG 3:</strong> Good Health & Well-being – Faster emergency response, optimal patient care</li>
-          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – Smart resource allocation using algorithms</li>
-          <li><strong>SDG 11:</strong> Sustainable Cities & Communities – Efficient ambulance routes, reduced congestion, sustainable medical logistics.</li>
-          <li><strong>SDG 12:</strong> Responsible Consumption – Optimized medicine stock management & reduced waste.</li>
-          <li><strong>SDG 17:</strong> Partnerships for the Goals – Connects hospitals, ambulance services, labs</li>
+          <li><strong>Dijkstra’s Algorithm</strong> — Time: O(E log V), Space: O(V)</li>
+          <li><strong>Priority Queue (Patient Priority)</strong> — Push / Pop: O(log n)</li>
+          <li><strong>AVL Tree (Bed Allocation)</strong> — Insert / Search / Delete: O(log n), Space: O(n)</li>
+          <li><strong>Hash Table (Medicine Stock)</strong> — Average O(1) lookup</li>
+          <li><strong>Min-Heap (Expiry)</strong> — Insert / min() / pop: O(log n)</li>
         </ul>
-      </div>
+      </section>
+
+      <!-- SDGS -->
+      <section class="card sdg-card" aria-labelledby="sdg-heading">
+        <h2 id="sdg-heading">5 • Sustainable Development Goals (SDGs)</h2>
+        <ul>
+          <li><strong>SDG 3:</strong> Good Health &amp; Well-being — Faster emergency response, optimal patient care</li>
+          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure — Smart resource allocation using algorithms</li>
+          <li><strong>SDG 11:</strong> Sustainable Cities &amp; Communities — Efficient ambulance routes, reduced congestion</li>
+          <li><strong>SDG 12:</strong> Responsible Consumption — Optimized medicine stock management &amp; reduced waste</li>
+          <li><strong>SDG 17:</strong> Partnerships for the Goals — Connects hospitals, ambulance services, labs</li>
+        </ul>
+      </section>
+
+      <!-- TRANSFER OF KNOWLEDGE -->
+      <section class="card panel wide" aria-labelledby="transfer-heading">
+        <h2 id="transfer-heading">6 • Transfer of Knowledge</h2>
+        <p class="muted">This project demonstrates how algorithmic thinking can be generalized to other domains:</p>
+        <ul>
+          <li>Disaster management (routing + resource allocation)</li>
+          <li>Fire department dispatch systems</li>
+          <li>Smart city water & traffic management</li>
+          <li>Supply chain & warehouse optimization</li>
+          <li>Vaccination center scheduling</li>
+        </ul>
+      </section>
 
     </div>
+
   </main>
 
   <footer>
