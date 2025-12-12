@@ -1,137 +1,253 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <unordered_map>
+#include <climits>
+#include <string>
+#include <algorithm>   // REQUIRED FOR max()
 using namespace std;
 
-#define INF 1e9
+// ---------------- GRAPH (Ambulance Routing) -------------------
+class Graph {
+public:
+    int V;
+    vector<vector<pair<int,int>>> adj;
 
-// ---------------- STRUCTURES ----------------
-struct Patient {
-    string name;
-    string condition;
-    int severity; // 3 = Critical, 2 = Urgent, 1 = Normal
-};
+    Graph(int V){
+        this->V = V;
+        adj.resize(V);
+    }
 
-struct Ambulance {
-    string id;
-    int location;  // node index
-    bool available;
-};
+    void addEdge(int u, int v, int w){
+        adj[u].push_back({v,w});
+        adj[v].push_back({u,w});
+    }
 
-struct Resources {
-    int beds;
-    int icuBeds;
-    int ventilators;
-    map<string,int> blood; // A+,A-,B+,B-,O+,O-,AB+,AB-
-};
+    vector<int> dijkstra(int src){
+        vector<int> dist(V, INT_MAX);
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
 
-// ---------------- DIJKSTRA: SHORTEST PATH ----------------
-vector<int> dijkstra(int src, vector<vector<pair<int,int>>> &graph) {
-    int n = graph.size();
-    vector<int> dist(n, INF);
-    dist[src] = 0;
+        pq.push({0, src});
+        dist[src] = 0;
 
-    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<>> pq;
-    pq.push({0, src});
+        while(!pq.empty()){
+            int u = pq.top().second;
+            pq.pop();
 
-    while(!pq.empty()) {
-        auto [d, u] = pq.top(); pq.pop();
-        if(d > dist[u]) continue;
+            for(auto &p: adj[u]){
+                int v = p.first;
+                int w = p.second;
 
-        for(auto &edge : graph[u]) {
-            int v = edge.first, w = edge.second;
-            if(dist[u] + w < dist[v]) {
-                dist[v] = dist[u] + w;
-                pq.push({dist[v], v});
+                if(dist[u] + w < dist[v]){
+                    dist[v] = dist[u] + w;
+                    pq.push({dist[v], v});
+                }
             }
         }
+        return dist;
     }
-    return dist;
-}
+};
 
-// ---------------- TRIAGE PRIORITY QUEUE ----------------
+// -------- PRIORITY QUEUE (Patient Severity) --------
+struct Patient {
+    string name;
+    int severity;
+};
+
 struct Compare {
-    bool operator()(Patient &a, Patient &b) {
+    bool operator()(const Patient &a, const Patient &b){
         return a.severity < b.severity;
     }
 };
 
-// ---------------- MAIN PROGRAM ----------------
-int main() {
+// ---------------- AVL TREE (Bed Management) -------------------
+class AVL {
+public:
+    int bedID, height;
+    AVL *left, *right;
 
-    // ---------------- HOSPITAL RESOURCES ----------------
-    Resources r = {50, 10, 7, 
-        {{"A+",5},{"A-",4},{"B+",3},{"O+",8},{"O-",2}}
-    };
+    AVL(int id){
+        bedID = id;
+        height = 1;
+        left = right = nullptr;
+    }
+};
 
-    // ---------------- AMBULANCES ----------------
-    vector<Ambulance> amb = {
-        {"AMB1",0,true},
-        {"AMB2",3,true},
-        {"AMB3",5,false}
-    };
+int height(AVL* N){
+    return (N == nullptr) ? 0 : N->height;
+}
 
-    // ---------------- HOSPITAL GRAPH ----------------
-    vector<vector<pair<int,int>>> graph(6);
-    graph[0].push_back({1,7});
-    graph[1].push_back({2,5});
-    graph[1].push_back({3,3});
-    graph[2].push_back({4,4});
-    graph[3].push_back({4,6});
-    graph[4].push_back({5,2});
+int getBalance(AVL* N){
+    return (N == nullptr) ? 0 : height(N->left) - height(N->right);
+}
 
-    // ---------------- TRIAGE QUEUE ----------------
-    priority_queue<Patient, vector<Patient>, Compare> triage;
+AVL* rightRotate(AVL* y){
+    AVL* x = y->left;
+    AVL* T2 = x->right;
 
-    // Add some patients
-    triage.push({"Rahul","Heart Attack",3});
-    triage.push({"Asha","Accident Injury",2});
-    triage.push({"John","Fever",1});
+    x->right = y;
+    y->left = T2;
 
-    cout << "\n=== PATIENT TRIAGE LIST ===\n";
-    while(!triage.empty()) {
-        auto p = triage.top(); triage.pop();
-        cout << p.name << " | Condition: " << p.condition 
-             << " | Severity Level: " << p.severity << endl;
+    y->height = max(height(y->left), height(y->right)) + 1;
+    x->height = max(height(x->left), height(x->right)) + 1;
+
+    return x;
+}
+
+AVL* leftRotate(AVL* x){
+    AVL* y = x->right;
+    AVL* T2 = y->left;
+
+    y->left = x;
+    x->right = T2;
+
+    x->height = max(height(x->left), height(x->right)) + 1;
+    y->height = max(height(y->left), height(y->right)) + 1;
+
+    return y;
+}
+
+AVL* insertBed(AVL* node, int key){
+    if (node == nullptr)
+        return new AVL(key);
+
+    if (key < node->bedID)
+        node->left = insertBed(node->left, key);
+    else if (key > node->bedID)
+        node->right = insertBed(node->right, key);
+    else
+        return node;
+
+    node->height = 1 + max(height(node->left), height(node->right));
+
+    int balance = getBalance(node);
+
+    if (balance > 1 && key < node->left->bedID)
+        return rightRotate(node);
+
+    if (balance < -1 && key > node->right->bedID)
+        return leftRotate(node);
+
+    if (balance > 1 && key > node->left->bedID){
+        node->left = leftRotate(node->left);
+        return rightRotate(node);
     }
 
-    // ---------------- FIND NEAREST AMBULANCE ----------------
-    int emergencyLocation = 4;
-    cout << "\n=== NEAREST AMBULANCE DISPATCH ===\n";
-
-    int bestAmbulance = -1;
-    int bestDist = INF;
-
-    for(int i=0;i<amb.size();i++){
-        if(!amb[i].available) continue;
-
-        auto dist = dijkstra(amb[i].location, graph);
-        if(dist[emergencyLocation] < bestDist){
-            bestDist = dist[emergencyLocation];
-            bestAmbulance = i;
-        }
+    if (balance < -1 && key < node->right->bedID){
+        node->right = rightRotate(node->right);
+        return leftRotate(node);
     }
 
-    if(bestAmbulance != -1){
-        cout << "Dispatch Ambulance: " << amb[bestAmbulance].id 
-             << " | Distance: " << bestDist << endl;
+    return node;
+}
+
+void inorder(AVL* root){
+    if (root != nullptr){
+        inorder(root->left);
+        cout << root->bedID << " ";
+        inorder(root->right);
     }
-    else cout << "No ambulance available!\n";
+}
 
-    // ---------------- RESOURCE STATUS ----------------
-    cout << "\n=== RESOURCE STATUS ===\n";
-    cout << "Beds Available: " << r.beds << endl;
-    cout << "ICU Beds: " << r.icuBeds << endl;
-    cout << "Ventilators: " << r.ventilators << endl;
+// ---------- Medicine (Hash Table + Min-Heap) ----------- 
+struct Medicine {
+    string name;
+    int expiryDays;
+};
 
-    cout << "\nBlood Stock:\n";
-    for(auto &b : r.blood)
-        cout << b.first << ": " << b.second << endl;
+struct MinCompare {
+    bool operator()(const Medicine &a, const Medicine &b){
+        return a.expiryDays > b.expiryDays;
+    }
+};
 
-    // ---------------- BLOOD MATCH SYSTEM ----------------
-    string needed = "O+";
-    cout << "\n=== BLOOD MATCH ===\nNeed Blood: " << needed << endl;
-    if(r.blood[needed] > 0) cout << "Blood Available!" << endl;
-    else cout << "Not Available!" << endl;
+unordered_map<string, int> stock;
+priority_queue<Medicine, vector<Medicine>, MinCompare> expiryHeap;
+
+// ---------------------- MAIN PROGRAM -------------------------------
+int main(){
+
+    cout << "\n===== HOSPITAL EMERGENCY RESOURCE MANAGEMENT SYSTEM =====\n\n";
+
+    int V, E;
+    cout << "Enter number of areas (nodes): ";
+    cin >> V;
+
+    Graph g(V);
+
+    cout << "Enter number of roads: ";
+    cin >> E;
+
+    cout << "Enter roads in format: u v weight\n";
+    for(int i=0;i<E;i++){
+        int u,v,w;
+        cin >> u >> v >> w;
+        g.addEdge(u,v,w);
+    }
+
+    int src;
+    cout << "\nEnter hospital node (source): ";
+    cin >> src;
+
+    auto dist = g.dijkstra(src);
+
+    cout << "\n--- Ambulance Shortest Distance from Hospital ---\n";
+    for(int i=0;i<V;i++)
+        cout << "Area " << i << ": " << dist[i] << "\n";
+
+    // -------- Patients PQ --------
+    int P;
+    cout << "\nEnter number of patients: ";
+    cin >> P;
+
+    priority_queue<Patient, vector<Patient>, Compare> pq;
+    for(int i=0;i<P;i++){
+        Patient p;
+        cout << "Enter patient name & severity: ";
+        cin >> p.name >> p.severity;
+        pq.push(p);
+    }
+
+    cout << "\n--- Patient Treatment Order (High → Low severity) ---\n";
+    while(!pq.empty()){
+        auto p = pq.top(); pq.pop();
+        cout << p.name << " (sev " << p.severity << ")\n";
+    }
+
+    // --------- Beds (AVL Tree) --------
+    AVL* root = nullptr;
+    int B;
+    cout << "\nEnter number of beds: ";
+    cin >> B;
+
+    cout << "Enter bed IDs:\n";
+    for(int i=0;i<B;i++){
+        int id;
+        cin >> id;
+        root = insertBed(root, id);
+    }
+
+    cout << "\nAvailable Beds (Inorder Sorted): ";
+    inorder(root);
+    cout << "\n";
+
+    // ---------- Medicines ----------
+    int M;
+    cout << "\nEnter number of medicines: ";
+    cin >> M;
+
+    for(int i=0;i<M;i++){
+        Medicine m;
+        cout << "Enter medicine name & expiry days: ";
+        cin >> m.name >> m.expiryDays;
+
+        stock[m.name]++;
+        expiryHeap.push(m);
+    }
+
+    cout << "\nMost urgent medicine (min expiry): "
+         << expiryHeap.top().name
+         << " (" << expiryHeap.top().expiryDays << " days)\n";
 
     return 0;
 }
-
