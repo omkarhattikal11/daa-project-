@@ -2412,7 +2412,165 @@ SDG 13 — Climate Action </div>
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-<pre> </pre>
+<pre> // shuttle_load_balancer.cpp
+// C++17 - In-place Heap Sort + Lookup Table example for Campus Shuttle Stop Load Balancing
+
+#include <bits/stdc++.h>
+using namespace std;
+
+struct StopInfo {
+    int id;
+    string name;
+    string zone;
+    string next_shuttle_time; // e.g. "12:05"
+    // add more metadata as needed
+};
+
+struct StopLoad {
+    int id;
+    int count; // current passenger count (window)
+};
+
+// --- Lookup table: stopID -> StopInfo
+using StopLookup = unordered_map<int, StopInfo>;
+
+// ---------------------- Heap Sort (in-place) ----------------------
+// We'll sort vector<StopLoad> in descending order of count (largest first)
+// Implementation: build max-heap then extract
+
+void heapify(vector<StopLoad> &arr, int n, int i) {
+    int largest = i;
+    int l = 2*i + 1;
+    int r = 2*i + 2;
+
+    if (l < n && arr[l].count > arr[largest].count)
+        largest = l;
+    if (r < n && arr[r].count > arr[largest].count)
+        largest = r;
+
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        heapify(arr, n, largest);
+    }
+}
+
+void heapSortDescending(vector<StopLoad> &arr) {
+    int n = (int)arr.size();
+    // Build max-heap
+    for (int i = n/2 - 1; i >= 0; --i)
+        heapify(arr, n, i);
+
+    // Extract elements from heap one by one
+    for (int i = n - 1; i > 0; --i) {
+        // Move current root (largest) to end
+        swap(arr[0], arr[i]);
+        // call heapify on reduced heap
+        heapify(arr, i, 0);
+    }
+    // After this, array is sorted in ascending order by count.
+    // We want descending (largest first) so reverse:
+    reverse(arr.begin(), arr.end());
+}
+
+// ---------------------- Business logic helpers ----------------------
+
+void printTopK(const vector<StopLoad> &sortedLoads, const StopLookup &lookup, int K) {
+    cout << "Top " << K << " busiest stops:\n";
+    for (int i = 0; i < (int)sortedLoads.size() && i < K; ++i) {
+        int id = sortedLoads[i].id;
+        int cnt = sortedLoads[i].count;
+        auto it = lookup.find(id);
+        if (it != lookup.end()) {
+            const StopInfo &s = it->second;
+            cout << i+1 << ". StopID: " << s.id << " | " << s.name << " | Zone: " << s.zone
+                 << " | Load: " << cnt << " | Next shuttle: " << s.next_shuttle_time << "\n";
+        } else {
+            cout << i+1 << ". StopID: " << id << " | Load: " << cnt << " | (metadata missing)\n";
+        }
+    }
+    cout << "----\n";
+}
+
+// Simulate sensor updates: this updates the current counts map (every 5 minutes in reality)
+void applySensorUpdates(unordered_map<int,int> &currentCounts, const vector<pair<int,int>> &updates) {
+    // updates: vector of (stopID, measuredCount)
+    for (auto &u : updates) {
+        currentCounts[u.first] = u.second; // overwrite with latest window count
+    }
+}
+
+// Convert currentCounts map to vector<StopLoad>
+vector<StopLoad> buildLoadVector(const unordered_map<int,int> &currentCounts, const StopLookup &lookup) {
+    vector<StopLoad> loads;
+    loads.reserve(currentCounts.size());
+    for (auto &p : currentCounts) {
+        loads.push_back({p.first, p.second});
+    }
+    // optional: ensure all stops exist in lookup (if some are missing, we still include them)
+    return loads;
+}
+
+// Example dispatch recommendation: choose top K stops and print a recommendation
+void recommendDispatch(const vector<StopLoad> &sortedLoads, const StopLookup &lookup, int K) {
+    cout << "Dispatch recommendation (send extra shuttle to these stops):\n";
+    for (int i = 0; i < (int)sortedLoads.size() && i < K; ++i) {
+        int id = sortedLoads[i].id;
+        auto it = lookup.find(id);
+        string label = (it != lookup.end()) ? it->second.name : ("Stop " + to_string(id));
+        cout << "- " << label << " (ID " << id << ") : current load = " << sortedLoads[i].count << "\n";
+    }
+    cout << "====\n";
+}
+
+// ---------------------- Main (demo) ----------------------
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    // Build lookup table (would be static / persisted in real system)
+    StopLookup lookup;
+    lookup[101] = {101, "North Gate", "Zone A", "12:05"};
+    lookup[102] = {102, "Library", "Zone B", "12:10"};
+    lookup[103] = {103, "Cafeteria", "Zone C", "12:00"};
+    lookup[104] = {104, "South Gate", "Zone D", "12:20"};
+    lookup[105] = {105, "Research Park", "Zone E", "12:15"};
+    lookup[106] = {106, "Admin Block", "Zone B", "12:12"};
+
+    // Current counts keyed by stopID (updated every 5 minutes by sensors)
+    unordered_map<int,int> currentCounts;
+    // initialize with zeros
+    for (auto &kv : lookup) currentCounts[kv.first] = 0;
+
+    // Simulate multiple 5-minute sensor updates (normally this would be event driven)
+    vector<vector<pair<int,int>>> sensorBatches = {
+        // batch 1 (t0)
+        { {101, 5}, {102, 12}, {103, 9}, {104, 3}, {105, 20}, {106, 7} },
+        // batch 2 (t+5min)
+        { {101, 8}, {102, 18}, {103, 6}, {104, 4}, {105, 22}, {106, 5} },
+        // batch 3 (t+10min)
+        { {101, 10}, {102, 25}, {103, 15}, {104, 6}, {105, 12}, {106, 9} }
+    };
+
+    int topK = 3;
+
+    for (size_t t = 0; t < sensorBatches.size(); ++t) {
+        cout << "\n[Sensor batch " << (t+1) << "] Applying 5-minute updates...\n";
+        applySensorUpdates(currentCounts, sensorBatches[t]);
+
+        // Create vector from counts and sort using heap sort
+        vector<StopLoad> loads = buildLoadVector(currentCounts, lookup);
+        heapSortDescending(loads);
+
+        // Print top-K and recommend dispatch
+        printTopK(loads, lookup, topK);
+        recommendDispatch(loads, lookup, topK);
+
+        // In real system, here we'd trigger an event to dispatch extra shuttle(s)
+        // or update operator dashboard.
+    }
+
+    return 0;
+}</pre>
                 </div>
             </section>
 
@@ -2472,7 +2630,219 @@ SDG 13 — Climate Action</div>
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-<pre> </pre>
+<pre>// evac_pathfinder.cpp
+// C++17 - Emergency Evacuation Path Finder (DFS + Backtracking + DP + Fire spread BFS)
+
+#include <bits/stdc++.h>
+using namespace std;
+
+const int INF = 1e9;
+struct Pos { int r, c; };
+struct Node { int r, c, t; };
+
+// 4-neighbour moves (up, right, down, left)
+const vector<pair<int,int>> DIRS = {{-1,0},{0,1},{1,0},{0,-1}};
+
+// Utility
+bool inside(int r, int c, int R, int C) { return r>=0 && r<R && c>=0 && c<C; }
+
+// Compute earliest fire arrival times using multi-source BFS
+// grid: 0 = free, 1 = wall/blocked
+// fireSources: list of starting fire positions (they get fire at time 0)
+// fireSpreadTimePerStep: time it takes fire to spread across one cell (int)
+vector<vector<int>> computeFireTimes(const vector<vector<int>>& grid,
+                                     const vector<Pos>& fireSources,
+                                     int fireSpreadTimePerStep) {
+    int R = grid.size(), C = grid[0].size();
+    vector<vector<int>> fireTime(R, vector<int>(C, INF));
+    deque<Node> dq;
+    for (auto &fs : fireSources) {
+        if (inside(fs.r, fs.c, R, C) && grid[fs.r][fs.c] == 0) {
+            fireTime[fs.r][fs.c] = 0;
+            dq.push_back({fs.r, fs.c, 0});
+        }
+    }
+    while (!dq.empty()) {
+        Node cur = dq.front(); dq.pop_front();
+        for (auto &d : DIRS) {
+            int nr = cur.r + d.first, nc = cur.c + d.second;
+            if (!inside(nr,nc,R,C)) continue;
+            if (grid[nr][nc] == 1) continue; // wall/blocked cannot be burned/traversed
+            int arrive = cur.t + fireSpreadTimePerStep;
+            if (arrive < fireTime[nr][nc]) {
+                fireTime[nr][nc] = arrive;
+                dq.push_back({nr,nc,arrive});
+            }
+        }
+    }
+    return fireTime;
+}
+
+// DFS with backtracking + DP to find minimal safe evacuation time path
+// - start: starting position and startTime (time when person is at start)
+// - exits: set of exit positions (any of these are valid goal)
+// - moveTimePerStep: time taken by person to move between adjacent cells
+// Rules to consider a move safe:
+//   when person would arrive at a cell at time T_person, it's safe only if T_person < fireTime[cell]
+//   (if T_person == fireTime[cell], consider unsafe; adjust as policy)
+// Returns tuple (found, bestTime, bestPath)
+tuple<bool,int,vector<Pos>> findFastestSafePathDFS(const vector<vector<int>>& grid,
+                                                  const vector<vector<int>>& fireTime,
+                                                  Pos start, int startTime,
+                                                  const vector<Pos>& exits,
+                                                  int moveTimePerStep) {
+    int R = grid.size(), C = grid[0].size();
+    vector<vector<int>> bestTime(R, vector<int>(C, INF)); // DP: best known time to reach cell
+    vector<Pos> path, bestPath;
+    bool found = false;
+    int bestArrival = INF;
+
+    // exit quick-lookup
+    vector<vector<bool>> isExit(R, vector<bool>(C, false));
+    for (auto &e : exits) if (inside(e.r,e.c,R,C)) isExit[e.r][e.c] = true;
+
+    function<void(int,int,int)> dfs = [&](int r, int c, int curTime) {
+        // Prune if current time already worse than best overall
+        if (curTime >= bestArrival) return;
+        // Prune using DP: if we've been here earlier (<=) then no point
+        if (curTime >= bestTime[r][c]) return;
+        bestTime[r][c] = curTime;
+
+        // If cell will be on fire at or before arrival, cannot be here
+        if (curTime >= fireTime[r][c]) return;
+
+        // Add to path
+        path.push_back({r,c});
+
+        // If this is an exit, record solution
+        if (isExit[r][c]) {
+            found = true;
+            if (curTime < bestArrival) {
+                bestArrival = curTime;
+                bestPath = path;
+            }
+            // still backtrack (there might be faster through other branches)
+            path.pop_back();
+            return;
+        }
+
+        // Explore neighbors
+        for (auto &d : DIRS) {
+            int nr = r + d.first, nc = c + d.second;
+            if (!inside(nr,nc,R,C)) continue;
+            if (grid[nr][nc] == 1) continue; // wall/blocked
+            int arriveTime = curTime + moveTimePerStep;
+            // Only attempt if arriveTime < fireTime[nr][nc]
+            if (arriveTime >= fireTime[nr][nc]) continue;
+            // Also prune if arriveTime >= bestArrival
+            if (arriveTime >= bestArrival) continue;
+            dfs(nr, nc, arriveTime);
+        }
+
+        // backtrack
+        path.pop_back();
+    };
+
+    // Start: check start isn't immediately on fire and not wall
+    if (!inside(start.r,start.c,R,C) || grid[start.r][start.c] == 1) {
+        return {false, INF, {}};
+    }
+    if (startTime >= fireTime[start.r][start.c]) {
+        // Person cannot start safely
+        return {false, INF, {}};
+    }
+
+    dfs(start.r, start.c, startTime);
+    return {found, bestArrival, bestPath};
+}
+
+// Helper to print path
+void printPath(const vector<Pos>& path) {
+    for (size_t i=0;i<path.size();++i) {
+        cout << "(" << path[i].r << "," << path[i].c << ")";
+        if (i+1<path.size()) cout << " -> ";
+    }
+    cout << "\n";
+}
+
+// Demo main with an example grid
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    // Grid legend:
+    // 0 = free cell (room/corridor)
+    // 1 = wall / blocked / collapsed (never traversable)
+    // We'll show a 8x10 example building floor
+    vector<vector<int>> grid = {
+        {0,0,0,0,0,1,0,0,0,0},
+        {0,1,1,0,0,1,0,1,1,0},
+        {0,0,0,0,0,0,0,1,0,0},
+        {0,1,0,1,1,0,0,0,0,0},
+        {0,1,0,0,0,0,1,1,1,0},
+        {0,0,0,1,0,0,0,0,0,0},
+        {1,1,0,1,0,1,1,0,1,0},
+        {0,0,0,0,0,0,0,0,0,0}
+    };
+    int R = grid.size(), C = grid[0].size();
+
+    // Fire sources (cells where fire starts at t=0)
+    vector<Pos> fireSources = { {0,9}, {4,4} }; // example: fire in top-right corner and middle
+    int fireSpreadPerStep = 2; // fire spreads to adjacent cell in 2 time units
+
+    // Person start and exits
+    Pos start = {7, 0}; // bottom-left
+    vector<Pos> exits = { {0,0}, {0,4}, {7,9} }; // top-left, a mid-top exit, and bottom-right
+
+    // Person movement time per step
+    int moveTime = 1; // person takes 1 time unit to move across one cell
+
+    // Starting time (person at start at this time)
+    int startTime = 0;
+
+    // Step 1: compute fire arrival times
+    auto fireTime = computeFireTimes(grid, fireSources, fireSpreadPerStep);
+
+    // debug: print fire times grid (INF -> "X")
+    cout << "Fire arrival times (INF = safe forever / unreachable by fire):\n";
+    for (int r=0;r<R;++r) {
+        for (int c=0;c<C;++c) {
+            if (grid[r][c] == 1) {
+                cout << "  # "; // wall
+            } else {
+                if (fireTime[r][c] >= INF) cout << "  X ";
+                else {
+                    // align numbers
+                    cout << setw(3) << fireTime[r][c] << " ";
+                }
+            }
+        }
+        cout << "\n";
+    }
+    cout << "----\n";
+
+    // Step 2: run DFS/backtracking with DP to find fastest safe path
+    auto [found, bestArrival, bestPath] = findFastestSafePathDFS(grid, fireTime, start, startTime, exits, moveTime);
+
+    if (!found) {
+        cout << "No safe evacuation path found from start (" << start.r << "," << start.c << ").\n";
+    } else {
+        cout << "Fastest safe evacuation found. Arrival time: " << bestArrival << "\n";
+        cout << "Path (coordinates): ";
+        printPath(bestPath);
+        // Also print timeline: time at each step
+        cout << "Timeline:\n";
+        int t = startTime;
+        for (size_t i=0;i<bestPath.size();++i) {
+            cout << " t=" << setw(3) << t << " -> (" << bestPath[i].r << "," << bestPath[i].c << ")";
+            if (t >= fireTime[bestPath[i].r][bestPath[i].c]) cout << "  [ON FIRE]";
+            cout << "\n";
+            if (i+1 < bestPath.size()) t += moveTime;
+        }
+    }
+
+    return 0;
+}</pre>
                 </div>
             </section>
  <!-- ========== CASE 18 ========== -->
@@ -2527,7 +2897,320 @@ SDG 12 — Responsible Consumption and Production</div>
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-<pre> </pre>
+<pre> // parts_catalog.cpp
+// C++17 - CASE D: Industrial Parts Catalogue Indexing
+// - dynamic catalog: std::map (RB-tree under the hood)
+// - static catalog: custom 2-3 tree built via divide & conquer
+
+#include <bits/stdc++.h>
+using namespace std;
+
+// -------------------------------
+// Domain type: Part
+// -------------------------------
+struct Part {
+    long long id;       // unique numeric ID (key)
+    string name;
+    string category;
+
+    bool operator<(const Part& o) const {
+        return id < o.id;
+    }
+};
+
+// pretty print
+ostream& operator<<(ostream& os, const Part &p) {
+    os << "[ID:" << p.id << ", " << p.name << ", " << p.category << "]";
+    return os;
+}
+
+// -------------------------------
+// RED-BLACK TREE (dynamic) USING std::map
+// std::map is typically implemented as a red-black tree and provides O(log n)
+// -------------------------------
+class DynamicCatalog {
+    // map from id -> Part (std::map gives balanced tree behavior)
+    std::map<long long, Part> table;
+public:
+    void insert(const Part &p) {
+        table[p.id] = p; // insert or update
+    }
+
+    bool remove(long long id) {
+        auto it = table.find(id);
+        if (it == table.end()) return false;
+        table.erase(it);
+        return true;
+    }
+
+    optional<Part> find(long long id) const {
+        auto it = table.find(id);
+        if (it == table.end()) return nullopt;
+        return it->second;
+    }
+
+    size_t size() const { return table.size(); }
+
+    // iterate
+    template<typename Fn>
+    void forEach(Fn fn) const {
+        for (auto &kv : table) fn(kv.second);
+    }
+};
+
+// -------------------------------
+// 2-3 TREE (static) implementation
+// Node stores either one key (2-node) or two keys (3-node).
+// This is a minimal educational implementation supporting build/search.
+// -------------------------------
+class TwoThreeTree {
+public:
+    struct Node {
+        // For simplicity: store keys as Part and use id as comparison
+        // keys size = 1 (2-node) or 2 (3-node)
+        vector<Part> keys;
+        vector<Node*> children; // 0 for leaf, otherwise children.size() == keys.size()+1
+
+        Node() {}
+        ~Node() {
+            for (auto c : children) delete c;
+        }
+        bool isLeaf() const { return children.empty(); }
+    };
+
+private:
+    Node *root = nullptr;
+
+    // Build a balanced 2-3 tree from a sorted vector of Parts using divide & conquer.
+    // Strategy (simple and deterministic):
+    // - If vector small, create leaf node with 1 or 2 keys.
+    // - Otherwise split into 3 near-equal parts and create internal node with 1 or 2 keys taken
+    //   as separators, recursively build children.
+    Node* buildFromSorted(const vector<Part>& items, int L, int R) {
+        int n = R - L;
+        if (n <= 0) return nullptr;
+        if (n == 1) {
+            Node* node = new Node();
+            node->keys.push_back(items[L]);
+            return node;
+        }
+        if (n == 2) {
+            Node* node = new Node();
+            node->keys.push_back(items[L]);
+            node->keys.push_back(items[L+1]);
+            return node;
+        }
+
+        // For n >= 3, split into 3 blocks as evenly as possible
+        int third = n / 3;
+        if (third == 0) third = 1;
+        int a = L;
+        int b = min(R, a + third);
+        int c = min(R, b + third);
+
+        // If remaining is large, adjust to ensure we have meaningful partitions
+        if (R - c <= third/2) {
+            // simple fallback: split in two parts (create a 2-node)
+            int mid = L + n/2;
+            Node* node = new Node();
+            node->keys.push_back(items[mid]);
+            node->children.push_back(buildFromSorted(items, L, mid));
+            node->children.push_back(buildFromSorted(items, mid+1, R));
+            // clean null children
+            vector<Node*> ch;
+            for (auto p : node->children) if (p) ch.push_back(p);
+            node->children.swap(ch);
+            return node;
+        }
+
+        // Create an internal 3-node:
+        // choose separators k1 = items[b-1], k2 = items[c-1] (safe because b-1 >= a)
+        Node* node = new Node();
+        node->keys.push_back(items[b-1]);
+        node->keys.push_back(items[c-1]);
+        // children: [L..b-1), [b-1..c-1), [c-1..R)
+        node->children.push_back(buildFromSorted(items, L, b-1));
+        node->children.push_back(buildFromSorted(items, b-1, c-1));
+        node->children.push_back(buildFromSorted(items, c-1, R));
+        // remove empty children
+        vector<Node*> ch;
+        for (auto p : node->children) if (p) ch.push_back(p);
+        node->children.swap(ch);
+        return node;
+    }
+
+    // Search helper
+    const Part* searchNode(Node* node, long long id) const {
+        if (!node) return nullptr;
+        // check keys
+        for (auto &k : node->keys) {
+            if (k.id == id) return &k;
+        }
+        if (node->isLeaf()) return nullptr;
+        // choose child
+        // keys are 1 or 2, children size accordingly
+        if (node->keys.size() == 1) {
+            if (id < node->keys[0].id) return searchNode(node->children[0], id);
+            else return searchNode(node->children[1], id);
+        } else {
+            // two keys
+            if (id < node->keys[0].id) return searchNode(node->children[0], id);
+            else if (id < node->keys[1].id) return searchNode(node->children[1], id);
+            else return searchNode(node->children[2], id);
+        }
+    }
+
+public:
+    TwoThreeTree() {}
+    ~TwoThreeTree() { delete root; }
+
+    // Build from arbitrary vector by sorting then divide & conquer.
+    void buildFromVector(vector<Part> items) {
+        if (root) { delete root; root = nullptr; }
+        sort(items.begin(), items.end(), [](const Part&a,const Part&b){ return a.id < b.id; });
+        root = buildFromSorted(items, 0, (int)items.size());
+    }
+
+    optional<Part> find(long long id) const {
+        const Part* p = searchNode(root, id);
+        if (!p) return nullopt;
+        return *p;
+    }
+
+    // debug printing (in-order)
+    void inorderDump() const {
+        function<void(Node*)> dfs = [&](Node* node) {
+            if (!node) return;
+            if (node->isLeaf()) {
+                for (auto &k : node->keys) cout << k << "\n";
+            } else {
+                if (node->keys.size() == 1) {
+                    dfs(node->children[0]);
+                    cout << node->keys[0] << "\n";
+                    dfs(node->children[1]);
+                } else {
+                    dfs(node->children[0]);
+                    cout << node->keys[0] << "\n";
+                    dfs(node->children[1]);
+                    cout << node->keys[1] << "\n";
+                    dfs(node->children[2]);
+                }
+            }
+        };
+        dfs(root);
+    }
+};
+
+// -------------------------------
+// Divide & Conquer Bulk Import Utilities
+// -------------------------------
+// Example: split a large dataset into chunks and build per-chunk 2-3 trees in parallel (conceptually).
+// Here we'll simply demonstrate splitting and building multiple 2-3 trees (vector of trees).
+vector<TwoThreeTree> divideAndBuildChunks(const vector<Part>& allParts, int chunks) {
+    vector<TwoThreeTree> trees;
+    if (allParts.empty() || chunks <= 0) return trees;
+    int n = allParts.size();
+    int per = max(1, n / chunks);
+    for (int i = 0; i < n; i += per) {
+        int j = min(n, i + per);
+        vector<Part> slice(allParts.begin() + i, allParts.begin() + j);
+        TwoThreeTree t;
+        t.buildFromVector(move(slice));
+        trees.push_back(std::move(t));
+    }
+    return trees;
+}
+
+// -------------------------------
+// Demo main
+// -------------------------------
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    // Sample parts (unsorted)
+    vector<Part> sample = {
+        {1003, "Coupling - A", "Mechanical"},
+        {1001, "Bolt M8x30", "Fasteners"},
+        {1010, "Bearing - 6204", "Mechanical"},
+        {1007, "Filter - Oil", "Consumables"},
+        {1002, "Nut M8", "Fasteners"},
+        {1009, "Seal Ring", "Seals"},
+        {1005, "Sprocket small", "Transmission"},
+        {1008, "Gasket set", "Consumables"},
+        {1004, "Washer M8", "Fasteners"},
+        {1011, "Sensor temp", "Electronics"},
+    };
+
+    // -------------------------
+    // Dynamic catalog usage (red-black via std::map)
+    // -------------------------
+    DynamicCatalog dyn;
+    for (auto &p : sample) {
+        dyn.insert(p);
+    }
+    cout << "Dynamic catalog size: " << dyn.size() << "\n";
+    auto f = dyn.find(1007);
+    if (f) cout << "Found dynamic: " << *f << "\n";
+    else cout << "Not found dynamic id 1007\n";
+
+    // Insert new live part
+    dyn.insert({2000, "Emergency Valve", "Safety"});
+    cout << "After live insert size: " << dyn.size() << "\n";
+
+    // -------------------------
+    // Static catalog build (2-3 tree) using divide & conquer
+    // -------------------------
+    TwoThreeTree staticCatalog;
+    staticCatalog.buildFromVector(sample); // build (sort + divide & conquer)
+    cout << "\nStatic catalog (2-3 tree) inorder dump:\n";
+    staticCatalog.inorderDump();
+
+    // Search static
+    auto r = staticCatalog.find(1010);
+    if (r) cout << "\nFound in static: " << *r << "\n";
+    else cout << "\nNot found in static\n";
+
+    // -------------------------
+    // Bulk import example: divide into 3 chunks, build 3 trees
+    // -------------------------
+    vector<Part> big = sample;
+    // emulate a larger data set by duplicating with new ids
+    for (int i = 0; i < 200; ++i) {
+        big.push_back({3000 + i, "Part_" + to_string(i), (i%2? "Mech":"Elec")});
+    }
+    auto builtChunks = divideAndBuildChunks(big, 4);
+    cout << "\nBuilt " << builtChunks.size() << " chunked 2-3 trees (divide & conquer). Sizes (approx):\n";
+    for (size_t i = 0; i < builtChunks.size(); ++i) {
+        cout << " - chunk " << i << " (inorder sample):\n";
+        // print first few items of each chunk by doing inorder dump but limit output
+        // (we won't implement size query; this is just demo)
+        builtChunks[i].inorderDump();
+        cout << "----\n";
+        if (i >= 0 && i >= 0) {
+            // break early for readable demo; in real system you might keep them all
+            // (comment the following to print all)
+            break;
+        }
+    }
+
+    // -------------------------
+    // Example combined usage: dynamic updates + periodic static re-index
+    // -------------------------
+    // Workflow:
+    // - Use DynamicCatalog for real-time inserts/updates (RB-tree properties)
+    // - Once per week, dump dynamic catalog to vector, sort, and rebuild staticCatalog via buildFromVector
+    // - staticCatalog serves fastest, balanced read-only queries for analytics / batch lookup
+    cout << "\nExample: rebuild static catalog from current dynamic catalog (weekly):\n";
+    vector<Part> dump;
+    dyn.forEach([&](const Part &p){ dump.push_back(p); });
+    staticCatalog.buildFromVector(dump);
+    cout << "Rebuilt static catalog (size approx):\n";
+    staticCatalog.inorderDump();
+
+    cout << "\nDemo complete.\n";
+    return 0;
+}</pre>
                 </div>
             </section>
  <!-- ========== CASE 19 ========== -->
@@ -2576,7 +3259,94 @@ picks smallest edges and merges components via union-find (DSU). Ideal when you 
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-<pre> </pre>
+<pre> // kruskal_mst.cpp
+// Compile: g++ -std=c++17 -O2 kruskal_mst.cpp -o kruskal_mst
+// Run: ./kruskal_mst < input.txt
+
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Edge {
+    int u, v;
+    long long w;
+    int idx; // optional original index
+    bool operator<(Edge const& o) const {
+        return w < o.w;
+    }
+};
+
+struct DSU {
+    int n;
+    vector<int> p, r;
+    DSU(int n=0){init(n);}
+    void init(int N){ n=N; p.resize(N); r.assign(N,0); for(int i=0;i<N;++i)p[i]=i; }
+    int find(int x){ return p[x]==x?x:p[x]=find(p[x]); }
+    bool unite(int a,int b){
+        a=find(a); b=find(b);
+        if(a==b) return false;
+        if(r[a]<r[b]) swap(a,b);
+        p[b]=a;
+        if(r[a]==r[b]) r[a]++;
+        return true;
+    }
+    bool same(int a,int b){ return find(a)==find(b); }
+};
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int N, M;
+    // Input format:
+    // N M
+    // M lines: u v w
+    // (nodes numbered 1..N in sample, code converts to 0..N-1)
+    if(!(cin >> N >> M)){
+        cerr << "Expected: N M followed by M edges.\n";
+        return 1;
+    }
+
+    vector<Edge> edges;
+    edges.reserve(M);
+    for(int i=0;i<M;++i){
+        int u,v; long long w;
+        cin >> u >> v >> w;
+        // allow 1-based or 0-based: if any index equals N, assume 1-based
+        // but simple: assume user provides 1..N; convert to 0..N-1
+        edges.push_back({u-1, v-1, w, i});
+    }
+
+    sort(edges.begin(), edges.end());
+
+    DSU dsu(N);
+    long long totalCost = 0;
+    vector<Edge> chosen;
+    chosen.reserve(N-1);
+
+    for(const Edge &e : edges){
+        if(dsu.unite(e.u, e.v)){
+            chosen.push_back(e);
+            totalCost += e.w;
+            if((int)chosen.size() == N-1) break;
+        }
+    }
+
+    // Check connectivity
+    int rep = dsu.find(0);
+    for(int i=1;i<N;i++){
+        if(dsu.find(i) != rep){
+            cout << "Graph is disconnected — no spanning network covering all nodes.\n";
+            return 0;
+        }
+    }
+
+    cout << "MST total cost: " << totalCost << "\n";
+    cout << "Edges in MST (u v w) (1-based nodes):\n";
+    for(auto &e : chosen){
+        cout << (e.u+1) << " " << (e.v+1) << " " << e.w << "\n";
+    }
+    return 0;
+}</pre>
                 </div>
             </section>
  <!-- ========== CASE 20 ========== -->
@@ -2625,7 +3395,74 @@ picks smallest edges and merges components via union-find (DSU). Ideal when you 
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-<pre> </pre>
+<pre>// crowd_counter_fenwick.cpp
+// Compile: g++ -std=c++17 -O2 crowd_counter_fenwick.cpp -o crowd_counter
+// Run: ./crowd_counter
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Fenwick {
+    int n;
+    vector<long long> bit;   // 1-indexed Fenwick tree
+public:
+    Fenwick(int n) : n(n), bit(n+1, 0) {}
+
+    // Add value 'val' to index 'i' (1-indexed)
+    void update(int i, long long val) {
+        for (; i <= n; i += i & -i)
+            bit[i] += val;
+    }
+
+    // Prefix sum query: sum of [1..i]
+    long long query(int i) const {
+        long long s = 0;
+        for (; i > 0; i -= i & -i)
+            s += bit[i];
+        return s;
+    }
+
+    // Range sum: [l..r]
+    long long rangeQuery(int l, int r) const {
+        return query(r) - query(l - 1);
+    }
+};
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n = 10; // Example: 10 stalls/zones
+    Fenwick fw(n);
+
+    // Initial counts (could come from sensors)
+    vector<int> initial = {5, 3, 10, 2, 7, 0, 6, 1, 4, 9}; // size = n
+
+    // Build BIT from initial values
+    for (int i = 0; i < n; ++i)
+        fw.update(i + 1, initial[i]);
+
+    // Example operations
+    cout << "Total visitors in first 5 stalls: "
+         << fw.query(5) << "\n";
+
+    cout << "Visitors in stalls 3 to 7: "
+         << fw.rangeQuery(3, 7) << "\n";
+
+    // Live update: 4 visitors entered stall 2
+    fw.update(2, 4);
+
+    cout << "After update, prefix sum(5): "
+         << fw.query(5) << "\n";
+
+    // Live update: 3 visitors left stall 4
+    fw.update(4, -3);
+
+    cout << "Visitors in stalls 1..10: "
+         << fw.query(10) << "\n";
+
+    return 0;
+}</pre>
                 </div>
             </section>
  <!-- ========== CASE 21 ========== -->
@@ -2674,7 +3511,100 @@ picks smallest edges and merges components via union-find (DSU). Ideal when you 
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-<pre> </pre>
+<pre> // sparse_table_sensor.cpp
+// C++17 - Sparse Table for RMQ (min or max) on static sensor logs
+// Compile: g++ -std=c++17 -O2 sparse_table_sensor.cpp -o sparse_table_sensor
+// Run: ./sparse_table_sensor
+
+#include <bits/stdc++.h>
+using namespace std;
+
+struct SparseTable {
+    int n;
+    int LOG;                          // floor(log2(n))
+    vector<int> lg;                   // precomputed logs
+    // st[k][i] holds value for interval starting at i of length 2^k
+    vector<vector<long long>> st;
+    // aggregator: +1 => max, -1 => min (we use compare accordingly)
+    int mode; // +1 for max, -1 for min
+
+    // constructor: mode = +1 -> max, mode = -1 -> min
+    SparseTable() : n(0), LOG(0), mode(+1) {}
+
+    void build(const vector<long long>& a, int mode_in = +1) {
+        mode = (mode_in >= 0 ? +1 : -1);
+        n = (int)a.size();
+        LOG = (n>0) ? 31 - __builtin_clz(n) : 0;
+        lg.assign(n+1, 0);
+        for (int i = 2; i <= n; ++i) lg[i] = lg[i/2] + 1;
+
+        st.assign(LOG+1, vector<long long>(n));
+        // k = 0
+        for (int i = 0; i < n; ++i) st[0][i] = a[i];
+
+        for (int k = 1; k <= LOG; ++k) {
+            int len = 1 << k;
+            int half = 1 << (k-1);
+            for (int i = 0; i + len <= n; ++i) {
+                long long left = st[k-1][i];
+                long long right = st[k-1][i + half];
+                if (mode == +1) st[k][i] = max(left, right);
+                else st[k][i] = min(left, right);
+            }
+        }
+    }
+
+    // Query on inclusive range [l, r] (0-indexed)
+    long long query(int l, int r) const {
+        if (l > r) swap(l,r);
+        int len = r - l + 1;
+        int k = lg[len];
+        long long left = st[k][l];
+        long long right = st[k][r - (1<<k) + 1];
+        if (mode == +1) return max(left, right);
+        else return min(left, right);
+    }
+};
+
+// ---------------- Demo ----------------
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    // Example sensor log (e.g., hourly pollution readings)
+    vector<long long> pollution = {
+        55, 60, 58, 63, 70, 68, 65, 59, 62, 61, 66, 64
+    };
+
+    // Build sparse tables for MIN and MAX (show both)
+    SparseTable stMax, stMin;
+    stMax.build(pollution, +1);  // max table
+    stMin.build(pollution, -1);  // min table
+
+    // Example queries (0-indexed): "max pollution between time A and B"
+    vector<pair<int,int>> queries = {
+        {0, 3},   // t=0..3
+        {2, 6},   // t=2..6
+        {4, 11},  // t=4..11
+        {7, 9}    // t=7..9
+    };
+
+    cout << "Sensor data (index:value):\n";
+    for (int i = 0; i < (int)pollution.size(); ++i)
+        cout << i << ":" << pollution[i] << (i+1< (int)pollution.size() ? ", " : "\n");
+    cout << "\n";
+
+    for (auto &q : queries) {
+        int l = q.first, r = q.second;
+        cout << "Range [" << l << "," << r << "]: max = " << stMax.query(l,r)
+             << ", min = " << stMin.query(l,r) << "\n";
+    }
+
+    // Typical usage in dashboards:
+    // - preprocess once after data batch/append
+    // - answer thousands of RMQ queries in O(1) each
+    return 0;
+}</pre>
                 </div>
             </section>
  <!-- ========== CASE 22 ========== -->
@@ -2723,7 +3653,207 @@ picks smallest edges and merges components via union-find (DSU). Ideal when you 
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-<pre> </pre>
+<pre> // concurrent_skiplist.cpp
+// C++17 - Concurrent Skip List (reader-writer lock via shared_mutex)
+// Compile: g++ -std=c++17 -O2 concurrent_skiplist.cpp -pthread -o concurrent_skiplist
+// Run: ./concurrent_skiplist
+
+#include <bits/stdc++.h>
+#include <shared_mutex>
+using namespace std;
+
+// Simple thread-safe skip list with shared_mutex: readers use shared_lock, writers use unique_lock.
+// Not lock-free, but safer and much easier to implement and reason about than hand-rolled lock-free variants.
+
+template<typename Key, typename Value>
+class ConcurrentSkipList {
+private:
+    struct Node {
+        Key key;
+        Value val;
+        vector<Node*> next;
+        Node(int level, Key k = Key(), Value v = Value()) : key(k), val(v), next(level, nullptr) {}
+    };
+
+    const int MAX_LEVEL;
+    const double P; // probability for random level
+    Node* head;
+    int level;   // current max level (0-indexed)
+    mutable std::shared_mutex rwmutex; // protects structure for concurrency
+    std::mt19937 rng;
+    std::uniform_real_distribution<double> dist;
+
+    int randomLevel() {
+        int lvl = 1;
+        while (lvl < MAX_LEVEL && dist(rng) < P) ++lvl;
+        return lvl;
+    }
+
+public:
+    ConcurrentSkipList(int maxLevel = 32, double probability = 0.5)
+        : MAX_LEVEL(maxLevel), P(probability), level(1), rng(std::random_device{}()), dist(0.0, 1.0)
+    {
+        head = new Node(MAX_LEVEL, Key(), Value()); // sentinel head with MAX_LEVEL pointers
+    }
+
+    ~ConcurrentSkipList() {
+        Node* cur = head;
+        // delete nodes (single-threaded destruction)
+        while (cur) {
+            Node* nxt = cur->next[0];
+            delete cur;
+            cur = nxt;
+        }
+    }
+
+    // Insert or update
+    void insert(const Key& key, const Value& value) {
+        std::unique_lock lock(rwmutex); // exclusive lock for writers
+
+        vector<Node*> update(MAX_LEVEL, nullptr);
+        Node* x = head;
+        for (int i = level - 1; i >= 0; --i) {
+            while (x->next[i] && x->next[i]->key < key) x = x->next[i];
+            update[i] = x;
+        }
+        x = x->next[0];
+
+        if (x && x->key == key) {
+            // update existing
+            x->val = value;
+            return;
+        } else {
+            int lvl = randomLevel();
+            if (lvl > level) {
+                for (int i = level; i < lvl; ++i) update[i] = head;
+                level = lvl;
+            }
+            Node* newNode = new Node(lvl, key, value);
+            for (int i = 0; i < lvl; ++i) {
+                newNode->next[i] = update[i]->next[i];
+                update[i]->next[i] = newNode;
+            }
+        }
+    }
+
+    // Erase by key. returns true if erased.
+    bool erase(const Key& key) {
+        std::unique_lock lock(rwmutex);
+
+        vector<Node*> update(MAX_LEVEL, nullptr);
+        Node* x = head;
+        for (int i = level - 1; i >= 0; --i) {
+            while (x->next[i] && x->next[i]->key < key) x = x->next[i];
+            update[i] = x;
+        }
+        x = x->next[0];
+        if (!x || x->key != key) return false;
+
+        for (int i = 0; i < level; ++i) {
+            if (update[i]->next[i] != x) break;
+            update[i]->next[i] = x->next[i];
+        }
+        delete x;
+        // decrease level if necessary
+        while (level > 1 && head->next[level-1] == nullptr) --level;
+        return true;
+    }
+
+    // Find value by key. Returns optional<Value>
+    optional<Value> find(const Key& key) const {
+        std::shared_lock lock(rwmutex); // allow concurrent readers
+        Node* x = head;
+        for (int i = level - 1; i >= 0; --i) {
+            while (x->next[i] && x->next[i]->key < key) x = x->next[i];
+        }
+        x = x->next[0];
+        if (x && x->key == key) return x->val;
+        return nullopt;
+    }
+
+    // Range traversal: collects key-value pairs in [lo, hi] inclusive.
+    vector<pair<Key, Value>> rangeQuery(const Key& lo, const Key& hi) const {
+        vector<pair<Key, Value>> out;
+        std::shared_lock lock(rwmutex);
+        Node* x = head;
+        for (int i = level - 1; i >= 0; --i)
+            while (x->next[i] && x->next[i]->key < lo) x = x->next[i];
+        x = x->next[0];
+        while (x && x->key <= hi) {
+            out.emplace_back(x->key, x->val);
+            x = x->next[0];
+        }
+        return out;
+    }
+
+    // For debugging: print first N items
+    void dumpFirstN(int N = 50) const {
+        std::shared_lock lock(rwmutex);
+        Node* x = head->next[0];
+        int c = 0;
+        while (x && c < N) {
+            cout << "[" << x->key << " -> " << x->val << "] ";
+            x = x->next[0];
+            ++c;
+        }
+        cout << "\n";
+    }
+};
+
+// ---------------- DEMO ----------------
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    ConcurrentSkipList<int, string> dir(24, 0.5);
+
+    // Prepopulate
+    dir.insert(100, "VendorA");
+    dir.insert(200, "VendorB");
+    dir.insert(150, "VendorC");
+    dir.insert(250, "VendorD");
+
+    cout << "Initial directory:\n";
+    dir.dumpFirstN();
+
+    // Spawn multiple reader threads and writer threads to demo concurrency
+    vector<thread> readers;
+    for (int i = 0; i < 4; ++i) {
+        readers.emplace_back([&dir, i]() {
+            for (int k = 0; k < 10; ++k) {
+                auto v = dir.find(150);
+                if (v) {
+                    // simulate some read processing
+                    this_thread::sleep_for(chrono::milliseconds(10));
+                }
+            }
+        });
+    }
+
+    vector<thread> writers;
+    writers.emplace_back([&dir]() {
+        dir.insert(175, "VendorE");
+        this_thread::sleep_for(chrono::milliseconds(5));
+        dir.erase(100);
+    });
+    writers.emplace_back([&dir]() {
+        dir.insert(125, "VendorF");
+        dir.insert(300, "VendorG");
+    });
+
+    for (auto &t : readers) t.join();
+    for (auto &t : writers) t.join();
+
+    cout << "After concurrent ops:\n";
+    dir.dumpFirstN();
+
+    // Range query example
+    auto range = dir.rangeQuery(120, 200);
+    cout << "Range 120..200 results:\n";
+    for (auto &p : range) cout << p.first << " => " << p.second << "\n";
+
+    return 0;
+}</pre>
                 </div>
             </section>
  <!-- ========== CASE 23 ========== -->
@@ -2772,7 +3902,113 @@ picks smallest edges and merges components via union-find (DSU). Ideal when you 
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-<pre> </pre>
+<pre> // zone_dsu.cpp
+// C++17 - Disjoint Set Union (Union-Find) for Zone Merge & Permit Management
+// Features: union-by-size, path compression, component sizes, group listing
+
+#include <bits/stdc++.h>
+using namespace std;
+
+struct DSU {
+    int n;
+    vector<int> parent;
+    vector<int> sz;   // size of component (only accurate at root)
+    int components;
+
+    DSU(int n = 0) { init(n); }
+
+    void init(int N) {
+        n = N;
+        parent.resize(n);
+        sz.assign(n, 1);
+        for (int i = 0; i < n; ++i) parent[i] = i;
+        components = n;
+    }
+
+    // Find with path compression
+    int find(int x) {
+        if (parent[x] == x) return x;
+        return parent[x] = find(parent[x]);
+    }
+
+    // Union by size. returns true if merged (were distinct).
+    bool unite(int a, int b) {
+        a = find(a); b = find(b);
+        if (a == b) return false;
+        // ensure a is the bigger
+        if (sz[a] < sz[b]) swap(a,b);
+        parent[b] = a;
+        sz[a] += sz[b];
+        sz[b] = 0; // optional: keep root sizes accurate only at root
+        --components;
+        return true;
+    }
+
+    bool same(int a, int b) { return find(a) == find(b); }
+
+    // size of component containing x
+    int component_size(int x) { return sz[find(x)]; }
+
+    int components_count() const { return components; }
+
+    // Build groups: returns map root -> vector of members
+    // Complexity: O(n α(n)) (practically linear)
+    unordered_map<int, vector<int>> group_all() {
+        unordered_map<int, vector<int>> groups;
+        groups.reserve(n * 1.1);
+        for (int i = 0; i < n; ++i) {
+            int r = find(i);
+            groups[r].push_back(i);
+        }
+        return groups;
+    }
+};
+
+// ---------------- Demo ----------------
+// Example: stalls numbered 0..9 (10 stalls). Merge operations simulate combining stalls/zones.
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int stalls = 10;
+    DSU dsu(stalls);
+
+    cout << "Initial components: " << dsu.components_count() << "\n";
+
+    // Example merges (merge adjacent stalls when traffic low)
+    vector<pair<int,int>> merges = {
+        {0,1}, {2,3}, {3,4}, {7,8}
+    };
+    for (auto &m : merges) {
+        bool merged = dsu.unite(m.first, m.second);
+        cout << "Merge " << m.first << " & " << m.second << (merged ? " => merged\n" : " => already same\n");
+    }
+
+    // Query examples
+    cout << "Are stall 2 and 4 in same zone? " << (dsu.same(2,4) ? "Yes\n" : "No\n");
+    cout << "Are stall 0 and 4 in same zone? " << (dsu.same(0,4) ? "Yes\n" : "No\n");
+    cout << "Size of zone containing stall 3: " << dsu.component_size(3) << "\n";
+    cout << "Total active components (zones): " << dsu.components_count() << "\n";
+
+    // If an operator asks "which zone is stall 7 in?" we can get root id
+    cout << "Root (representative) of stall 7: " << dsu.find(7) << "\n";
+
+    // Build list of current groups (useful to display merged stall groups / issue permit to group)
+    auto groups = dsu.group_all();
+    cout << "\nCurrent groups (root -> members):\n";
+    for (auto &kv : groups) {
+        cout << "Root " << kv.first << " : ";
+        for (int x : kv.second) cout << x << " ";
+        cout << "(size=" << kv.second.size() << ")\n";
+    }
+
+    // Example: trying to split is NOT supported by classic DSU.
+    cout << "\nNote: DSU supports fast merges and membership checks but does NOT support splits.\n";
+    cout << "If stalls may split frequently, consider a dynamic connectivity data structure or maintain\n"
+         << "a higher-level log of operations and rebuild DSU periodically.\n";
+
+    return 0;
+}</pre>
                 </div>
             </section>
  <!-- ========== CASE 24 ========== -->
@@ -2821,7 +4057,331 @@ picks smallest edges and merges components via union-find (DSU). Ideal when you 
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-<pre> </pre>
+<pre> // resilient_mst.cpp
+// Compile: g++ -std=c++17 -O2 resilient_mst.cpp -o resilient_mst
+// Run: ./resilient_mst < input.txt
+//
+// Input format:
+// N M
+// M lines: u v w   (1-based nodes)
+// Example below in comments.
+
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+const ll INF = (1LL<<60);
+
+struct Edge { int u, v; ll w; int idx; };
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int N, M;
+    if(!(cin >> N >> M)) {
+        cerr << "Expected N M\n";
+        return 1;
+    }
+
+    vector<Edge> edges;
+    edges.reserve(M);
+    for(int i=0;i<M;++i){
+        int u,v; ll w; cin >> u >> v >> w;
+        --u; --v;
+        edges.push_back({u,v,w,i});
+    }
+
+    // Build adjacency list (for Prim)
+    vector<vector<pair<int,ll>>> adj(N);
+    for(auto &e: edges){
+        adj[e.u].push_back({e.v, e.w});
+        adj[e.v].push_back({e.u, e.w});
+    }
+
+    // Prim's algorithm to build MST and capture which edges are chosen (by weight + endpoints)
+    vector<char> inMST_edge(M, 0); // we'll detect chosen edges by matching endpoints+weight (we'll map later)
+    vector<ll> minCost(N, INF);
+    vector<int> parentNode(N, -1);
+    vector<ll> parentEdgeW(N, 0);
+    vector<int> parentEdgeIdx(N, -1);
+
+    // We'll need mapping from (u,v,w) to list of indices; create multimap-like by tuple key
+    unordered_multimap<long long, int> edgeKeyToIdx;
+    // key = ((ll)min(u,v) << 32) ^ ((ll)max(u,v) << 8) ^ (w & 0xffffffff) -- but to avoid collisions use hashing pair
+    // Simpler: store mapping by string key (safe here)
+    unordered_map<string, vector<int>> keymap;
+    keymap.reserve(M*2);
+
+    auto make_key = [&](int a, int b, ll w)->string{
+        if(a>b) swap(a,b);
+        return to_string(a) + "#" + to_string(b) + "#" + to_string(w);
+    };
+    for(auto &e: edges) keymap[make_key(e.u,e.v,e.w)].push_back(e.idx);
+
+    // Prim starting from node 0 (assume connected; will check)
+    using pli = pair<ll,int>;
+    priority_queue<pli, vector<pli>, greater<pli>> pq;
+    minCost[0] = 0;
+    pq.push({0,0});
+
+    vector<char> vis(N,0);
+    vector<Edge> mstEdges; mstEdges.reserve(N-1);
+
+    while(!pq.empty()){
+        auto [c,u] = pq.top(); pq.pop();
+        if(vis[u]) continue;
+        vis[u] = 1;
+        if(parentNode[u] != -1){
+            // record MST edge (parentNode[u] -- u)
+            mstEdges.push_back({parentNode[u], u, parentEdgeW[u], parentEdgeIdx[u]});
+        }
+        for(auto &pr : adj[u]){
+            int v = pr.first; ll w = pr.second;
+            if(!vis[v] && w < minCost[v]){
+                minCost[v] = w;
+                parentNode[v] = u;
+                parentEdgeW[v] = w;
+                pq.push({w, v});
+            }
+        }
+    }
+
+    // Check connected
+    for(int i=0;i<N;++i) if(!vis[i]) {
+        cout << "Graph is disconnected — cannot build spanning network.\n";
+        return 0;
+    }
+
+    // Now we must map each MST edge (u,v,w) to a concrete input edge index.
+    // For each recorded MST edge (u,v,w) find a matching input edge index (pop from keymap)
+    vector<int> mstEdgeIndex; mstEdgeIndex.reserve(mstEdges.size());
+    for(auto &me: mstEdges){
+        string k = make_key(me.u, me.v, me.w);
+        auto it = keymap.find(k);
+        if(it == keymap.end() || it->second.empty()){
+            // Should not happen in normal data, but handle gracefully by marking -1
+            mstEdgeIndex.push_back(-1);
+        } else {
+            int idx = it->second.back();
+            it->second.pop_back();
+            mstEdgeIndex.push_back(idx);
+            inMST_edge[idx] = 1;
+        }
+    }
+
+    // Compute MST total cost
+    ll mstCost = 0;
+    for(auto &me: mstEdges) mstCost += me.w;
+
+    // Build MST adjacency for tree operations
+    vector<vector<pair<int,ll>>> tree(N);
+    vector<pair<pair<int,int>,ll>> mstEdgeList; mstEdgeList.reserve(mstEdges.size());
+    for(auto &me: mstEdges){
+        tree[me.u].push_back({me.v, me.w});
+        tree[me.v].push_back({me.u, me.w});
+        mstEdgeList.push_back({{me.u, me.v}, me.w});
+    }
+
+    // Binary lifting preprocess: parent[k][v] and maxEdge[k][v]
+    int LOG = 1;
+    while((1<<LOG) <= N) ++LOG;
+    vector<vector<int>> up(LOG, vector<int>(N, -1));
+    vector<vector<ll>> maxUp(LOG, vector<ll>(N, 0));
+    vector<int> depth(N,0);
+
+    // DFS to fill up[0] and depth and maxUp[0]
+    function<void(int,int)> dfs = [&](int u, int p){
+        for(auto &pr: tree[u]){
+            int v = pr.first; ll w = pr.second;
+            if(v == p) continue;
+            depth[v] = depth[u] + 1;
+            up[0][v] = u;
+            maxUp[0][v] = w;
+            dfs(v, u);
+        }
+    };
+    up[0][0] = -1; maxUp[0][0] = 0; depth[0] = 0;
+    dfs(0,-1);
+
+    for(int k=1;k<LOG;++k){
+        for(int v=0;v<N;++v){
+            if(up[k-1][v] != -1){
+                up[k][v] = up[k-1][ up[k-1][v] ];
+                maxUp[k][v] = max( maxUp[k-1][v], (up[k-1][v]==-1 ? 0 : maxUp[k-1][ up[k-1][v] ]) );
+            } else {
+                up[k][v] = -1;
+                maxUp[k][v] = maxUp[k-1][v];
+            }
+        }
+    }
+
+    auto maxOnPath = [&](int a, int b)->ll{
+        if(a == b) return 0;
+        ll res = 0;
+        if(depth[a] < depth[b]) swap(a,b);
+        int diff = depth[a] - depth[b];
+        for(int k=0;k<LOG;++k) if(diff & (1<<k)){
+            res = max(res, maxUp[k][a]);
+            a = up[k][a];
+        }
+        if(a==b) return res;
+        for(int k=LOG-1;k>=0;--k){
+            if(up[k][a] != -1 && up[k][a] != up[k][b]){
+                res = max(res, maxUp[k][a]);
+                res = max(res, maxUp[k][b]);
+                a = up[k][a];
+                b = up[k][b];
+            }
+        }
+        // now a and b are children of LCA
+        res = max(res, maxUp[0][a]);
+        res = max(res, maxUp[0][b]);
+        return res;
+    };
+
+    // For per-MST-edge replacement tracking:
+    // Map each MST edge (u,v,w) to an id we can index (0..N-2)
+    // We'll use canonical ordering (min,max) to identify edges.
+    unordered_map<long long, int> mstEdgeId; // key -> id
+    auto mk_e_key = [&](int a, int b)->long long{
+        if(a>b) swap(a,b);
+        return ((long long)a<<32) | (unsigned long long)b;
+    };
+    for(int i=0;i<(int)mstEdges.size();++i){
+        int a = mstEdges[i].u, b = mstEdges[i].v;
+        mstEdgeId[ mk_e_key(a,b) ] = i;
+    }
+
+    // Initialize replacement info
+    vector<ll> bestReplacementCostForEdge(mstEdges.size(), INF);
+    vector<int> bestReplacementEdgeIdx(mstEdges.size(), -1);
+
+    ll secondBest = INF;
+    // For each non-MST edge, compute effect
+    for(auto &e: edges){
+        if(inMST_edge[e.idx]) continue;
+        int u = e.u, v = e.v; ll w = e.w;
+        ll maxEdge = maxOnPath(u, v);
+        if(maxEdge == 0 && u==v) continue; // self-loop (unlikely)
+        // replacement total cost:
+        ll candidate = mstCost - maxEdge + w;
+        if(candidate > mstCost && candidate < secondBest) secondBest = candidate;
+        // find which MST edge(s) on path have weight == maxEdge; any of them could be replaced.
+        // To attribute replacement cost per MST edge, we should find specific edge on path with weight == maxEdge.
+        // We'll locate the one nearest to u or v: we can climb to find an edge with that weight.
+        // We'll implement a helper to find any edge id on path with weight == maxEdge.
+        auto findEdgeOnPathWithWeight = [&](int a, int b, ll target)->int{
+            // climb a up
+            if(depth[a] < depth[b]) swap(a,b);
+            int diff = depth[a]-depth[b];
+            for(int k=0;k<LOG;++k) if(diff & (1<<k)){
+                if(maxUp[k][a] == target){
+                    // need to find exact edge lower than or equal to 2^k step - but we can descend
+                    // fallback: we will step down by single steps from a to ancestor to pinpoint
+                    ;
+                }
+                a = up[k][a];
+            }
+            if(a==b) {
+                // moved; need to find along original route; fallback below
+            }
+            // fallback robust approach: walk from original endpoints along path using parent pointers step-by-step (safe for N up to 2e5)
+            // We'll do step-by-step from both u and v towards LCA to find the first edge with weight == target.
+            // For simplicity and safety, implement step-by-step (O(path length)); amortized still ok for typical sizes.
+            // We'll implement outside; here we return -1 as placeholder.
+            return -1;
+        };
+        // Simpler robust approach: find edge(s) on path by walking from u up to LCA and v up to LCA and checking edges.
+        // Find LCA:
+        int a=u, b=v;
+        if(depth[a] < depth[b]) swap(a,b);
+        int aa=a, bb=b;
+        int diff = depth[a]-depth[b];
+        for(int k=0;k<LOG;++k) if(diff & (1<<k)) a = up[k][a];
+        if(a != b){
+            for(int k=LOG-1;k>=0;--k){
+                if(up[k][a] != -1 && up[k][a] != up[k][b]){
+                    a = up[k][a];
+                    b = up[k][b];
+                }
+            }
+            a = up[0][a];
+            b = up[0][b];
+        }
+        int lca = a;
+        // walk from uu->lca
+        int uu = uu = u;
+        bool found = false;
+        // step up from uu until lca
+        while(uu != lca){
+            int p = up[0][uu];
+            ll edgew = maxUp[0][uu];
+            if(edgew == maxEdge){
+                int id = mstEdgeId[ mk_e_key(uu,p) ];
+                if(candidate < bestReplacementCostForEdge[id]){
+                    bestReplacementCostForEdge[id] = candidate;
+                    bestReplacementEdgeIdx[id] = e.idx;
+                }
+                found = true;
+                // don't break: there may be multiple edges equal to maxEdge; we update all (they all could be replaced)
+            }
+            uu = p;
+        }
+        int vv = v;
+        while(vv != lca){
+            int p = up[0][vv];
+            ll edgew = maxUp[0][vv];
+            if(edgew == maxEdge){
+                int id = mstEdgeId[ mk_e_key(vv,p) ];
+                if(candidate < bestReplacementCostForEdge[id]){
+                    bestReplacementCostForEdge[id] = candidate;
+                    bestReplacementEdgeIdx[id] = e.idx;
+                }
+                found = true;
+            }
+            vv = p;
+        }
+        // if !found, it's okay — sometimes due to duplicates weights we may have accounted earlier; continue
+    }
+
+    // Output results
+    cout << "MST total cost: " << mstCost << "\n";
+    cout << "MST edges (u v w) (0-based nodes):\n";
+    for(size_t i=0;i<mstEdges.size();++i){
+        cout << mstEdges[i].u << " " << mstEdges[i].v << " " << mstEdges[i].w
+             << "  (edge_id_input=" << (mstEdgeIndex[i] >=0 ? to_string(mstEdgeIndex[i]) : string("unknown")) << ")\n";
+    }
+    if(secondBest >= INF) cout << "No second-best spanning tree found (graph may have all equal or no replacing edges).\n";
+    else cout << "Second-best MST total cost (best single-edge replacement): " << secondBest << "\n";
+
+    cout << "\nPer-MST-edge cheapest replacement if that edge fails:\n";
+    for(size_t i=0;i<mstEdges.size();++i){
+        auto &me = mstEdges[i];
+        cout << "MST-edge " << i << " (" << me.u << "-" << me.v << " w=" << me.w << "): ";
+        if(bestReplacementCostForEdge[i] >= INF) cout << "NO replacement found (cut has no non-MST crossing edges)\n";
+        else {
+            cout << "replacement total cost = " << bestReplacementCostForEdge[i]
+                 << " using input-edge idx " << bestReplacementEdgeIdx[i] << "\n";
+        }
+    }
+
+    // Suggest backup edges to add: choose, for example, top K best replacements (cheapest increase)
+    int K = 3;
+    vector<pair<ll,int>> candidates; // (extra cost, inputEdgeIdx)
+    for(size_t i=0;i<mstEdges.size();++i){
+        if(bestReplacementCostForEdge[i] < INF){
+            ll extra = bestReplacementCostForEdge[i] - mstCost;
+            candidates.push_back({extra, bestReplacementEdgeIdx[i]});
+        }
+    }
+    sort(candidates.begin(), candidates.end());
+    cout << "\nTop " << min((int)candidates.size(), K) << " backup edges to add (cheapest extra cost):\n";
+    for(int i=0;i<(int)candidates.size() && i<K; ++i){
+        cout << " extra=" << candidates[i].first << "  input_edge_idx=" << candidates[i].second << "\n";
+    }
+
+    return 0;
+}</pre>
                 </div>
             </section>
             <footer>
