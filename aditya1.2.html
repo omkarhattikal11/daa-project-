@@ -121,12 +121,11 @@
         </ul>
         <h3>Solution Overview:</h3>
         <ul>
-          <li>Real-Time Resource Tracking</li>
-          <li>Emergency Triage.</li>
-          <li>Smart Ambulance Allocation</li>
-          <li>Optimize bus and train schedules dynamically using real-time data.</li>
-          <li>Predictive Resource Allocation</li>
-          <li>Central dashboard</li>
+          <li>Ambulance Routing & Traffic Navigation</li>
+          <li>Patient Triage & Prioritization.</li>
+          <li>Bed / ICU / Ventilator Allocation</li>
+          <li>Medicine Stock & Distribution.</li>
+          <li>Emergency Prediction</li>
         </ul>
       </div>
 
@@ -135,33 +134,54 @@
         <h2>2 • Algorithms & Data Structures</h2>
         <table>
           <tr><th>Task</th><th>Algorithm / Data Structure</th><th>why used</th></tr>
-          <tr><td>Ambulance allocation</td><td>Dijkstra (shortest path)</td><td>Find nearest available ambulance</td></tr>
-          <tr><td>Patient triage priority</td><td>Max-Heap / Priority Queue</td><td>Highest priority patient treated first</td></tr>
-          <tr><td>Resource update</td><td>Hash Table</td><td>Fast lookup of beds, ICUs</td></tr>
-          <tr><td>Ambulance dispatch queue</td><td>Queue</td><td>FIFO dispatch for emergency vehicles</td></tr>
-          <tr><td>Hospital network</td><td>Graph</td><td>Represent departments, ambulances, routes</td></tr>
-          <tr><td>Blood match system</td><td>String matching (KMP / direct map)</td><td>Quick blood group matching</td></tr>
-          <tr><td>Critical patient clustering</td><td>BFS / DFS</td><td>Group emergencies by location</td></tr>
+          <tr><td>Ambulance fastest route</td><td>Dijkstra’s Algorithm</td><td>Shortest path</td></tr>
+          <tr><td>Patient triage priorityCity area reachability</td><td>BFS/DFS</td><td>Region search & exploration</td></tr>
+          <tr><td>Bed search</td><td>Binary Search (sorted beds/BST)</td><td>-</td></tr>
+          <tr><td>Patient sorting by severity</td><td>Merge Sort / Quick Sort</td><td>-</td></tr>
+          
         </table>
+        <h3>Optimization Techniques</h3>
+        <table>
+          <tr><th>Technique</th><th>Application</th></tr>
+          <tr><th>Divide & Conquer</th><th>Sorting patient records</th></tr>
+          <tr><th>Dynamic Programming</th><th>Emergency prediction</th></tr>
+          <tr><th>Greedy Algorithm</th><th>Allocate nearest ambulance</th></tr>
+        </table>
+        </ul>
         <h3>Data Structures Used:</h3>
         <ul>
-          <li><strong>Graph:</strong> hospital network / ambulance routes</li>
-          <li><strong>Priority Queue: </strong> triage system</li>
-          <li><strong>Queue:</strong> ambulance dispatch</li>
-          <li><strong>Hash Map:</strong> resource lookup (beds, blood, ventilators)</li>
-          <li><strong>Struct:</strong>patient, ambulance, resource info</li>
-          <li><strong>Vector:</strong>dynamic lists</li>
+          <li><strong>Max-Heap / Priority Queue</strong>Patient triage</li>
+          <li><strong>BST / AVL Tree </strong>Bed mapping</li>
+          <li><strong>Hash Table + Min-Heap (expiry)</strong>Medicine stock</li>
+          <li><strong>Graph (Adjacency List)</strong>Traffic map</li>
         </ul>
       </div>
-
+       <div class="card algo-datastruct-card4">
+         <h2>System Architecture</h2>
+         <ul>
+           <li>Ambulance Routing Module
+           </li><p>Graph of city roads.
+             Use Dijkstra to compute shortest path.</p>
+           <li>Patient Priority Module</li>
+           <p>Max-Heap based triage queue.</p>
+           <li>Resource Allocation Module
+           </li>
+           <p>AVL Tree for beds.
+             Hash table for medicines.</p>
+           <li>Waste Management (Expired Medicines)</li>
+           <p>Min-Heap by expiry date.</p>
+           <li>Emergency Prediction Module</li>
+           <p>Dynamic programming trend analysis.</p>
+         </ul>
+       </div>
       <!-- SDGs -->
       <div class="card sdg-card">
         <h2>3 • Sustainable Development Goals (SDGs)</h2>
         <ul>
-          <li><strong>SDG 3:</strong> Good Health & Well-being – Improves emergency response, reduces mortality</li>
-          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – Smart hospital automation</li>
-          <li><strong>SDG 11:</strong> Sustainable Cities & Communities – Better ambulance distribution.</li>
-          <li><strong>SDG 12:</strong> Responsible Consumption – Avoids resource wastage (beds, oxygen, blood).</li>
+          <li><strong>SDG 3:</strong> Good Health & Well-being – Faster emergency response, optimal patient care</li>
+          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – Smart resource allocation using algorithms</li>
+          <li><strong>SDG 11:</strong> Sustainable Cities & Communities – Efficient ambulance routes, reduced congestion, sustainable medical logistics.</li>
+          <li><strong>SDG 12:</strong> Responsible Consumption – Optimized medicine stock management & reduced waste.</li>
           <li><strong>SDG 17:</strong> Partnerships for the Goals – Connects hospitals, ambulance services, labs</li>
         </ul>
       </div>
