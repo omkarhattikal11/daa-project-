@@ -1,1 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Residential Water Leak Detection System</title>
+
+<style>
+  :root{
+    --bg-1:#f0f4ff;
+    --section-bg:#ffffff;
+    --text-dark:#1a1a1a;
+    --accent-1:#0077ff;
+    --accent-2:#d97706;
+    --accent-3:#6b21a8;
+    --max-width:900px;
+    font-family:'Inter',sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background:var(--bg-1);
+    color:var(--text-dark);
+    padding-top:78px;
+    line-height:1.6;
+  }
+
+  .navbar{
+    position:fixed; top:8px; left:50%; transform:translateX(-50%);
+    width:calc(100% - 40px); max-width:var(--max-width);
+    display:flex; justify-content:space-between; align-items:center;
+    background:#ffffffbb;
+    padding:12px 18px; border-radius:12px;
+    backdrop-filter:blur(10px);
+    border:1px solid #d0d8ff;
+  }
+
+  .logo{ display:flex; gap:12px; align-items:center; }
+  .logo .dot{
+    width:36px; height:36px; border-radius:9px;
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; color:#ffffff;
+  }
+
+  nav a{ text-decoration:none; color:var(--text-dark); font-weight:600; }
+
+  .wrap{
+    max-width:var(--max-width);
+    margin:28px auto;
+    padding:0 22px;
+  }
+
+  h1{ text-align:center; margin-bottom:32px; }
+
+  .section{
+    background:var(--section-bg);
+    padding:28px 22px;
+    margin-bottom:22px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  }
+
+  .section h2{
+    margin-bottom:12px;
+    font-size:24px;
+    color:var(--accent-1);
+  }
+
+  .section h3{
+    margin-top:14px;
+    font-size:18px;
+    color:var(--accent-2);
+  }
+
+  .section ul{ padding-left:22px; margin-top:10px; }
+  .section ul li{ margin-bottom:8px; }
+
+  table{
+    width:100%;
+    margin-top:14px;
+    border-collapse:collapse;
+  }
+  th,td{
+    border:1px solid #d0d0d0;
+    padding:10px;
+  }
+  th{ background:#e8eefd; }
+
+  .flowchart{
+    margin-top:16px;
+    padding:18px;
+    background:#f8fafc;
+    border:1px dashed #94a3b8;
+    border-radius:10px;
+    text-align:center;
+    font-weight:600;
+  }
+
+  .flowchart div{ margin:10px 0; }
+
+  footer{
+    text-align:center;
+    padding:24px;
+    margin-top:24px;
+    color:var(--text-dark);
+  }
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <div class="dot">EMS</div>
+    <div>
+      <div style="font-weight:800">SMART CITY SOLUTION</div>
+      <div style="font-size:12px;">DAA — Design & Analysis of Algorithms</div>
+    </div>
+  </div>
+  <nav>
+     <ul>
+        <li><a href="aditya.html">BACK</a></li>
+      </ul>
+ </nav>
+</header>
+
+<main class="wrap">
+
+  <h1>Business Case 2: Residential Water Leak Detection System</h1>
+
+  <div class="section">
+    <h2>1. Business Case Description</h2>
+    <p>
+      Large residential communities often face significant water wastage and high repair costs due to undetected leaks
+      in homes, pipelines, or underground water networks. Since residents cannot monitor water flow continuously,
+      leaks may remain unnoticed for long periods.
+    </p>
+    <p>
+      The Residential Water Leak Detection System monitors real-time water flow using sensors, detects abnormal usage
+      patterns, and alerts residents immediately. By analyzing usage trends, the system helps conserve water, reduce
+      bills, and prevent structural damage.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>2. Problem Statement</h2>
+    <ul>
+      <li>Leaks are detected only after visible damage occurs</li>
+      <li>Unexpected increase in water bills without explanation</li>
+      <li>Manual inspection methods are slow and unreliable</li>
+      <li>Abnormal flow patterns are hard to detect manually</li>
+    </ul>
+
+    <h3>System Requirements</h3>
+    <ul>
+      <li>Continuously track water consumption</li>
+      <li>Compare real-time usage with normal patterns</li>
+      <li>Detect abnormal spikes immediately</li>
+      <li>Notify residents automatically</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>3. Solution Approach</h2>
+    <ul>
+      <li>Sensors collect water flow data at regular intervals</li>
+      <li>Hash Map stores time-based readings efficiently</li>
+      <li>Fenwick Tree enables fast range usage calculation</li>
+      <li>Sliding Window detects continuous abnormal flow</li>
+      <li>Queue manages recent readings for live monitoring</li>
+    </ul>
+
+    <h3>System Output</h3>
+    <ul>
+      <li>Leak detection alert</li>
+      <li>Time and approximate location of leak</li>
+      <li>Duration of abnormal water usage</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>4. Algorithms and Data Structures Used</h2>
+
+    <h3>Hash Map — Fast Storage of Sensor Data</h3>
+    <p>Stores time-stamped water flow readings for quick access.<br>
+       Enables instant comparison with expected usage patterns.</p>
+
+    <h3>Fenwick Tree (Binary Indexed Tree) — Efficient Range Queries</h3>
+    <p>Calculates total water usage over a time interval efficiently.<br>
+       Helps detect unusual spikes in consumption.</p>
+
+    <h3>Sliding Window Algorithm — Continuous Spike Detection</h3>
+    <p>Analyzes recent k readings to detect sustained high usage.<br>
+       Differentiates leaks from short-term normal usage.</p>
+
+    <h3>Queue — Managing Recent Sensor Readings</h3>
+    <p>Maintains the most recent flow values in real time.<br>
+       Supports efficient sliding window analysis.</p>
+  </div>
+
+  <div class="section">
+    <h2>5. System Workflow</h2>
+
+    <div class="flowchart">
+      <div>Start</div>
+      <div>↓</div>
+      <div>Water Flow Sensor Sends Reading</div>
+      <div>↓</div>
+      <div>Store Reading in Hash Map</div>
+      <div>↓</div>
+      <div>Update Fenwick Tree</div>
+      <div>↓</div>
+      <div>Update Queue (Sliding Window)</div>
+      <div>↓</div>
+      <div>Compare with Normal Usage Pattern</div>
+      <div>↓</div>
+      <div>Abnormal Usage Detected?</div>
+      <div>↓</div>
+      <div>Send Leak Alert to Resident</div>
+      <div>↓</div>
+      <div>End</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>6. Space and Time Efficiency</h2>
+
+    <h3>Time Complexity</h3>
+    <ul>
+      <li>Hash Map operations: O(1) average</li>
+      <li>Fenwick Tree update/query: O(log N)</li>
+      <li>Sliding Window processing: O(N)</li>
+    </ul>
+
+    <h3>Space Complexity</h3>
+    <ul>
+      <li>Hash Map storage: O(N)</li>
+      <li>Fenwick Tree: O(N)</li>
+      <li>Queue: O(K), where K is window size</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>7. Sustainable Development Goals (SDGs) Alignment</h2>
+    <ul>
+      <li><strong>SDG 6:</strong> Clean Water and Sanitation</li>
+      <li><strong>SDG 11:</strong> Sustainable Cities and Communities</li>
+      <li><strong>SDG 12:</strong> Responsible Consumption and Production</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>8. Conclusion</h2>
+    <p>
+      The Residential Water Leak Detection System offers an intelligent solution for early leak identification using
+      efficient algorithms and data structures. By monitoring real-time water usage patterns, it minimizes wastage,
+      reduces repair costs, and supports sustainable living in residential communities.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  © Smart City DAA Project • KLE Technological University
+</footer>
+
+</body>
+</html>
 
