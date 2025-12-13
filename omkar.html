@@ -627,72 +627,37 @@ int main() {
     }
     return 0;
 }</pre>
-<!-- ===== AFTER EACH EXISTING CODE-BLOCK ===== -->
-
 <div class="case-field">
-  <h3>Efficiency Analysis</h3>
-  <p>
-    The efficiency of this solution depends on the algorithm used.
-    It follows the standard time and space complexity defined in
-    Design and Analysis of Algorithms. The algorithm is chosen to
-    ensure optimal performance for large-scale real-world data
-    while maintaining correctness and scalability.
-  </p>
+<h3>Efficiency Analysis</h3>
+<p>
+Time Complexity: <strong>O((V + E) log V)</strong><br>
+Space Complexity: <strong>O(V)</strong><br>
+Using a priority queue allows efficient computation of shortest paths
+in large road networks with many intersections.
+</p>
 </div>
 
 <div class="case-field">
-  <h3>Flowchart Diagram</h3>
+<h3>Flowchart Diagram</h3>
+<svg width="100%" height="260" viewBox="0 0 600 260">
+  <rect x="240" y="10" width="120" height="40" rx="20" stroke="#22c55e" fill="none"/>
+  <text x="300" y="35" fill="#e5e7eb" text-anchor="middle">Start</text>
 
-  <svg width="100%" height="180" viewBox="0 0 600 180">
-    <defs>
-      <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5"
-              orient="auto-start-reverse">
-        <path d="M 0 0 L 10 5 L 0 10 z" fill="#22c55e" />
-      </marker>
-    </defs>
+  <rect x="200" y="70" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="95" fill="#e5e7eb" text-anchor="middle">Initialize Distances</text>
 
-    <!-- Start -->
-    <rect x="20" y="50" rx="18" ry="18" width="90" height="40"
-          fill="#020617" stroke="#22c55e"/>
-    <text x="65" y="75" fill="#e5e7eb" text-anchor="middle">Start</text>
+  <rect x="190" y="130" width="220" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="155" fill="#e5e7eb" text-anchor="middle">Pick Min Distance Node</text>
 
-    <!-- Input -->
-    <rect x="140" y="50" rx="8" ry="8" width="130" height="40"
-          fill="#020617" stroke="#22c55e"/>
-    <text x="205" y="75" fill="#e5e7eb" text-anchor="middle">
-      Read Input
-    </text>
+  <rect x="200" y="190" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="215" fill="#e5e7eb" text-anchor="middle">Relax Adjacent Edges</text>
 
-    <!-- Process -->
-    <rect x="310" y="50" rx="8" ry="8" width="160" height="40"
-          fill="#020617" stroke="#22c55e"/>
-    <text x="390" y="75" fill="#e5e7eb" text-anchor="middle">
-      Apply Algorithm Logic
-    </text>
-
-    <!-- Output -->
-    <rect x="510" y="50" rx="18" ry="18" width="90" height="40"
-          fill="#020617" stroke="#22c55e"/>
-    <text x="555" y="75" fill="#e5e7eb" text-anchor="middle">Output</text>
-
-    <!-- Arrows -->
-    <line x1="110" y1="70" x2="140" y2="70"
-          stroke="#22c55e" marker-end="url(#arrow)"/>
-    <line x1="270" y1="70" x2="310" y2="70"
-          stroke="#22c55e" marker-end="url(#arrow)"/>
-    <line x1="470" y1="70" x2="510" y2="70"
-          stroke="#22c55e" marker-end="url(#arrow)"/>
-
-  </svg>
-
-  <p style="font-size:12px;color:#9ca3af;margin-top:6px;">
-    The flowchart represents the general execution flow of the C++
-    program: starting execution, taking inputs, processing data using
-    the selected algorithm, and producing the final output.
-  </p>
+  <line x1="300" y1="50" x2="300" y2="70" stroke="#22c55e"/>
+  <line x1="300" y1="110" x2="300" y2="130" stroke="#22c55e"/>
+  <line x1="300" y1="170" x2="300" y2="190" stroke="#22c55e"/>
+</svg>
 </div>
-
-                </div>
+              </div>
             </section>
 
             <!-- ========== CASE 2 ========== -->
@@ -777,6 +742,32 @@ int main() {
     }
     return 0;
 }</pre>
+<div class="case-field">
+<h3>Efficiency Analysis</h3>
+<p>
+Insertion and deletion operations take <strong>O(log n)</strong> time.<br>
+Space Complexity: <strong>O(n)</strong>.<br>
+This ensures urgent waste and water service requests are handled first.
+</p>
+</div>
+
+<div class="case-field">
+<h3>Flowchart Diagram</h3>
+<svg width="100%" height="240" viewBox="0 0 600 240">
+  <rect x="240" y="10" width="120" height="40" rx="20" stroke="#22c55e" fill="none"/>
+  <text x="300" y="35" fill="#e5e7eb" text-anchor="middle">Start</text>
+
+  <rect x="200" y="70" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="95" fill="#e5e7eb" text-anchor="middle">Insert Requests</text>
+
+  <rect x="190" y="130" width="220" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="155" fill="#e5e7eb" text-anchor="middle">Extract Highest Priority</text>
+
+  <line x1="300" y1="50" x2="300" y2="70" stroke="#22c55e"/>
+  <line x1="300" y1="110" x2="300" y2="130" stroke="#22c55e"/>
+</svg>
+</div>
+
                 </div>
             </section>
 
@@ -888,6 +879,36 @@ int main() {
     }
     return 0;
 }</pre>
+<div class="case-field">
+<h3>Efficiency Analysis</h3>
+<p>
+Time Complexity: <strong>O(V + E)</strong><br>
+Space Complexity: <strong>O(V)</strong>.<br>
+BFS efficiently checks connectivity and fault propagation in pipelines.
+</p>
+</div>
+
+<div class="case-field">
+<h3>Flowchart Diagram</h3>
+<svg width="100%" height="260" viewBox="0 0 600 260">
+  <rect x="240" y="10" width="120" height="40" rx="20" stroke="#22c55e" fill="none"/>
+  <text x="300" y="35" fill="#e5e7eb" text-anchor="middle">Start</text>
+
+  <rect x="210" y="70" width="180" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="95" fill="#e5e7eb" text-anchor="middle">Enqueue Source</text>
+
+  <rect x="200" y="130" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="155" fill="#e5e7eb" text-anchor="middle">Visit Neighbors</text>
+
+  <rect x="200" y="190" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="215" fill="#e5e7eb" text-anchor="middle">Mark Visited</text>
+
+  <line x1="300" y1="50" x2="300" y2="70" stroke="#22c55e"/>
+  <line x1="300" y1="110" x2="300" y2="130" stroke="#22c55e"/>
+  <line x1="300" y1="170" x2="300" y2="190" stroke="#22c55e"/>
+</svg>
+</div>
+                    
                 </div>
             </section>
 
@@ -984,6 +1005,32 @@ int main() {
     cout &lt;&lt; "\nTraffic optimization cycle completed.\n";
     return 0;
 }</pre>
+                    <div class="case-field">
+<h3>Efficiency Analysis</h3>
+<p>
+Heap insert and delete operations run in <strong>O(log n)</strong> time.<br>
+Space Complexity: <strong>O(n)</strong>.<br>
+Allows quick identification of the most congested traffic points.
+</p>
+</div>
+
+<div class="case-field">
+<h3>Flowchart Diagram</h3>
+<svg width="100%" height="220" viewBox="0 0 600 220">
+  <rect x="240" y="10" width="120" height="40" rx="20" stroke="#22c55e" fill="none"/>
+  <text x="300" y="35" fill="#e5e7eb" text-anchor="middle">Start</text>
+
+  <rect x="200" y="70" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="95" fill="#e5e7eb" text-anchor="middle">Insert Traffic Data</text>
+
+  <rect x="190" y="130" width="220" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="155" fill="#e5e7eb" text-anchor="middle">Extract Max Congestion</text>
+
+  <line x1="300" y1="50" x2="300" y2="70" stroke="#22c55e"/>
+  <line x1="300" y1="110" x2="300" y2="130" stroke="#22c55e"/>
+</svg>
+</div>
+
                 </div>
             </section>
 
@@ -1077,6 +1124,36 @@ int main() {
     cout &lt;&lt; "\nAll trains processed safely.\n";
     return 0;
 }</pre>
+<div class="case-field">
+<h3>Efficiency Analysis</h3>
+<p>
+Time Complexity: <strong>O(n log n)</strong><br>
+Space Complexity: <strong>O(n)</strong><br>
+Train arrival events are processed in chronological order using a min-heap.
+</p>
+</div>
+
+<div class="case-field">
+<h3>Flowchart Diagram</h3>
+<svg viewBox="0 0 600 260" width="100%" height="260">
+  <rect x="240" y="10" width="120" height="40" rx="20" stroke="#22c55e" fill="none"/>
+  <text x="300" y="35" fill="#e5e7eb" text-anchor="middle">Start</text>
+
+  <rect x="200" y="70" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="95" fill="#e5e7eb" text-anchor="middle">Insert Train Events</text>
+
+  <rect x="190" y="130" width="220" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="155" fill="#e5e7eb" text-anchor="middle">Extract Earliest Train</text>
+
+  <rect x="200" y="190" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="215" fill="#e5e7eb" text-anchor="middle">Close / Open Gate</text>
+
+  <line x1="300" y1="50" x2="300" y2="70" stroke="#22c55e"/>
+  <line x1="300" y1="110" x2="300" y2="130" stroke="#22c55e"/>
+  <line x1="300" y1="170" x2="300" y2="190" stroke="#22c55e"/>
+</svg>
+</div>
+
                 </div>
             </section>
 
@@ -1168,6 +1245,33 @@ int main() {
 
     return 0;
 }</pre>
+<div class="case-field">
+<h3>Efficiency Analysis</h3>
+<p>
+Average Time Complexity: <strong>O(1)</strong><br>
+Worst Case: <strong>O(n)</strong><br>
+Space Complexity: <strong>O(n)</strong><br>
+Fast item lookup using unique token IDs.
+</p>
+</div>
+
+<div class="case-field">
+<h3>Flowchart Diagram</h3>
+<svg viewBox="0 0 600 240" width="100%" height="240">
+  <rect x="240" y="10" width="120" height="40" rx="20" stroke="#22c55e" fill="none"/>
+  <text x="300" y="35" fill="#e5e7eb" text-anchor="middle">Start</text>
+
+  <rect x="210" y="70" width="180" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="95" fill="#e5e7eb" text-anchor="middle">Generate Token</text>
+
+  <rect x="200" y="130" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="155" fill="#e5e7eb" text-anchor="middle">Store / Search Item</text>
+
+  <line x1="300" y1="50" x2="300" y2="70" stroke="#22c55e"/>
+  <line x1="300" y1="110" x2="300" y2="130" stroke="#22c55e"/>
+</svg>
+</div>
+ 
                 </div>
             </section>
 
@@ -1341,6 +1445,36 @@ int main() {
 
     return 0;
 }</pre>
+<div class="case-field">
+<h3>Efficiency Analysis</h3>
+<p>
+Insert & Search Time: <strong>O(L)</strong><br>
+Space Complexity: <strong>O(total characters)</strong><br>
+Ideal for autocomplete and fast prefix matching.
+</p>
+</div>
+
+<div class="case-field">
+<h3>Flowchart Diagram</h3>
+<svg viewBox="0 0 600 260" width="100%" height="260">
+  <rect x="240" y="10" width="120" height="40" rx="20" stroke="#22c55e" fill="none"/>
+  <text x="300" y="35" fill="#e5e7eb" text-anchor="middle">Start</text>
+
+  <rect x="210" y="70" width="180" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="95" fill="#e5e7eb" text-anchor="middle">Read Character</text>
+
+  <rect x="190" y="130" width="220" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="155" fill="#e5e7eb" text-anchor="middle">Traverse Trie Node</text>
+
+  <rect x="200" y="190" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="215" fill="#e5e7eb" text-anchor="middle">Prefix Found</text>
+
+  <line x1="300" y1="50" x2="300" y2="70" stroke="#22c55e"/>
+  <line x1="300" y1="110" x2="300" y2="130" stroke="#22c55e"/>
+  <line x1="300" y1="170" x2="300" y2="190" stroke="#22c55e"/>
+</svg>
+</div>
+
                 </div>
             </section>
 
@@ -1437,6 +1571,32 @@ int main() {
 
     return 0;
 }</pre>
+<div class="case-field">
+<h3>Efficiency Analysis</h3>
+<p>
+Time Complexity: <strong>O(n × m)</strong><br>
+Space Complexity: <strong>O(1)</strong><br>
+Used when log size is small and simplicity is preferred.
+</p>
+</div>
+
+<div class="case-field">
+<h3>Flowchart Diagram</h3>
+<svg viewBox="0 0 600 240" width="100%" height="240">
+  <rect x="240" y="10" width="120" height="40" rx="20" stroke="#22c55e" fill="none"/>
+  <text x="300" y="35" fill="#e5e7eb" text-anchor="middle">Start</text>
+
+  <rect x="190" y="70" width="220" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="95" fill="#e5e7eb" text-anchor="middle">Compare Pattern</text>
+
+  <rect x="200" y="130" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="155" fill="#e5e7eb" text-anchor="middle">Match Found?</text>
+
+  <line x1="300" y1="50" x2="300" y2="70" stroke="#22c55e"/>
+  <line x1="300" y1="110" x2="300" y2="130" stroke="#22c55e"/>
+</svg>
+</div>
+
                 </div>
             </section>
 
@@ -1561,6 +1721,36 @@ int main() {
 
     return 0;
 }</pre>
+<div class="case-field">
+<h3>Efficiency Analysis</h3>
+<p>
+Time Complexity: <strong>O(n + m)</strong><br>
+Space Complexity: <strong>O(m)</strong><br>
+Efficient pattern searching in large log files.
+</p>
+</div>
+
+<div class="case-field">
+<h3>Flowchart Diagram</h3>
+<svg viewBox="0 0 600 260" width="100%" height="260">
+  <rect x="240" y="10" width="120" height="40" rx="20" stroke="#22c55e" fill="none"/>
+  <text x="300" y="35" fill="#e5e7eb" text-anchor="middle">Start</text>
+
+  <rect x="200" y="70" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="95" fill="#e5e7eb" text-anchor="middle">Build LPS Array</text>
+
+  <rect x="190" y="130" width="220" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="155" fill="#e5e7eb" text-anchor="middle">Compare Characters</text>
+
+  <rect x="200" y="190" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="215" fill="#e5e7eb" text-anchor="middle">Pattern Found</text>
+
+  <line x1="300" y1="50" x2="300" y2="70" stroke="#22c55e"/>
+  <line x1="300" y1="110" x2="300" y2="130" stroke="#22c55e"/>
+  <line x1="300" y1="170" x2="300" y2="190" stroke="#22c55e"/>
+</svg>
+</div>
+
                 </div>
             </section>
 
@@ -1728,7 +1918,33 @@ int main() {
     else cout &lt;&lt; "Vendor not found.\n";
 
     return 0;
-}</pre>
+}</pre> 
+<div class="case-field">
+<h3>Efficiency Analysis</h3>
+<p>
+Search / Insert / Delete: <strong>O(log n)</strong><br>
+Space Complexity: <strong>O(n)</strong><br>
+Self-balancing tree ensures consistent performance.
+</p>
+</div>
+
+<div class="case-field">
+<h3>Flowchart Diagram</h3>
+<svg viewBox="0 0 600 240" width="100%" height="240">
+  <rect x="240" y="10" width="120" height="40" rx="20" stroke="#22c55e" fill="none"/>
+  <text x="300" y="35" fill="#e5e7eb" text-anchor="middle">Start</text>
+
+  <rect x="200" y="70" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="95" fill="#e5e7eb" text-anchor="middle">Insert Node</text>
+
+  <rect x="190" y="130" width="220" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="155" fill="#e5e7eb" text-anchor="middle">Balance Tree</text>
+
+  <line x1="300" y1="50" x2="300" y2="70" stroke="#22c55e"/>
+  <line x1="300" y1="110" x2="300" y2="130" stroke="#22c55e"/>
+</svg>
+</div>
+
                 </div>
             </section>
 
@@ -1873,9 +2089,40 @@ int main() {
 
     return 0;
 }</pre>
+<div class="case-field">
+<h3>Efficiency Analysis</h3>
+<p>
+Build Time: <strong>O(n)</strong><br>
+Update Time: <strong>O(log n)</strong><br>
+Query Time: <strong>O(log n)</strong><br>
+Space Complexity: <strong>O(4n)</strong><br>
+Efficient for real-time crowd updates and range queries.
+</p>
+</div>
+
+<div class="case-field">
+<h3>Flowchart Diagram</h3>
+<svg viewBox="0 0 600 260" width="100%" height="260">
+  <rect x="240" y="10" width="120" height="40" rx="20" stroke="#22c55e" fill="none"/>
+  <text x="300" y="35" fill="#e5e7eb" text-anchor="middle">Start</text>
+
+  <rect x="190" y="70" width="220" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="95" fill="#e5e7eb" text-anchor="middle">Build Segment Tree</text>
+
+  <rect x="200" y="130" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="155" fill="#e5e7eb" text-anchor="middle">Update / Query</text>
+
+  <rect x="240" y="190" width="120" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="215" fill="#e5e7eb" text-anchor="middle">Output</text>
+
+  <line x1="300" y1="50" x2="300" y2="70" stroke="#22c55e"/>
+  <line x1="300" y1="110" x2="300" y2="130" stroke="#22c55e"/>
+  <line x1="300" y1="170" x2="300" y2="190" stroke="#22c55e"/>
+</svg>
+</div>
                 </div>
             </section>
-            <!-- ========== CASE 12 (Segment Tree) ========== -->
+            <!-- ========== CASE 12  ========== -->
             <section class="case">
                 <div class="case-header-row">
                     <span>CASE 12</span>
@@ -2047,9 +2294,40 @@ int main() {
     return 0;
 }
  </pre>
+<div class="case-field">
+<h3>Efficiency Analysis</h3>
+<p>
+AVL Insert/Search/Delete: <strong>O(log n)</strong><br>
+Boyer–Moore Search: <strong>O(n / m)</strong> (average)<br>
+Space Complexity: <strong>O(n)</strong><br>
+Balanced search with fast keyword matching.
+</p>
+</div>
+
+<div class="case-field">
+<h3>Flowchart Diagram</h3>
+<svg viewBox="0 0 600 260" width="100%" height="260">
+  <rect x="240" y="10" width="120" height="40" rx="20" stroke="#22c55e" fill="none"/>
+  <text x="300" y="35" fill="#e5e7eb" text-anchor="middle">Start</text>
+
+  <rect x="190" y="70" width="220" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="95" fill="#e5e7eb" text-anchor="middle">Search Title (AVL)</text>
+
+  <rect x="180" y="130" width="240" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="155" fill="#e5e7eb" text-anchor="middle">Keyword Match (BM)</text>
+
+  <rect x="240" y="190" width="120" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="215" fill="#e5e7eb" text-anchor="middle">Result</text>
+
+  <line x1="300" y1="50" x2="300" y2="70" stroke="#22c55e"/>
+  <line x1="300" y1="110" x2="300" y2="130" stroke="#22c55e"/>
+  <line x1="300" y1="170" x2="300" y2="190" stroke="#22c55e"/>
+</svg>
+</div>
+
                 </div>
             </section>
-            <!-- ========== CASE 13 (Segment Tree) ========== -->
+            <!-- ========== CASE 13  ========== -->
             <section class="case">
                 <div class="case-header-row">
                     <span>CASE 13</span>
@@ -2159,6 +2437,36 @@ int main() {
 
     return 0;
 } </pre>
+<div class="case-field">
+<h3>Efficiency Analysis</h3>
+<p>
+Bellman–Ford Time: <strong>O(V × E)</strong><br>
+Handles negative edges safely.<br>
+Space Complexity: <strong>O(V)</strong><br>
+Reliable for fare discounts & penalties.
+</p>
+</div>
+
+<div class="case-field">
+<h3>Flowchart Diagram</h3>
+<svg viewBox="0 0 600 260" width="100%" height="260">
+  <rect x="240" y="10" width="120" height="40" rx="20" stroke="#22c55e" fill="none"/>
+  <text x="300" y="35" fill="#e5e7eb" text-anchor="middle">Start</text>
+
+  <rect x="180" y="70" width="240" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="95" fill="#e5e7eb" text-anchor="middle">Initialize Distances</text>
+
+  <rect x="180" y="130" width="240" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="155" fill="#e5e7eb" text-anchor="middle">Relax All Edges</text>
+
+  <rect x="200" y="190" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="215" fill="#e5e7eb" text-anchor="middle">Detect Cycles</text>
+
+  <line x1="300" y1="50" x2="300" y2="70" stroke="#22c55e"/>
+  <line x1="300" y1="110" x2="300" y2="130" stroke="#22c55e"/>
+  <line x1="300" y1="170" x2="300" y2="190" stroke="#22c55e"/>
+</svg>
+</div>
                 </div>
             </section>
   <!-- ========== CASE 14 ========== -->
@@ -2259,6 +2567,35 @@ int main() {
 
     return 0;
 }</pre>
+<div class="case-field">
+<h3>Efficiency Analysis</h3>
+<p>
+Time Complexity: <strong>O(n log n)</strong><br>
+Space Complexity: <strong>O(n)</strong><br>
+Stable and efficient for large datasets.
+</p>
+</div>
+
+<div class="case-field">
+<h3>Flowchart Diagram</h3>
+<svg viewBox="0 0 600 260" width="100%" height="260">
+  <rect x="240" y="10" width="120" height="40" rx="20" stroke="#22c55e" fill="none"/>
+  <text x="300" y="35" fill="#e5e7eb" text-anchor="middle">Start</text>
+
+  <rect x="200" y="70" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="95" fill="#e5e7eb" text-anchor="middle">Divide Array</text>
+
+  <rect x="190" y="130" width="220" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="155" fill="#e5e7eb" text-anchor="middle">Sort Subarrays</text>
+
+  <rect x="200" y="190" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="215" fill="#e5e7eb" text-anchor="middle">Merge Results</text>
+
+  <line x1="300" y1="50" x2="300" y2="70" stroke="#22c55e"/>
+  <line x1="300" y1="110" x2="300" y2="130" stroke="#22c55e"/>
+  <line x1="300" y1="170" x2="300" y2="190" stroke="#22c55e"/>
+</svg>
+</div>
                 </div>
             </section>
  <!-- ========== CASE 15 ========== -->
@@ -2424,6 +2761,36 @@ int main() {
 
     return 0;
 }</pre>
+<div class="case-field">
+<h3>Efficiency Analysis</h3>
+<p>
+Quick Sort Avg: <strong>O(n log n)</strong><br>
+Worst Case: <strong>O(n²)</strong><br>
+Bubble/Selection: <strong>O(n²)</strong><br>
+Efficient for near-sorted queues.
+</p>
+</div>
+
+<div class="case-field">
+<h3>Flowchart Diagram</h3>
+<svg viewBox="0 0 600 260" width="100%" height="260">
+  <rect x="240" y="10" width="120" height="40" rx="20" stroke="#22c55e" fill="none"/>
+  <text x="300" y="35" fill="#e5e7eb" text-anchor="middle">Start</text>
+
+  <rect x="200" y="70" width="200" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="95" fill="#e5e7eb" text-anchor="middle">Choose Strategy</text>
+
+  <rect x="180" y="130" width="240" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="155" fill="#e5e7eb" text-anchor="middle">Sort / Adjust Queue</text>
+
+  <rect x="240" y="190" width="120" height="40" stroke="#22c55e" fill="none"/>
+  <text x="300" y="215" fill="#e5e7eb" text-anchor="middle">Done</text>
+
+  <line x1="300" y1="50" x2="300" y2="70" stroke="#22c55e"/>
+  <line x1="300" y1="110" x2="300" y2="130" stroke="#22c55e"/>
+  <line x1="300" y1="170" x2="300" y2="190" stroke="#22c55e"/>
+</svg>
+</div>
                 </div>
             </section>
  <!-- ========== CASE 16 ========== -->
@@ -2636,6 +3003,8 @@ int main() {
 
     return 0;
 }</pre>
+
+
                 </div>
             </section>
 
