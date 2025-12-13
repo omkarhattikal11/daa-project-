@@ -1,0 +1,11 @@
+incident_id,incident_type,location_zone,severity_level,reported_time,nearest_unit,unit_type,response_time_minutes,route_id,status
+INC001,Fire Accident,Zone-A,5,08:45,Unit-12,Fire Brigade,6,R3,Resolved
+INC002,Medical Emergency,Zone-C,4,09:10,Unit-05,Ambulance,5,R1,Resolved
+INC003,Road Accident,Zone-B,3,09:25,Unit-09,Police,7,R2,Resolved
+INC004,Gas Leak,Zone-D,5,09:40,Unit-14,Fire Brigade,8,R4,In-Progress
+INC005,Flood Alert,Zone-E,4,10:00,Unit-18,Rescue Team,10,R5,In-Progress
+INC006,Building Collapse,Zone-A,5,10:20,Unit-21,Disaster Response,9,R3,Resolved
+INC007,Heart Attack,Zone-F,5,10:35,Unit-07,Ambulance,4,R2,Resolved
+INC008,Electrical Fire,Zone-C,3,10:50,Unit-11,Fire Brigade,6,R1,Resolved
+INC009,Industrial Accident,Zone-D,4,11:05,Unit-16,Rescue Team,8,R4,In-Progress
+INC010,Public Panic,Zone-B,2,11:20,Unit-03,Police,5,R2,Resolved
