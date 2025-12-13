@@ -1,0 +1,11 @@
+beacon_id,zone_name,beacon_status,emergency_type,signal_strength,activated_time,connected_beacons,evacuation_route_id
+B001,Central Plaza,ACTIVE,Fire,85,10:05,B002|B003,R1
+B002,North Park,ACTIVE,Fire,78,10:06,B001|B004,R1
+B003,City Mall,ACTIVE,Fire,82,10:06,B001|B005,R2
+B004,Residential Block A,ACTIVE,Fire,70,10:07,B002|B006,R3
+B005,Metro Station,ACTIVE,Fire,88,10:07,B003|B007,R2
+B006,School Zone,ACTIVE,Fire,65,10:08,B004|B008,R4
+B007,Hospital Area,ACTIVE,Fire,92,10:08,B005|B009,R5
+B008,Beach Road,ACTIVE,Fire,60,10:09,B006,R4
+B009,Industrial Zone,ACTIVE,Fire,75,10:09,B007,R6
+B010,Bus Terminal,ACTIVE,Fire,90,10:10,B005|B009,R5
