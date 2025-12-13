@@ -1,1 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Student Performance Pattern Finder</title>
+
+<style>
+  :root{
+    --bg-1:#f0f4ff;
+    --section-bg:#ffffff;
+    --text-dark:#1a1a1a;
+    --accent-1:#0077ff;
+    --accent-2:#d97706;
+    --accent-3:#6b21a8;
+    --max-width:900px;
+    font-family:'Inter',sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background:var(--bg-1);
+    color:var(--text-dark);
+    padding-top:78px;
+    line-height:1.6;
+  }
+
+  .navbar{
+    position:fixed; top:8px; left:50%; transform:translateX(-50%);
+    width:calc(100% - 40px); max-width:var(--max-width);
+    display:flex; justify-content:space-between; align-items:center;
+    background:#ffffffbb;
+    padding:12px 18px; border-radius:12px;
+    backdrop-filter:blur(10px);
+    border:1px solid #d0d8ff;
+  }
+
+  .logo{ display:flex; gap:12px; align-items:center; }
+  .logo .dot{
+    width:36px; height:36px; border-radius:9px;
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; color:#ffffff;
+  }
+
+  nav a{ text-decoration:none; color:var(--text-dark); font-weight:600; }
+
+  .wrap{
+    max-width:var(--max-width);
+    margin:28px auto;
+    padding:0 22px;
+  }
+
+  h1{ text-align:center; margin-bottom:32px; }
+
+  .section{
+    background:var(--section-bg);
+    padding:28px 22px;
+    margin-bottom:22px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  }
+
+  .section h2{
+    margin-bottom:12px;
+    font-size:24px;
+    color:var(--accent-1);
+  }
+
+  .section h3{
+    margin-top:14px;
+    font-size:18px;
+    color:var(--accent-2);
+  }
+
+  .section ul{ padding-left:22px; margin-top:10px; }
+  .section ul li{ margin-bottom:8px; }
+
+  table{
+    width:100%;
+    margin-top:14px;
+    border-collapse:collapse;
+  }
+  th,td{
+    border:1px solid #d0d0d0;
+    padding:10px;
+  }
+  th{ background:#e8eefd; }
+
+  .flowchart{
+    margin-top:16px;
+    padding:18px;
+    background:#f8fafc;
+    border:1px dashed #94a3b8;
+    border-radius:10px;
+    text-align:center;
+    font-weight:600;
+  }
+
+  .flowchart div{ margin:10px 0; }
+
+  footer{
+    text-align:center;
+    padding:24px;
+    margin-top:24px;
+    color:var(--text-dark);
+  }
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <div class="dot">EMS</div>
+    <div>
+      <div style="font-weight:800">SMART CITY SOLUTION</div>
+      <div style="font-size:12px;">DAA — Design & Analysis of Algorithms</div>
+    </div>
+  </div>
+  <nav>
+     <ul>
+        <li><a href="Rakshita.html">BACK</a></li>
+      </ul>
+ </nav>
+</header>
+
+<main class="wrap">
+
+  <h1>Business Case 7: Student Performance Pattern Finder</h1>
+
+  <div class="section">
+    <h2>1. Business Case Description</h2>
+    <p>
+      Schools often struggle to identify students who need support early because performance data is scattered across tests, subjects, and activities.
+    </p>
+    <p>
+      The Student Performance Pattern Finder analyzes student marks, trends, and learning patterns to detect weak areas and highlight subjects needing improvement.
+      This enables teachers to intervene early and support students more effectively.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>2. Problem Statement</h2>
+    <ul>
+      <li>Manual analysis of student performance across multiple subjects and tests is slow and often inaccurate</li>
+    </ul>
+
+    <h3>System Requirements</h3>
+    <ul>
+      <li>Process large student datasets</li>
+      <li>Detect patterns in scores</li>
+      <li>Quickly identify subjects where students are struggling</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>3. Solution Approach</h2>
+    <ul>
+      <li>Hash Map stores student records efficiently</li>
+      <li>Segment Tree supports fast range queries on scores</li>
+      <li>Sorting algorithms rank students by total performance</li>
+      <li>Trie enables quick search for specific subjects or topics</li>
+    </ul>
+
+    <h3>System Output</h3>
+    <ul>
+      <li>Highlights weak subjects and improvement areas</li>
+      <li>Data-driven performance dashboard for teachers</li>
+      <li>Ranked student performance and trends</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>4. Algorithms and Data Structures Used</h2>
+
+    <h3>Segment Tree — Fast Range Score Analysis</h3>
+    <p>Answers range-based queries like average or maximum marks in a score interval.<br>
+       Helps quickly analyze trends across multiple tests.</p>
+
+    <h3>Hash Map — Store Student Records</h3>
+    <p>Stores student details (ID, name, subject-wise marks) for instant access.<br>
+       Enables easy fetching and updating of performance data.</p>
+
+    <h3>Bubble Sort / QuickSort — Ranking Students</h3>
+    <p>Sorts students by total marks from highest to lowest.<br>
+       Generates clear performance rankings and progress reports.</p>
+
+    <h3>Trie — Fast Subject or Topic Search</h3>
+    <p>Stores chapter or topic names for prefix-based searching.<br>
+       Helps teachers quickly access performance data for specific topics.</p>
+  </div>
+
+  <div class="section">
+    <h2>5. System Workflow</h2>
+
+    <div class="flowchart">
+      <div>Start</div>
+      <div>↓</div>
+      <div>Store Student Records in Hash Map</div>
+      <div>↓</div>
+      <div>Process Score Ranges Using Segment Tree</div>
+      <div>↓</div>
+      <div>Rank Students Using Sorting Algorithms</div>
+      <div>↓</div>
+      <div>Search Subject/Topic Data via Trie</div>
+      <div>↓</div>
+      <div>Highlight Weak Subjects and Improvement Areas</div>
+      <div>↓</div>
+      <div>Generate Teacher Dashboard</div>
+      <div>↓</div>
+      <div>End</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>6. Space and Time Efficiency</h2>
+
+    <h3>Time Complexity</h3>
+    <ul>
+      <li>Hash Map lookup/update: O(1) average</li>
+      <li>Segment Tree query/update: O(log N)</li>
+      <li>QuickSort: O(N log N) average, Bubble Sort: O(N²) worst case</li>
+      <li>Trie search: O(L), L = length of topic string</li>
+    </ul>
+
+    <h3>Space Complexity</h3>
+    <ul>
+      <li>Hash Map storage: O(S × M) (S = students, M = subjects)</li>
+      <li>Segment Tree: O(4 × S) ≈ O(S)</li>
+      <li>Trie storage: O(T × L) (T = topics, L = topic length)</li>
+      <li>Sorting auxiliary space: O(N)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>7. Sustainable Development Goals (SDGs) Alignment</h2>
+    <ul>
+      <li><strong>SDG 4:</strong> Quality Education</li>
+      <li><strong>SDG 8:</strong> Decent Work and Economic Growth</li>
+      <li><strong>SDG 10:</strong> Reduced Inequalities</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>8. Conclusion</h2>
+    <p>
+      The Student Performance Pattern Finder provides schools with a smart, automated system for monitoring student performance.
+      By combining fast search, efficient range queries, sorting, and structured topic access, the system enables data-driven decisions,
+      supports timely interventions, and enhances overall learning outcomes.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  © Smart City DAA Project • KLE Technological University
+</footer>
+
+</body>
+</html>
 
