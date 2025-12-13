@@ -1,0 +1,13 @@
+node_id,node_type,adjacent_nodes,edge_weight,crowd_density,obstacle
+N1,Room,N2;N3,1,Low,No
+N2,Corridor,N1;N4,1,Medium,No
+N3,Corridor,N1;N5,1,High,No
+N4,Exit,N2,1,Low,No
+N5,Exit,N3,1,High,Yes
+N6,Room,N7,1,Low,No
+N7,Corridor,N6;N8,1,Medium,No
+N8,Exit,N7,1,Low,No
+N9,Room,N10;N11,1,Low,No
+N10,Corridor,N9;N12,2,High,No
+N11,Corridor,N9;N12,2,Medium,Yes
+N12,Exit,N10;N11,2,Medium,No
