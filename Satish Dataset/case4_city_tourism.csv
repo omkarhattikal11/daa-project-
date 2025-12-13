@@ -1,0 +1,11 @@
+attraction_id,attraction_name,zone,category,entry_fee,crowd_level,best_visit_time,avg_visit_duration_min,nearest_transport,route_id
+AT001,Velora Beachfront,West,Beach,0,High,06:00-09:00,90,BRT Stop W3,R1
+AT002,Velora Science Park,Central,Education,150,Medium,10:00-13:00,120,Metro C1,R2
+AT003,Historic Velora Fort,South,Heritage,100,Medium,08:00-11:00,75,Bus Stop S2,R3
+AT004,City Times Square,Central,Entertainment,0,High,18:00-22:00,60,Metro C2,R1
+AT005,Velora Art Gallery,East,Art,80,Low,11:00-15:00,45,Bus Stop E1,R4
+AT006,Velora Aquarium,West,Education,200,High,12:00-16:00,90,BRT Stop W1,R2
+AT007,Green Valley Park,North,Nature,0,Medium,06:00-08:00,60,Cycle Dock N2,R5
+AT008,Velora Night Market,Central,Shopping,0,High,19:00-23:00,110,Metro C3,R1
+AT009,Marina View Point,South,Nature,50,Low,17:00-18:30,40,Bus Stop S4,R3
+AT010,Cultural Museum,East,Heritage,120,Medium,10:00-14:00,70,Metro E2,R4
