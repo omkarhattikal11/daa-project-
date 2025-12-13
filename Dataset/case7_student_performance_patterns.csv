@@ -1,0 +1,16 @@
+student_id,student_name,subject,test_id,score,topic
+S1,Aarav,Mathematics,T1,78,Algebra
+S1,Aarav,Science,T1,72,Physics
+S1,Aarav,English,T1,85,Grammar
+S2,Diya,Mathematics,T1,65,Algebra
+S2,Diya,Science,T1,60,Chemistry
+S2,Diya,English,T1,70,Comprehension
+S3,Rohan,Mathematics,T1,90,Calculus
+S3,Rohan,Science,T1,88,Physics
+S3,Rohan,English,T1,92,Writing
+S4,Meera,Mathematics,T1,55,Algebra
+S4,Meera,Science,T1,58,Biology
+S4,Meera,English,T1,62,Grammar
+S5,Kabir,Mathematics,T1,82,Geometry
+S5,Kabir,Science,T1,80,Chemistry
+S5,Kabir,English,T1,78,Comprehension
