@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Beachside Energy Usage Optimizer</title>
+
+<style>
+  :root{
+    --bg-1:#f0f4ff;
+    --section-bg:#ffffff;
+    --text-dark:#1a1a1a;
+    --accent-1:#0077ff;
+    --accent-2:#d97706;
+    --accent-3:#6b21a8;
+    --max-width:900px;
+    font-family:'Inter',sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background:var(--bg-1);
+    color:var(--text-dark);
+    padding-top:78px;
+    line-height:1.6;
+  }
+
+  .navbar{
+    position:fixed; top:8px; left:50%; transform:translateX(-50%);
+    width:calc(100% - 40px); max-width:var(--max-width);
+    display:flex; justify-content:space-between; align-items:center;
+    background:#ffffffbb;
+    padding:12px 18px; border-radius:12px;
+    backdrop-filter:blur(10px);
+    border:1px solid #d0d8ff;
+  }
+
+  .logo{ display:flex; gap:12px; align-items:center; }
+  .logo .dot{
+    width:36px; height:36px; border-radius:9px;
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; color:#ffffff;
+  }
+
+  nav a{ text-decoration:none; color:var(--text-dark); font-weight:600; }
+
+  .wrap{
+    max-width:var(--max-width);
+    margin:28px auto;
+    padding:0 22px;
+  }
+
+  h1{ text-align:center; margin-bottom:32px; }
+
+  .section{
+    background:var(--section-bg);
+    padding:28px 22px;
+    margin-bottom:22px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  }
+
+  .section h2{
+    margin-bottom:12px;
+    font-size:24px;
+    color:var(--accent-1);
+  }
+
+  .section h3{
+    margin-top:14px;
+    font-size:18px;
+    color:var(--accent-2);
+  }
+
+  .section ul{ padding-left:22px; margin-top:10px; }
+  .section ul li{ margin-bottom:8px; }
+
+  table{
+    width:100%;
+    margin-top:14px;
+    border-collapse:collapse;
+  }
+  th,td{
+    border:1px solid #d0d0d0;
+    padding:10px;
+  }
+  th{ background:#e8eefd; }
+
+  .flowchart{
+    margin-top:16px;
+    padding:18px;
+    background:#f8fafc;
+    border:1px dashed #94a3b8;
+    border-radius:10px;
+    text-align:center;
+    font-weight:600;
+  }
+
+  .flowchart div{ margin:10px 0; }
+
+  footer{
+    text-align:center;
+    padding:24px;
+    margin-top:24px;
+    color:var(--text-dark);
+  }
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <div class="dot">EMS</div>
+    <div>
+      <div style="font-weight:800">SMART CITY SOLUTION</div>
+      <div style="font-size:12px;">DAA — Design & Analysis of Algorithms</div>
+    </div>
+  </div>
+  <nav>
+     <ul>
+        <li><a href="Rakshita.html">BACK</a></li>
+      </ul>
+ </nav>
+</header>
+
+<main class="wrap">
+
+  <h1>Business Case 5: Beachside Energy Usage Optimizer</h1>
+
+  <div class="section">
+    <h2>1. Business Case Description</h2>
+    <p>
+      Beachside areas consume a large amount of electricity for streetlights, public lighting, shops, and utility services. However, much of this energy is wasted because lighting systems remain ON during low-crowd hours and do not adapt to actual usage demand.
+    </p>
+    <p>
+      The Beachside Energy Usage Optimizer analyzes real-time energy sensor data, identifies consumption patterns, and predicts low-demand periods. Based on this analysis, it automatically adjusts lighting and utilities, ensuring efficient energy usage, reduced costs, and improved sustainability.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>2. Problem Statement</h2>
+    <ul>
+      <li>High electricity wastage during late-night or low-crowd hours</li>
+      <li>Uneven power distribution across beach zones</li>
+      <li>Manual monitoring and adjustment is inefficient at large scale</li>
+    </ul>
+
+    <h3>System Requirements</h3>
+    <ul>
+      <li>Monitor energy usage in real time</li>
+      <li>Identify high- and low-consumption zones quickly</li>
+      <li>Predict upcoming low-demand periods</li>
+      <li>Automatically optimize lighting and utility usage</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>3. Solution Approach</h2>
+    <ul>
+      <li>Queue manages incoming energy sensor readings</li>
+      <li>Hash Map stores the latest energy usage per beach zone</li>
+      <li>Segment Tree analyzes energy usage across time intervals</li>
+      <li>Min-Heap prioritizes zones with highest energy consumption</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>4. Algorithms and Data Structures Used</h2>
+
+    <h3>Segment Tree — Fast Energy Usage Analysis</h3>
+    <p>Supports quick range-sum queries over time intervals.<br>
+       Helps identify peak and off-peak energy usage periods efficiently.</p>
+
+    <h3>Min-Heap — Prioritizing High-Energy Zones</h3>
+    <p>Orders beach zones based on energy consumption.<br>
+       Allows the system to optimize or dim the highest-consuming zones first.</p>
+
+    <h3>Hash Map — Storing Latest Sensor Readings</h3>
+    <p>Maps each zone to its current energy usage value.<br>
+       Provides O(1) average-time access for live monitoring.</p>
+
+    <h3>Queue — Managing Real-Time Sensor Updates</h3>
+    <p>Processes incoming energy readings in arrival order.<br>
+       Ensures smooth and timely system updates.</p>
+  </div>
+
+  <div class="section">
+    <h2>5. System Workflow</h2>
+
+    <div class="flowchart">
+      <div>Start</div>
+      <div>↓</div>
+      <div>Sensors across beach zones send energy usage data continuously</div>
+      <div>↓</div>
+      <div>Readings are added to the Queue</div>
+      <div>↓</div>
+      <div>Hash Map updates the current energy usage per zone</div>
+      <div>↓</div>
+      <div>Segment Tree analyzes energy consumption over time</div>
+      <div>↓</div>
+      <div>Min-Heap ranks zones by energy usage</div>
+      <div>↓</div>
+      <div>System predicts low-demand periods</div>
+      <div>↓</div>
+      <div>Lighting and utilities are adjusted automatically</div>
+      <div>↓</div>
+      <div>Overall energy consumption is optimized</div>
+      <div>↓</div>
+      <div>End</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>6. Space and Time Efficiency</h2>
+
+    <h3>Time Complexity</h3>
+    <ul>
+      <li>Queue operations: O(1)</li>
+      <li>Hash Map update/lookup: O(1) average</li>
+      <li>Segment Tree query/update: O(log N)</li>
+      <li>Min-Heap insertion/removal: O(log Z)</li>
+    </ul>
+
+    <h3>Space Complexity</h3>
+    <ul>
+      <li>Queue storage: O(N)</li>
+      <li>Hash Map for zones: O(Z)</li>
+      <li>Segment Tree storage: O(4N) ≈ O(N)</li>
+      <li>Min-Heap storage: O(Z)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>7. Sustainable Development Goals (SDGs) Alignment</h2>
+    <ul>
+      <li><strong>SDG 7:</strong> Affordable and Clean Energy</li>
+      <li><strong>SDG 11:</strong> Sustainable Cities and Communities</li>
+      <li><strong>SDG 13:</strong> Climate Action</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>8. Conclusion</h2>
+    <p>
+      The Beachside Energy Usage Optimizer provides an intelligent and automated solution for managing electricity consumption in coastal areas. By using efficient data structures and predictive analysis, it reduces energy wastage, lowers operational costs, and supports environmentally sustainable beach management.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  © Smart City DAA Project • KLE Technological University
+</footer>
+
+</body>
+</html>
