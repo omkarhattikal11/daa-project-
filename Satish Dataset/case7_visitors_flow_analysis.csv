@@ -1,0 +1,11 @@
+zone_id,zone_name,entry_point,timestamp,visitor_count,crowd_density,peak_level,recommended_action
+Z01,Central Plaza,Gate-A,09:00,350,High,Peak,Redirect to Zone Z03
+Z02,Beach Front,Gate-B,09:00,220,Medium,Normal,Monitor
+Z03,City Mall,Gate-C,09:00,180,Low,Normal,Allow Entry
+Z01,Central Plaza,Gate-A,10:00,520,Very High,Peak,Block Entry Temporarily
+Z04,Amusement Park,Gate-D,10:00,410,High,Peak,Open Extra Gate
+Z02,Beach Front,Gate-B,10:00,300,High,Peak,Redirect to Z05
+Z05,Food Street,Gate-E,11:00,260,Medium,Normal,Monitor
+Z03,City Mall,Gate-C,11:00,390,High,Peak,Activate Crowd Control
+Z01,Central Plaza,Gate-A,12:00,600,Very High,Peak,Emergency Crowd Alert
+Z04,Amusement Park,Gate-D,12:00,450,High,Peak,Deploy Security Team
