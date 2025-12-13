@@ -4946,14 +4946,8 @@ int main(){
             if(a==b) {
                 // moved; need to find along original route; fallback below
             }
-            // fallback robust approach: walk from original endpoints along path using parent pointers step-by-step (safe for N up to 2e5)
-            // We'll do step-by-step from both u and v towards LCA to find the first edge with weight == target.
-            // For simplicity and safety, implement step-by-step (O(path length)); amortized still ok for typical sizes.
-            // We'll implement outside; here we return -1 as placeholder.
             return -1;
         };
-        // Simpler robust approach: find edge(s) on path by walking from u up to LCA and v up to LCA and checking edges.
-        // Find LCA:
         int a=u, b=v;
         if(depth[a] < depth[b]) swap(a,b);
         int aa=a, bb=b;
@@ -5005,7 +4999,6 @@ int main(){
         // if !found, it's okay — sometimes due to duplicates weights we may have accounted earlier; continue
     }
 
-    // Output results
     cout << "MST total cost: " << mstCost << "\n";
     cout << "MST edges (u v w) (0-based nodes):\n";
     for(size_t i=0;i<mstEdges.size();++i){
@@ -5025,8 +5018,6 @@ int main(){
                  << " using input-edge idx " << bestReplacementEdgeIdx[i] << "\n";
         }
     }
-
-    // Suggest backup edges to add: choose, for example, top K best replacements (cheapest increase)
     int K = 3;
     vector<pair<ll,int>> candidates; // (extra cost, inputEdgeIdx)
     for(size_t i=0;i<mstEdges.size();++i){
