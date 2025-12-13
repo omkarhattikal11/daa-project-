@@ -1,0 +1,16 @@
+record_id,restaurant_id,day,time_slot,customers_entered,queue_length,table_occupancy_pct,crowd_level,predicted_next_hour
+R1,REST01,Monday,12:00-13:00,22,5,65,Moderate,Moderate
+R2,REST01,Monday,13:00-14:00,35,9,85,High,High
+R3,REST01,Monday,19:00-20:00,48,15,95,Very High,Very High
+R4,REST01,Tuesday,12:00-13:00,18,3,55,Low,Moderate
+R5,REST01,Tuesday,13:00-14:00,28,6,75,Moderate,High
+R6,REST01,Friday,19:00-20:00,55,18,100,Very High,Very High
+R7,REST01,Friday,20:00-21:00,60,22,100,Very High,Very High
+R8,REST01,Saturday,13:00-14:00,50,16,98,Very High,Very High
+R9,REST01,Saturday,19:00-20:00,65,25,100,Very High,Very High
+R10,REST01,Sunday,13:00-14:00,58,20,100,Very High,High
+R11,REST01,Sunday,14:00-15:00,45,12,90,High,Moderate
+R12,REST01,Sunday,20:00-21:00,70,28,100,Very High,Very High
+R13,REST01,Holiday,13:00-14:00,75,30,100,Very High,Very High
+R14,REST01,Holiday,19:00-20:00,82,35,100,Very High,Very High
+R15,REST01,Holiday,20:00-21:00,78,32,100,Very High,High
