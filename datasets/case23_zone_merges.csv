@@ -1,0 +1,7 @@
+operation,zone_a,zone_b
+merge,0,1
+merge,2,3
+merge,3,4
+query,2,4
+query,0,4
+merge,7,8
