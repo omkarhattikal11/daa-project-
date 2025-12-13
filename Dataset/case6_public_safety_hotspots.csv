@@ -1,0 +1,13 @@
+incident_id,zone_id,latitude,longitude,incident_type,severity,timestamp
+I1,Z1,12.9716,77.5946,Pickpocketing,3,18:05
+I2,Z1,12.9718,77.5949,Fight,4,18:20
+I3,Z2,12.9725,77.5955,Theft,3,19:00
+I4,Z2,12.9728,77.5958,Suspicious Activity,2,19:15
+I5,Z3,12.9750,77.5980,Harassment,4,20:10
+I6,Z3,12.9752,77.5982,Fight,5,20:25
+I7,Z3,12.9754,77.5985,Theft,3,20:40
+I8,Z4,12.9780,77.6000,Pickpocketing,2,21:05
+I9,Z4,12.9782,77.6003,Suspicious Activity,3,21:30
+I10,Z5,12.9800,77.6020,Fight,5,22:00
+I11,Z5,12.9803,77.6024,Theft,4,22:15
+I12,Z5,12.9806,77.6027,Harassment,4,22:35
