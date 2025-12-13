@@ -1,1 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Smart Ambulance Routing System</title>
 
+<style>
+  :root{
+    --bg-1:#f0f4ff;
+    --section-bg:#ffffff;
+    --text-dark:#1a1a1a;
+    --accent-1:#0077ff;
+    --accent-2:#d97706;
+    --accent-3:#6b21a8;
+    --max-width:900px;
+    font-family:'Inter',sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background:var(--bg-1);
+    color:var(--text-dark);
+    padding-top:78px;
+    line-height:1.6;
+  }
+
+  .navbar{
+    position:fixed; top:8px; left:50%; transform:translateX(-50%);
+    width:calc(100% - 40px); max-width:var(--max-width);
+    display:flex; justify-content:space-between; align-items:center;
+    background:#ffffffbb;
+    padding:12px 18px; border-radius:12px;
+    backdrop-filter:blur(10px);
+    border:1px solid #d0d8ff;
+  }
+
+  .logo{ display:flex; gap:12px; align-items:center; }
+  .logo .dot{
+    width:36px; height:36px; border-radius:9px;
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; color:#ffffff;
+  }
+
+  nav a{ text-decoration:none; color:var(--text-dark); font-weight:600; }
+
+  .wrap{
+    max-width:var(--max-width);
+    margin:28px auto;
+    padding:0 22px;
+  }
+
+  h1{ text-align:center; margin-bottom:32px; }
+
+  .section{
+    background:var(--section-bg);
+    padding:28px 22px;
+    margin-bottom:22px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  }
+
+  .section h2{
+    margin-bottom:12px;
+    font-size:24px;
+    color:var(--accent-1);
+  }
+
+  .section h3{
+    margin-top:14px;
+    font-size:18px;
+    color:var(--accent-2);
+  }
+
+  .section ul{ padding-left:22px; margin-top:10px; }
+  .section ul li{ margin-bottom:8px; }
+
+  table{
+    width:100%;
+    margin-top:14px;
+    border-collapse:collapse;
+  }
+  th,td{
+    border:1px solid #d0d0d0;
+    padding:10px;
+  }
+  th{ background:#e8eefd; }
+
+  .flowchart{
+    margin-top:16px;
+    padding:18px;
+    background:#f8fafc;
+    border:1px dashed #94a3b8;
+    border-radius:10px;
+    text-align:center;
+    font-weight:600;
+  }
+
+  .flowchart div{ margin:10px 0; }
+
+  footer{
+    text-align:center;
+    padding:24px;
+    margin-top:24px;
+    color:var(--text-dark);
+  }
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <div class="dot">EMS</div>
+    <div>
+      <div style="font-weight:800">SMART CITY SOLUTION</div>
+      <div style="font-size:12px;">DAA — Design & Analysis of Algorithms</div>
+    </div>
+  </div>
+  <nav>
+     <ul>
+        <li><a href="Rakshita.html">BACK</a></li>
+      </ul>
+ </nav>
+</header>
+
+<main class="wrap">
+
+  <h1>Business Case 1: Smart Ambulance Routing System</h1>
+
+  <div class="section">
+    <h2>1. Business Case Description</h2>
+    <p>
+      In busy cities, ambulances often get delayed due to heavy traffic, confusing routes, and slow decision-making.
+      Even a small delay can put a patient’s life at risk.
+    </p>
+    <p>
+      The Smart Ambulance Routing System automatically finds the fastest route to the nearest suitable hospital using
+      real-time road data. It reduces emergency response time and helps save lives.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>2. Problem Statement</h2>
+    <ul>
+      <li>Most ambulances depend on manual navigation or basic GPS systems</li>
+      <li>Complex urban road networks make quick decisions difficult</li>
+      <li>An automated and optimal routing system is required</li>
+    </ul>
+
+    <h3>System Requirements</h3>
+    <ul>
+      <li>Represent the city as a graph</li>
+      <li>Compute the shortest path instantly</li>
+      <li>Select the nearest hospital with minimum travel time</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>3. Solution Approach</h2>
+    <ul>
+      <li>Graph models the city road network</li>
+      <li>Dijkstra’s algorithm finds the shortest travel time</li>
+      <li>Min-Heap enables faster node selection</li>
+      <li>Hash Map stores hospital information</li>
+    </ul>
+
+    <h3>System Output</h3>
+    <ul>
+      <li>Nearest hospital</li>
+      <li>Minimum distance</li>
+      <li>Optimal route</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>4. Algorithms and Data Structures Used</h2>
+
+    <h3>Dijkstra’s Algorithm — Shortest Path Finder</h3>
+    <p>Calculates the minimum travel distance from the ambulance to all hospitals.<br>
+       Ensures the fastest possible route is selected.</p>
+
+    <h3>Min-Heap / Priority Queue — Efficient Node Selection</h3>
+    <p>Selects the nearest unvisited node efficiently during execution.<br>
+       Reduces overall processing time.</p>
+
+    <h3>Hash Map — Fast Hospital Lookup</h3>
+    <p>Stores hospital names and their corresponding nodes.<br>
+       Enables instant access to hospital locations.</p>
+
+    <h3>Graph (Adjacency List) — Road Representation</h3>
+    <p>Represents intersections as nodes and roads as weighted edges.<br>
+       Uses less memory and allows faster traversal.</p>
+  </div>
+
+  <div class="section">
+    <h2>5. System Workflow</h2>
+
+    <div class="flowchart">
+      <div>Start</div>
+      <div>↓</div>
+      <div>Input City Road Network (Graph)</div>
+      <div>↓</div>
+      <div>Get Ambulance Location (Source Node)</div>
+      <div>↓</div>
+      <div>Apply Dijkstra’s Algorithm</div>
+      <div>↓</div>
+      <div>Use Min-Heap for Fast Node Selection</div>
+      <div>↓</div>
+      <div>Find Nearest Hospital using Hash Map</div>
+      <div>↓</div>
+      <div>Display Shortest Path & Minimum Distance</div>
+      <div>↓</div>
+      <div>End</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>6. Space and Time Efficiency</h2>
+
+    <h3>Time Complexity</h3>
+    <p>O((V + E) log V), where V = intersections and E = roads</p>
+
+    <h3>Space Complexity</h3>
+    <ul>
+      <li>Graph (Adjacency List): O(V + E)</li>
+      <li>Distance Array & Min-Heap: O(V)</li>
+      <li>Hospital Hash Map: O(H)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>7. Sustainable Development Goals (SDGs) Alignment</h2>
+    <ul>
+      <li><strong>SDG 3:</strong> Good Health and Well-Being</li>
+      <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure</li>
+      <li><strong>SDG 11:</strong> Sustainable Cities and Communities</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>8. Conclusion</h2>
+    <p>
+      The Smart Ambulance Routing System improves emergency response time using efficient algorithms and data structures.
+      It ensures the fastest route to the nearest hospital, supports life-saving decisions, and contributes to building
+      smart and safe cities aligned with global sustainable development goals.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  © Smart City DAA Project • KLE Technological University
+</footer>
+
+</body>
+</html>
