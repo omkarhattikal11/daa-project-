@@ -1,0 +1,16 @@
+record_id,zone_id,timestamp,energy_usage_kw,crowd_level,lighting_status,priority_action
+E1,Z1,18:00,45,High,ON,Normal
+E2,Z2,18:00,52,High,ON,Normal
+E3,Z3,18:00,60,Very High,ON,Monitor
+E4,Z1,20:00,48,Medium,ON,Monitor
+E5,Z2,20:00,65,High,ON,Optimize
+E6,Z3,20:00,72,Very High,ON,Optimize
+E7,Z4,22:00,55,Medium,ON,Monitor
+E8,Z1,23:00,40,Low,ON,Dim Lights
+E9,Z2,23:00,38,Low,ON,Dim Lights
+E10,Z3,23:00,42,Low,ON,Dim Lights
+E11,Z4,23:00,35,Low,ON,Dim Lights
+E12,Z1,01:00,28,Very Low,ON,Switch Off
+E13,Z2,01:00,25,Very Low,ON,Switch Off
+E14,Z3,01:00,30,Very Low,ON,Switch Off
+E15,Z4,01:00,22,Very Low,ON,Switch Off
