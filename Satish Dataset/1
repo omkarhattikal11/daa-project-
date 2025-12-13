@@ -1,0 +1,11 @@
+event_id,event_name,advertiser_name,stall_id,ad_priority,slot_start,slot_end,expected_footfall,drone_route_id
+EV001,Tech Expo 2025,MetaVision Ads,S12,5,09:00,09:30,1200,R1
+EV002,Food Carnival,StreetBite Media,S07,3,09:30,10:00,900,R2
+EV003,Music Fest Night,SoundWave Promotions,S21,4,10:00,10:30,1500,R3
+EV004,Startup Launch,InnovAds,S05,2,10:30,11:00,700,R1
+EV005,Auto Show,DriveX Media,S18,5,11:00,11:30,1800,R4
+EV006,Fashion Walk,Glamify Ads,S09,4,11:30,12:00,1300,R2
+EV007,Book Fair,ReadMore Media,S14,1,12:00,12:30,500,R5
+EV008,Gaming Arena,PlayVerse Ads,S25,5,12:30,13:00,2000,R3
+EV009,Health Camp,Wellness Media,S03,2,13:00,13:30,650,R4
+EV010,AI Showcase,FutureTech Ads,S16,4,13:30,14:00,1400,R1
