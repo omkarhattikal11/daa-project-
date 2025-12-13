@@ -1,1 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 7 - Visitors Flow Analysis</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #4db6ac;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #4db6ac;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+    .sdg-box {
+        background: #e6f7f6;
+        padding: 12px;
+        border-left: 5px solid #4db6ac;
+        border-radius: 6px;
+        margin-top: 8px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Case 7 — Visitors Flow Analysis</h1>
+
+<h2>Brief Description</h2>
+<p>
+The Visitors Flow Analysis system monitors and analyzes the movement of people across Velora’s
+public spaces such as parks, beaches, malls, event zones, and transit hubs.
+It helps city planners predict congestion, manage crowd safety, and improve visitor experience.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Overcrowding in popular public areas during peak hours.</li>
+    <li>Safety risks caused by uncontrolled crowd movement.</li>
+    <li>Difficulty predicting visitor surges during festivals and events.</li>
+    <li>Inefficient deployment of security and support staff.</li>
+</ul>
+
+<h2>Solutions / Logic Used</h2>
+<ul>
+    <li><strong>Sliding Window Technique:</strong> Continuously analyzes footfall data to detect sudden crowd spikes.</li>
+    <li><strong>Hash Map:</strong> Stores real-time sensor data for each location.</li>
+    <li><strong>BFS:</strong> Tracks how crowds spread across connected zones.</li>
+    <li><strong>Priority Queue:</strong> Identifies high-risk congestion zones first.</li>
+</ul>
+
+<h2>Suitable SDGs</h2>
+
+<div class="sdg-box">
+    <strong>SDG 11 — Sustainable Cities & Communities</strong>
+    <p>Ensures safer public spaces through intelligent crowd management.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 3 — Good Health & Well-Being</strong>
+    <p>Reduces accident risks and improves emergency accessibility in crowded areas.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 9 — Industry, Innovation & Infrastructure</strong>
+    <p>Uses data-driven systems and algorithms for smart city planning.</p>
+</div>
+
+<button>
+  <a href="satish.html" target="_blank">back</a>
+</button>
+
+</body>
+</html>
