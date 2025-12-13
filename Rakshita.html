@@ -7,13 +7,13 @@
 
 <style>
 :root {
-  --bg: #0f172a;              
-  --card: rgba(255,255,255,0.05);
-  --accent: #38bdf8;          
-  --accent2: #818cf8;         
-  --muted: #cbd5e1;           
-  --glass: rgba(255,255,255,0.06);
-  --border: rgba(255,255,255,0.08);
+  --bg: #1e1b2f;               /* Dark purple background */           
+  --card: rgba(255,255,255,0.08);
+  --accent: #d946ef;           /* Pink accent */
+  --accent2: #9333ea;          /* Deep purple accent */
+  --muted: #e0d7f3;            /* Lighter text */
+  --glass: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.12);
   --radius: 14px;
   --blur: 12px;
   font-family: "Inter", sans-serif;
@@ -62,7 +62,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #0f172a;
+  color: #1e1b2f;
   font-size: 20px;
   font-weight: 900;
   box-shadow: 0 6px 18px rgba(0,0,0,0.4);
@@ -124,7 +124,7 @@ h1 { font-size: 30px; font-weight: 900; margin-bottom: 6px; color: var(--accent)
   align-items: center;
   font-size: 22px;
   font-weight: 900;
-  color: #0f172a;
+  color: #1e1b2f;
 }
 
 .author-info .name {
@@ -144,24 +144,34 @@ h1 { font-size: 30px; font-weight: 900; margin-bottom: 6px; color: var(--accent)
   border: 1px solid rgba(255,255,255,0.05);
   transition: 0.3s;
 }
-.case-item:hover { background: rgba(56,189,248,0.1); }
+.case-item:hover { background: rgba(217,70,239,0.1); }
 
 .case-item h2 { font-size: 20px; margin-bottom: 8px; font-weight: 900; color: var(--accent2); }
 .case-item p { color: var(--muted); margin-bottom: 10px; }
 
-.algos-title { margin-top: 6px; font-weight: 800; color: #e0f2fe; font-size: 16px; }
+/* View More links */
+.case-item a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  margin-right: 10px;
+  transition: 0.3s;
+}
+.case-item a:hover { color: var(--accent2); }
+
+.algos-title { margin-top: 6px; font-weight: 800; color: #f0d4ff; font-size: 16px; }
 
 .btn {
   display: inline-block;
   padding: 10px 16px;
   background: linear-gradient(90deg, var(--accent), var(--accent2));
   border-radius: 10px;
-  color: #0f172a;
+  color: #fff;
   text-decoration: none;
   font-weight: 800;
   transition: 0.3s;
 }
-.btn:hover { opacity: 0.85; }
+.btn:hover { opacity: 0.9; }
 
 .sidebar { display: flex; flex-direction: column; gap: 16px; }
 
@@ -339,5 +349,5 @@ footer {
   &copy; 2025 Rakshita K — Velora Project
 </footer>
 
-</body>
+</body>   
 </html>
