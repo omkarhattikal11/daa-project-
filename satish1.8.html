@@ -1,1 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 8 - Smart Emergency Beacon System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #e85d75;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #e85d75;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+    .sdg-box {
+        background: #fdecee;
+        padding: 12px;
+        border-left: 5px solid #e85d75;
+        border-radius: 6px;
+        margin-top: 8px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Case 8 — Smart Emergency Beacon System</h1>
+
+<h2>Brief Description</h2>
+<p>
+The Smart Emergency Beacon System is a city-wide safety mechanism designed to guide citizens during
+emergencies such as fires, floods, accidents, or natural disasters. Beacon poles equipped with lights,
+sirens, and digital signals activate automatically to direct people toward safe zones.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Citizens panicking due to lack of clear evacuation guidance.</li>
+    <li>Delayed emergency alerts reaching affected areas.</li>
+    <li>Uncoordinated evacuation causing congestion and confusion.</li>
+    <li>Failure of manual warning systems during large-scale emergencies.</li>
+</ul>
+
+<h2>Solutions / Logic Used</h2>
+<ul>
+    <li><strong>BFS (Breadth-First Search):</strong> Propagates emergency signals across beacon nodes rapidly.</li>
+    <li><strong>Hash Table:</strong> Stores beacon status, signal strength, and operational health.</li>
+    <li><strong>Queue:</strong> Manages multiple alert broadcasts in the correct sequence.</li>
+    <li><strong>Graph Traversal:</strong> Determines safest evacuation paths dynamically.</li>
+</ul>
+
+<h2>Suitable SDGs</h2>
+
+<div class="sdg-box">
+    <strong>SDG 11 — Sustainable Cities & Communities</strong>
+    <p>Enhances disaster preparedness and minimizes loss during emergencies.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 3 — Good Health & Well-Being</strong>
+    <p>Protects lives by enabling safe and guided evacuation.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 9 — Industry, Innovation & Infrastructure</strong>
+    <p>Promotes smart safety infrastructure using intelligent communication networks.</p>
+</div>
+
+<button>
+  <a href="satish.html" target="_blank">back</a>
+</button>
+
+</body>
+</html>
