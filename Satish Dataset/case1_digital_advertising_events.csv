@@ -1,0 +1,11 @@
+advertiser_id,advertiser_name,event_name,stall_id,ad_priority,time_slot,crowd_count,drone_route_distance_km,ad_duration_sec
+ADV101,Goa Tourism Board,Beach Carnival,ST01,5,09:00-09:30,1200,1.8,30
+ADV102,Velora Mall,Music Fest,ST02,4,09:30-10:00,950,2.4,25
+ADV103,Oceanic Resorts,Night Fiesta,ST03,3,10:00-10:30,1500,3.1,40
+ADV104,Green Energy Corp,Tech Expo,ST04,2,10:30-11:00,700,2.0,20
+ADV105,Food Plaza Velora,Food Carnival,ST05,5,11:00-11:30,1800,1.5,35
+ADV106,AutoDrive EVs,Auto Show,ST06,4,11:30-12:00,1100,2.7,30
+ADV107,Velora Bank,Finance Fair,ST07,3,12:00-12:30,650,3.3,25
+ADV108,City Hospital,Health Camp,ST08,5,12:30-13:00,900,1.9,20
+ADV109,Smart Homes Ltd,Home Expo,ST09,2,13:00-13:30,780,2.6,30
+ADV110,Velora University,Education Fair,ST10,4,13:30-14:00,1400,2.2,35
