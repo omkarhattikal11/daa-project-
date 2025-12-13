@@ -1,0 +1,11 @@
+incident_id,incident_type,location,priority_level,reported_time,nearest_unit,unit_type,response_status,estimated_response_time
+IR001,Fire Accident,Central Mall,5,09:05,Unit-A3,Fire Brigade,Dispatched,4
+IR002,Medical Emergency,Beach Road,4,09:18,Unit-M1,Ambulance,Dispatched,6
+IR003,Robbery Alert,City Square,5,09:30,Unit-P2,Police,Dispatched,3
+IR004,Gas Leak,Industrial Zone,5,09:45,Unit-A1,Fire Brigade,On Route,5
+IR005,Road Accident,Highway NH-66,4,10:00,Unit-M4,Ambulance,Dispatched,7
+IR006,Power Failure,Residential Block B,3,10:12,Unit-U2,Utility Team,Assigned,10
+IR007,Flood Alert,Riverfront Area,5,10:25,Unit-D1,Disaster Team,Dispatched,6
+IR008,Heart Attack,City Park,5,10:40,Unit-M2,Ambulance,Dispatched,4
+IR009,Fire Alarm,Tech Park,4,10:55,Unit-A4,Fire Brigade,Assigned,6
+IR010,Traffic Accident,Flyover Junction,3,11:10,Unit-P3,Police,On Route,8
