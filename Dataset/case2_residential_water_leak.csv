@@ -1,0 +1,16 @@
+reading_id,house_id,timestamp,flow_rate_lpm,expected_flow_lpm,usage_status,location
+W1,H101,08:00,6,5,Normal,Kitchen
+W2,H101,08:01,5,5,Normal,Kitchen
+W3,H101,08:02,6,5,Normal,Kitchen
+W4,H101,08:03,12,5,Abnormal,Bathroom
+W5,H101,08:04,14,5,Abnormal,Bathroom
+W6,H101,08:05,15,5,Abnormal,Bathroom
+W7,H101,08:06,16,5,Leak Detected,Bathroom
+W8,H102,09:00,4,4,Normal,Wash Area
+W9,H102,09:01,4,4,Normal,Wash Area
+W10,H102,09:02,9,4,Abnormal,Pipeline
+W11,H102,09:03,11,4,Abnormal,Pipeline
+W12,H102,09:04,13,4,Leak Detected,Pipeline
+W13,H103,07:30,3,3,Normal,Garden
+W14,H103,07:31,3,3,Normal,Garden
+W15,H103,07:32,7,3,Abnormal,Garden
