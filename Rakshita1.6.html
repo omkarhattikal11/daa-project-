@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Public Safety Hotspot Mapping System</title>
+
+<style>
+  :root{
+    --bg-1:#f0f4ff;
+    --section-bg:#ffffff;
+    --text-dark:#1a1a1a;
+    --accent-1:#0077ff;
+    --accent-2:#d97706;
+    --accent-3:#6b21a8;
+    --max-width:900px;
+    font-family:'Inter',sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background:var(--bg-1);
+    color:var(--text-dark);
+    padding-top:78px;
+    line-height:1.6;
+  }
+
+  .navbar{
+    position:fixed; top:8px; left:50%; transform:translateX(-50%);
+    width:calc(100% - 40px); max-width:var(--max-width);
+    display:flex; justify-content:space-between; align-items:center;
+    background:#ffffffbb;
+    padding:12px 18px; border-radius:12px;
+    backdrop-filter:blur(10px);
+    border:1px solid #d0d8ff;
+  }
+
+  .logo{ display:flex; gap:12px; align-items:center; }
+  .logo .dot{
+    width:36px; height:36px; border-radius:9px;
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; color:#ffffff;
+  }
+
+  nav a{ text-decoration:none; color:var(--text-dark); font-weight:600; }
+
+  .wrap{
+    max-width:var(--max-width);
+    margin:28px auto;
+    padding:0 22px;
+  }
+
+  h1{ text-align:center; margin-bottom:32px; }
+
+  .section{
+    background:var(--section-bg);
+    padding:28px 22px;
+    margin-bottom:22px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  }
+
+  .section h2{
+    margin-bottom:12px;
+    font-size:24px;
+    color:var(--accent-1);
+  }
+
+  .section h3{
+    margin-top:14px;
+    font-size:18px;
+    color:var(--accent-2);
+  }
+
+  .section ul{ padding-left:22px; margin-top:10px; }
+  .section ul li{ margin-bottom:8px; }
+
+  table{
+    width:100%;
+    margin-top:14px;
+    border-collapse:collapse;
+  }
+  th,td{
+    border:1px solid #d0d0d0;
+    padding:10px;
+  }
+  th{ background:#e8eefd; }
+
+  .flowchart{
+    margin-top:16px;
+    padding:18px;
+    background:#f8fafc;
+    border:1px dashed #94a3b8;
+    border-radius:10px;
+    text-align:center;
+    font-weight:600;
+  }
+
+  .flowchart div{ margin:10px 0; }
+
+  footer{
+    text-align:center;
+    padding:24px;
+    margin-top:24px;
+    color:var(--text-dark);
+  }
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <div class="dot">EMS</div>
+    <div>
+      <div style="font-weight:800">SMART CITY SOLUTION</div>
+      <div style="font-size:12px;">DAA — Design & Analysis of Algorithms</div>
+    </div>
+  </div>
+  <nav>
+     <ul>
+        <li><a href="Rakshita.html">BACK</a></li>
+      </ul>
+ </nav>
+</header>
+
+<main class="wrap">
+
+  <h1>Business Case 6: Public Safety Hotspot Mapping System</h1>
+
+  <div class="section">
+    <h2>1. Business Case Description</h2>
+    <p>
+      Crowded public areas such as beaches, markets, and transport hubs can develop hidden danger zones due to overcrowding,
+      repeated incidents, or suspicious activities.
+    </p>
+    <p>
+      The Public Safety Hotspot Mapping System analyzes past and current incident data to detect high-risk areas and alert
+      authorities. Early detection enables effective deployment of security resources and ensures safer public environments.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>2. Problem Statement</h2>
+    <ul>
+      <li>Repetitive danger zones</li>
+      <li>Incident clusters spread across nearby areas</li>
+      <li>High-risk regions needing immediate attention</li>
+    </ul>
+
+    <h3>System Requirements</h3>
+    <ul>
+      <li>Process large volumes of incident data</li>
+      <li>Detect clusters of unsafe areas</li>
+      <li>Rank hotspots by severity</li>
+      <li>Provide actionable insights in real time</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>3. Solution Approach</h2>
+    <ul>
+      <li>Hash Map stores incident records with instant lookup</li>
+      <li>K-Means clustering identifies groups of repeated incidents</li>
+      <li>Graph + BFS detects connected risky areas</li>
+      <li>Max-Heap ranks hotspots by severity</li>
+    </ul>
+
+    <h3>System Output</h3>
+    <ul>
+      <li>Real-time map of risk zones</li>
+      <li>Ranked hotspots by severity</li>
+      <li>Actionable alerts for authorities</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>4. Algorithms and Data Structures Used</h2>
+
+    <h3>K-Means Clustering — Identify Danger Clusters</h3>
+    <p>Groups incident locations into clusters to reveal repeated unsafe activity.<br>
+       Helps visualize where risk is concentrated.</p>
+
+    <h3>Graph + BFS — Detect Connected Risky Zones</h3>
+    <p>Creates connections between nearby unsafe points.<br>
+       BFS finds larger continuous danger regions efficiently.</p>
+
+    <h3>Hash Map — Fast Storage of Incident Records</h3>
+    <p>Stores incident details (type, location, time) for instant access.<br>
+       Enables quick updates and retrieval during analysis.</p>
+
+    <h3>Max-Heap — Rank Highest-Risk Hotspots</h3>
+    <p>Orders hotspots by frequency or severity of incidents.<br>
+       Allows authorities to respond to the most dangerous zones first.</p>
+  </div>
+
+  <div class="section">
+    <h2>5. System Workflow</h2>
+
+    <div class="flowchart">
+      <div>Start</div>
+      <div>↓</div>
+      <div>Record Incidents in Hash Map</div>
+      <div>↓</div>
+      <div>Apply K-Means Clustering</div>
+      <div>↓</div>
+      <div>Create Graph of Unsafe Points</div>
+      <div>↓</div>
+      <div>Detect Connected Risk Zones using BFS</div>
+      <div>↓</div>
+      <div>Rank Hotspots with Max-Heap</div>
+      <div>↓</div>
+      <div>Notify Authorities with Risk Map</div>
+      <div>↓</div>
+      <div>Deploy Safety Measures</div>
+      <div>↓</div>
+      <div>End</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>6. Space and Time Efficiency</h2>
+
+    <h3>Time Complexity</h3>
+    <ul>
+      <li>K-Means clustering: O(I × K × N × D)</li>
+      <li>BFS on graph: O(V + E)</li>
+      <li>Hash Map update/lookup: O(1) average</li>
+      <li>Max-Heap insertion/removal: O(log H)</li>
+    </ul>
+
+    <h3>Space Complexity</h3>
+    <ul>
+      <li>Hash Map storage: O(N)</li>
+      <li>Graph adjacency list: O(V + E)</li>
+      <li>Max-Heap storage: O(H)</li>
+      <li>K-Means centroids & cluster assignments: O(K + N)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>7. Sustainable Development Goals (SDGs) Alignment</h2>
+    <ul>
+      <li><strong>SDG 3:</strong> Good Health and Well-Being</li>
+      <li><strong>SDG 11:</strong> Sustainable Cities and Communities</li>
+      <li><strong>SDG 16:</strong> Peace, Justice, and Strong Institutions</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>8. Conclusion</h2>
+    <p>
+      The Public Safety Hotspot Mapping System provides a data-driven solution for enhancing public safety.
+      By combining clustering, graph traversal, and priority ranking, it identifies high-risk zones quickly
+      and accurately, enabling authorities to respond efficiently and protect citizens.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  © Smart City DAA Project • KLE Technological University
+</footer>
+
+</body>
+</html>
