@@ -1,0 +1,16 @@
+reading_id,zone_id,timestamp,waste_level_kg,crowd_density,tide_condition,priority_status
+B1,Z1,07:00,8,Low,Low,Normal
+B2,Z2,07:00,12,Medium,Low,Normal
+B3,Z3,07:00,18,High,Medium,Alert
+B4,Z1,09:00,15,Medium,Medium,Alert
+B5,Z2,09:00,20,High,High,Critical
+B6,Z3,09:00,26,Very High,High,Critical
+B7,Z4,11:00,10,Low,Low,Normal
+B8,Z4,13:00,22,High,Medium,Alert
+B9,Z5,15:00,28,Very High,High,Critical
+B10,Z1,17:00,24,High,Medium,Alert
+B11,Z2,17:00,30,Very High,High,Critical
+B12,Z3,17:00,35,Very High,High,Critical
+B13,Z4,18:30,18,Medium,Medium,Alert
+B14,Z5,18:30,40,Very High,High,Critical
+B15,Z6,19:00,6,
