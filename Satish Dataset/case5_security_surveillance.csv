@@ -1,0 +1,11 @@
+camera_id,zone_id,location,alert_type,severity_level,timestamp,detected_object,response_unit,status
+CCTV01,Z01,Central Plaza,Suspicious Activity,4,10:05,Unknown Person,Police Unit 3,Dispatched
+CCTV02,Z02,Parking Area,Vehicle Theft,5,10:12,Car,Police Unit 1,Resolved
+CCTV03,Z03,Mall Entrance,Crowd Surge,3,10:18,People Group,Control Room,Monitoring
+CCTV04,Z04,Residential Block A,Unauthorized Entry,4,10:25,Individual,Security Patrol 2,Dispatched
+CCTV05,Z05,Metro Station,Abandoned Object,5,10:32,Bag,Bomb Squad,In Progress
+CCTV06,Z06,Beach Road,Accident Detection,4,10:40,Two-Wheeler,Ambulance Unit 4,Resolved
+CCTV07,Z07,City Park,Fight Detected,3,10:47,Multiple Persons,Police Unit 2,Dispatched
+CCTV08,Z08,Bus Terminal,Pickpocket Alert,2,10:55,Suspect,Police Unit 5,Monitoring
+CCTV09,Z09,Market Area,Fire Detection,5,11:03,Smoke,Fire Brigade 1,In Progress
+CCTV10,Z10,School Zone,Intrusion Alert,4,11:10,Unknown Person,Security Patrol 1,Resolved
