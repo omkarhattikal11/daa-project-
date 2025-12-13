@@ -1,0 +1,13 @@
+parking_zone,slot_id,slot_status,vehicle_type,arrival_time,departure_time,charging_required,charging_station_id,distance_to_entry_meters,traffic_level
+Zone-A,A1,Occupied,Car,08:45,10:30,No,,120,Medium
+Zone-A,A2,Free,,,Yes,CS-01,90,Low
+Zone-A,A3,Occupied,EV,09:10,11:45,Yes,CS-02,80,High
+Zone-B,B1,Occupied,Bike,09:00,09:40,No,,200,Low
+Zone-B,B2,Free,,,,No,,180,Medium
+Zone-B,B3,Occupied,Car,08:30,10:00,No,,210,High
+Zone-C,C1,Occupied,EV,09:20,12:00,Yes,CS-03,60,High
+Zone-C,C2,Free,,,Yes,CS-04,50,Low
+Zone-C,C3,Occupied,Car,08:55,09:50,No,,75,Medium
+Zone-D,D1,Free,,,No,,300,Low
+Zone-D,D2,Occupied,Bike,09:05,09:35,No,,280,Medium
+Zone-D,D3,Occupied,EV,08:40,11:15,Yes,CS-05,260,High
