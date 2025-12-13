@@ -1,0 +1,10 @@
+row,col,cell_type
+0,0,free
+0,1,free
+0,2,wall
+1,0,free
+1,1,fire
+1,2,free
+2,0,exit
+2,1,free
+2,2,free
