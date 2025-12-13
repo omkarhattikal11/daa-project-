@@ -1,0 +1,7 @@
+stop_id,stop_name,zone,passenger_count,next_shuttle_time
+101,North Gate,A,10,12:05
+102,Library,B,25,12:10
+103,Cafeteria,C,15,12:00
+104,South Gate,D,6,12:20
+105,Research Park,E,12,12:15
+106,Admin Block,B,9,12:12
