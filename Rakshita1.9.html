@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Marine Research & Conservation Analytics</title>
+
+<style>
+  :root{
+    --bg-1:#f0f4ff;
+    --section-bg:#ffffff;
+    --text-dark:#1a1a1a;
+    --accent-1:#0077ff;
+    --accent-2:#d97706;
+    --accent-3:#6b21a8;
+    --max-width:900px;
+    font-family:'Inter',sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background:var(--bg-1);
+    color:var(--text-dark);
+    padding-top:78px;
+    line-height:1.6;
+  }
+
+  .navbar{
+    position:fixed; top:8px; left:50%; transform:translateX(-50%);
+    width:calc(100% - 40px); max-width:var(--max-width);
+    display:flex; justify-content:space-between; align-items:center;
+    background:#ffffffbb;
+    padding:12px 18px; border-radius:12px;
+    backdrop-filter:blur(10px);
+    border:1px solid #d0d8ff;
+  }
+
+  .logo{ display:flex; gap:12px; align-items:center; }
+  .logo .dot{
+    width:36px; height:36px; border-radius:9px;
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; color:#ffffff;
+  }
+
+  nav a{ text-decoration:none; color:var(--text-dark); font-weight:600; }
+
+  .wrap{
+    max-width:var(--max-width);
+    margin:28px auto;
+    padding:0 22px;
+  }
+
+  h1{ text-align:center; margin-bottom:32px; }
+
+  .section{
+    background:var(--section-bg);
+    padding:28px 22px;
+    margin-bottom:22px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  }
+
+  .section h2{
+    margin-bottom:12px;
+    font-size:24px;
+    color:var(--accent-1);
+  }
+
+  .section h3{
+    margin-top:14px;
+    font-size:18px;
+    color:var(--accent-2);
+  }
+
+  .section ul{ padding-left:22px; margin-top:10px; }
+  .section ul li{ margin-bottom:8px; }
+
+  table{
+    width:100%;
+    margin-top:14px;
+    border-collapse:collapse;
+  }
+  th,td{
+    border:1px solid #d0d0d0;
+    padding:10px;
+  }
+  th{ background:#e8eefd; }
+
+  .flowchart{
+    margin-top:16px;
+    padding:18px;
+    background:#f8fafc;
+    border:1px dashed #94a3b8;
+    border-radius:10px;
+    text-align:center;
+    font-weight:600;
+  }
+
+  .flowchart div{ margin:10px 0; }
+
+  footer{
+    text-align:center;
+    padding:24px;
+    margin-top:24px;
+    color:var(--text-dark);
+  }
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <div class="dot">EMS</div>
+    <div>
+      <div style="font-weight:800">SMART CITY SOLUTION</div>
+      <div style="font-size:12px;">DAA — Design & Analysis of Algorithms</div>
+    </div>
+  </div>
+  <nav>
+     <ul>
+        <li><a href="Rakshita.html">BACK</a></li>
+      </ul>
+ </nav>
+</header>
+
+<main class="wrap">
+
+  <h1>Business Case 9: Marine Research & Conservation Analytics</h1>
+
+  <div class="section">
+    <h2>1. Business Case Description</h2>
+    <p>
+      Coastal agencies in Velora rely on continuous ocean measurements—such as temperature, salinity, tide movements,
+      and marine species behavior—to understand environmental changes.
+    </p>
+    <p>
+      The Marine Research & Conservation Analytics System processes large, noisy, and time-dependent data to identify
+      ecological patterns and support long-term conservation planning. It helps researchers detect trends, anomalies,
+      and vulnerable zones in marine ecosystems.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>2. Problem Statement</h2>
+    <ul>
+      <li>Unpredictable ocean conditions</li>
+      <li>Incomplete or irregular logs</li>
+      <li>Sparse or inconsistent species sightings</li>
+    </ul>
+
+    <h3>System Requirements</h3>
+    <ul>
+      <li>Detect long-term environmental trends</li>
+      <li>Identify anomalies in marine habitats</li>
+      <li>Generate actionable insights for ecosystem protection</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>3. Solution Approach</h2>
+    <ul>
+      <li>Moving Average smooths noisy ocean data</li>
+      <li>Hash Map stores species sightings for instant retrieval</li>
+      <li>Graph models marine migration paths</li>
+      <li>DFS explores connectivity and isolated habitat zones</li>
+    </ul>
+
+    <h3>System Output</h3>
+    <ul>
+      <li>Smoothed trends of ocean parameters</li>
+      <li>Quick lookup for species data</li>
+      <li>Identified migration paths and isolated habitats</li>
+      <li>Insights for marine conservation planning</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>4. Algorithms and Data Structures Used</h2>
+
+    <h3>Moving Average (Time-Series Analysis) — Trend Smoothing</h3>
+    <p>Removes daily fluctuations in ocean data such as temperature or tide levels.<br>
+       Reveals clear long-term environmental trends.</p>
+
+    <h3>Hash Map — Fast Species Data Lookup</h3>
+    <p>Stores species sightings with keys like location or ID.<br>
+       Allows instant retrieval from large datasets.</p>
+
+    <h3>Graph (Migration Path Mapping) — Marine Movement Modeling</h3>
+    <p>Represents animal routes as nodes and edges.<br>
+       Helps study migration patterns and seasonal behaviors.</p>
+
+    <h3>DFS (Depth-First Search) — Habitat Zone Exploration</h3>
+    <p>Explores connected and isolated zones in the marine graph.<br>
+       Identifies regions where biodiversity may be fragile or at risk.</p>
+  </div>
+
+  <div class="section">
+    <h2>5. System Workflow</h2>
+
+    <div class="flowchart">
+      <div>Start</div>
+      <div>↓</div>
+      <div>Collect Ocean Sensor Data</div>
+      <div>↓</div>
+      <div>Apply Moving Average for Trend Smoothing</div>
+      <div>↓</div>
+      <div>Store Species Sightings in Hash Map</div>
+      <div>↓</div>
+      <div>Model Migration Routes Using Graph</div>
+      <div>↓</div>
+      <div>Explore Connectivity & Isolated Zones Using DFS</div>
+      <div>↓</div>
+      <div>Generate Insights for Conservation Planning</div>
+      <div>↓</div>
+      <div>End</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>6. Space and Time Efficiency</h2>
+
+    <h3>Time Complexity</h3>
+    <ul>
+      <li>Moving Average: O(N) per time-series</li>
+      <li>Hash Map lookup/update: O(1) average</li>
+      <li>Graph DFS: O(V + E), V = nodes, E = edges</li>
+      <li>Graph construction: O(E)</li>
+    </ul>
+
+    <h3>Space Complexity</h3>
+    <ul>
+      <li>Hash Map for species data: O(S), S = total sightings</li>
+      <li>Graph adjacency list: O(V + E)</li>
+      <li>Moving Average storage: O(N)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>7. Sustainable Development Goals (SDGs) Alignment</h2>
+    <ul>
+      <li><strong>SDG 14:</strong> Life Below Water</li>
+      <li><strong>SDG 13:</strong> Climate Action</li>
+      <li><strong>SDG 15:</strong> Life on Land</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>8. Conclusion</h2>
+    <p>
+      The Marine Research & Conservation Analytics System transforms raw ocean and species data into meaningful insights.
+      By combining time-series smoothing, fast data storage, graph modeling, and zone exploration, it supports scientific
+      decision-making and helps protect vulnerable marine ecosystems effectively.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  © Smart City DAA Project • KLE Technological University
+</footer>
+
+</body>
+</html>
