@@ -1,0 +1,11 @@
+Request_ID,Citizen_ID,Citizen_Name,Service_Type,Department,Priority_Level,Submission_Time,Estimated_Time_Min,Status
+REQ201,CIT1001,Ramesh Kumar,Birth Certificate,Revenue,High,09:05,30,In Progress
+REQ202,CIT1002,Sneha Patil,Property Tax,Finance,Medium,09:10,20,Completed
+REQ203,CIT1003,Amit Shah,Income Certificate,Revenue,Low,09:15,25,Pending
+REQ204,CIT1004,Anjali Rao,Pension Application,Social Welfare,High,09:18,40,In Progress
+REQ205,CIT1005,Manoj Verma,Water Connection,Utilities,Medium,09:22,35,Pending
+REQ206,CIT1006,Priya Singh,Grievance Complaint,Administration,High,09:25,15,Completed
+REQ207,CIT1007,Suresh Naik,Electricity Issue,Utilities,High,09:30,10,In Progress
+REQ208,CIT1008,Kavya Joshi,Marriage Certificate,Revenue,Low,09:35,30,Pending
+REQ209,CIT1009,Rahul Mehta,Trade License,Commerce,Medium,09:40,45,In Progress
+REQ210,CIT1010,Neha Kulkarni,Address Change,Administration,Low,09:45,20,Completed
