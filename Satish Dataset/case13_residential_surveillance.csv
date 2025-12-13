@@ -1,0 +1,11 @@
+pod_id,location,resident_id,visitor_id,entry_time,exit_time,access_type,anomaly_flag,alert_generated,patrol_route_id
+POD01,Block-A Gate,R102,V501,08:15,08:30,Visitor,No,No,PR1
+POD02,Block-B Gate,R215,V502,09:00,09:10,Delivery,No,No,PR2
+POD03,Block-C Gate,R330,NA,09:45,NA,Resident,No,No,PR3
+POD04,Block-A Gate,R118,V503,10:05,10:25,Visitor,Yes,Yes,PR1
+POD05,Block-D Gate,R450,V504,11:00,11:05,Unknown,Yes,Yes,PR4
+POD06,Block-B Gate,R221,NA,11:40,NA,Resident,No,No,PR2
+POD07,Block-C Gate,R309,V505,12:10,12:35,Visitor,No,No,PR3
+POD08,Block-A Gate,R145,V506,13:00,13:15,Delivery,No,No,PR1
+POD09,Block-D Gate,R478,V507,14:20,NA,Unknown,Yes,Yes,PR4
+POD10,Block-B Gate,R230,NA,15:05,NA,Resident,No,No,PR2
