@@ -1,0 +1,11 @@
+parcel_id,sender_area,receiver_area,parcel_type,priority_level,dispatch_time,delivery_distance_km,assigned_vehicle,delivery_status
+P001,Velora-North,Velora-South,Documents,5,09:00,8,VAN-01,Dispatched
+P002,Velora-East,Velora-West,Electronics,4,09:15,12,VAN-02,In Transit
+P003,Velora-Central,Velora-North,Medicine,5,09:30,6,BIKE-01,Dispatched
+P004,Velora-South,Velora-East,Clothing,2,09:45,10,VAN-03,Pending
+P005,Velora-West,Velora-Central,Documents,3,10:00,7,BIKE-02,In Transit
+P006,Velora-North,Velora-East,Electronics,4,10:15,11,VAN-04,Dispatched
+P007,Velora-Central,Velora-South,Medicine,5,10:30,5,BIKE-03,Delivered
+P008,Velora-East,Velora-North,Books,2,10:45,9,VAN-05,Pending
+P009,Velora-South,Velora-West,Documents,3,11:00,13,VAN-06,In Transit
+P010,Velora-West,Velora-East,Electronics,4,11:15,14,VAN-07,Dispatched
