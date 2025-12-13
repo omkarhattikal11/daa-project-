@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AI-Based Public Complaint & Feedback System</title>
+
+<style>
+  :root{
+    --bg-1:#f0f4ff;
+    --section-bg:#ffffff;
+    --text-dark:#1a1a1a;
+    --accent-1:#0077ff;
+    --accent-2:#d97706;
+    --accent-3:#6b21a8;
+    --max-width:900px;
+    font-family:'Inter',sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background:var(--bg-1);
+    color:var(--text-dark);
+    padding-top:78px;
+    line-height:1.6;
+  }
+
+  .navbar{
+    position:fixed; top:8px; left:50%; transform:translateX(-50%);
+    width:calc(100% - 40px); max-width:var(--max-width);
+    display:flex; justify-content:space-between; align-items:center;
+    background:#ffffffbb;
+    padding:12px 18px; border-radius:12px;
+    backdrop-filter:blur(10px);
+    border:1px solid #d0d8ff;
+  }
+
+  .logo{ display:flex; gap:12px; align-items:center; }
+  .logo .dot{
+    width:36px; height:36px; border-radius:9px;
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; color:#ffffff;
+  }
+
+  nav a{ text-decoration:none; color:var(--text-dark); font-weight:600; }
+
+  .wrap{
+    max-width:var(--max-width);
+    margin:28px auto;
+    padding:0 22px;
+  }
+
+  h1{ text-align:center; margin-bottom:32px; }
+
+  .section{
+    background:var(--section-bg);
+    padding:28px 22px;
+    margin-bottom:22px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  }
+
+  .section h2{
+    margin-bottom:12px;
+    font-size:24px;
+    color:var(--accent-1);
+  }
+
+  .section h3{
+    margin-top:14px;
+    font-size:18px;
+    color:var(--accent-2);
+  }
+
+  .section ul{ padding-left:22px; margin-top:10px; }
+  .section ul li{ margin-bottom:8px; }
+
+  table{
+    width:100%;
+    margin-top:14px;
+    border-collapse:collapse;
+  }
+  th,td{
+    border:1px solid #d0d0d0;
+    padding:10px;
+  }
+  th{ background:#e8eefd; }
+
+  .flowchart{
+    margin-top:16px;
+    padding:18px;
+    background:#f8fafc;
+    border:1px dashed #94a3b8;
+    border-radius:10px;
+    text-align:center;
+    font-weight:600;
+  }
+
+  .flowchart div{ margin:10px 0; }
+
+  footer{
+    text-align:center;
+    padding:24px;
+    margin-top:24px;
+    color:var(--text-dark);
+  }
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <div class="dot">EMS</div>
+    <div>
+      <div style="font-weight:800">SMART CITY SOLUTION</div>
+      <div style="font-size:12px;">DAA — Design & Analysis of Algorithms</div>
+    </div>
+  </div>
+  <nav>
+     <ul>
+        <li><a href="Rakshita.html">BACK</a></li>
+      </ul>
+ </nav>
+</header>
+
+<main class="wrap">
+
+  <h1>Business Case 10: AI-Based Public Complaint & Feedback System</h1>
+
+  <div class="section">
+    <h2>1. Business Case Description</h2>
+    <p>
+      Municipal authorities often face challenges in managing citizen complaints due to the large volume and variety of issues.
+    </p>
+    <p>
+      The AI-Based Public Complaint & Feedback System collects, organizes, and prioritizes citizen complaints automatically.
+      It categorizes issues, identifies recurring problems, and highlights critical concerns, enabling authorities to respond
+      efficiently and improve public satisfaction.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>2. Problem Statement</h2>
+    <ul>
+      <li>Manual complaint handling is slow, inconsistent, and error-prone</li>
+    </ul>
+
+    <h3>System Requirements</h3>
+    <ul>
+      <li>Track complaints in real time</li>
+      <li>Identify urgent or recurring issues quickly</li>
+      <li>Categorize complaints accurately</li>
+      <li>Enable efficient forwarding to relevant departments</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>3. Solution Approach</h2>
+    <ul>
+      <li>Trie is used for fast keyword extraction and search</li>
+      <li>Hash Map stores complaint details for instant access</li>
+      <li>Priority Queue ranks urgent complaints for immediate action</li>
+      <li>Rabin-Karp detects repeated patterns in feedback</li>
+    </ul>
+
+    <h3>System Output</h3>
+    <ul>
+      <li>Quick keyword-based search</li>
+      <li>Instant access to complaint records</li>
+      <li>Urgent issues prioritized</li>
+      <li>Recurring problems highlighted</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>4. Algorithms and Data Structures Used</h2>
+
+    <h3>Trie — Fast Keyword Search</h3>
+    <p>Stores keywords from complaints for efficient prefix-based lookup.<br>
+       Enables quick classification and search of issues.</p>
+
+    <h3>Hash Map — Efficient Storage and Lookup</h3>
+    <p>Stores complaint details including ID, type, and timestamp.<br>
+       Provides O(1) average-time retrieval and updates.</p>
+
+    <h3>Priority Queue — Urgent Issue Prioritization</h3>
+    <p>Ranks complaints based on severity or urgency.<br>
+       Ensures critical issues are addressed first.</p>
+
+    <h3>Rabin-Karp — Detect Repeated Patterns</h3>
+    <p>Identifies recurring words or complaint patterns efficiently.<br>
+       Helps spot systemic or repeated issues.</p>
+  </div>
+
+  <div class="section">
+    <h2>5. System Workflow</h2>
+
+    <div class="flowchart">
+      <div>Start</div>
+      <div>↓</div>
+      <div>Citizen Submits Complaint via Digital Portal</div>
+      <div>↓</div>
+      <div>Trie Extracts Keywords from Complaint Text</div>
+      <div>↓</div>
+      <div>Hash Map Stores Complaint Data</div>
+      <div>↓</div>
+      <div>Priority Queue Ranks Urgent Complaints</div>
+      <div>↓</div>
+      <div>Rabin-Karp Identifies Repeated Complaints</div>
+      <div>↓</div>
+      <div>Forward Complaints to Relevant Departments</div>
+      <div>↓</div>
+      <div>Citizens Receive Updates</div>
+      <div>↓</div>
+      <div>End</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>6. Space and Time Efficiency</h2>
+
+    <h3>Time Complexity</h3>
+    <ul>
+      <li>Trie insertion/search: O(L), L = keyword length</li>
+      <li>Hash Map lookup/update: O(1) average</li>
+      <li>Priority Queue insertion/removal: O(log N), N = total complaints</li>
+      <li>Rabin-Karp pattern detection: O(M + N), M = pattern length, N = text length</li>
+    </ul>
+
+    <h3>Space Complexity</h3>
+    <ul>
+      <li>Trie storage: O(K × L), K = keywords, L = keyword length</li>
+      <li>Hash Map: O(N)</li>
+      <li>Priority Queue: O(N)</li>
+      <li>Rabin-Karp: O(M)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>7. Sustainable Development Goals (SDGs) Alignment</h2>
+    <ul>
+      <li><strong>SDG 11:</strong> Sustainable Cities and Communities</li>
+      <li><strong>SDG 16:</strong> Peace, Justice, and Strong Institutions</li>
+      <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>8. Conclusion</h2>
+    <p>
+      The AI-Based Public Complaint & Feedback System provides a smart and automated solution for municipal complaint management.
+      By combining fast search, efficient storage, priority ranking, and pattern detection, the system ensures urgent issues
+      are addressed promptly, recurring problems are highlighted, and citizen satisfaction is improved.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  © Smart City DAA Project • KLE Technological University
+</footer>
+
+</body>
+</html>
+
