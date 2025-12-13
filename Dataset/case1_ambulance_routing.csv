@@ -1,0 +1,11 @@
+route_id,start_location,end_location,distance_km,avg_traffic_level,signal_density,road_condition,accident_prone,avg_speed_kmph,estimated_time_min
+R1,Hospital_A,Accident_Spot_1,6.2,High,8,Good,Yes,28,13
+R2,Hospital_A,Accident_Spot_1,7.5,Medium,5,Good,No,40,11
+R3,Hospital_A,Accident_Spot_1,5.8,Very High,10,Fair,Yes,20,17
+R4,Hospital_B,Accident_Spot_2,4.1,Low,2,Excellent,No,55,5
+R5,Hospital_B,Accident_Spot_2,5.0,Medium,4,Good,No,42,7
+R6,Hospital_C,Accident_Spot_3,9.3,High,9,Poor,Yes,25,22
+R7,Hospital_C,Accident_Spot_3,8.1,Medium,6,Fair,No,35,14
+R8,Hospital_D,Accident_Spot_4,3.6,Low,1,Excellent,No,60,4
+R9,Hospital_D,Accident_Spot_4,4.4,Medium,3,Good,No,45,6
+R10,Hospital_E,Accident_Spot_5,10.2,High,7,Fair,Yes,30,20
