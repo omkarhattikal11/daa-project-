@@ -1,0 +1,11 @@
+mall_id,shop_id,shop_name,category,footfall_count,avg_purchase_value,queue_length,offer_priority,nav_zone
+MALL01,S101,TechWorld,Electronics,850,4200,12,4,Z1
+MALL01,S102,FashionHub,Clothing,1200,3100,18,5,Z2
+MALL01,S103,FoodiesCourt,Food,2000,850,25,3,Z3
+MALL01,S104,BookNest,Books,450,650,6,2,Z4
+MALL01,S105,ShoeSpot,Footwear,780,2300,10,4,Z2
+MALL01,S106,GameZone,Entertainment,1600,1500,20,5,Z5
+MALL01,S107,BeautyPlus,Cosmetics,920,2700,14,4,Z1
+MALL01,S108,HomeStyle,Home Decor,560,3900,8,3,Z4
+MALL01,S109,KidsWorld,Toys,1100,1800,16,4,Z3
+MALL01,S110,WatchPoint,Accessories,640,5200,7,5,Z2
