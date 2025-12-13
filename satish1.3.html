@@ -1,1 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 3 - Smart Parking & Mobility Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #6ac36a;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #6ac36a;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+    .sdg-box {
+        background: #eaf7ea;
+        padding: 12px;
+        border-left: 5px solid #6ac36a;
+        border-radius: 6px;
+        margin-top: 8px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Case 3 — Smart Parking & Mobility Hub</h1>
+
+<h2>Brief Description</h2>
+<p>
+The Smart Parking & Mobility Hub provides real-time parking slot availability, EV charging coordination, 
+and last-mile transport connectivity in Velora. It integrates sensors and routing logic to reduce congestion 
+and improve urban mobility efficiency.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Drivers wasting time searching for available parking slots.</li>
+    <li>Traffic congestion near parking zones during peak hours.</li>
+    <li>Inefficient usage of EV charging infrastructure.</li>
+    <li>Lack of coordination between parking and local mobility services.</li>
+</ul>
+
+<h2>Solutions / Logic Used</h2>
+<ul>
+    <li><strong>Hash Table:</strong> Maintains real-time mapping of vehicles to parking slots.</li>
+    <li><strong>Min-Heap:</strong> Identifies the nearest available parking slot quickly.</li>
+    <li><strong>BFS:</strong> Scans parking zones level-by-level for free spaces.</li>
+    <li><strong>Dijkstra’s Algorithm:</strong> Calculates optimal routes for mobility shuttles.</li>
+</ul>
+
+<h2>Suitable SDGs</h2>
+
+<div class="sdg-box">
+    <strong>SDG 11 — Sustainable Cities & Communities</strong>
+    <p>Reduces traffic congestion and promotes efficient urban mobility.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 9 — Industry, Innovation & Infrastructure</strong>
+    <p>Encourages smart transport infrastructure using algorithm-driven systems.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 7 — Affordable & Clean Energy</strong>
+    <p>Supports efficient utilization of EV charging stations and clean transport.</p>
+</div>
+
+<button>
+  <a href="satish.html" target="_blank">back</a>
+</button>
+
+</body>
+</html>
