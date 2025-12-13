@@ -627,68 +627,21 @@ int main() {
     }
     return 0;
 }</pre> 
-<!-- ===== AFTER EACH EXISTING CODE-BLOCK ===== -->
-
 <div class="case-field">
   <h3>Efficiency Analysis</h3>
   <p>
-    The efficiency of this solution depends on the algorithm used.
-    It follows the standard time and space complexity defined in
-    Design and Analysis of Algorithms. The algorithm is chosen to
-    ensure optimal performance for large-scale real-world data
-    while maintaining correctness and scalability.
+    Dijkstra’s algorithm runs in <strong>O((V + E) log V)</strong> time
+    when implemented using a priority queue. Space complexity is
+    <strong>O(V)</strong> for storing distances and visited nodes.
+    This ensures fast route computation even for large road networks.
   </p>
 </div>
 
 <div class="case-field">
   <h3>Flowchart Diagram</h3>
-
-  <svg width="100%" height="180" viewBox="0 0 600 180">
-    <defs>
-      <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5"
-              orient="auto-start-reverse">
-        <path d="M 0 0 L 10 5 L 0 10 z" fill="#22c55e" />
-      </marker>
-    </defs>
-
-    <!-- Start -->
-    <rect x="20" y="50" rx="18" ry="18" width="90" height="40"
-          fill="#020617" stroke="#22c55e"/>
-    <text x="65" y="75" fill="#e5e7eb" text-anchor="middle">Start</text>
-
-    <!-- Input -->
-    <rect x="140" y="50" rx="8" ry="8" width="130" height="40"
-          fill="#020617" stroke="#22c55e"/>
-    <text x="205" y="75" fill="#e5e7eb" text-anchor="middle">
-      Read Input
-    </text>
-
-    <!-- Process -->
-    <rect x="310" y="50" rx="8" ry="8" width="160" height="40"
-          fill="#020617" stroke="#22c55e"/>
-    <text x="390" y="75" fill="#e5e7eb" text-anchor="middle">
-      Apply Algorithm Logic
-    </text>
-
-    <!-- Output -->
-    <rect x="510" y="50" rx="18" ry="18" width="90" height="40"
-          fill="#020617" stroke="#22c55e"/>
-    <text x="555" y="75" fill="#e5e7eb" text-anchor="middle">Output</text>
-
-    <!-- Arrows -->
-    <line x1="110" y1="70" x2="140" y2="70"
-          stroke="#22c55e" marker-end="url(#arrow)"/>
-    <line x1="270" y1="70" x2="310" y2="70"
-          stroke="#22c55e" marker-end="url(#arrow)"/>
-    <line x1="470" y1="70" x2="510" y2="70"
-          stroke="#22c55e" marker-end="url(#arrow)"/>
-
-  </svg>
-
-  <p style="font-size:12px;color:#9ca3af;margin-top:6px;">
-    The flowchart represents the general execution flow of the C++
-    program: starting execution, taking inputs, processing data using
-    the selected algorithm, and producing the final output.
+  <p>
+    Start → Initialize distances → Select nearest unvisited node →
+    Relax adjacent edges → Repeat until all nodes processed → Output shortest paths
   </p>
 </div>
 
