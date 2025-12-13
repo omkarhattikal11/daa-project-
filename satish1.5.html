@@ -1,1 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case 5 - Central Security & Smart Surveillance Room</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    h1 {
+        color: #333333;
+        border-bottom: 3px solid #ff5c5c;
+        padding-bottom: 6px;
+    }
+    h2 {
+        color: #444444;
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #ff5c5c;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+    .sdg-box {
+        background: #ffecec;
+        padding: 12px;
+        border-left: 5px solid #ff5c5c;
+        border-radius: 6px;
+        margin-top: 8px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>Case 5 — Central Security & Smart Surveillance Room</h1>
+
+<h2>Brief Description</h2>
+<p>
+The Central Security & Smart Surveillance Room serves as Velora’s main command center for city-wide safety.
+It continuously monitors CCTV feeds, motion sensors, fire alarms, and emergency alerts, enabling
+real-time threat detection and rapid security response.
+</p>
+
+<h2>Rising Problems</h2>
+<ul>
+    <li>Manual monitoring of multiple camera feeds causing delayed threat detection.</li>
+    <li>Difficulty prioritizing critical alerts during peak activity.</li>
+    <li>Lack of coordination between surveillance zones.</li>
+    <li>Slow deployment of security personnel to incident locations.</li>
+</ul>
+
+<h2>Solutions / Logic Used</h2>
+<ul>
+    <li><strong>Hash Table:</strong> Stores and retrieves camera IDs, alert logs, and sensor data efficiently.</li>
+    <li><strong>Priority Queue:</strong> Ranks alerts based on severity for immediate action.</li>
+    <li><strong>BFS:</strong> Scans nearby cameras to track incident spread or movement.</li>
+    <li><strong>AVL Tree:</strong> Maintains time-ordered incident records for fast querying.</li>
+</ul>
+
+<h2>Suitable SDGs</h2>
+
+<div class="sdg-box">
+    <strong>SDG 16 — Peace, Justice & Strong Institutions</strong>
+    <p>Enhances public safety and strengthens institutional response systems.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 11 — Sustainable Cities & Communities</strong>
+    <p>Creates safer urban environments through intelligent surveillance.</p>
+</div>
+
+<div class="sdg-box">
+    <strong>SDG 9 — Industry, Innovation & Infrastructure</strong>
+    <p>Promotes advanced digital security infrastructure and smart monitoring systems.</p>
+</div>
+
+<button>
+  <a href="satish.html" target="_blank">back</a>
+</button>
+
+</body>
+</html>
