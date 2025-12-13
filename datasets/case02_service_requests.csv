@@ -1,0 +1,5 @@
+request_id,type,deadline,priority
+W01,Waste,10,2
+WT01,Water,9,1
+W02,Waste,11,3
+WT02,Water,10,5
