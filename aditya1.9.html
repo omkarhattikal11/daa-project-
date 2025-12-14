@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Smart City – Algorithm Solutions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Climate-Resilient City – Algorithm Solutions</title>
 
 <style>
   :root{
     --bg-dark: #0d1117;      
     --text-light: #e6eef3;
-    --accent-1: #00f5d4;        /* Problem + Solution */
-    --accent-2: #d97706;        /* Algorithms + Data Structures - dark amber */
-    --accent-3: #6b21a8;        /* SDGs - dark violet */
+    --accent-1: #00f5d4;       
+    --accent-2: #d97706;       
+    --accent-3: #6b21a8;       
     --card-radius: 14px;
     --shadow-dark: rgba(0,0,0,0.5);
-    --max-width: 900px;
+    --max-width: 1000px;
     font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   }
 
@@ -25,10 +25,9 @@
     background: var(--bg-dark);
     color: var(--text-light);
     padding-top:78px;
-    line-height:1.5;
+    line-height:1.6;
   }
 
-  /* NAVBAR */
   .navbar{
     position:fixed; top:8px; left:50%; transform:translateX(-50%);
     width:calc(100% - 40px); max-width:var(--max-width);
@@ -51,11 +50,9 @@
   nav a{ text-decoration:none; color:var(--text-light); font-weight:600; padding:8px 12px; border-radius:8px; font-size:14px; transition: all .18s ease; }
   nav a:hover{ color:#00f5d4; transform:translateY(-2px); }
 
-  /* WRAPPER */
   .wrap{ max-width:var(--max-width); margin:28px auto; padding:28px; }
   h1{ font-size:28px; margin-bottom:24px; text-align:center; color:var(--text-light); }
 
-  /* CARD STYLES */
   .card-container{ display:flex; flex-direction:column; gap:22px; }
 
   .card{
@@ -66,7 +63,7 @@
   }
 
   .card h2{ font-size:20px; margin-bottom:12px; }
-
+  .card h3{ margin-top:12px; margin-bottom:8px; }
   .card ul{ padding-left:20px; margin-top:10px; }
   .card ul li{ margin-bottom:8px; font-size:14px; }
 
@@ -74,90 +71,113 @@
   .card th, .card td{ border:1px solid rgba(255,255,255,0.2); padding:10px; text-align:left; font-size:14px; }
   .card th{ background-color: rgba(0,0,0,0.3); color: var(--text-light); }
 
-  /* DISTINCT GRADIENTS */
   .problem-solution-card{ background: linear-gradient(135deg,#00f5d4,#3b82f6); color:#0d1117; }
-  .algo-datastruct-card{ background: linear-gradient(135deg,#b45309,#78350f); color:#f3f3f3; } /* dark amber/brown */
-  .sdg-card{ background: linear-gradient(135deg,#5b21b6,#3b0764); color:#f3f3f3; } /* dark violet */
+  .algo-datastruct-card{ background: linear-gradient(135deg,#b45309,#78350f); color:#f3f3f3; }
+  .efficiency-card{ background: linear-gradient(135deg,#059669,#064e3b); color:#f3f3f3; } 
+  .sdg-card{ background: linear-gradient(135deg,#5b21b6,#3b0764); color:#f3f3f3; }
 
   footer{ margin-top:34px; color:var(--text-light); font-size:14px; text-align:center; padding:18px 6px; }
 </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <header class="navbar">
     <div class="logo">
-      <div class="dot">CD</div>
+      <div class="dot">CR</div>
       <div>
-        <div style="font-weight:800">CITY DESIGN</div>
-        <div style="font-size:12px;color:var(--text-light);margin-top:2px">DAA — Design & Analysis of Algorithms</div>
+        <div style="font-weight:800">Climate-Resilient City</div>
+        <div style="font-size:12px;color:var(--text-light);margin-top:2px">DAA Project – Algorithm Solutions</div>
       </div>
     </div>
     <nav>
       <ul>
-        <li><a href="aditya.html">BACK</a></li>
+        <li><a href="#">BACK</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- PAGE CONTENT -->
   <main class="wrap">
     <h1>Climate-Resilient City Resource Management System</h1>
 
     <div class="card-container">
 
-      <!-- PROBLEM + SOLUTION -->
+      <!-- Problem Statement -->
       <div class="card problem-solution-card">
-        <h2>1 • Problem Statement & Solution Overview</h2>
-        <h3>Problem Statement:</h3>
+        <h2>1 • Problem Statement</h2>
         <ul>
-          <li>Water scarcity due to unpredictable rainfall & overuse.</li>
-          <li>Energy overload during heatwaves causing blackouts.</li>
-          <li>Floods & disasters overwhelming emergency systems.</li>
-          <li>Waste overflow due to inefficient route planning.</li>
-          <li>Pollution & heat island effect increasing health risks.</li>
-          <li>Unplanned urban expansion reducing climate resilience.</li>
-        </ul>
-        <h3>Solution Overview:</h3>
-        <ul>
-          <li>Tracks live water, energy, waste, pollution levels.</li>
-          <li>Uses AI + data structures for predictions.</li>
-          <li>Automatically optimizes resource distribution.</li>
-          <li>Uses graph algorithms for best routes.</li>
-          <li>Generates emergency alerts & evacuation plans.</li>
-          <li>Provides city dashboard for decision-making.</li>
+          <li>Traffic congestion during emergencies (floods, heatwaves)</li>
+          <li>Unequal distribution of critical resources (water, energy, medical aid)</li>
+          <li>Inefficient waste and resource routing</li>
+          <li>Overloaded infrastructure during peak demand</li>
         </ul>
       </div>
 
-      <!-- ALGORITHMS + DATA STRUCTURES -->
+      <!-- System Design -->
       <div class="card algo-datastruct-card">
-        <h2>2 • Algorithms & Data Structures</h2>
+        <h2>2 • System Design</h2>
+        <ul>
+          <li>City represented as a graph (nodes = zones, edges = roads with weights)</li>
+          <li>Dynamic data models climate impact (road blockage, demand surge)</li>
+          <li>Modules: Emergency Routing, Resource Distribution, Waste & Utility Optimization, Decision Support</li>
+        </ul>
+      </div>
+
+      <!-- Algorithms & Data Structures -->
+      <div class="card algo-datastruct-card">
+        <h2>3 • Algorithms & Data Structures</h2>
         <table>
-          <tr><th>Algorithm / Data Structure</th><th>purpose</th></tr>
-          <tr><td>Dijkstra Algorithm</td><td>Emergency evacuation, flood escape routing</td></tr>
-          <tr><td>Prim/Kruskal</td><td>Building minimum-cost energy/water pipeline network</td></tr>
-          <tr><td>BFS/DFS</td><td>Flood spread simulation, connectivity, zone scanning.</td></tr>
-          <tr><td>AVL Tree</td><td>Stores sensor data with auto-balancing</td></tr>
-          <tr><td>Binary Search Tree</td><td>Stores pollution index & allows range search</td></tr>
-          <tr><td>Min-Heap / Max-Heap</td><td>Priority of emergencies & resource allocation</td></tr>
-          <tr><td>Hash Table</td><td>Fast zone lookup by name or sensor ID</td></tr>
-          <tr><td>Quick Sort / Merge Sort</td><td>Sort zones by water/energy demand</td></tr>
-          <tr><td>Segment Tree</td><td>Range updates for water or energy usage</td></tr>
-          <tr><td>Union-Find</td><td>Connect/disconnect damaged infrastructure</td></tr>
+          <tr><th>City Problem</th><th>Data Structure / Algorithm</th><th>Paradigm</th></tr>
+          <tr><td>Emergency vehicle routing</td><td>Graph / Dijkstra / A*</td><td>Greedy</td></tr>
+          <tr><td>Traffic analysis</td><td>Graph / BFS / DFS</td><td>Traversal</td></tr>
+          <tr><td>Resource allocation</td><td>Priority Queue</td><td>Greedy</td></tr>
+          <tr><td>Shelter / Bed management</td><td>AVL Tree</td><td>Divide & Conquer</td></tr>
+          <tr><td>Medicine / Water expiry</td><td>Min-Heap + Hash Map</td><td>Greedy</td></tr>
+          <tr><td>Planning optimization</td><td>DP Table</td><td>Dynamic Programming</td></tr>
+          <tr><td>Disaster evacuation planning</td><td>Recursion / Backtracking</td><td>Backtracking</td></tr>
         </table>
       </div>
 
-      <!-- SDGs -->
-      <div class="card sdg-card">
-        <h2>3 • Sustainable Development Goals (SDGs)</h2>
+      <!-- Efficiency Analysis -->
+      <div class="card efficiency-card">
+        <h2>5 • Efficiency Analysis</h2>
+        <table>
+          <tr><th>Algorithm</th><th>Time Complexity</th><th>Space Complexity</th></tr>
+          <tr><td>Dijkstra / A*</td><td>O((V+E) log V)</td><td>O(V)</td></tr>
+          <tr><td>Greedy Resource Allocation</td><td>O(n log n)</td><td>O(n)</td></tr>
+          <tr><td>AVL Tree</td><td>O(log n)</td><td>O(n)</td></tr>
+          <tr><td>DP Optimization</td><td>O(n²)</td><td>O(n)</td></tr>
+          <tr><td>Backtracking</td><td>Exponential</td><td>O(depth)</td></tr>
+        </table>
+      </div>
+
+      <!-- Principles & Generalization -->
+      <div class="card algo-datastruct-card">
+        <h2>6 • Principles & Generalization</h2>
         <ul>
-          <li><strong>SDG 6:</strong>	Clean Water & Sanitation	Water conservation, leak detection.</li>
-          <li><strong>SDG 7:</strong>	Affordable & Clean Energy	Energy load balancing.</li>
-          <li><strong>SDG 9:</strong>	Innovation & Infrastructure	Smart IoT-based systems.</li>
-          <li><strong>SDG 11:</strong>	Sustainable Cities	Climate-resilient planning.</li>
-          <li><strong>SDG 12:</strong>	Responsible Consumption	Optimal resource usage.</li>
-          <li><strong>SDG 13:</strong>	Climate Action	Flood/heatwave monitoring.</li>
-          <li><strong>SDG 3:</strong>	Good Health	Pollution control & safety.</li>
+          <li>Applicable to Smart traffic systems, Disaster management, Smart grids, Healthcare logistics, Waste recycling networks</li>
+          <li>Algorithms remain the same; only input data changes</li>
+        </ul>
+      </div>
+
+      <!-- Transfer of Knowledge -->
+      <div class="card algo-datastruct-card">
+        <h2>7 • Transfer of Knowledge</h2>
+        <ul>
+          <li>Graph algorithms → Transportation & evacuation</li>
+          <li>Priority queues → Resource triage</li>
+          <li>Trees → Infrastructure management</li>
+          <li>DP & Backtracking → Planning under constraints</li>
+        </ul>
+      </div>
+
+      <!-- SDG Alignment -->
+      <div class="card sdg-card">
+        <h2>8 • SDG-11 Alignment</h2>
+        <ul>
+          <li>Reduces congestion</li>
+          <li>Improves emergency response</li>
+          <li>Promotes efficient resource usage</li>
+          <li>Enhances urban resilience to climate risks</li>
         </ul>
       </div>
 
@@ -165,7 +185,7 @@
   </main>
 
   <footer>
-    © City Design — DAA • KLE Technological University • Built by the project team
+    © Climate-Resilient City — DAA • KLE Technological University • Built by Project Team
   </footer>
 
 </body>
