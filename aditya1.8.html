@@ -131,21 +131,82 @@
       <div class="card algo-datastruct-card">
         <h2>2 • Algorithms & Data Structures</h2>
         <table>
-          <tr><th>Algorithm / Data Structure</th><th>purpose</th></tr>
-          <tr><td>AVL Tree</td><td>for ordered item storage (by price or id).</td></tr>
-          <tr><td>BST</td><td>for simple ordered storage/example.</td></tr>
+          <tr><th>Algorithm / Data Structure</th><th>Purpose</th></tr>
+          <tr><td>AVL Tree</td><td>for ordered item storage (by price or id)</td></tr>
+          <tr><td>BST</td><td>for simple ordered storage/example</td></tr>
           <tr><td>Stack & Queue</td><td>for order processing pipeline</td></tr>
           <tr><td>Heaps (min/max)</td><td>for top-demand and urgent-discount items</td></tr>
           <tr><td>Hashing (unordered_map)</td><td>for fast id → item lookup</td></tr>
-          <tr><td>Quick/Merge/Heap Sort</td><td>for reports and analytics.</td></tr>
-          <tr><td>Binary Search</td><td>on sorted price lists.</td></tr>
+          <tr><td>Quick/Merge/Heap Sort</td><td>for reports and analytics</td></tr>
+          <tr><td>Binary Search</td><td>on sorted price lists</td></tr>
           <tr><td>Graph + Dijkstra</td><td>for finding nearest supplier / fastest replenishment route</td></tr>
+        </table>
+      </div>
+
+      <!-- EFFICIENCY ANALYSIS -->
+      <div class="card algo-datastruct-card">
+        <h2>3 • Efficiency Analysis</h2>
+        <table>
+          <tr>
+            <th>Algorithm / Data Structure</th>
+            <th>Time Complexity</th>
+            <th>Space Complexity</th>
+            <th>Notes</th>
+          </tr>
+          <tr>
+            <td>AVL Tree</td>
+            <td>O(log n) insert/search/delete</td>
+            <td>O(n)</td>
+            <td>Maintains balanced order of items for quick range queries</td>
+          </tr>
+          <tr>
+            <td>BST</td>
+            <td>O(h) insert/search/delete, h = tree height</td>
+            <td>O(n)</td>
+            <td>Simple ordered storage; may become unbalanced</td>
+          </tr>
+          <tr>
+            <td>Stack & Queue</td>
+            <td>O(1) push/pop / enqueue/dequeue</td>
+            <td>O(n)</td>
+            <td>Efficient processing of order pipelines</td>
+          </tr>
+          <tr>
+            <td>Heap (Min/Max)</td>
+            <td>O(log n) insertion / extraction</td>
+            <td>O(n)</td>
+            <td>Prioritize top-demand or urgent items</td>
+          </tr>
+          <tr>
+            <td>Hashing (unordered_map)</td>
+            <td>O(1) average lookup/insert</td>
+            <td>O(n)</td>
+            <td>Fast item ID → item mapping</td>
+          </tr>
+          <tr>
+            <td>Quick/Merge/Heap Sort</td>
+            <td>O(n log n)</td>
+            <td>O(n) for Merge/Heap, O(log n) for Quick</td>
+            <td>Generate sorted reports or analytics</td>
+          </tr>
+          <tr>
+            <td>Binary Search</td>
+            <td>O(log n)</td>
+            <td>O(1)</td>
+            <td>Search in sorted price lists</td>
+          </tr>
+          <tr>
+            <td>Graph + Dijkstra</td>
+            <td>O(E + V log V) using Min-Heap</td>
+            <td>O(V + E)</td>
+            <td>Find fastest supplier route for replenishment</td>
+          </tr>
         </table>
       </div>
 
       <!-- SDGs -->
       <div class="card sdg-card">
-        <h2>3 • Sustainable Development Goals (SDGs)</h2>
+        <h2>4 • Sustainable Development Goals (SDGs)</h2>
         <ul>
           <li><strong>SDG 12:</strong> Responsible Consumption & Production – reduces waste by smart discounts near expiry.</li>
           <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – uses infrastructure & algorithms to modernize retail.</li>
