@@ -111,19 +111,19 @@
         <h2>1 • Problem Statement & Solution Overview</h2>
         <h3>Problem Statement:</h3>
         <ul>
-          <liBrute force login attacks</li>
-          <li>Malicious IP scanning the network.</li>
-          <li>Malware signatures present in network logs.</li>
-          <li>Lateral movement attacks between computers.</li>
-          <li>Large spikes in suspicious traffic.</li>
+          <li>Brute force login attacks</li>
+          <li>Malicious IP scanning the network</li>
+          <li>Malware signatures present in network logs</li>
+          <li>Lateral movement attacks between computers</li>
+          <li>Large spikes in suspicious traffic</li>
         </ul>
         <h3>Solution Overview:</h3>
         <ul>
-          <li>Uses KMP pattern matching to detect malware signatures in logs..</li>
-          <li>Uses Hashing (Hash Table) to track failed login attempts per IP.</li>
-          <li>Uses Priority Queue (Heap) to show top suspicious IPs.</li>
+          <li>Uses KMP pattern matching to detect malware signatures in logs</li>
+          <li>Uses Hashing (Hash Table) to track failed login attempts per IP</li>
+          <li>Uses Priority Queue (Heap) to show top suspicious IPs</li>
           <li>Uses Graph + BFS to detect lateral movement between computers</li>
-          <li>Uses Sorting to prepare a final report of suspicious activity.</li>
+          <li>Uses Sorting to prepare a final report of suspicious activity</li>
         </ul>
       </div>
 
@@ -131,24 +131,73 @@
       <div class="card algo-datastruct-card">
         <h2>2 • Algorithms & Data Structures</h2>
         <table>
-          <tr><th>Algorithm / Data Structure</th><th>purpose</th></tr>
-          <tr><td>Hash Table</td><td>Count failed login attempts per IP (O(1)).</td></tr>
+          <tr><th>Algorithm / Data Structure</th><th>Purpose</th></tr>
+          <tr><td>Hash Table</td><td>Count failed login attempts per IP (O(1))</td></tr>
           <tr><td>KMP Algorithm</td><td>Detect malware signatures in logs efficiently</td></tr>
-          <tr><td>Priority Queue (Max-Heap)</td><td>Find top suspicious IPs.</td></tr>
-          <tr><td>Graph (Adjacency List)</td><td>Model network connections.</td></tr>
-          <tr><td>BFS</td><td>Detect lateral movement attacks.</td></tr>
-          <tr><td>Merge Sort</td><td>Sort suspicious IPs by severity.</td></tr>
+          <tr><td>Priority Queue (Max-Heap)</td><td>Find top suspicious IPs</td></tr>
+          <tr><td>Graph (Adjacency List)</td><td>Model network connections</td></tr>
+          <tr><td>BFS</td><td>Detect lateral movement attacks</td></tr>
+          <tr><td>Merge Sort</td><td>Sort suspicious IPs by severity</td></tr>
+        </table>
+      </div>
+
+      <!-- EFFICIENCY ANALYSIS -->
+      <div class="card algo-datastruct-card">
+        <h2>3 • Efficiency Analysis</h2>
+        <table>
+          <tr>
+            <th>Algorithm / Data Structure</th>
+            <th>Time Complexity</th>
+            <th>Space Complexity</th>
+            <th>Notes</th>
+          </tr>
+          <tr>
+            <td>Hash Table</td>
+            <td>O(1) average per lookup/insert</td>
+            <td>O(n) for n IPs</td>
+            <td>Efficiently tracks failed login attempts per IP</td>
+          </tr>
+          <tr>
+            <td>KMP Algorithm</td>
+            <td>O(n + m), n = log size, m = pattern length</td>
+            <td>O(m) for prefix array</td>
+            <td>Fast malware signature detection in logs</td>
+          </tr>
+          <tr>
+            <td>Priority Queue (Max-Heap)</td>
+            <td>O(log k) per insertion/extraction, k = number of suspicious IPs</td>
+            <td>O(k)</td>
+            <td>Quickly identifies top suspicious IPs</td>
+          </tr>
+          <tr>
+            <td>Graph (Adjacency List)</td>
+            <td>O(V + E)</td>
+            <td>O(V + E)</td>
+            <td>Efficient representation of network connections</td>
+          </tr>
+          <tr>
+            <td>BFS</td>
+            <td>O(V + E)</td>
+            <td>O(V) for visited array</td>
+            <td>Detects lateral movement attacks efficiently</td>
+          </tr>
+          <tr>
+            <td>Merge Sort</td>
+            <td>O(n log n)</td>
+            <td>O(n)</td>
+            <td>Sorts suspicious IPs by severity efficiently</td>
+          </tr>
         </table>
       </div>
 
       <!-- SDGs -->
       <div class="card sdg-card">
-        <h2>3 • Sustainable Development Goals (SDGs)</h2>
+        <h2>4 • Sustainable Development Goals (SDGs)</h2>
         <ul>
-          <li><strong>SDG 11:</strong>Sustainable Cities & Communities – Secures smart city networks & IoT systems.</li>
-          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – Protects digital infrastructure of companies, banks, hospitals.</li>
-          <li><strong>SDG 16:</strong>Peace, Justice & Strong Institutions – Prevents cybercrime, strengthens digital governance..</li>
-           <li><strong>SDG 8:</strong>Decent Work & Economic Growth – Prevents business downtime due to cyber-attacks.</li>
+          <li><strong>SDG 11:</strong> Sustainable Cities & Communities – Secures smart city networks & IoT systems</li>
+          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – Protects digital infrastructure of companies, banks, hospitals</li>
+          <li><strong>SDG 16:</strong> Peace, Justice & Strong Institutions – Prevents cybercrime, strengthens digital governance</li>
+          <li><strong>SDG 8:</strong> Decent Work & Economic Growth – Prevents business downtime due to cyber-attacks</li>
         </ul>
       </div>
 
