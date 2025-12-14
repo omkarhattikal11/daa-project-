@@ -9,9 +9,9 @@
   :root{
     --bg-dark: #0d1117;      
     --text-light: #e6eef3;
-    --accent-1: #00f5d4;        /* Problem + Solution */
-    --accent-2: #d97706;        /* Algorithms + Data Structures - dark amber */
-    --accent-3: #6b21a8;        /* SDGs - dark violet */
+    --accent-1: #00f5d4;        
+    --accent-2: #d97706;        
+    --accent-3: #6b21a8;        
     --card-radius: 14px;
     --shadow-dark: rgba(0,0,0,0.5);
     --max-width: 900px;
@@ -76,8 +76,8 @@
 
   /* DISTINCT GRADIENTS */
   .problem-solution-card{ background: linear-gradient(135deg,#00f5d4,#3b82f6); color:#0d1117; }
-  .algo-datastruct-card{ background: linear-gradient(135deg,#b45309,#78350f); color:#f3f3f3; } /* dark amber/brown */
-  .sdg-card{ background: linear-gradient(135deg,#5b21b6,#3b0764); color:#f3f3f3; } /* dark violet */
+  .algo-datastruct-card{ background: linear-gradient(135deg,#b45309,#78350f); color:#f3f3f3; } 
+  .sdg-card{ background: linear-gradient(135deg,#5b21b6,#3b0764); color:#f3f3f3; }
 
   footer{ margin-top:34px; color:var(--text-light); font-size:14px; text-align:center; padding:18px 6px; }
 </style>
@@ -132,13 +132,55 @@
       <div class="card algo-datastruct-card">
         <h2>2 • Algorithms & Data Structures</h2>
         <table>
-          <tr><th>Task</th><th>Algorithm / Data Structure</th><th>purpose</th></tr>
-          <tr><td>Nearest slot assignment</td><td>Min-Heap / Priority Queue</td><td>Find nearest available ambulance</td></tr>
-          <tr><td>Slot availability tracking</td><td>2D/3D Array</td><td>Track floors, zones, and slots occupancy status</td></tr>
-          <tr><td>Priority vehicle handling</td><td>Priority Queue</td><td>Serve VIP and handicapped vehicles first</td></tr>
-          <tr><td>Search vehicle by number</td><td>Hash Table / Map</td><td>Quick lookup of vehicle location</td></tr>
-          <tr><td>Sorting available slots</td><td>Sorting Algorithm</td><td>Display slots in ascending order of distance for better allocation</td></tr>
-          <tr><td>Represent floors & zones</td><td>Graph / BFS</td><td>Simulate floor/zone traversal to find  nearest free slot efficiently</td></tr>
+          <tr>
+            <th>Task</th>
+            <th>Algorithm / Data Structure</th>
+            <th>Purpose</th>
+            <th>Time Complexity</th>
+            <th>Space Complexity</th>
+          </tr>
+          <tr>
+            <td>Nearest slot assignment</td>
+            <td>Min-Heap / Priority Queue</td>
+            <td>Find nearest available slot</td>
+            <td>O(log n) insertion / extraction</td>
+            <td>O(n) for n slots</td>
+          </tr>
+          <tr>
+            <td>Slot availability tracking</td>
+            <td>2D/3D Array</td>
+            <td>Track floors, zones, and slots occupancy status</td>
+            <td>O(1) access per slot</td>
+            <td>O(f × z × s) for floors × zones × slots</td>
+          </tr>
+          <tr>
+            <td>Priority vehicle handling</td>
+            <td>Priority Queue</td>
+            <td>Serve VIP and handicapped vehicles first</td>
+            <td>O(log n) insertion / extraction</td>
+            <td>O(n) for n priority vehicles</td>
+          </tr>
+          <tr>
+            <td>Search vehicle by number</td>
+            <td>Hash Table / Map</td>
+            <td>Quick lookup of vehicle location</td>
+            <td>O(1) average, O(n) worst-case</td>
+            <td>O(n) for n vehicles</td>
+          </tr>
+          <tr>
+            <td>Sorting available slots</td>
+            <td>Sorting Algorithm (e.g., QuickSort)</td>
+            <td>Display slots in ascending order of distance for better allocation</td>
+            <td>O(n log n) average, O(n²) worst-case</td>
+            <td>O(n) auxiliary space for some implementations</td>
+          </tr>
+          <tr>
+            <td>Represent floors & zones</td>
+            <td>Graph / BFS</td>
+            <td>Simulate floor/zone traversal to find nearest free slot efficiently</td>
+            <td>O(V + E) where V = slots, E = connections</td>
+            <td>O(V + E) for adjacency list</td>
+          </tr>
         </table>
       </div>
 
@@ -146,7 +188,7 @@
       <div class="card sdg-card">
         <h2>3 • Sustainable Development Goals (SDGs)</h2>
         <ul>
-          <li><strong>SDG 13:</strong>Climate Action – Reduces fuel consumption and carbon footprint by minimizing search time for parking</li>
+          <li><strong>SDG 13:</strong> Climate Action – Reduces fuel consumption and carbon footprint by minimizing search time for parking</li>
           <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – Integrates smart infrastructure with IoT-like simulation</li>
           <li><strong>SDG 11:</strong> Sustainable Cities & Communities – Improves urban mobility and reduces traffic congestion.</li>
         </ul>
