@@ -1,0 +1,52 @@
+LogText,Pattern,EmergencyType,GraphStart,GraphEnd,DijkstraSrc,DijkstraDest
+"Smoke detected in Block A","FIRE","FIRE",0,3,0,3
+"Flood warning in Sector 5","FLOOD","FLOOD",1,4,1,4
+"Minor earthquake felt","EARTHQUAKE","EARTHQUAKE",2,5,2,5
+"Medical emergency reported","MEDICAL","MEDICAL",3,6,3,6
+"Car accident at junction 7","ACCIDENT","ACCIDENT",4,7,4,7
+"Fire alarm triggered at warehouse","FIRE","FIRE",0,2,0,2
+"Water level rising in river bank","FLOOD","FLOOD",1,3,1,3
+"Earthquake tremor in downtown","EARTHQUAKE","EARTHQUAKE",2,4,2,4
+"Patient collapse in hospital","MEDICAL","MEDICAL",3,5,3,5
+"Minor collision on highway","ACCIDENT","ACCIDENT",4,6,4,6
+"Smoke in residential area","FIRE","FIRE",0,1,0,1
+"Flood in basement","FLOOD","FLOOD",1,2,1,2
+"Seismic activity detected","EARTHQUAKE","EARTHQUAKE",2,3,2,3
+"Heart attack emergency","MEDICAL","MEDICAL",3,4,3,4
+"Vehicle accident near mall","ACCIDENT","ACCIDENT",4,5,4,5
+"Fire in parking lot","FIRE","FIRE",0,3,0,3
+"Flooded road blocked","FLOOD","FLOOD",1,4,1,4
+"Earthquake shaking felt","EARTHQUAKE","EARTHQUAKE",2,5,2,5
+"Emergency surgery required","MEDICAL","MEDICAL",3,6,3,6
+"Truck collision on bridge","ACCIDENT","ACCIDENT",4,7,4,7
+"Fire detected in lab","FIRE","FIRE",0,2,0,2
+"River overflowing in village","FLOOD","FLOOD",1,3,1,3
+"Seismic sensor alert","EARTHQUAKE","EARTHQUAKE",2,4,2,4
+"Ambulance needed immediately","MEDICAL","MEDICAL",3,5,3,5
+"Car crash at intersection","ACCIDENT","ACCIDENT",4,6,4,6
+"Smoke in factory","FIRE","FIRE",0,1,0,1
+"Flooding in parking","FLOOD","FLOOD",1,2,1,2
+"Earthquake magnitude 4","EARTHQUAKE","EARTHQUAKE",2,3,2,3
+"Medical emergency in mall","MEDICAL","MEDICAL",3,4,3,4
+"Traffic accident on highway","ACCIDENT","ACCIDENT",4,5,4,5
+"Fire in office building","FIRE","FIRE",0,3,0,3
+"Flood water in street","FLOOD","FLOOD",1,4,1,4
+"Earthquake reported in city","EARTHQUAKE","EARTHQUAKE",2,5,2,5
+"Critical patient at clinic","MEDICAL","MEDICAL",3,6,3,6
+"Multi-vehicle accident","ACCIDENT","ACCIDENT",4,7,4,7
+"Smoke near storage area","FIRE","FIRE",0,2,0,2
+"Flooded neighborhood","FLOOD","FLOOD",1,3,1,3
+"Seismic alert raised","EARTHQUAKE","EARTHQUAKE",2,4,2,4
+"Heart emergency at home","MEDICAL","MEDICAL",3,5,3,5
+"Collision on main road","ACCIDENT","ACCIDENT",4,6,4,6
+"Fire alarm in school","FIRE","FIRE",0,1,0,1
+"Rising flood levels","FLOOD","FLOOD",1,2,1,2
+"Minor tremor detected","EARTHQUAKE","EARTHQUAKE",2,3,2,3
+"Medical assistance needed","MEDICAL","MEDICAL",3,4,3,4
+"Road accident on bridge","ACCIDENT","ACCIDENT",4,5,4,5
+"Smoke in chemical lab","FIRE","FIRE",0,3,0,3
+"Flooding in downtown","FLOOD","FLOOD",1,4,1,4
+"Earthquake felt in sector 2","EARTHQUAKE","EARTHQUAKE",2,5,2,5
+"Emergency surgery at hospital","MEDICAL","MEDICAL",3,6,3,6
+"Collision near stadium","ACCIDENT","ACCIDENT",4,7,4,7
+
