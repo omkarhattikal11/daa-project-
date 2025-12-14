@@ -113,44 +113,48 @@ vector<int> greedyRoute(vector<vector<int> >& dist) {
 
 // ------------------- MAIN -------------------
 int main() {
-    Graph g(6);
+    int V, E;
+    cout << "Enter number of nodes in the graph: ";
+    cin >> V;
+    Graph g(V);
 
-    g.addEdge(0,1,4);
-    g.addEdge(1,2,3);
-    g.addEdge(2,3,6);
-    g.addEdge(3,4,2);
-    g.addEdge(4,5,5);
-    g.addEdge(0,5,10);
+    cout << "Enter number of edges: ";
+    cin >> E;
+    cout << "Enter edges (u v w) with 0-based indexing:\n";
+    for(int i=0;i<E;i++) {
+        int u,v,w;
+        cin >> u >> v >> w;
+        g.addEdge(u,v,w);
+    }
 
     cout << "\n--- Scenario 1: Peak Hour Optimization (Dijkstra) ---\n";
-    vector<int> d = dijkstra(g, 0);
+    int src;
+    cout << "Enter source node: ";
+    cin >> src;
+    vector<int> d = dijkstra(g, src);
     for(size_t i=0;i<d.size();i++)
         cout << "Distance to " << i << " = " << d[i] << endl;
 
     cout << "\n--- Scenario 3: Emergency Route (A*) ---\n";
-    cout << "Fastest path cost from 0 to 5 = " << Astar(g,0,5) << endl;
+    int start, goal;
+    cout << "Enter start and goal nodes for emergency route: ";
+    cin >> start >> goal;
+    cout << "Fastest path cost from " << start << " to " << goal << " = " << Astar(g,start,goal) << endl;
 
     cout << "\n--- Scenario 2: Bus Route Optimization (Greedy) ---\n";
-
-    int arr[5][5] = {
-        {0,4,6,7,8},
-        {4,0,2,5,7},
-        {6,2,0,3,4},
-        {7,5,3,0,2},
-        {8,7,4,2,0}
-    };
-
-    vector<vector<int> > dist(5, vector<int>(5));
-    for(int i=0;i<5;i++)
-        for(int j=0;j<5;j++)
-            dist[i][j] = arr[i][j];
+    int n;
+    cout << "Enter number of bus stops: ";
+    cin >> n;
+    vector<vector<int> > dist(n, vector<int>(n));
+    cout << "Enter distance matrix:\n";
+    for(int i=0;i<n;i++)
+        for(int j=0;j<n;j++)
+            cin >> dist[i][j];
 
     vector<int> route = greedyRoute(dist);
-
     cout << "Optimized Bus Route: ";
     for(size_t i = 0; i < route.size(); i++)
         cout << route[i] << " ";
-
     cout << endl;
 
     return 0;
