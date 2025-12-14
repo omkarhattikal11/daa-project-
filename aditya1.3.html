@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Smart City – Algorithm Solutions</title>
+<title>Flood & Water-Level Monitoring System – Algorithm Solutions</title>
 
 <style>
   :root{
     --bg-dark: #0d1117;      
     --text-light: #e6eef3;
-    --accent-1: #00f5d4;        /* Problem + Solution */
-    --accent-2: #d97706;        /* Algorithms + Data Structures - dark amber */
-    --accent-3: #6b21a8;        /* SDGs - dark violet */
+    --accent-1: #00f5d4;        
+    --accent-2: #d97706;        
+    --accent-3: #6b21a8;        
     --card-radius: 14px;
     --shadow-dark: rgba(0,0,0,0.5);
     --max-width: 900px;
@@ -28,7 +28,6 @@
     line-height:1.5;
   }
 
-  /* NAVBAR */
   .navbar{
     position:fixed; top:8px; left:50%; transform:translateX(-50%);
     width:calc(100% - 40px); max-width:var(--max-width);
@@ -51,11 +50,9 @@
   nav a{ text-decoration:none; color:var(--text-light); font-weight:600; padding:8px 12px; border-radius:8px; font-size:14px; transition: all .18s ease; }
   nav a:hover{ color:#00f5d4; transform:translateY(-2px); }
 
-  /* WRAPPER */
   .wrap{ max-width:var(--max-width); margin:28px auto; padding:28px; }
   h1{ font-size:28px; margin-bottom:24px; text-align:center; color:var(--text-light); }
 
-  /* CARD STYLES */
   .card-container{ display:flex; flex-direction:column; gap:22px; }
 
   .card{
@@ -74,96 +71,140 @@
   .card th, .card td{ border:1px solid rgba(255,255,255,0.2); padding:10px; text-align:left; font-size:14px; }
   .card th{ background-color: rgba(0,0,0,0.3); color: var(--text-light); }
 
-  /* DISTINCT GRADIENTS */
   .problem-solution-card{ background: linear-gradient(135deg,#00f5d4,#3b82f6); color:#0d1117; }
-  .algo-datastruct-card{ background: linear-gradient(135deg,#b45309,#78350f); color:#f3f3f3; } /* dark amber/brown */
-  .sdg-card{ background: linear-gradient(135deg,#5b21b6,#3b0764); color:#f3f3f3; } /* dark violet */
+  .algo-datastruct-card{ background: linear-gradient(135deg,#b45309,#78350f); color:#f3f3f3; }
+  .sdg-card{ background: linear-gradient(135deg,#5b21b6,#3b0764); color:#f3f3f3; }
+  .efficiency-card{ background: linear-gradient(135deg,#3b82f6,#10b981); color:#0d1117; }
+  .transfer-card{ background: linear-gradient(135deg,#facc15,#b45309); color:#0d1117; }
 
   footer{ margin-top:34px; color:var(--text-light); font-size:14px; text-align:center; padding:18px 6px; }
+
+  /* Flow Diagram CSS */
+  .flow-diagram {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top:20px;
+    gap:10px;
+  }
+  .flow-box {
+    background: rgba(255,255,255,0.15);
+    padding:12px 20px;
+    border-radius:10px;
+    width:250px;
+    text-align:center;
+    font-weight:600;
+  }
+  .flow-arrow {
+    font-size:20px;
+    font-weight:700;
+    color:#f3f3f3;
+  }
 </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="logo">
-      <div class="dot">CD</div>
-      <div>
-        <div style="font-weight:800">CITY DESIGN</div>
-        <div style="font-size:12px;color:var(--text-light);margin-top:2px">DAA — Design & Analysis of Algorithms</div>
-      </div>
+<header class="navbar">
+  <div class="logo">
+    <div class="dot">CD</div>
+    <div>
+      <div style="font-weight:800">CITY DESIGN</div>
+      <div style="font-size:12px;color:var(--text-light);margin-top:2px">DAA — Design & Analysis of Algorithms</div>
     </div>
-    <nav>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="aditya.html">BACK</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="wrap">
+  <h1>Flood & Water-Level Monitoring System</h1>
+
+  <div class="card-container">
+
+    <div class="card problem-solution-card">
+      <h2>1 • Problem Statement & Solution Overview</h2>
+      <h3>Problem Statement:</h3>
       <ul>
-        <li><a href="aditya.html">BACK</a></li>
+        <li>Floods occur due to heavy rainfall, overflow of rivers/dams, and poor drainage systems. Most areas lack real-time monitoring.</li>
       </ul>
-    </nav>
-  </header>
-
-  <!-- PAGE CONTENT -->
-  <main class="wrap">
-    <h1></h1>Flood & Water-Level Monitoring System</h1>
-
-    <div class="card-container">
-
-      <!-- PROBLEM + SOLUTION -->
-      <div class="card problem-solution-card">
-        <h2>1 • Problem Statement & Solution Overview</h2>
-        <h3>Problem Statement:</h3>
-        <ul>
-          <li>Floods occur due to heavy rainfall, overflow of rivers/dams, and poor drainage.
-Most areas lack real-time monitoring, so warnings come too late.</li>
-          
-        </ul>
-        <h3>Solution Overview:</h3>
-        <ul>
-          <li>Measure water height in rivers, lakes, dams, and drainage channels.</li>
-          <li>Track rainfall intensity and predict rising water levels.</li>
-          <li>Send real-time data to a central server or cloud.</li>
-          <li>Analyze water data and give alerts</li>
-        </ul>
-      </div>
-
-      <!-- ALGORITHMS + DATA STRUCTURES -->
-      <div class="card algo-datastruct-card">
-        <h2>2 • Algorithms & Data Structures</h2>
-        <table>
-          <tr><th>Task</th><th>Algorithm / Data Structure</th></tr>
-          <tr><td>Store continuous readings (water-level history).</td><td>Arrays</td></tr>
-          <tr><td>Handle real-time sensor input (FIFO live data stream).</td><td>Queue</td></tr>
-          <tr><td>Find the highest recorded water level quickly.</td><td>Max-Heap</td></tr>
-          <tr><td>Simulate how water spreads across land.</td><td>BFS</td></tr>
-          <tr><td>Store and check sensor ID → location instantly.</td><td>Hashing (Lookup Table)</td></tr>
-          <tr><td>Sort water levels to find trends (rising/falling).</td><td>Selection Sort</td></tr>
-        </table>
-        <!--
-        <h3>Data Structures Used:</h3>
-        <ul>
-          <li><strong>Graph:</strong> Road network representation (nodes = junctions, edges = roads).</li>
-          <li><strong>Priority Queue (Heap):</strong> Dispatch vehicles efficiently.</li>
-          <li><strong>Queue:</strong> Simulate vehicles in line at stops.</li>
-          <li><strong>Array / List:</strong> Store schedules and historical data.</li>
-          <li><strong>Trie:</strong> Fast lookup of routes and stops.</li>
-        </ul>
-        -->
-      </div>
-
-      <!-- SDGs -->
-      <div class="card sdg-card">
-        <h2>3 • Sustainable Development Goals (SDGs)</h2>
-        <ul>
-          <li><strong>SDG 11:</strong> Sustainable Cities – Protect cities from disasters.</li>
-          <li><strong>SDG 6:</strong> Clean Water & Sanitation – Safe water management.</li>
-          <li><strong>SDG 13:</strong> Climate Action – Climate action & prediction.</li>
-        </ul>
-      </div>
-
+      <h3>Solution Overview:</h3>
+      <ul>
+        <li>Real-time monitoring using sensors in rivers, lakes, dams, and drainage channels.</li>
+        <li>Store continuous readings for historical analysis.</li>
+        <li>Track rainfall and predict rising water levels; send alerts to authorities and citizens.</li>
+        <li>Sort and analyze water-level trends to detect high-risk areas.</li>
+        <li>Simulate water spread using graph traversal algorithms (BFS) for preparedness.</li>
+      </ul>
     </div>
-  </main>
 
-  <footer>
-    © City Design — DAA • KLE Technological University • Built by the project team
-  </footer>
+    <div class="card algo-datastruct-card">
+      <h2>2 • Algorithms & Data Structures</h2>
+      <table>
+        <tr><th>Task</th><th>Algorithm / Data Structure</th><th>Time Complexity</th><th>Space Complexity</th></tr>
+        <tr><td>Store continuous water-level readings</td><td>Array</td><td>O(1) access, O(n) insertion</td><td>O(n)</td></tr>
+        <tr><td>Handle real-time sensor input (FIFO)</td><td>Queue</td><td>O(1) enqueue/dequeue</td><td>O(n)</td></tr>
+        <tr><td>Find highest recorded water level</td><td>Max-Heap</td><td>O(log n) insert, O(1) max</td><td>O(n)</td></tr>
+        <tr><td>Simulate water spread</td><td>BFS</td><td>O(V + E)</td><td>O(V)</td></tr>
+        <tr><td>Lookup sensor ID → location</td><td>Hash Table</td><td>O(1) average, O(n) worst</td><td>O(n)</td></tr>
+        <tr><td>Sort water levels to find trends</td><td>Selection Sort</td><td>O(n²)</td><td>O(1)</td></tr>
+      </table>
+
+      <!-- Flow Diagram -->
+      <h3>Algorithm Implementation Flow</h3>
+      <div class="flow-diagram">
+        <div class="flow-box">Sensors</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Data Collection (Array / Queue)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Processing (Max-Heap / BFS / Hash Table)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Trend Analysis (Selection Sort)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Alerts & Notifications</div>
+      </div>
+    </div>
+
+    <div class="card efficiency-card">
+      <h2>3 • Time & Space Efficiency Analysis</h2>
+      <ul>
+        <li>Arrays: Efficient for historical data; O(1) access, O(n) insertion.</li>
+        <li>Queue: Ideal for live sensor data; O(1) enqueue/dequeue.</li>
+        <li>Max-Heap: Quickly identifies highest water level; insert O(log n), max O(1).</li>
+        <li>BFS: Simulates water spread; time O(V+E), space O(V).</li>
+        <li>Hash Table: Fast sensor lookup; average O(1).</li>
+        <li>Selection Sort: Trend analysis; simple but O(n²), not for large datasets.</li>
+      </ul>
+    </div>
+
+    <div class="card sdg-card">
+      <h2>4 • SDG Alignment</h2>
+      <ul>
+        <li><strong>SDG 11:</strong> Sustainable Cities – Protect cities from floods.</li>
+        <li><strong>SDG 6:</strong> Clean Water & Sanitation – Ensure proper water-level management.</li>
+        <li><strong>SDG 13:</strong> Climate Action – Predict flood risks from extreme rainfall.</li>
+      </ul>
+    </div>
+
+    <div class="card transfer-card">
+      <h2>5 • Transfer of Knowledge</h2>
+      <ul>
+        <li>Sensor Data Handling</li>
+        <li>Simulation & Graph Algorithms</li>
+        <li>Alert & Priority Systems</li>
+        <li>Trend Analysis & Sorting</li>
+        <li>Algorithmic Efficiency</li>
+      </ul>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  © City Design — DAA • KLE Technological University • Built by the project team
+</footer>
 
 </body>
 </html>
