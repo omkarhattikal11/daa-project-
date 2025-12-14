@@ -1,100 +1,98 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <unordered_map>
+#include <algorithm>
+#include <utility> // for pair
 using namespace std;
 
-// ----------- Structure for Sensor -------------
-struct Sensor {
-    float level;   // water level
-    float rain;    // rainfall
-    long time;     // timestamp
-};
-
-queue<Sensor> liveData;          // real-time queue
-priority_queue<float> maxHeap;   // maximum water level
-unordered_map<int,string> sensorLocation; // hashing lookup table
-
-// ---------- BFS Flood Spread Simulation ----------
-void floodBFS(vector<vector<int>>& grid, int x, int y) {
-    int n = grid.size();
-    int m = grid[0].size();
+// BFS simulation for water spread
+void bfsFloodSimulation(vector<vector<int>>& cityGrid, int startX, int startY) {
+    int rows = cityGrid.size();
+    int cols = cityGrid[0].size();
+    vector<vector<bool>> visited(rows, vector<bool>(cols, false));
     queue<pair<int,int>> q;
-    q.push({x,y});
 
-    int dx[4] = {1,-1,0,0};
-    int dy[4] = {0,0,1,-1};
+    q.push({startX, startY});
+    visited[startX][startY] = true;
 
+    int dx[] = {-1, 1, 0, 0};
+    int dy[] = {0, 0, -1, 1};
+
+    cout << "\nFlood Simulation BFS:\n";
     while(!q.empty()) {
-        auto [a,b] = q.front(); q.pop();
+        pair<int,int> pos = q.front(); q.pop();
+        int x = pos.first;
+        int y = pos.second;
+        cout << "Flood reached: (" << x << "," << y << ")\n";
 
-        for(int i=0;i<4;i++){
-            int nx = a + dx[i];
-            int ny = b + dy[i];
-
-            if(nx>=0 && ny>=0 && nx<n && ny<m && grid[nx][ny]==0){
-                grid[nx][ny] = 1; // mark flooded
-                q.push({nx,ny});
+        for(int i = 0; i < 4; i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            if(nx >= 0 && nx < rows && ny >= 0 && ny < cols
+               && !visited[nx][ny] && cityGrid[nx][ny] == 0) {
+                visited[nx][ny] = true;
+                q.push({nx, ny});
             }
         }
     }
 }
 
-// ----------- Selection Sort for Trend Analysis -----------
-void selectionSort(vector<float>& arr) {
-    int n = arr.size();
-    for(int i=0;i<n;i++){
-        int minIndex = i;
-        for(int j=i+1;j<n;j++)
-            if(arr[j] < arr[minIndex])
-                minIndex = j;
-        swap(arr[i], arr[minIndex]);
-    }
-}
-
-// ------------------ Main Program ------------------
 int main() {
+    int n;
+    cout << "Enter number of water-level readings: ";
+    cin >> n;
 
-    // Hash table (sensor ID -> location)
-    sensorLocation[101] = "River Bank";
-    sensorLocation[102] = "Dam Gate";
+    vector<int> waterLevels(n);
+    queue<int> liveDataQueue;
+    unordered_map<int, string> sensorLocations;
 
-    // Sample sensors
-    Sensor s1 = {3.5, 10, 100};
-    Sensor s2 = {4.8, 20, 110};
-    Sensor s3 = {5.5, 30, 120}; // high value
+    cout << "Enter water-level readings (meters):\n";
+    for(int i = 0; i < n; i++) {
+        cin >> waterLevels[i];
+        liveDataQueue.push(waterLevels[i]);
+    }
 
-    liveData.push(s1);
-    liveData.push(s2);
-    liveData.push(s3);
+    // Example sensor locations
+    sensorLocations[101] = "River A";
+    sensorLocations[102] = "Dam B";
 
-    maxHeap.push(s1.level);
-    maxHeap.push(s2.level);
-    maxHeap.push(s3.level);
+    // Max-Heap to find highest water level
+    priority_queue<int> maxHeap(waterLevels.begin(), waterLevels.end());
+    cout << "\nHighest Water Level: " << maxHeap.top() << " meters\n";
 
-    cout << "Highest water level: " << maxHeap.top() << " m\n";
+    // Trend Analysis using Selection Sort
+    vector<int> sortedLevels = waterLevels;
+    for(int i = 0; i < n-1; i++){
+        int minIdx = i;
+        for(int j = i+1; j < n; j++){
+            if(sortedLevels[j] < sortedLevels[minIdx])
+                minIdx = j;
+        }
+        swap(sortedLevels[i], sortedLevels[minIdx]);
+    }
 
-    // Lookup using hashing
-    cout << "Sensor 101 located at: " << sensorLocation[101] << "\n";
+    cout << "Water Level Trends (sorted): ";
+    for(int level : sortedLevels) cout << level << " ";
+    cout << "\n";
 
-    // Sorting trend
-    vector<float> levels = {s1.level, s2.level, s3.level};
-    selectionSort(levels);
-
-    cout << "Sorted water levels: ";
-    for(float x : levels) cout << x << " ";
-    cout << endl;
-
-    // Flood simulation grid
-    vector<vector<int>> area = {
-        {0,0,0},
-        {0,1,0}, // flood starts here
-        {0,0,0}
+    // Sample city grid BFS
+    vector<vector<int>> cityGrid = {
+        {0,0,0,1,0},
+        {0,1,0,1,0},
+        {0,1,0,0,0},
+        {0,0,0,1,0}
     };
+    bfsFloodSimulation(cityGrid, 0, 0);
 
-    floodBFS(area, 1, 1);
-
-    cout << "\nFlood Spread Simulation:\n";
-    for(auto &row : area){
-        for(int cell : row) cout << cell << " ";
-        cout << endl;
+    // Alerts
+    const int threshold = 6;
+    cout << "\nAlerts:\n";
+    while(!liveDataQueue.empty()) {
+        int reading = liveDataQueue.front(); liveDataQueue.pop();
+        if(reading >= threshold) {
+            cout << "ALERT! Water level high: " << reading << " meters\n";
+        }
     }
 
     return 0;
