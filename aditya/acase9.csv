@@ -1,12 +1,8 @@
-# ----------------- ZONES -----------------
-ZoneCount
-50
+# Zones and Roads
+Zones,Roads
+50,70
 
-# ----------------- ROADS -----------------
-RoadCount
-70
-
-# ----------------- EDGES -----------------
+# Edges (u,v,weight)
 u,v,weight
 0,1,4
 0,2,7
@@ -90,11 +86,11 @@ u,v,weight
 2,27,5
 3,28,8
 
-# ----------------- SOURCE HOSPITAL -----------------
+# Source Hospital Zone
 Source
 0
 
-# ----------------- RESOURCES -----------------
+# Resources (name, urgency)
 name,urgency
 Water,15
 Food,12
