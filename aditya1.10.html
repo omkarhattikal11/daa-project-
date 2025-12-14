@@ -102,7 +102,7 @@
 
   <!-- PAGE CONTENT -->
   <main class="wrap">
-    <h1>industrial goods transport optimization</h1>
+    <h1>Industrial Goods Transport Optimization</h1>
 
     <div class="card-container">
 
@@ -124,7 +124,7 @@
           <li>Compute shortest-path distances between nodes using Dijkstra once (or on demand).</li>
           <li>Use a priority queue to schedule urgent shipments first.</li>
           <li>Locally improve each vehicle route using 2-opt swaps to reduce distance.</li>
-          <li>Compute metrics: total distance, total cost, estimated fuel & CO₂, number of vehicles used, service of priorities..</li>
+          <li>Compute metrics: total distance, total cost, estimated fuel & CO₂, number of vehicles used, service of priorities.</li>
           <li>Provide simple what-if: add vehicle, re-run assignment.</li>
         </ul>
       </div>
@@ -133,7 +133,7 @@
       <div class="card algo-datastruct-card">
         <h2>2 • Algorithms & Data Structures</h2>
         <table>
-          <tr><th>Algorithm / Data Structure</th><th>purpose</th></tr>
+          <tr><th>Algorithm / Data Structure</th><th>Purpose</th></tr>
           <tr><td>Graph (adjacency list)</td><td>for road network</td></tr>
           <tr><td>Dijkstra’s algorithm</td><td>for shortest paths between nodes</td></tr>
           <tr><td>Priority Queue (max-heap)</td><td>to process urgent shipments first</td></tr>
@@ -144,14 +144,69 @@
         </table>
       </div>
 
+      <!-- EFFICIENCY ANALYSIS -->
+      <div class="card algo-datastruct-card">
+        <h2>3 • Efficiency Analysis</h2>
+        <table>
+          <tr>
+            <th>Algorithm / Data Structure</th>
+            <th>Time Complexity</th>
+            <th>Space Complexity</th>
+            <th>Notes</th>
+          </tr>
+          <tr>
+            <td>Graph (adjacency list)</td>
+            <td>O(V + E)</td>
+            <td>O(V + E)</td>
+            <td>Efficient storage for sparse road networks</td>
+          </tr>
+          <tr>
+            <td>Dijkstra’s algorithm (with min-heap)</td>
+            <td>O((V + E) log V)</td>
+            <td>O(V + E)</td>
+            <td>Computes shortest paths from a source to all nodes efficiently</td>
+          </tr>
+          <tr>
+            <td>Priority Queue (max-heap)</td>
+            <td>O(log n) insertion/extraction</td>
+            <td>O(n)</td>
+            <td>Schedules urgent shipments first</td>
+          </tr>
+          <tr>
+            <td>Greedy nearest-neighbor routing</td>
+            <td>O(n²) for n stops per vehicle</td>
+            <td>O(n)</td>
+            <td>Fast heuristic for initial VRP solution</td>
+          </tr>
+          <tr>
+            <td>2-Opt local search</td>
+            <td>O(k * n²) typical, k = number of improvement iterations</td>
+            <td>O(n)</td>
+            <td>Improves route length locally; depends on iteration limit</td>
+          </tr>
+          <tr>
+            <td>Sorting & greedy bin-packing</td>
+            <td>O(n log n)</td>
+            <td>O(n)</td>
+            <td>Assigns shipments to vehicles by capacity efficiently</td>
+          </tr>
+          <tr>
+            <td>Hash maps (unordered_map)</td>
+            <td>O(1) average lookup/insert</td>
+            <td>O(n)</td>
+            <td>Fast mapping of shipment IDs to nodes or vehicles</td>
+          </tr>
+        </table>
+      </div>
+
       <!-- SDGs -->
       <div class="card sdg-card">
-        <h2>3 • Sustainable Development Goals (SDGs)</h2>
+        <h2>4 • Sustainable Development Goals (SDGs)</h2>
         <ul>
           <li><strong>SDG 11:</strong> Sustainable Cities – reduce congestion and emissions.</li>
-          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure –smarter logistics and resilient supply chains.</li>
+          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – smarter logistics and resilient supply chains.</li>
           <li><strong>SDG 13:</strong> Climate Action – lower greenhouse gases through optimized routing.</li>
-           <li><strong>SDG 12:</strong> Responsible Consumption & Production– efficient transport reduces resource waste.</li>
+          <li><strong>SDG 12:</strong> Responsible Consumption & Production – efficient transport reduces resource waste.</li>
         </ul>
       </div>
 
