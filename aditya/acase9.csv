@@ -88,7 +88,7 @@ Roads,70
 # Source Hospital Zone
 Source,0
 
-# Resources (name, urgency)
+# Resources (name,urgency)
 ResourceCount,50
 Water,15
 Food,12
@@ -138,4 +138,3 @@ Spray,8
 Soap,14
 Shovel,12
 Wheelbarrow,7
-
