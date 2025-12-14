@@ -5059,321 +5059,113 @@ Extremely fast for zone merging operations.
                         <span class="code-title">C++ Code</span>
                         <button class="copy-btn">Copy Code</button>
                     </div>
-<pre>// resilient_mst.cpp
-// Compile: g++ -std=c++17 -O2 resilient_mst.cpp -o resilient_mst
-// Run: ./resilient_mst < input.txt
-//
-// Input format:
-// N M
-// M lines: u v w   (1-based nodes)
-// Example below in comments.
+<pre>// resilient_mst_moderate.cpp
+// Prim's MST + Second Best MST (single-edge failure handling)
 
 #include <bits/stdc++.h>
 using namespace std;
-using ll = long long;
-const ll INF = (1LL<<60);
 
-struct Edge { int u, v; ll w; int idx; };
+struct Edge {
+    int u, v;
+    int w;
+};
 
-int main(){
+const int INF = 1e9;
+
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
     int N, M;
-    if(!(cin >> N >> M)) {
-        cerr << "Expected N M\n";
-        return 1;
+    cin >> N >> M;
+
+    vector<Edge> edges(M);
+    vector<vector<pair<int,int>>> adj(N);
+
+    for (int i = 0; i < M; i++) {
+        int u, v, w;
+        cin >> u >> v >> w;
+        u--; v--;
+        edges[i] = {u, v, w};
+        adj[u].push_back({v, w});
+        adj[v].push_back({u, w});
     }
 
-    vector<Edge> edges;
-    edges.reserve(M);
-    for(int i=0;i<M;++i){
-        int u,v; ll w; cin >> u >> v >> w;
-        --u; --v;
-        edges.push_back({u,v,w,i});
-    }
+    // --------- Prim’s Algorithm ----------
+    vector<int> key(N, INF), parent(N, -1);
+    vector<bool> inMST(N, false);
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<>> pq;
 
-    // Build adjacency list (for Prim)
-    vector<vector<pair<int,ll>>> adj(N);
-    for(auto &e: edges){
-        adj[e.u].push_back({e.v, e.w});
-        adj[e.v].push_back({e.u, e.w});
-    }
+    key[0] = 0;
+    pq.push({0, 0});
 
-    // Prim's algorithm to build MST and capture which edges are chosen (by weight + endpoints)
-    vector<char> inMST_edge(M, 0); // we'll detect chosen edges by matching endpoints+weight (we'll map later)
-    vector<ll> minCost(N, INF);
-    vector<int> parentNode(N, -1);
-    vector<ll> parentEdgeW(N, 0);
-    vector<int> parentEdgeIdx(N, -1);
+    while (!pq.empty()) {
+        auto [cost, u] = pq.top();
+        pq.pop();
 
-    // We'll need mapping from (u,v,w) to list of indices; create multimap-like by tuple key
-    unordered_multimap<long long, int> edgeKeyToIdx;
-    // key = ((ll)min(u,v) << 32) ^ ((ll)max(u,v) << 8) ^ (w & 0xffffffff) -- but to avoid collisions use hashing pair
-    // Simpler: store mapping by string key (safe here)
-    unordered_map<string, vector<int>> keymap;
-    keymap.reserve(M*2);
+        if (inMST[u]) continue;
+        inMST[u] = true;
 
-    auto make_key = [&](int a, int b, ll w)->string{
-        if(a>b) swap(a,b);
-        return to_string(a) + "#" + to_string(b) + "#" + to_string(w);
-    };
-    for(auto &e: edges) keymap[make_key(e.u,e.v,e.w)].push_back(e.idx);
-
-    // Prim starting from node 0 (assume connected; will check)
-    using pli = pair<ll,int>;
-    priority_queue<pli, vector<pli>, greater<pli>> pq;
-    minCost[0] = 0;
-    pq.push({0,0});
-
-    vector<char> vis(N,0);
-    vector<Edge> mstEdges; mstEdges.reserve(N-1);
-
-    while(!pq.empty()){
-        auto [c,u] = pq.top(); pq.pop();
-        if(vis[u]) continue;
-        vis[u] = 1;
-        if(parentNode[u] != -1){
-            // record MST edge (parentNode[u] -- u)
-            mstEdges.push_back({parentNode[u], u, parentEdgeW[u], parentEdgeIdx[u]});
-        }
-        for(auto &pr : adj[u]){
-            int v = pr.first; ll w = pr.second;
-            if(!vis[v] && w < minCost[v]){
-                minCost[v] = w;
-                parentNode[v] = u;
-                parentEdgeW[v] = w;
+        for (auto [v, w] : adj[u]) {
+            if (!inMST[v] && w < key[v]) {
+                key[v] = w;
+                parent[v] = u;
                 pq.push({w, v});
             }
         }
     }
 
-    // Check connected
-    for(int i=0;i<N;++i) if(!vis[i]) {
-        cout << "Graph is disconnected — cannot build spanning network.\n";
-        return 0;
+    int mstCost = 0;
+    vector<vector<pair<int,int>>> mstAdj(N);
+
+    for (int i = 1; i < N; i++) {
+        mstCost += key[i];
+        mstAdj[i].push_back({parent[i], key[i]});
+        mstAdj[parent[i]].push_back({i, key[i]});
     }
 
-    // Now we must map each MST edge (u,v,w) to a concrete input edge index.
-    // For each recorded MST edge (u,v,w) find a matching input edge index (pop from keymap)
-    vector<int> mstEdgeIndex; mstEdgeIndex.reserve(mstEdges.size());
-    for(auto &me: mstEdges){
-        string k = make_key(me.u, me.v, me.w);
-        auto it = keymap.find(k);
-        if(it == keymap.end() || it->second.empty()){
-            // Should not happen in normal data, but handle gracefully by marking -1
-            mstEdgeIndex.push_back(-1);
-        } else {
-            int idx = it->second.back();
-            it->second.pop_back();
-            mstEdgeIndex.push_back(idx);
-            inMST_edge[idx] = 1;
-        }
-    }
+    // --------- Helper: max edge on path (DFS) ----------
+    function<bool(int,int,int,int&,vector<bool>&)> dfs =
+        [&](int u, int target, int parent, int &mx, vector<bool> &vis) {
+            if (u == target) return true;
+            vis[u] = true;
 
-    // Compute MST total cost
-    ll mstCost = 0;
-    for(auto &me: mstEdges) mstCost += me.w;
-
-    // Build MST adjacency for tree operations
-    vector<vector<pair<int,ll>>> tree(N);
-    vector<pair<pair<int,int>,ll>> mstEdgeList; mstEdgeList.reserve(mstEdges.size());
-    for(auto &me: mstEdges){
-        tree[me.u].push_back({me.v, me.w});
-        tree[me.v].push_back({me.u, me.w});
-        mstEdgeList.push_back({{me.u, me.v}, me.w});
-    }
-
-    // Binary lifting preprocess: parent[k][v] and maxEdge[k][v]
-    int LOG = 1;
-    while((1<<LOG) <= N) ++LOG;
-    vector<vector<int>> up(LOG, vector<int>(N, -1));
-    vector<vector<ll>> maxUp(LOG, vector<ll>(N, 0));
-    vector<int> depth(N,0);
-
-    // DFS to fill up[0] and depth and maxUp[0]
-    function<void(int,int)> dfs = [&](int u, int p){
-        for(auto &pr: tree[u]){
-            int v = pr.first; ll w = pr.second;
-            if(v == p) continue;
-            depth[v] = depth[u] + 1;
-            up[0][v] = u;
-            maxUp[0][v] = w;
-            dfs(v, u);
-        }
-    };
-    up[0][0] = -1; maxUp[0][0] = 0; depth[0] = 0;
-    dfs(0,-1);
-
-    for(int k=1;k<LOG;++k){
-        for(int v=0;v<N;++v){
-            if(up[k-1][v] != -1){
-                up[k][v] = up[k-1][ up[k-1][v] ];
-                maxUp[k][v] = max( maxUp[k-1][v], (up[k-1][v]==-1 ? 0 : maxUp[k-1][ up[k-1][v] ]) );
-            } else {
-                up[k][v] = -1;
-                maxUp[k][v] = maxUp[k-1][v];
-            }
-        }
-    }
-
-    auto maxOnPath = [&](int a, int b)->ll{
-        if(a == b) return 0;
-        ll res = 0;
-        if(depth[a] < depth[b]) swap(a,b);
-        int diff = depth[a] - depth[b];
-        for(int k=0;k<LOG;++k) if(diff & (1<<k)){
-            res = max(res, maxUp[k][a]);
-            a = up[k][a];
-        }
-        if(a==b) return res;
-        for(int k=LOG-1;k>=0;--k){
-            if(up[k][a] != -1 && up[k][a] != up[k][b]){
-                res = max(res, maxUp[k][a]);
-                res = max(res, maxUp[k][b]);
-                a = up[k][a];
-                b = up[k][b];
-            }
-        }
-        // now a and b are children of LCA
-        res = max(res, maxUp[0][a]);
-        res = max(res, maxUp[0][b]);
-        return res;
-    };
-
-    // For per-MST-edge replacement tracking:
-    // Map each MST edge (u,v,w) to an id we can index (0..N-2)
-    // We'll use canonical ordering (min,max) to identify edges.
-    unordered_map<long long, int> mstEdgeId; // key -> id
-    auto mk_e_key = [&](int a, int b)->long long{
-        if(a>b) swap(a,b);
-        return ((long long)a<<32) | (unsigned long long)b;
-    };
-    for(int i=0;i<(int)mstEdges.size();++i){
-        int a = mstEdges[i].u, b = mstEdges[i].v;
-        mstEdgeId[ mk_e_key(a,b) ] = i;
-    }
-
-    // Initialize replacement info
-    vector<ll> bestReplacementCostForEdge(mstEdges.size(), INF);
-    vector<int> bestReplacementEdgeIdx(mstEdges.size(), -1);
-
-    ll secondBest = INF;
-    // For each non-MST edge, compute effect
-    for(auto &e: edges){
-        if(inMST_edge[e.idx]) continue;
-        int u = e.u, v = e.v; ll w = e.w;
-        ll maxEdge = maxOnPath(u, v);
-        if(maxEdge == 0 && u==v) continue; // self-loop (unlikely)
-        // replacement total cost:
-        ll candidate = mstCost - maxEdge + w;
-        if(candidate > mstCost && candidate < secondBest) secondBest = candidate;
-        // find which MST edge(s) on path have weight == maxEdge; any of them could be replaced.
-        // To attribute replacement cost per MST edge, we should find specific edge on path with weight == maxEdge.
-        // We'll locate the one nearest to u or v: we can climb to find an edge with that weight.
-        // We'll implement a helper to find any edge id on path with weight == maxEdge.
-        auto findEdgeOnPathWithWeight = [&](int a, int b, ll target)->int{
-            // climb a up
-            if(depth[a] < depth[b]) swap(a,b);
-            int diff = depth[a]-depth[b];
-            for(int k=0;k<LOG;++k) if(diff & (1<<k)){
-                if(maxUp[k][a] == target){
-                    // need to find exact edge lower than or equal to 2^k step - but we can descend
-                    // fallback: we will step down by single steps from a to ancestor to pinpoint
-                    ;
+            for (auto [v, w] : mstAdj[u]) {
+                if (v == parent || vis[v]) continue;
+                if (dfs(v, target, u, mx, vis)) {
+                    mx = max(mx, w);
+                    return true;
                 }
-                a = up[k][a];
             }
-            if(a==b) {
-                // moved; need to find along original route; fallback below
-            }
-            return -1;
+            return false;
         };
-        int a=u, b=v;
-        if(depth[a] < depth[b]) swap(a,b);
-        int aa=a, bb=b;
-        int diff = depth[a]-depth[b];
-        for(int k=0;k<LOG;++k) if(diff & (1<<k)) a = up[k][a];
-        if(a != b){
-            for(int k=LOG-1;k>=0;--k){
-                if(up[k][a] != -1 && up[k][a] != up[k][b]){
-                    a = up[k][a];
-                    b = up[k][b];
-                }
-            }
-            a = up[0][a];
-            b = up[0][b];
-        }
-        int lca = a;
-        // walk from uu->lca
-        int uu = uu = u;
-        bool found = false;
-        // step up from uu until lca
-        while(uu != lca){
-            int p = up[0][uu];
-            ll edgew = maxUp[0][uu];
-            if(edgew == maxEdge){
-                int id = mstEdgeId[ mk_e_key(uu,p) ];
-                if(candidate < bestReplacementCostForEdge[id]){
-                    bestReplacementCostForEdge[id] = candidate;
-                    bestReplacementEdgeIdx[id] = e.idx;
-                }
-                found = true;
-                // don't break: there may be multiple edges equal to maxEdge; we update all (they all could be replaced)
-            }
-            uu = p;
-        }
-        int vv = v;
-        while(vv != lca){
-            int p = up[0][vv];
-            ll edgew = maxUp[0][vv];
-            if(edgew == maxEdge){
-                int id = mstEdgeId[ mk_e_key(vv,p) ];
-                if(candidate < bestReplacementCostForEdge[id]){
-                    bestReplacementCostForEdge[id] = candidate;
-                    bestReplacementEdgeIdx[id] = e.idx;
-                }
-                found = true;
-            }
-            vv = p;
-        }
-        // if !found, it's okay — sometimes due to duplicates weights we may have accounted earlier; continue
+
+    // --------- Second Best MST ----------
+    int secondBest = INF;
+
+    for (auto &e : edges) {
+        if (parent[e.u] == e.v || parent[e.v] == e.u) continue;
+
+        int maxEdge = 0;
+        vector<bool> vis(N, false);
+        dfs(e.u, e.v, -1, maxEdge, vis);
+
+        int candidate = mstCost - maxEdge + e.w;
+        if (candidate > mstCost)
+            secondBest = min(secondBest, candidate);
     }
 
-    cout << "MST total cost: " << mstCost << "\n";
-    cout << "MST edges (u v w) (0-based nodes):\n";
-    for(size_t i=0;i<mstEdges.size();++i){
-        cout << mstEdges[i].u << " " << mstEdges[i].v << " " << mstEdges[i].w
-             << "  (edge_id_input=" << (mstEdgeIndex[i] >=0 ? to_string(mstEdgeIndex[i]) : string("unknown")) << ")\n";
-    }
-    if(secondBest >= INF) cout << "No second-best spanning tree found (graph may have all equal or no replacing edges).\n";
-    else cout << "Second-best MST total cost (best single-edge replacement): " << secondBest << "\n";
+    // --------- Output ----------
+    cout << "MST Cost: " << mstCost << "\n";
 
-    cout << "\nPer-MST-edge cheapest replacement if that edge fails:\n";
-    for(size_t i=0;i<mstEdges.size();++i){
-        auto &me = mstEdges[i];
-        cout << "MST-edge " << i << " (" << me.u << "-" << me.v << " w=" << me.w << "): ";
-        if(bestReplacementCostForEdge[i] >= INF) cout << "NO replacement found (cut has no non-MST crossing edges)\n";
-        else {
-            cout << "replacement total cost = " << bestReplacementCostForEdge[i]
-                 << " using input-edge idx " << bestReplacementEdgeIdx[i] << "\n";
-        }
-    }
-    int K = 3;
-    vector<pair<ll,int>> candidates; // (extra cost, inputEdgeIdx)
-    for(size_t i=0;i<mstEdges.size();++i){
-        if(bestReplacementCostForEdge[i] < INF){
-            ll extra = bestReplacementCostForEdge[i] - mstCost;
-            candidates.push_back({extra, bestReplacementEdgeIdx[i]});
-        }
-    }
-    sort(candidates.begin(), candidates.end());
-    cout << "\nTop " << min((int)candidates.size(), K) << " backup edges to add (cheapest extra cost):\n";
-    for(int i=0;i<(int)candidates.size() && i<K; ++i){
-        cout << " extra=" << candidates[i].first << "  input_edge_idx=" << candidates[i].second << "\n";
-    }
+    if (secondBest == INF)
+        cout << "No second-best MST exists\n";
+    else
+        cout << "Second Best MST Cost: " << secondBest << "\n";
 
-    return 0;}</pre>
+    return 0;
+}
+</pre>
 <div class="case-field">
 <h3>Efficiency Analysis</h3>
 <p>
