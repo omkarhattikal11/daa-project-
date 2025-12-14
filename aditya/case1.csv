@@ -1,29 +1,57 @@
-# Scenario 1 & 3: Graph edges (u,v,w)
-u,v,w
-0,1,4
-0,2,8
-1,2,2
-1,3,5
-2,3,5
-2,4,9
-3,4,3
-3,5,6
-4,5,2
-0,5,15
-1,5,12
-2,5,7
+# Scenario 1 & 3: Graph Edges
+type,u,v,w
+edge,0,1,4
+edge,0,2,8
+edge,1,2,2
+edge,1,3,5
+edge,2,3,5
+edge,2,4,9
+edge,3,4,3
+edge,3,5,6
+edge,4,5,2
+edge,0,5,15
+edge,1,5,12
+edge,2,5,7
 
-# Scenario 1 & 3: Source and Goal (source,goal)
-source,goal
-0,5
+# Source and Goal
+type,source,goal
+source_goal,0,5
 
-# Scenario 2: Bus Distance Matrix (8 stops)
-0,4,6,7,8,9,10,11
-4,0,2,5,7,6,9,10
-6,2,0,3,4,7,5,9
-7,5,3,0,2,6,8,7
-8,7,4,2,0,5,6,8
-9,6,7,6,5,0,3,4
-10,9,5,8,6,3,0,2
-11,10,9,7,8,4,2,0
-
+# Scenario 2: Bus Distance Matrix (6 stops)
+type,from,to,distance
+heuristic,0,0,0
+heuristic,0,1,4
+heuristic,0,2,6
+heuristic,0,3,7
+heuristic,0,4,8
+heuristic,0,5,9
+heuristic,1,0,4
+heuristic,1,1,0
+heuristic,1,2,2
+heuristic,1,3,5
+heuristic,1,4,7
+heuristic,1,5,6
+heuristic,2,0,6
+heuristic,2,1,2
+heuristic,2,2,0
+heuristic,2,3,3
+heuristic,2,4,4
+heuristic,2,5,7
+heuristic,3,0,7
+heuristic,3,1,5
+heuristic,3,2,3
+heuristic,3,3,0
+heuristic,3,4,2
+heuristic,3,5,6
+heuristic,4,0,8
+heuristic,4,1,7
+heuristic,4,2,4
+heuristic,4,3,2
+heuristic,4,4,0
+heuristic,4,5,5
+heuristic,5,0,9
+heuristic,5,1,6
+heuristic,5,2,7
+heuristic,5,3,6
+heuristic,5,4,5
+heuristic,5,5,0
