@@ -102,7 +102,7 @@
 
   <!-- PAGE CONTENT -->
   <main class="wrap">
-    <h1>emergency alert system</h1>
+    <h1>Emergency Alert System</h1>
 
     <div class="card-container">
 
@@ -133,25 +133,73 @@
       <div class="card algo-datastruct-card">
         <h2>2 • Algorithms & Data Structures</h2>
         <table>
-          <tr><th>Algorithm / Data Structure</th><th>purpose</th></tr>
+          <tr><th>Algorithm / Data Structure</th><th>Purpose</th></tr>
           <tr><td>KMP String Search</td><td>Detect “FIRE”, “EARTHQUAKE”, “HELP” etc. in input logs</td></tr>
-          <tr><td>Hashing (unordered_map)</td><td>Instant O(1) identification</td></tr>
+          <tr><td>Hashing (unordered_map)</td><td>Instant O(1) identification of emergency type</td></tr>
           <tr><td>Max-Heap (priority_queue)</td><td>Highest severity alert first</td></tr>
           <tr><td>Queue</td><td>FIFO broadcast delivery</td></tr>
           <tr><td>BFS</td><td>Determine if safe zone can be reached</td></tr>
           <tr><td>Dijkstra</td><td>Shortest time to exit building</td></tr>
         </table>
-  
+      </div>
+
+      <!-- EFFICIENCY ANALYSIS -->
+      <div class="card algo-datastruct-card">
+        <h2>3 • Efficiency Analysis</h2>
+        <table>
+          <tr>
+            <th>Algorithm / Data Structure</th>
+            <th>Time Complexity</th>
+            <th>Space Complexity</th>
+            <th>Notes</th>
+          </tr>
+          <tr>
+            <td>KMP String Search</td>
+            <td>O(n + m) where n = log size, m = pattern length</td>
+            <td>O(m) for prefix array</td>
+            <td>Efficient detection of keywords in logs</td>
+          </tr>
+          <tr>
+            <td>Hash Map</td>
+            <td>O(1) average for insert/lookup</td>
+            <td>O(k) for k emergency types</td>
+            <td>Quick lookup for emergency type</td>
+          </tr>
+          <tr>
+            <td>Max-Heap (priority_queue)</td>
+            <td>O(log h) per insertion/extraction, h = number of alerts</td>
+            <td>O(h)</td>
+            <td>Ensures highest severity alert processed first</td>
+          </tr>
+          <tr>
+            <td>Queue</td>
+            <td>O(1) per insertion/removal</td>
+            <td>O(a), a = number of alerts</td>
+            <td>Maintains order of broadcast</td>
+          </tr>
+          <tr>
+            <td>BFS</td>
+            <td>O(V + E), V = number of zones, E = connections</td>
+            <td>O(V)</td>
+            <td>Find reachable safe zones efficiently</td>
+          </tr>
+          <tr>
+            <td>Dijkstra</td>
+            <td>O(E + V log V) using Min-Heap</td>
+            <td>O(V + E)</td>
+            <td>Finds shortest/safest evacuation paths</td>
+          </tr>
+        </table>
       </div>
 
       <!-- SDGs -->
       <div class="card sdg-card">
-        <h2>3 • Sustainable Development Goals (SDGs)</h2>
+        <h2>4 • Sustainable Development Goals (SDGs)</h2>
         <ul>
           <li><strong>SDG 11:</strong> Sustainable Cities – Supports resilient smart cities with automated safety systems.</li>
-          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – Smart emergency systems strengthen public infrastructure</li>
+          <li><strong>SDG 9:</strong> Industry, Innovation, and Infrastructure – Smart emergency systems strengthen public infrastructure.</li>
           <li><strong>SDG 3:</strong> Good Health & Well-being – Immediate emergency response saves lives.</li>
-          <li><strong>SDG 16:</strong> Peace, Justice & Strong Institutions– Ensures transparent and strong public emergency response.</li>
+          <li><strong>SDG 16:</strong> Peace, Justice & Strong Institutions – Ensures transparent and strong public emergency response.</li>
         </ul>
       </div>
 
