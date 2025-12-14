@@ -1,0 +1,54 @@
+Operation,IP,LoginSuccess,LogData,Signature,SourceNode,TargetNode
+Login,192.168.1.5,0,,,,
+Login,192.168.1.5,0,,,,
+Login,10.0.0.2,0,,,,
+Login,10.0.0.2,1,,,,
+Login,172.16.0.9,0,,,,
+Login,172.16.0.10,0,,,,
+Login,192.168.1.6,0,,,,
+Login,192.168.1.7,1,,,,
+Login,10.0.0.3,0,,,,
+Login,10.0.0.4,0,,,,
+Login,172.16.0.11,0,,,,
+Login,172.16.0.12,1,,,,
+Login,192.168.1.8,0,,,,
+Login,192.168.1.9,1,,,,
+Login,10.0.0.5,0,,,,
+Login,10.0.0.6,0,,,,
+Login,10.0.0.7,1,,,,
+Login,192.168.1.10,0,,,,
+Login,192.168.1.11,0,,,,
+Login,172.16.0.13,0,,,,
+Malware,,,User downloaded malware.exe,malware.exe,,
+Malware,,,User opened harmless.txt,malware.exe,,
+Malware,,,malware.exe detected in temp folder,malware.exe,,
+Malware,,,No threats found,malware.exe,,
+Malware,,,suspicious.exe detected,malware.exe,,
+Malware,,,downloaded trojan.exe,trojan.exe,,
+Malware,,,User opened document.doc,trojan.exe,,
+Malware,,,virus found in file virus.exe,virus.exe,,
+Malware,,,scan complete, clean,virus.exe,,
+Malware,,,malware.exe executed,malware.exe,,
+Malware,,,malware.exe run by user,malware.exe,,
+Malware,,,clean download,malware.exe,,
+Malware,,,trojan.exe in folder,trojan.exe,,
+Malware,,,virus.exe found,virus.exe,,
+Malware,,,no malware detected,malware.exe,,
+Malware,,,user ran malware.exe,malware.exe,,
+Graph,,,,,0,3
+Graph,,,,,1,3
+Graph,,,,,0,2
+Graph,,,,,2,3
+Graph,,,,,1,2
+Graph,,,,,2,0
+Graph,,,,,0,1
+Graph,,,,,3,0
+Graph,,,,,1,0
+Graph,,,,,2,1
+Graph,,,,,3,2
+Graph,,,,,0,3
+Graph,,,,,1,3
+Graph,,,,,0,2
+Graph,,,,,2,3
+Graph,,,,,1,2
+
