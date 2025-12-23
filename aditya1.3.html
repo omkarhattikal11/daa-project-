@@ -3,203 +3,267 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Flood & Water-Level Monitoring System – Algorithm Solutions</title>
+<title>Flood & Water-Level Monitoring System – Smart City Template</title>
 
 <style>
   :root{
-    --bg-dark: #0d1117;      
-    --text-light: #e6eef3;
-    --accent-1: #00f5d4;        
-    --accent-2: #d97706;        
-    --accent-3: #6b21a8;        
-    --card-radius: 14px;
-    --shadow-dark: rgba(0,0,0,0.5);
-    --max-width: 900px;
-    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    --bg-1:#f0f4ff;
+    --section-bg:#ffffff;
+    --text-dark:#1a1a1a;
+    --accent-1:#0077ff;
+    --accent-2:#d97706;
+    --accent-3:#6b21a8;
+    --max-width:900px;
+    font-family:'Inter',sans-serif;
   }
 
-  * { box-sizing: border-box; margin:0; padding:0; }
-  html,body { height:100%; }
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+  }
 
   body{
-    background: var(--bg-dark);
-    color: var(--text-light);
+    background:var(--bg-1);
+    color:var(--text-dark);
     padding-top:78px;
-    line-height:1.5;
+    line-height:1.6;
   }
 
+  /* NAVBAR */
   .navbar{
-    position:fixed; top:8px; left:50%; transform:translateX(-50%);
-    width:calc(100% - 40px); max-width:var(--max-width);
-    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    position:fixed;
+    top:8px;
+    left:50%;
+    transform:translateX(-50%);
+    width:calc(100% - 40px);
+    max-width:var(--max-width);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#ffffffbb;
     padding:12px 18px;
-    background: rgba(255,255,255,0.05);
     border-radius:12px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 6px 30px var(--shadow-dark);
-    z-index:50;
+    backdrop-filter:blur(10px);
+    border:1px solid #d0d8ff;
   }
 
-  .logo{ display:flex; gap:12px; align-items:center; font-weight:700; font-size:18px; }
-  .logo .dot{ width:36px; height:36px; border-radius:9px;
-    background: linear-gradient(135deg,#00f5d4,#3b82f6);
-    display:flex; align-items:center; justify-content:center;
-    color:#0d1117; font-weight:800; box-shadow:0 6px 18px rgba(0,255,212,0.3); }
-
-  nav ul{ display:flex; gap:14px; list-style:none; align-items:center; }
-  nav a{ text-decoration:none; color:var(--text-light); font-weight:600; padding:8px 12px; border-radius:8px; font-size:14px; transition: all .18s ease; }
-  nav a:hover{ color:#00f5d4; transform:translateY(-2px); }
-
-  .wrap{ max-width:var(--max-width); margin:28px auto; padding:28px; }
-  h1{ font-size:28px; margin-bottom:24px; text-align:center; color:var(--text-light); }
-
-  .card-container{ display:flex; flex-direction:column; gap:22px; }
-
-  .card{
-    border-radius:var(--card-radius);
-    padding:24px;
-    box-shadow: 0 8px 30px var(--shadow-dark);
-    border:1px solid rgba(255,255,255,0.1);
+  .logo{
+    display:flex;
+    gap:12px;
+    align-items:center;
   }
 
-  .card h2{ font-size:20px; margin-bottom:12px; }
+  .logo .dot{
+    width:36px;
+    height:36px;
+    border-radius:9px;
+    background:linear-gradient(135deg,#00f5d4,#3b82f6);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    color:#ffffff;
+  }
 
-  .card ul{ padding-left:20px; margin-top:10px; }
-  .card ul li{ margin-bottom:8px; font-size:14px; }
+  nav a{
+    text-decoration:none;
+    color:var(--text-dark);
+    font-weight:600;
+  }
 
-  .card table{ width:100%; border-collapse: collapse; margin-top:12px; color: #0d1117; }
-  .card th, .card td{ border:1px solid rgba(255,255,255,0.2); padding:10px; text-align:left; font-size:14px; }
-  .card th{ background-color: rgba(0,0,0,0.3); color: var(--text-light); }
+  .wrap{
+    max-width:var(--max-width);
+    margin:28px auto;
+    padding:0 22px;
+  }
 
-  .problem-solution-card{ background: linear-gradient(135deg,#00f5d4,#3b82f6); color:#0d1117; }
-  .algo-datastruct-card{ background: linear-gradient(135deg,#b45309,#78350f); color:#f3f3f3; }
-  .sdg-card{ background: linear-gradient(135deg,#5b21b6,#3b0764); color:#f3f3f3; }
-  .efficiency-card{ background: linear-gradient(135deg,#3b82f6,#10b981); color:#0d1117; }
-  .transfer-card{ background: linear-gradient(135deg,#facc15,#b45309); color:#0d1117; }
+  /* SECTION STYLE */
+  .section{
+    background:var(--section-bg);
+    padding:28px 22px;
+    margin-bottom:22px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  }
 
-  footer{ margin-top:34px; color:var(--text-light); font-size:14px; text-align:center; padding:18px 6px; }
+  h1{
+    text-align:center;
+    margin-bottom:32px;
+  }
 
-  /* Flow Diagram CSS */
-  .flow-diagram {
+  h2{
+    margin-bottom:16px;
+    color:var(--accent-1);
+  }
+
+  h3{
+    margin-top:12px;
+    margin-bottom:8px;
+    color:var(--accent-2);
+  }
+
+  ul{
+    padding-left:20px;
+    margin-top:10px;
+  }
+
+  ul li{
+    margin-bottom:6px;
+    font-size:14px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+  }
+
+  th, td{
+    border:1px solid rgba(0,0,0,0.1);
+    padding:8px;
+    text-align:left;
+  }
+
+  th{
+    background:var(--accent-3);
+    color:#fff;
+  }
+
+  /* Flow Diagram */
+  .flow-diagram{
     display:flex;
     flex-direction:column;
     align-items:center;
-    margin-top:20px;
-    gap:10px;
+    margin-top:16px;
+    gap:6px;
   }
-  .flow-box {
-    background: rgba(255,255,255,0.15);
-    padding:12px 20px;
+
+  .flow-box{
+    background:rgba(0,119,255,0.15);
+    padding:10px 16px;
     border-radius:10px;
     width:250px;
     text-align:center;
     font-weight:600;
   }
-  .flow-arrow {
-    font-size:20px;
+
+  .flow-arrow{
+    font-size:18px;
     font-weight:700;
-    color:#f3f3f3;
+    color:var(--accent-2);
   }
+
+  footer{
+    text-align:center;
+    padding:24px;
+    margin-top:24px;
+    color:var(--text-dark);
+  }
+
 </style>
 </head>
+
 <body>
 
 <header class="navbar">
   <div class="logo">
     <div class="dot">CD</div>
-    <div>
-      <div style="font-weight:800">CITY DESIGN</div>
-      <div style="font-size:12px;color:var(--text-light);margin-top:2px">DAA — Design & Analysis of Algorithms</div>
-    </div>
+    <div>Smart City – DAA</div>
   </div>
   <nav>
-    <ul>
-      <li><a href="aditya.html">BACK</a></li>
-    </ul>
+    <a href="#">Back</a>
   </nav>
 </header>
 
 <main class="wrap">
   <h1>Flood & Water-Level Monitoring System</h1>
 
-  <div class="card-container">
-
-    <div class="card problem-solution-card">
-      <h2>1 • Problem Statement & Solution Overview</h2>
-      <h3>Problem Statement:</h3>
-      <ul>
-        <li>Floods occur due to heavy rainfall, overflow of rivers/dams, and poor drainage systems. Most areas lack real-time monitoring.</li>
-      </ul>
-      <h3>Solution Overview:</h3>
-      <ul>
-        <li>Real-time monitoring using sensors in rivers, lakes, dams, and drainage channels.</li>
-        <li>Store continuous readings for historical analysis.</li>
-        <li>Track rainfall and predict rising water levels; send alerts to authorities and citizens.</li>
-        <li>Sort and analyze water-level trends to detect high-risk areas.</li>
-        <li>Simulate water spread using graph traversal algorithms (BFS) for preparedness.</li>
-      </ul>
-    </div>
-
-    <div class="card algo-datastruct-card">
-      <h2>2 • Algorithms & Data Structures</h2>
-      <table>
-        <tr><th>Task</th><th>Algorithm / Data Structure</th><th>Time Complexity</th><th>Space Complexity</th></tr>
-        <tr><td>Store continuous water-level readings</td><td>Array</td><td>O(1) access, O(n) insertion</td><td>O(n)</td></tr>
-        <tr><td>Handle real-time sensor input (FIFO)</td><td>Queue</td><td>O(1) enqueue/dequeue</td><td>O(n)</td></tr>
-        <tr><td>Find highest recorded water level</td><td>Max-Heap</td><td>O(log n) insert, O(1) max</td><td>O(n)</td></tr>
-        <tr><td>Simulate water spread</td><td>BFS</td><td>O(V + E)</td><td>O(V)</td></tr>
-        <tr><td>Lookup sensor ID → location</td><td>Hash Table</td><td>O(1) average, O(n) worst</td><td>O(n)</td></tr>
-        <tr><td>Sort water levels to find trends</td><td>Selection Sort</td><td>O(n²)</td><td>O(1)</td></tr>
-      </table>
-
-      <!-- Flow Diagram -->
-      <h3>Algorithm Implementation Flow</h3>
-      <div class="flow-diagram">
-        <div class="flow-box">Sensors</div>
-        <div class="flow-arrow">↓</div>
-        <div class="flow-box">Data Collection (Array / Queue)</div>
-        <div class="flow-arrow">↓</div>
-        <div class="flow-box">Processing (Max-Heap / BFS / Hash Table)</div>
-        <div class="flow-arrow">↓</div>
-        <div class="flow-box">Trend Analysis (Selection Sort)</div>
-        <div class="flow-arrow">↓</div>
-        <div class="flow-box">Alerts & Notifications</div>
-      </div>
-    </div>
-
-    <div class="card efficiency-card">
-      <h2>3 • Time & Space Efficiency Analysis</h2>
-      <ul>
-        <li>Arrays: Efficient for historical data; O(1) access, O(n) insertion.</li>
-        <li>Queue: Ideal for live sensor data; O(1) enqueue/dequeue.</li>
-        <li>Max-Heap: Quickly identifies highest water level; insert O(log n), max O(1).</li>
-        <li>BFS: Simulates water spread; time O(V+E), space O(V).</li>
-        <li>Hash Table: Fast sensor lookup; average O(1).</li>
-        <li>Selection Sort: Trend analysis; simple but O(n²), not for large datasets.</li>
-      </ul>
-    </div>
-
-    <div class="card sdg-card">
-      <h2>4 • SDG Alignment</h2>
-      <ul>
-        <li><strong>SDG 11:</strong> Sustainable Cities – Protect cities from floods.</li>
-        <li><strong>SDG 6:</strong> Clean Water & Sanitation – Ensure proper water-level management.</li>
-        <li><strong>SDG 13:</strong> Climate Action – Predict flood risks from extreme rainfall.</li>
-      </ul>
-    </div>
-
-    <div class="card transfer-card">
-      <h2>5 • Transfer of Knowledge</h2>
-      <ul>
-        <li>Sensor Data Handling</li>
-        <li>Simulation & Graph Algorithms</li>
-        <li>Alert & Priority Systems</li>
-        <li>Trend Analysis & Sorting</li>
-        <li>Algorithmic Efficiency</li>
-      </ul>
-    </div>
-
+  <!-- 1 • Problem & Solution -->
+  <div class="section">
+    <h2>1 • Problem Statement & Solution Overview</h2>
+    <h3>Problem Statement:</h3>
+    <ul>
+      <li>Floods due to heavy rainfall, overflow of rivers/dams, poor drainage systems.</li>
+      <li>Real-time monitoring lacking in most areas.</li>
+      <li>Difficulty predicting water-level rise and sending alerts.</li>
+      <li>Historical water-level data not properly stored.</li>
+      <li>Limited simulation of water spread to identify high-risk zones.</li>
+    </ul>
+    <h3>Solution Overview:</h3>
+    <ul>
+      <li>Real-time monitoring using sensors in rivers, lakes, dams, and drainage channels.</li>
+      <li>Store continuous readings for historical analysis.</li>
+      <li>Track rainfall and predict rising water levels; send alerts to authorities and citizens.</li>
+      <li>Sort and analyze water-level trends to detect high-risk areas.</li>
+      <li>Simulate water spread using graph traversal algorithms (BFS).</li>
+    </ul>
   </div>
+
+  <!-- 2 • Algorithms & Data Structures -->
+  <div class="section">
+    <h2>2 • Algorithms & Data Structures</h2>
+    <table>
+      <tr><th>Task</th><th>Algorithm / Data Structure</th><th>Time Complexity</th><th>Space Complexity</th></tr>
+      <tr><td>Store continuous water-level readings</td><td>Array</td><td>O(1) access, O(n) insertion</td><td>O(n)</td></tr>
+      <tr><td>Handle real-time sensor input (FIFO)</td><td>Queue</td><td>O(1) enqueue/dequeue</td><td>O(n)</td></tr>
+      <tr><td>Find highest recorded water level</td><td>Max-Heap</td><td>O(log n) insert, O(1) max</td><td>O(n)</td></tr>
+      <tr><td>Simulate water spread</td><td>BFS</td><td>O(V + E)</td><td>O(V)</td></tr>
+      <tr><td>Lookup sensor ID → location</td><td>Hash Table</td><td>O(1) average, O(n) worst</td><td>O(n)</td></tr>
+      <tr><td>Sort water levels to find trends</td><td>Selection Sort</td><td>O(n²)</td><td>O(1)</td></tr>
+    </table>
+
+    <h3>Algorithm Implementation Flow</h3>
+    <div class="flow-diagram">
+      <div class="flow-box">Sensors</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box">Data Collection (Array / Queue)</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box">Processing (Max-Heap / BFS / Hash Table)</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box">Trend Analysis (Selection Sort)</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box">Alerts & Notifications</div>
+    </div>
+  </div>
+
+  <!-- 3 • Time & Space Efficiency -->
+  <div class="section">
+    <h2>3 • Time & Space Efficiency Analysis</h2>
+    <ul>
+      <li>Array: O(1) access, O(n) insertion, Space O(n)</li>
+      <li>Queue: O(1) enqueue/dequeue, Space O(n)</li>
+      <li>Max-Heap: O(log n) insert, O(1) max, Space O(n)</li>
+      <li>BFS: Time O(V + E), Space O(V)</li>
+      <li>Hash Table: Average O(1), Space O(n)</li>
+      <li>Selection Sort: Time O(n²), Space O(1)</li>
+      <li><strong>Total Time Complexity:</strong> O(V + E + n²)</li>
+      <li><strong>Total Space Complexity:</strong> O(max(n, V))</li>
+    </ul>
+  </div>
+
+  <!-- 4 • SDG Alignment -->
+  <div class="section">
+    <h2>4 • SDG Alignment</h2>
+    <ul>
+      <li><strong>SDG 6:</strong> Clean Water & Sanitation</li>
+      <li><strong>SDG 11:</strong> Sustainable Cities & Communities</li>
+      <li><strong>SDG 13:</strong> Climate Action</li>
+    </ul>
+  </div>
+
+  <!-- 5 • Transfer of Knowledge -->
+  <div class="section">
+    <h2>5 • Transfer of Knowledge</h2>
+    <ul>
+      <li>Sensor Data Handling</li>
+      <li>Simulation & Graph Algorithms</li>
+      <li>Alert & Priority Systems</li>
+      <li>Trend Analysis & Sorting</li>
+      <li>Algorithmic Efficiency</li>
+    </ul>
+  </div>
+
 </main>
 
 <footer>
