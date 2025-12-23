@@ -7,113 +7,184 @@
 
 <style>
   :root{
-    --bg-dark: #0d1117;      
-    --text-light: #e6eef3;
-    --accent-1: #00f5d4;
-    --accent-2: #d97706;
-    --accent-3: #6b21a8;
-    --card-radius: 14px;
-    --shadow-dark: rgba(0,0,0,0.5);
-    --max-width: 900px;
-    font-family: 'Inter', sans-serif;
+    --bg-1:#f0f4ff;
+    --section-bg:#ffffff;
+    --text-dark:#1a1a1a;
+    --accent-1:#0077ff;
+    --accent-2:#d97706;
+    --accent-3:#6b21a8;
+    --max-width:900px;
+    font-family:'Inter',sans-serif;
   }
 
-  * { box-sizing: border-box; margin:0; padding:0; }
-  html,body { height:100%; }
-  body{ background: var(--bg-dark); color: var(--text-light); padding-top:78px; line-height:1.5; }
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+  }
+
+  body{
+    background:var(--bg-1);
+    color:var(--text-dark);
+    padding-top:78px;
+    line-height:1.6;
+  }
 
   /* NAVBAR */
   .navbar{
-    position:fixed; top:8px; left:50%; transform:translateX(-50%);
-    width:calc(100% - 40px); max-width:var(--max-width);
-    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    position:fixed;
+    top:8px;
+    left:50%;
+    transform:translateX(-50%);
+    width:calc(100% - 40px);
+    max-width:var(--max-width);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#ffffffbb;
     padding:12px 18px;
-    background: rgba(255,255,255,0.05);
     border-radius:12px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 6px 30px var(--shadow-dark);
-    z-index:50;
+    backdrop-filter:blur(10px);
+    border:1px solid #d0d8ff;
   }
-  .logo{ display:flex; gap:12px; align-items:center; font-weight:700; font-size:18px; }
-  .logo .dot{ width:36px; height:36px; border-radius:9px;
-    background: linear-gradient(135deg,#00f5d4,#3b82f6);
-    display:flex; align-items:center; justify-content:center;
-    color:#0d1117; font-weight:800; box-shadow:0 6px 18px rgba(0,255,212,0.3); }
-  nav ul{ display:flex; gap:14px; list-style:none; align-items:center; }
-  nav a{ text-decoration:none; color:var(--text-light); font-weight:600; padding:8px 12px; border-radius:8px; font-size:14px; transition: all .18s ease; }
-  nav a:hover{ color:#00f5d4; transform:translateY(-2px); }
 
-  /* WRAPPER */
-  .wrap{ max-width:var(--max-width); margin:28px auto; padding:28px; }
-  h1{ font-size:28px; margin-bottom:24px; text-align:center; color:var(--text-light); }
+  .logo{
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
 
-  /* CARD STYLES */
-  .card-container{ display:flex; flex-direction:column; gap:22px; }
-  .card{ border-radius:var(--card-radius); padding:24px; box-shadow: 0 8px 30px var(--shadow-dark); border:1px solid rgba(255,255,255,0.1); }
-  .card h2{ font-size:20px; margin-bottom:12px; }
-  .card h3{ margin-top:16px; }
-  .card ul{ padding-left:20px; margin-top:10px; }
-  .card ul li{ margin-bottom:8px; font-size:14px; }
-  .card table{ width:100%; border-collapse: collapse; margin-top:12px; color: var(--text-light); }
-  .card th, .card td{ border:1px solid rgba(255,255,255,0.2); padding:10px; text-align:left; font-size:14px; }
-  .card th{ background-color: rgba(0,0,0,0.3); }
+  .logo .dot{
+    width:36px;
+    height:36px;
+    border-radius:9px;
+    background:linear-gradient(135deg,#00f5d4,#3b82f6);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    color:#ffffff;
+  }
 
-  /* DISTINCT GRADIENTS */
-  .problem-solution-card{ background: linear-gradient(135deg,#00f5d4,#3b82f6); color:#0d1117; }
-  .algo-datastruct-card{ background: linear-gradient(135deg,#b45309,#78350f); color:#f3f3f3; }
-  .sdg-card{ background: linear-gradient(135deg,#5b21b6,#3b0764); color:#f3f3f3; }
-  .flow-card{ background: linear-gradient(135deg,#3b82f6,#06b6d4); color:#0d1117; font-family: monospace; white-space: pre; }
+  nav a{
+    text-decoration:none;
+    color:var(--text-dark);
+    font-weight:600;
+  }
 
-  footer{ margin-top:34px; color:var(--text-light); font-size:14px; text-align:center; padding:18px 6px; }
+  .wrap{
+    max-width:var(--max-width);
+    margin:28px auto;
+    padding:0 22px;
+  }
+
+  /* SECTION STYLE */
+  .section{
+    background:var(--section-bg);
+    padding:28px 22px;
+    margin-bottom:22px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  }
+
+  h1{
+    text-align:center;
+    margin-bottom:32px;
+  }
+
+  h2{
+    font-size:20px;
+    margin-bottom:12px;
+  }
+
+  h3{
+    margin-top:16px;
+  }
+
+  ul{
+    margin-top:10px;
+    padding-left:20px;
+  }
+
+  li{
+    margin-bottom:8px;
+    font-size:14px;
+  }
+
+  table{
+    width:100%;
+    border-collapse: collapse;
+    margin-top:12px;
+  }
+
+  th, td{
+    border:1px solid #d0d8ff;
+    padding:10px;
+    text-align:left;
+    font-size:14px;
+  }
+
+  th{
+    background-color: #f0f4ff;
+  }
+
+  pre{
+    background:#f0f4ff;
+    padding:12px;
+    border-radius:8px;
+    overflow-x:auto;
+  }
+
+  footer{
+    text-align:center;
+    padding:24px;
+    margin-top:24px;
+    color:var(--text-dark);
+  }
 </style>
 </head>
+
 <body>
 
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="logo">
-      <div class="dot">CD</div>
-      <div>
-        <div style="font-weight:800">CITY DESIGN</div>
-        <div style="font-size:12px;color:var(--text-light);margin-top:2px">DAA — Design & Analysis of Algorithms</div>
-      </div>
+<header class="navbar">
+  <div class="logo">
+    <div class="dot">CD</div>
+    <div>
+      <div style="font-weight:800">CITY DESIGN</div>
+      <div style="font-size:12px;">DAA — Design & Analysis of Algorithms</div>
     </div>
-    <nav>
-      <ul>
-        <li><a href="#">BACK</a></li>
-      </ul>
-    </nav>
-  </header>
+  </div>
+  <nav>
+    <a href="#">BACK</a>
+  </nav>
+</header>
 
-  <!-- PAGE CONTENT -->
-  <main class="wrap">
-    <h1>Bank & Government Queue Management System</h1>
+<main class="wrap">
+  <h1>Bank & Government Queue Management System</h1>
 
-    <div class="card-container">
+  <!-- PROBLEM + SOLUTION -->
+  <div class="section">
+    <h2>1 • Problem Statement & Proposed Solution</h2>
+    <h3>Problem:</h3>
+    <ul>
+      <li>Long wait times due to inefficient queue handling.</li>
+      <li>Priority handling needed for VIPs, senior citizens, and emergencies.</li>
+      <li>Customers require routing to multiple service counters.</li>
+      <li>Dynamic queue changes as some customers leave or switch queues.</li>
+      <li>Tracking serviced customers and average waiting time is difficult.</li>
+    </ul>
+    <h3>Solution:</h3>
+    <ul>
+      <li>Regular customers in FIFO queues, VIPs in priority queues.</li>
+      <li>Multiple counters simulated with arrays tracking current counter time.</li>
+      <li>Assign customers to least busy counter for efficiency.</li>
+      <li>Maximum service time calculated to monitor efficiency.</li>
+    </ul>
+  </div>
 
-      <!-- PROBLEM + SOLUTION -->
-      <div class="card problem-solution-card">
-        <h2>1 • Problem Statement & Proposed Solution</h2>
-        <h3>Problem:</h3>
-        <ul>
-          <li>Long wait times due to inefficient queue handling.</li>
-          <li>Priority handling needed for VIPs, senior citizens, and emergencies.</li>
-          <li>Customers require routing to multiple service counters.</li>
-          <li>Dynamic queue changes as some customers leave or switch queues.</li>
-          <li>Tracking serviced customers and average waiting time is difficult.</li>
-        </ul>
-        <h3>Solution:</h3>
-        <ul>
-          <li>Regular customers in FIFO queues, VIPs in priority queues.</li>
-          <li>Multiple counters simulated with arrays tracking current counter time.</li>
-          <li>Assign customers to least busy counter for efficiency.</li>
-          <li>Maximum service time calculated to monitor efficiency.</li>
-        </ul>
-      </div>
-
-      <!-- FLOW DIAGRAM -->
-      <div class="card flow-card">
-        <h2>2 • Flow Diagram</h2>
+  <!-- FLOW DIAGRAM -->
+  <div class="section">
+    <h2>2 • Flow Diagram</h2>
 <pre>
           +----------------+
           | Customer Arrives|
@@ -143,59 +214,58 @@
           | Customer Leaves |
           +----------------+
 </pre>
-      </div>
+  </div>
 
-      <!-- ALGORITHMS + DATA STRUCTURES -->
-      <div class="card algo-datastruct-card">
-        <h2>3 • Data Structures & Algorithms Used</h2>
-        <table>
-          <tr><th>Task</th><th>Data Structure / Algorithm</th><th>Purpose</th></tr>
-          <tr><td>Store customer queue</td><td>Queue</td><td>FIFO handling for regular customers</td></tr>
-          <tr><td>Prioritize urgent customers</td><td>Priority Queue</td><td>Serve VIPs first</td></tr>
-          <tr><td>Track counter time</td><td>Array / Vector</td><td>Store counter processing times</td></tr>
-          <tr><td>Assign least busy counter</td><td>Array manipulation</td><td>Efficient service allocation</td></tr>
-          <tr><td>Analyze trends</td><td>Selection Sort / Max</td><td>Track maximum waiting time</td></tr>
-          <tr><td>Multi-counter simulation</td><td>BFS / Iterative loop</td><td>Model parallel processing</td></tr>
-        </table>
+  <!-- ALGORITHMS + DATA STRUCTURES -->
+  <div class="section">
+    <h2>3 • Data Structures & Algorithms Used</h2>
+    <table>
+      <tr><th>Task</th><th>Data Structure / Algorithm</th><th>Purpose</th></tr>
+      <tr><td>Store customer queue</td><td>Queue</td><td>FIFO handling for regular customers</td></tr>
+      <tr><td>Prioritize urgent customers</td><td>Priority Queue</td><td>Serve VIPs first</td></tr>
+      <tr><td>Track counter time</td><td>Array / Vector</td><td>Store counter processing times</td></tr>
+      <tr><td>Assign least busy counter</td><td>Array manipulation</td><td>Efficient service allocation</td></tr>
+      <tr><td>Analyze trends</td><td>Selection Sort / Max</td><td>Track maximum waiting time</td></tr>
+      <tr><td>Multi-counter simulation</td><td>BFS / Iterative loop</td><td>Model parallel processing</td></tr>
+    </table>
 
-        <h3>Time & Space Efficiency</h3>
-        <table>
-          <tr><th>Data Structure</th><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr>
-          <tr><td>Queue</td><td>Enqueue / Dequeue</td><td>O(1)</td><td>O(n)</td></tr>
-          <tr><td>Priority Queue</td><td>Insert / Extract Max</td><td>O(log n)</td><td>O(n)</td></tr>
-          <tr><td>Array / Vector</td><td>Access / Update</td><td>O(1)</td><td>O(counters)</td></tr>
-          <tr><td>Simulation Loop</td><td>Process all customers</td><td>O(n * counters)</td><td>O(counters)</td></tr>
-        </table>
-      </div>
+    <h3>Time & Space Efficiency</h3>
+    <table>
+      <tr><th>Data Structure</th><th>Operation</th><th>Time Complexity</th><th>Space Complexity</th></tr>
+      <tr><td>Queue</td><td>Enqueue / Dequeue</td><td>O(1)</td><td>O(n)</td></tr>
+      <tr><td>Priority Queue</td><td>Insert / Extract Max</td><td>O(log n)</td><td>O(n)</td></tr>
+      <tr><td>Array / Vector</td><td>Access / Update</td><td>O(1)</td><td>O(counters)</td></tr>
+      <tr><td>Simulation Loop</td><td>Process all customers</td><td>O(n * counters)</td><td>O(counters)</td></tr>
+    </table>
+  </div>
 
-      <!-- SDGs -->
-      <div class="card sdg-card">
-        <h2>4 • Sustainable Development Goals (SDGs)</h2>
-        <ul>
-          <li><strong>SDG 11:</strong> Sustainable Cities – Optimized queues reduce congestion and improve accessibility.</li>
-          <li><strong>SDG 9:</strong> Industry, Innovation & Infrastructure – Efficient service systems improve infrastructure use.</li>
-          <li><strong>SDG 8:</strong> Decent Work & Economic Growth – Reduced waiting improves efficiency.</li>
-        </ul>
-      </div>
+  <!-- SDGs -->
+  <div class="section">
+    <h2>4 • Sustainable Development Goals (SDGs)</h2>
+    <ul>
+      <li><strong>SDG 11:</strong> Sustainable Cities – Optimized queues reduce congestion and improve accessibility.</li>
+      <li><strong>SDG 9:</strong> Industry, Innovation & Infrastructure – Efficient service systems improve infrastructure use.</li>
+      <li><strong>SDG 8:</strong> Decent Work & Economic Growth – Reduced waiting improves efficiency.</li>
+    </ul>
+  </div>
 
-      <!-- TRANSFER OF KNOWLEDGE -->
-      <div class="card problem-solution-card">
-        <h2>5 • Transfer of Knowledge</h2>
-        <ul>
-          <li>Queue Management: Understanding FIFO and priority queues for scheduling.</li>
-          <li>Simulation & BFS: Modeling real-world service counters.</li>
-          <li>Sorting & Max-Heap: Analyzing service trends and bottlenecks.</li>
-          <li>Algorithmic Thinking: Applying abstract algorithms to practical systems.</li>
-          <li>Applicable to hospitals, airports, ticket counters, or retail stores.</li>
-        </ul>
-      </div>
+  <!-- TRANSFER OF KNOWLEDGE -->
+  <div class="section">
+    <h2>5 • Transfer of Knowledge</h2>
+    <ul>
+      <li>Queue Management: Understanding FIFO and priority queues for scheduling.</li>
+      <li>Simulation & BFS: Modeling real-world service counters.</li>
+      <li>Sorting & Max-Heap: Analyzing service trends and bottlenecks.</li>
+      <li>Algorithmic Thinking: Applying abstract algorithms to practical systems.</li>
+      <li>Applicable to hospitals, airports, ticket counters, or retail stores.</li>
+    </ul>
+  </div>
 
-    </div>
-  </main>
+</main>
 
-  <footer>
-    © City Design — DAA • KLE Technological University • Built by the project team
-  </footer>
+<footer>
+  © City Design — DAA • KLE Technological University • Built by the project team
+</footer>
 
 </body>
 </html>
