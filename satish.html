@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Satish B — Velora Use Cases (DAA)</title>
 
 <!-- Chart.js -->
@@ -10,159 +10,169 @@
 
 <style>
 :root {
-  --bg: #0a0f1d;
-  --card: rgba(255,255,255,0.03);
-  --accent: #ffb86b;
-  --accent2: #6df7c1;
-  --muted: #a7b4c8;
-  --glass: rgba(255,255,255,0.05);
-  --border: rgba(255,255,255,0.07);
-  --radius: 14px;
-  --blur: 10px;
+  --bg:#0a0f1d;
+  --card:rgba(255,255,255,0.03);
+  --accent:#ffb86b;
+  --accent2:#6df7c1;
+  --muted:#a7b4c8;
+  --glass:rgba(255,255,255,0.05);
+  --border:rgba(255,255,255,0.07);
+  --radius:14px;
+  --blur:10px;
   font-family: "Inter", sans-serif;
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { box-sizing:border-box; margin:0; padding:0; }
 
 body {
-  min-height: 100vh;
+  min-height:100vh;
   background:
     radial-gradient(900px 400px at 10% 10%, rgba(255,184,107,0.06), transparent),
     radial-gradient(900px 400px at 90% 90%, rgba(109,247,193,0.04), transparent),
     var(--bg);
-  color: #e9f8ff;
-  padding: 90px 20px;
-  line-height: 1.45;
+  color:#e9f8ff;
+  padding:90px 20px;
+  line-height:1.45;
 }
 
 /* Header */
 header {
-  position: fixed;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 40px);
-  max-width: 1100px;
-  padding: 12px 20px;
-  display: flex;
-  justify-content: space-between;
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  backdrop-filter: blur(var(--blur));
-  z-index: 100;
+  position:fixed;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:calc(100% - 40px);
+  max-width:1100px;
+  padding:12px 20px;
+  display:flex;
+  justify-content:space-between;
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:12px;
+  backdrop-filter:blur(var(--blur));
+  z-index:100;
 }
 
-.brand { display: flex; align-items: center; gap: 14px; }
+.brand {
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
 .badge {
-  width: 46px;
-  height: 46px;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #062018;
-  font-weight: 900;
+  width:46px;
+  height:46px;
+  background:linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#062018;
+  font-weight:900;
 }
 
 nav a {
-  color: var(--muted);
-  text-decoration: none;
-  margin-left: 14px;
-  font-weight: 700;
+  color:var(--muted);
+  text-decoration:none;
+  font-weight:700;
+  margin-left:14px;
 }
-nav a:hover { color: var(--accent); }
+nav a:hover { color:var(--accent); }
 
 /* Layout */
 main {
-  max-width: 1100px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: 1fr 330px;
-  gap: 26px;
+  max-width:1100px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 330px;
+  gap:26px;
 }
 
 /* Card */
 .card {
-  padding: 24px;
-  background: var(--card);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
+  padding:24px;
+  background:var(--card);
+  border-radius:var(--radius);
+  border:1px solid var(--border);
 }
 
 /* Author */
 .author-box {
-  display: flex;
-  gap: 14px;
-  margin: 20px 0;
-  padding: 14px;
-  background: rgba(255,255,255,0.02);
-  border-radius: var(--radius);
+  display:flex;
+  gap:14px;
+  margin:20px 0;
+  padding:14px;
+  border-radius:var(--radius);
+  background:rgba(255,255,255,0.02);
 }
 
 /* Case */
 .case-item {
-  margin-bottom: 28px;
-  padding: 18px;
-  background: rgba(255,255,255,0.02);
-  border-radius: var(--radius);
-  border: 1px solid rgba(255,255,255,0.03);
+  margin-bottom:26px;
+  padding:18px;
+  border-radius:var(--radius);
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.03);
 }
-.case-item h2 { color: var(--accent); margin-bottom: 8px; }
-.case-item p { color: var(--muted); margin-bottom: 10px; }
-
-.algos-title { font-weight: 800; margin-top: 8px; }
-.case-item ul { margin-left: 18px; color: var(--muted); }
+.case-item h2 {
+  color:var(--accent);
+  margin-bottom:6px;
+}
+.case-item p {
+  color:var(--muted);
+  margin-bottom:8px;
+}
+.algos-title {
+  font-weight:800;
+  margin-top:6px;
+}
+.case-item ul {
+  margin-left:18px;
+  color:var(--muted);
+}
 
 /* Buttons */
 .btn {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 10px 16px;
-  border-radius: 10px;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  color: #062018;
-  text-decoration: none;
-  font-weight: 800;
+  display:inline-block;
+  margin:6px 6px 0 0;
+  padding:10px 16px;
+  background:linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius:10px;
+  color:#062018;
+  text-decoration:none;
+  font-weight:800;
 }
 
-/* Flow & Chart Box */
+/* Chart Box */
 .flowchart-box {
-  margin-top: 14px;
-  padding: 12px;
-  background: rgba(255,255,255,0.03);
-  border: 1px dashed rgba(255,255,255,0.2);
-  border-radius: 10px;
+  margin-top:14px;
+  padding:12px;
+  background:rgba(255,255,255,0.03);
+  border:1px dashed rgba(255,255,255,0.2);
+  border-radius:10px;
 }
-.flowchart-box h4 { color: var(--accent2); margin-bottom: 8px; }
+.flowchart-box h4 {
+  margin-bottom:8px;
+  color:var(--accent2);
+}
 
 /* Sidebar */
-.sidebar { display: flex; flex-direction: column; gap: 16px; }
+.sidebar {
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
 .side-card {
-  padding: 16px;
-  background: rgba(255,255,255,0.03);
-  border-radius: var(--radius);
+  padding:16px;
+  background:rgba(255,255,255,0.03);
+  border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,0.03);
 }
-
-/* Tables */
-.table-section { margin-top: 40px; }
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-th, td {
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 8px;
-  text-align: left;
-}
-th { background: rgba(255,255,255,0.05); }
 
 footer {
-  grid-column: 1 / -1;
-  margin-top: 40px;
-  text-align: center;
-  color: var(--muted);
+  grid-column:1 / -1;
+  margin-top:40px;
+  text-align:center;
+  color:var(--muted);
 }
 </style>
 </head>
@@ -172,7 +182,7 @@ footer {
 <header>
   <div class="brand">
     <div class="badge">SB</div>
-    <div>Satish B — Velora Project</div>
+    <div><strong>Satish B — Velora Project</strong></div>
   </div>
   <nav>
     <a href="../index.html">Home</a>
@@ -200,118 +210,441 @@ footer {
     <span style="color:var(--muted)">Roll No: 229 • Dept. of CSE</span>
   </div>
 </div>
-
-<!-- ================= CASES 1–13 (WITH CHARTS) ================= -->
-
-<!-- CASE 1 -->
+<!-- ========================= CASE 1 ========================= -->
 <div class="case-item">
-<h2>Digital Advertising & Events Hub</h2>
-<p>A centralized platform managing digital advertising slots, event bookings, live audience analytics, and stall allocations.</p>
-<div class="algos-title">Algorithms Used</div>
-<ul>
-<li>Hash Table</li><li>Max Heap</li><li>Dijkstra</li><li>Queue</li>
-</ul>
-<a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Central(case-1).cpp" target="_blank">View Code</a>
-<a class="btn" href="satish1.1.html" target="_blank">View More</a>
-<a class="btn" href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish Dataset/case1_digital_advertising_events.csv" target="_blank">View Dataset</a>
+  <h2>Digital Advertising & Events Hub</h2>
+  <p>
+    A centralized platform managing digital advertising slots, event bookings,
+    live audience analytics, and stall allocations inside Velora’s main plaza.
+  </p>
 
-<div class="flowchart-box"><h4>Live Analytics</h4><canvas id="chart-case-1"></canvas></div>
+  <div class="algos-title">Algorithms Used</div>
+  <ul>
+    <li>Hash Table → Advertiser & stall lookup</li>
+    <li>Max Heap → Ad-slot priority scheduling</li>
+    <li>Dijkstra → Drone/display routing</li>
+    <li>Queue → Advertisement rotation</li>
+  </ul>
+
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Central(case-1).cpp"
+     target="_blank">View Code</a>
+  <a class="btn" href="satish1.1.html" target="_blank">View More</a>
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish Dataset/case1_digital_advertising_events.csv"
+     target="_blank">View Dataset (CSV)</a>
+
+  <div class="flowchart-box">
+    <h4>Live Audience Engagement</h4>
+    <canvas id="chart-case-1"></canvas>
+  </div>
 </div>
 
-<!-- CASE 2 -->
+<!-- ========================= CASE 2 ========================= -->
 <div class="case-item">
-<h2>Smart Governance & Citizen Service Centre</h2>
-<p>Unified digital counter for certificates, taxes, and grievance handling.</p>
-<div class="algos-title">Algorithms Used</div>
-<ul>
-<li>Hashing</li><li>Queue</li><li>Heap</li><li>Search Trees</li>
-</ul>
-<div class="flowchart-box"><h4>Service Load</h4><canvas id="chart-case-2"></canvas></div>
+  <h2>Smart Governance & Citizen Service Centre</h2>
+  <p>
+    A unified digital service counter where citizens apply for certificates,
+    pay taxes, raise grievances, and track service requests with priority handling.
+  </p>
+
+  <div class="algos-title">Algorithms Used</div>
+  <ul>
+    <li>Hashing → Citizen profiles</li>
+    <li>Queue → Token management</li>
+    <li>Heap → Priority handling (elderly/emergency)</li>
+    <li>Search Trees → Document lookup</li>
+  </ul>
+
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%202"
+     target="_blank">View Code</a>
+  <a class="btn" href="satish1.2.html" target="_blank">View More</a>
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish Dataset/case2_smart_governance_citizen_services.csv"
+     target="_blank">View Dataset (CSV)</a>
+
+  <div class="flowchart-box">
+    <h4>Citizen Request Load</h4>
+    <canvas id="chart-case-2"></canvas>
+  </div>
 </div>
 
-<!-- CASE 3 -->
+<!-- ========================= CASE 3 ========================= -->
 <div class="case-item">
-<h2>Smart Parking & Mobility Hub</h2>
-<p>Real-time parking slot tracking and shuttle routing.</p>
-<div class="flowchart-box"><h4>Parking Usage</h4><canvas id="chart-case-3"></canvas></div>
+  <h2>Smart Parking & Mobility Hub</h2>
+  <p>
+    A real-time parking management system that detects free slots, assists EV
+    charging, and routes autonomous shuttles across the hub.
+  </p>
+
+  <div class="algos-title">Algorithms Used</div>
+  <ul>
+    <li>Min Heap → Nearest free slot</li>
+    <li>BFS → Zone-level scanning</li>
+    <li>Dijkstra → Shuttle routing</li>
+    <li>Hash Table → Vehicle-slot mapping</li>
+  </ul>
+
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%203"
+     target="_blank">View Code</a>
+  <a class="btn" href="satish1.3.html" target="_blank">View More</a>
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish Dataset/case3_smart_parking_mobility.csv"
+     target="_blank">View Dataset (CSV)</a>
+
+  <div class="flowchart-box">
+    <h4>Parking Slot Usage</h4>
+    <canvas id="chart-case-3"></canvas>
+  </div>
 </div>
 
-<!-- CASE 4 -->
+<!-- ========================= CASE 4 ========================= -->
 <div class="case-item">
-<h2>City Info–Tourism Centre</h2>
-<p>Tourist routes, footfall and attraction lookup.</p>
-<div class="flowchart-box"><h4>Tourist Footfall</h4><canvas id="chart-case-4"></canvas></div>
+  <h2>City Info–Tourism Centre</h2>
+  <p>
+    A digital tourism hub offering attraction details, ticketing information,
+    crowd analytics, and optimized tourist routes across Velora.
+  </p>
+
+  <div class="algos-title">Algorithms Used</div>
+  <ul>
+    <li>Trie → Fast attraction name search</li>
+    <li>Heap → Recommendation ranking</li>
+    <li>Dijkstra → Tourist route planning</li>
+    <li>Hash Table → Attraction metadata</li>
+  </ul>
+
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%204"
+     target="_blank">View Code</a>
+  <a class="btn" href="satish1.4.html" target="_blank">View More</a>
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish Dataset/case4_city_tourism.csv"
+     target="_blank">View Dataset (CSV)</a>
+
+  <div class="flowchart-box">
+    <h4>Tourist Footfall</h4>
+    <canvas id="chart-case-4"></canvas>
+  </div>
+</div>
+<!-- ========================= CASE 5 ========================= -->
+<div class="case-item">
+  <h2>Central Security & Smart Surveillance Room</h2>
+  <p>
+    A centralized command room monitoring CCTV feeds, fire sensors, motion detectors,
+    and emergency alarms. Intelligent alert ranking ensures rapid response.
+  </p>
+
+  <div class="algos-title">Algorithms Used</div>
+  <ul>
+    <li>Hashing → Camera & alert registry</li>
+    <li>Priority Queue → Alert severity ranking</li>
+    <li>BFS → Nearby camera scanning</li>
+    <li>AVL Tree → Incident log indexing</li>
+  </ul>
+
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%205"
+     target="_blank">View Code</a>
+  <a class="btn" href="satish1.5.html" target="_blank">View More</a>
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish Dataset/case5_security_surveillance.csv"
+     target="_blank">View Dataset (CSV)</a>
+
+  <div class="flowchart-box">
+    <h4>Security Alert Frequency</h4>
+    <canvas id="chart-case-5"></canvas>
+  </div>
 </div>
 
-<!-- CASE 5 -->
+<!-- ========================= CASE 6 ========================= -->
 <div class="case-item">
-<h2>Central Security & Surveillance Room</h2>
-<p>Monitors CCTV, alerts, and anomaly detection.</p>
-<div class="flowchart-box"><h4>Security Alerts</h4><canvas id="chart-case-5"></canvas></div>
+  <h2>Emergency Coordination Tower</h2>
+  <p>
+    A disaster response hub coordinating fire, medical, police, and rescue teams
+    using severity-based prioritization and shortest-path routing.
+  </p>
+
+  <div class="algos-title">Algorithms Used</div>
+  <ul>
+    <li>Priority Queue → Incident severity</li>
+    <li>Hash Table → Responder availability</li>
+    <li>Dijkstra → Fastest responder routing</li>
+    <li>Queue → Multi-stage rescue workflow</li>
+  </ul>
+
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%206"
+     target="_blank">View Code</a>
+  <a class="btn" href="satish1.6.html" target="_blank">View More</a>
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish Dataset/case6_emergency_coordination.csv"
+     target="_blank">View Dataset (CSV)</a>
+
+  <div class="flowchart-box">
+    <h4>Incident Severity Levels</h4>
+    <canvas id="chart-case-6"></canvas>
+  </div>
 </div>
 
-<!-- CASE 6 -->
+<!-- ========================= CASE 7 ========================= -->
 <div class="case-item">
-<h2>Emergency Coordination Tower</h2>
-<p>Disaster response and responder routing.</p>
-<div class="flowchart-box"><h4>Incident Severity</h4><canvas id="chart-case-6"></canvas></div>
+  <h2>Visitors Flow Analysis</h2>
+  <p>
+    Tracks visitor density across beaches, parks, malls, and plazas to predict
+    congestion and suggest alternate routes in real time.
+  </p>
+
+  <div class="algos-title">Algorithms Used</div>
+  <ul>
+    <li>Sliding Window → Density analysis</li>
+    <li>Hash Map → Entry sensor logs</li>
+    <li>BFS → Crowd propagation mapping</li>
+    <li>Heap → Peak-time forecasting</li>
+  </ul>
+
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%207"
+     target="_blank">View Code</a>
+  <a class="btn" href="satish1.7.html" target="_blank">View More</a>
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish Dataset/case7_visitors_flow_analysis.csv"
+     target="_blank">View Dataset (CSV)</a>
+
+  <div class="flowchart-box">
+    <h4>Visitor Density Trend</h4>
+    <canvas id="chart-case-7"></canvas>
+  </div>
 </div>
 
-<!-- CASE 7 -->
+<!-- ========================= CASE 8 ========================= -->
 <div class="case-item">
-<h2>Visitors Flow Analysis</h2>
-<p>Crowd density and congestion prediction.</p>
-<div class="flowchart-box"><h4>Visitor Density</h4><canvas id="chart-case-7"></canvas></div>
+  <h2>Smart Emergency Beacon System</h2>
+  <p>
+    A city-wide network of intelligent beacons that propagate emergency alerts
+    and guide citizens toward safe evacuation routes.
+  </p>
+
+  <div class="algos-title">Algorithms Used</div>
+  <ul>
+    <li>BFS → Beacon-to-beacon propagation</li>
+    <li>Hash Table → Beacon status lookup</li>
+    <li>Queue → Broadcast handling</li>
+    <li>Graph Traversal → Safe-route generation</li>
+  </ul>
+
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%208"
+     target="_blank">View Code</a>
+  <a class="btn" href="satish1.8.html" target="_blank">View More</a>
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish Dataset/case8_emergency_beacon_system.csv"
+     target="_blank">View Dataset (CSV)</a>
+
+  <div class="flowchart-box">
+    <h4>Beacon Signal Propagation</h4>
+    <canvas id="chart-case-8"></canvas>
+  </div>
 </div>
 
-<!-- CASE 8 -->
+<!-- ========================= CASE 9 ========================= -->
 <div class="case-item">
-<h2>Smart Emergency Beacon System</h2>
-<p>Beacon-based emergency evacuation alerts.</p>
-<div class="flowchart-box"><h4>Beacon Signals</h4><canvas id="chart-case-8"></canvas></div>
+  <h2>AI-Powered Lost Person Detection</h2>
+  <p>
+    Uses pattern matching and camera logs to detect missing individuals and
+    rank matches by confidence score for rapid response.
+  </p>
+
+  <div class="algos-title">Algorithms Used</div>
+  <ul>
+    <li>KMP → Facial feature pattern matching</li>
+    <li>Hash Map → Camera sightings</li>
+    <li>Priority Queue → Confidence ranking</li>
+    <li>BFS → Camera zone scanning</li>
+  </ul>
+
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%209"
+     target="_blank">View Code</a>
+  <a class="btn" href="satish1.9.html" target="_blank">View More</a>
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish Dataset/case9_lost_person_detection.csv"
+     target="_blank">View Dataset (CSV)</a>
+
+  <div class="flowchart-box">
+    <h4>Match Confidence Score</h4>
+    <canvas id="chart-case-9"></canvas>
+  </div>
+</div>
+<!-- ========================= CASE 10 ========================= -->
+<div class="case-item">
+  <h2>Central Mall Management</h2>
+  <p>
+    Manages tenant shops, footfall analytics, billing queues, and indoor navigation
+    to improve customer experience inside the mall.
+  </p>
+
+  <div class="algos-title">Algorithms Used</div>
+  <ul>
+    <li>Hash Map → Shop & inventory data</li>
+    <li>Queue → Billing flow</li>
+    <li>Heap → Best-offer recommendation</li>
+    <li>Dijkstra → Indoor navigation</li>
+  </ul>
+
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%2010"
+     target="_blank">View Code</a>
+  <a class="btn" href="satish1.10.html" target="_blank">View More</a>
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish Dataset/case10_central_mall_management.csv"
+     target="_blank">View Dataset (CSV)</a>
+
+  <div class="flowchart-box">
+    <h4>Mall Footfall Trend</h4>
+    <canvas id="chart-case-10"></canvas>
+  </div>
 </div>
 
-<!-- CASE 9 -->
+<!-- ========================= CASE 11 ========================= -->
 <div class="case-item">
-<h2>AI-Powered Lost Person Detection</h2>
-<p>Pattern matching across camera footage.</p>
-<div class="flowchart-box"><h4>Match Confidence</h4><canvas id="chart-case-9"></canvas></div>
+  <h2>City Post Office Control System</h2>
+  <p>
+    Handles parcel sorting, urgent delivery prioritization, address lookup,
+    and optimized routing for delivery vehicles.
+  </p>
+
+  <div class="algos-title">Algorithms Used</div>
+  <ul>
+    <li>Queue → Normal parcel sorting</li>
+    <li>Priority Queue → Urgent parcels</li>
+    <li>Hash Table → Sender/receiver lookup</li>
+    <li>Dijkstra → Delivery routing</li>
+  </ul>
+
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%2011"
+     target="_blank">View Code</a>
+  <a class="btn" href="satish1.11.html" target="_blank">View More</a>
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish Dataset/case11_city_post_office.csv"
+     target="_blank">View Dataset (CSV)</a>
+
+  <div class="flowchart-box">
+    <h4>Parcel Load Distribution</h4>
+    <canvas id="chart-case-11"></canvas>
+  </div>
 </div>
 
-<!-- CASE 10 -->
+<!-- ========================= CASE 12 ========================= -->
 <div class="case-item">
-<h2>Central Mall Management</h2>
-<p>Shop inventory, billing queues, navigation.</p>
-<div class="flowchart-box"><h4>Mall Footfall</h4><canvas id="chart-case-10"></canvas></div>
+  <h2>Rapid Response Network</h2>
+  <p>
+    Connects police, ambulance, fire, and utility teams to assign the fastest
+    and most suitable responder for emergencies.
+  </p>
+
+  <div class="algos-title">Algorithms Used</div>
+  <ul>
+    <li>Priority Queue → Emergency ranking</li>
+    <li>Hash Map → Unit specialization</li>
+    <li>Dijkstra → Fastest responder path</li>
+    <li>BFS → Backup responder scan</li>
+  </ul>
+
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%2012"
+     target="_blank">View Code</a>
+  <a class="btn" href="satish1.12.html" target="_blank">View More</a>
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish Dataset/case12_rapid_response_network.csv"
+     target="_blank">View Dataset (CSV)</a>
+
+  <div class="flowchart-box">
+    <h4>Response Speed Analysis</h4>
+    <canvas id="chart-case-12"></canvas>
+  </div>
 </div>
 
-<!-- CASE 11 -->
+<!-- ========================= CASE 13 ========================= -->
 <div class="case-item">
-<h2>City Post Office Control System</h2>
-<p>Parcel sorting and optimized delivery routing.</p>
-<div class="flowchart-box"><h4>Parcel Load</h4><canvas id="chart-case-11"></canvas></div>
+  <h2>Smart Residential Surveillance Pods</h2>
+  <p>
+    AI-enabled surveillance pods at residential entrances tracking visitor logs,
+    access control, anomaly detection, and emergency alerts.
+  </p>
+
+  <div class="algos-title">Algorithms Used</div>
+  <ul>
+    <li>Hash Table → Resident & visitor records</li>
+    <li>KMP → Pattern-based anomaly detection</li>
+    <li>Queue → Entry/exit handling</li>
+    <li>Dijkstra → Patrol dispatch routing</li>
+  </ul>
+
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish/Case%2013"
+     target="_blank">View Code</a>
+  <a class="btn" href="satish1.13.html" target="_blank">View More</a>
+  <a class="btn"
+     href="https://github.com/omkarhattikal11/daa-project-/blob/main/Satish Dataset/case13_residential_surveillance.csv"
+     target="_blank">View Dataset (CSV)</a>
+
+  <div class="flowchart-box">
+    <h4>Surveillance Event Count</h4>
+    <canvas id="chart-case-13"></canvas>
+  </div>
 </div>
 
-<!-- CASE 12 -->
-<div class="case-item">
-<h2>Rapid Response Network</h2>
-<p>Fastest responder selection.</p>
-<div class="flowchart-box"><h4>Response Speed</h4><canvas id="chart-case-12"></canvas></div>
-</div>
+<!-- ================== COMPUTATIONAL THINKING ================== -->
+<section class="table-section">
+<h2>Computational Thinking</h2>
+<table width="100%">
+<tr><th>Sl. No</th><th>Idea</th><th>Where (Case Numbers)</th></tr>
+<tr><td>1</td><td>Decomposition</td><td>Case 1 – Case 13</td></tr>
+<tr><td>2</td><td>Pattern Recognition</td><td>Case 3, 5, 7</td></tr>
+<tr><td>3</td><td>Abstraction</td><td>Case 2, 10, 11</td></tr>
+</table>
+</section>
 
-<!-- CASE 13 -->
-<div class="case-item">
-<h2>Smart Residential Surveillance Pods</h2>
-<p>Residential entry monitoring and alerts.</p>
-<div class="flowchart-box"><h4>Surveillance Events</h4><canvas id="chart-case-13"></canvas></div>
-</div>
+<!-- ================== DESIGN TECHNIQUES ================== -->
+<section class="table-section">
+<h2>Design Techniques</h2>
+<table width="100%">
+<tr><th>Sl. No</th><th>Technique</th><th>Cases</th></tr>
+<tr><td>1</td><td>Brute Force</td><td>Case 9</td></tr>
+<tr><td>2</td><td>Divide and Conquer</td><td>Case 5, 7</td></tr>
+<tr><td>3</td><td>Greedy</td><td>Case 6, 12</td></tr>
+<tr><td>4</td><td>Dynamic Programming</td><td>Case 3, 10</td></tr>
+<tr><td>5</td><td>Backtracking</td><td>Case 5, 6</td></tr>
+</table>
+</section>
+
+<!-- ================== ALGORITHMIC PRINCIPLES ================== -->
+<section class="table-section">
+<h2>Algorithmic Principles</h2>
+<table width="100%">
+<tr><th>Sl. No</th><th>Principle</th><th>Cases</th></tr>
+<tr><td>1</td><td>Shortest Path</td><td>Case 3, 6, 12</td></tr>
+<tr><td>2</td><td>Priority Scheduling</td><td>Case 1, 5, 6</td></tr>
+<tr><td>3</td><td>Pattern Matching</td><td>Case 9, 13</td></tr>
+<tr><td>4</td><td>Level Order Traversal</td><td>Case 6</td></tr>
+</table>
+</section>
 
 </section>
 
+<!-- ================== SIDEBAR ================== -->
 <aside class="sidebar">
   <div class="side-card">
     <h3>Status</h3>
-    <p>All 13 cases completed</p>
+    <p>All 13 cases completed with charts</p>
+  </div>
+  <div class="side-card">
+    <h3>Current Task</h3>
+    <p>Evaluation & submission</p>
   </div>
 </aside>
 
@@ -321,15 +654,15 @@ footer {
 
 </main>
 
-<!-- CHART INITIALIZATION -->
+<!-- ================== CHART INITIALIZATION ================== -->
 <script>
-const chartData = [
-[40,65,85,55],[30,50,70,90],[60,80,45,70],[25,55,95,60],
-[20,35,65,85],[30,70,90,50],[45,85,95,65],[50,75,90,80],
-[60,72,88,92],[55,80,95,70],[40,60,85,90],[65,78,90,98],[35,60,75,88]
+const chartValues = [
+  [40,65,85,55],[30,50,70,90],[60,80,45,70],[25,55,95,60],
+  [20,35,65,85],[30,70,90,50],[45,85,95,65],[50,75,90,80],
+  [60,72,88,92],[55,80,95,70],[40,60,85,90],[65,78,90,98],[35,60,75,88]
 ];
 
-chartData.forEach((data,i)=>{
+chartValues.forEach((data,i)=>{
   new Chart(document.getElementById(`chart-case-${i+1}`),{
     type:'bar',
     data:{
@@ -342,10 +675,9 @@ chartData.forEach((data,i)=>{
       }]
     },
     options:{
-      plugins:{legend:{labels:{color:'#e9f8ff'}}},
+      responsive:true,
       scales:{
-        x:{ticks:{color:'#a7b4c8'}},
-        y:{ticks:{color:'#a7b4c8'},beginAtZero:true}
+        y:{beginAtZero:true}
       }
     }
   });
